@@ -1,6 +1,6 @@
 {
     "name": "phpcfdi/finkok",
-    "description": "",
+    "description": "PHP library to connect to Finkok (CFDI PAC)",
     "keywords": ["phpcfdi", "sat", "cfdi", "finkok"],
     "homepage": "https://github.com/phpcfdi/finkok",
     "license": "MIT",
