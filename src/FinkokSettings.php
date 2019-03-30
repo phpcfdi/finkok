@@ -6,6 +6,9 @@ namespace PhpCfdi\Finkok;
 
 use PhpCfdi\Finkok\Exceptions\InvalidArgumentException;
 
+/**
+ * @todo Renombrar a FinkokContainer
+ */
 class FinkokSettings
 {
     /** @var string */
@@ -16,6 +19,9 @@ class FinkokSettings
 
     /** @var FinkokEnvironment */
     private $environment;
+
+    /** @var SoapFactory */
+    private $soapFactory;
 
     public function __construct(string $username, string $password, FinkokEnvironment $environment = null)
     {
@@ -28,6 +34,7 @@ class FinkokSettings
         $this->username = $username;
         $this->password = $password;
         $this->environment = $environment ?? FinkokEnvironment::makeDevelopment();
+        $this->soapFactory = new SoapFactory();
     }
 
     public function username(): string
@@ -43,5 +50,10 @@ class FinkokSettings
     public function environment(): FinkokEnvironment
     {
         return $this->environment;
+    }
+
+    public function soapFactory(): SoapFactory
+    {
+        return $this->soapFactory;
     }
 }
