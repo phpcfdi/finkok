@@ -40,4 +40,9 @@ class FinkokEnvironment
     {
         return $this->environment->value();
     }
+
+    public function endpoint(Definitions\Services $service): string
+    {
+        return $this->server() . $service->value();
+    }
 }
