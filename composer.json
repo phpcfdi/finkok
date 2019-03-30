@@ -20,7 +20,8 @@
     },
     "require": {
         "php": ">=7.2",
-        "eclipxe/enum": "^0.2.0"
+        "eclipxe/enum": "^0.2.0",
+        "ext-soap": "*"
     },
     "require-dev": {
         "eclipxe/cfdiutils": "^2.10",
