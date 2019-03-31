@@ -17,9 +17,13 @@ class SoapCaller
     /** @var SoapClient */
     private $soapClient;
 
-    public function __construct(SoapClient $soapClient)
+    /** @var array */
+    private $extraParameters;
+
+    public function __construct(SoapClient $soapClient, array $extraParameters = [])
     {
         $this->soapClient = $soapClient;
+        $this->extraParameters = $extraParameters;
     }
 
     private function soapClient(): SoapClient
@@ -27,11 +31,17 @@ class SoapCaller
         return $this->soapClient;
     }
 
+    public function extraParameters(): array
+    {
+        return $this->extraParameters;
+    }
+
     public function call(string $methodName, array $parameters): stdClass
     {
+        $parameters = array_merge($parameters, $this->extraParameters());
         $soap = $this->soapClient();
         try {
-            return $soap->__soapCall($methodName, $parameters, []);
+            return $soap->__soapCall($methodName, [$parameters], []);
         } catch (Throwable $exception) {
             throw new RuntimeException(
                 sprintf('Soap call to %s fail: %s', $methodName, $exception->getMessage()),
@@ -48,7 +58,6 @@ class SoapCaller
                 'Response.Body' => @$soap->__getLastResponse(),
             ];
             $this->traces[] = $lastTrace;
-            print_r($lastTrace);
         }
     }
 }
