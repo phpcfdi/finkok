@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PhpCfdi\Finkok\Tests\Unit\Services\Stamping;
 
-use PhpCfdi\Finkok\Services\Stamping\StampingCommand;
 use PhpCfdi\Finkok\Services\Stamping\StampedService;
+use PhpCfdi\Finkok\Services\Stamping\StampingCommand;
 use PhpCfdi\Finkok\Tests\Fakes\FakeSoapFactory;
 use PhpCfdi\Finkok\Tests\TestCase;
 

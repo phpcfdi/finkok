@@ -51,6 +51,25 @@ En su lugar contiene un `stampResult` con `Incidencia:CodigoError` `307`, el `xm
 }
 ```
 
+El servicio `stamped` tampoco puede encontrar el primer CFDI recién estampado.
+Debe reintentarlo aproximadamente 4 segundos hasta que lo recupera correctamente.
+Mientras tanto devuelve: `603: El CFDI no contiene un timbre previo`.
+
+Esto parece dar más claridad al error:
+
+- Se genera el estampado del PRECFDI e inmediatamente se llama a:
+    - `stamped`: El CFDI no contiene un timbre previo
+    - `stamp`: El CFDI contiene un timbre previo
+- ...después de algunos segundos:
+    - `stamped`: Lo encuentra y lo devuelve
+    - `stamp`: Lo encuentra y lo devuelve
+
+Por lo tanto, parece que en realidad el problema consiste en que internamente Finkok sí reporta que el CFDI fue creado
+pero no lo pone a disposición para poderlo recuperar.
+
+Los test se pueden ver en 
+
+
 ## Reporte
 
 2019-03-31 16:10 <https://support.finkok.com/support/tickets/17287>
