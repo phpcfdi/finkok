@@ -6,16 +6,21 @@ namespace PhpCfdi\Finkok\Tests;
 
 use PhpCfdi\Finkok\FinkokEnvironment;
 use PhpCfdi\Finkok\FinkokSettings;
+use PhpCfdi\Finkok\SoapFactory;
 
 class TestCase extends \PHPUnit\Framework\TestCase
 {
-    public function createSettingsFromEnvironment(): FinkokSettings
+    public function createSettingsFromEnvironment(SoapFactory $soapFactory = null): FinkokSettings
     {
-        return new FinkokSettings(
+        $settings = new FinkokSettings(
             strval(getenv('FINKOK_USERNAME')),
             strval(getenv('FINKOK_PASSWORD')),
             FinkokEnvironment::makeDevelopment()
         );
+        if (null !== $soapFactory) {
+            $settings->changeSoapFactory($soapFactory);
+        }
+        return $settings;
     }
 
     public static function filePath(string $append = ''): string

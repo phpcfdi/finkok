@@ -38,6 +38,11 @@ class FinkokSettings
         $this->soapFactory = new SoapFactory();
     }
 
+    public function changeSoapFactory(SoapFactory $soapFactory): void
+    {
+        $this->soapFactory = $soapFactory;
+    }
+
     public function username(): string
     {
         return $this->username;
