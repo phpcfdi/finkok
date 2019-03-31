@@ -6,6 +6,7 @@ namespace PhpCfdi\Finkok\Services\Stamping;
 
 use PhpCfdi\Finkok\Definitions\Services;
 use PhpCfdi\Finkok\FinkokSettings;
+use PhpCfdi\Finkok\SoapCaller;
 
 class StampService
 {
@@ -24,12 +25,16 @@ class StampService
 
     public function stamp(StampingCommand $command): StampingResult
     {
-        $settings = $this->settings();
-        $soapCaller = $settings->soapCaller(Services::stamping());
+        $soapCaller = $this->createSoapCaller();
         $rawResponse = $soapCaller->call('stamp', [
             'xml' => $command->xml(),
         ]);
         $result = new StampingResult('stampResult', $rawResponse);
         return $result;
+    }
+
+    protected function createSoapCaller(): SoapCaller
+    {
+        return $this->settings()->soapCaller(Services::stamping());
     }
 }
