@@ -20,6 +20,6 @@ class InvokeStampServiceTest extends TestCase
         $service = new StampService($settings);
         $command = new StampingCommand($xml);
         $result = $service->stamp($command);
-        $this->assertTrue($result->hasAlerts());
+        $this->assertGreaterThan(0, $result->alerts()->count());
     }
 }
