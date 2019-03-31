@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PhpCfdi\Finkok;
 
+use PhpCfdi\Finkok\Definitions\Services;
 use PhpCfdi\Finkok\Exceptions\InvalidArgumentException;
 
 /**
@@ -55,5 +56,16 @@ class FinkokSettings
     public function soapFactory(): SoapFactory
     {
         return $this->soapFactory;
+    }
+
+    public function soapCaller(Services $service): SoapCaller
+    {
+        $endpoint = $this->environment()->endpoint($service);
+        $soapClient = $this->soapFactory()->create($endpoint);
+        $defaultOptions = [
+            'username' => $this->username(),
+            'password' => $this->password(),
+        ];
+        return new SoapCaller($soapClient, $defaultOptions);
     }
 }
