@@ -39,4 +39,25 @@ class StampServiceTest extends TestCase
         $this->assertNotEmpty($result->uuid());
         $this->assertStringContainsString($result->uuid(), $result->xml());
     }
+
+    public function testStampValidPrecfdiTwoConsecutiveTimes(): void
+    {
+        $this->markTestSkipped('Finkok no está devolviendo la información esperada, finkok-bug?');
+
+        $precfdi = (new RandomPreCfdi())->createValid();
+        $command = new StampingCommand($precfdi);
+
+        $settings = $this->createSettingsFromEnvironment();
+        $service = new StampService($settings);
+
+        $firstResult = $service->stamp($command);
+        $this->assertSame('Comprobante timbrado satisfactoriamente', $firstResult->statusCode());
+
+        $secondResult = $service->stamp($command);
+        $this->assertSame(
+            $firstResult->uuid(),
+            $secondResult->uuid(),
+            'Finkok does not return the same UUID for duplicated stamp'
+        );
+    }
 }
