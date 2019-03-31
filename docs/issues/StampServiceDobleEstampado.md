@@ -51,4 +51,6 @@ En su lugar contiene un `stampResult` con `Incidencia:CodigoError` `307`, el `xm
 }
 ```
 
+## Reporte
 
+2019-03-31 16:10 <https://support.finkok.com/support/tickets/17287>
