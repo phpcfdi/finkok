@@ -24,6 +24,7 @@
         "ext-soap": "*"
     },
     "require-dev": {
+        "ext-json": "*",
         "eclipxe/cfdiutils": "^2.10",
         "phpunit/phpunit": "^8.0",
         "overtrue/phplint": "^1.0",
