@@ -4,8 +4,20 @@ declare(strict_types=1);
 
 namespace PhpCfdi\Finkok\Tests;
 
+use PhpCfdi\Finkok\FinkokSettings;
+use PhpCfdi\Finkok\FinkokEnvironment;
+
 class TestCase extends \PHPUnit\Framework\TestCase
 {
+    public function createSettingsFromEnvironment(): FinkokSettings
+    {
+        return new FinkokSettings(
+            strval(getenv('FINKOK_USERNAME')),
+            strval(getenv('FINKOK_PASSWORD')),
+            FinkokEnvironment::makeDevelopment()
+        );
+    }
+
     public static function filePath(string $append = ''): string
     {
         return __DIR__ . '/_files/' . $append;
