@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PhpCfdi\Finkok\Tests;
 
-use PhpCfdi\Finkok\FinkokSettings;
 use PhpCfdi\Finkok\FinkokEnvironment;
+use PhpCfdi\Finkok\FinkokSettings;
 
 class TestCase extends \PHPUnit\Framework\TestCase
 {

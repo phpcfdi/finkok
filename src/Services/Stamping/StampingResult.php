@@ -8,26 +8,31 @@ use stdClass;
 
 class StampingResult
 {
+    /** @var string */
+    public $container;
+
     /** @var StampingAlerts */
     private $alerts;
 
     /** @var stdClass */
     private $data;
 
-    public function __construct(stdClass $data)
+    public function __construct(string $container, stdClass $data)
     {
+        $this->container = $container;
         $this->data = $data;
-        $this->alerts = new StampingAlerts();
-        $alerts = $data->{'Incidencias'}->{'Incidencia'} ?? null;
+
+        $alerts = $data->{$container}->{'Incidencias'}->{'Incidencia'} ?? null;
         if (! is_array($alerts)) {
             $alerts = [];
         }
-        $this->alerts->hydrate($alerts);
+
+        $this->alerts = new StampingAlerts($alerts);
     }
 
     private function get(string $keyword): string
     {
-        return strval($this->data->{$keyword} ?? '');
+        return strval($this->data->{$this->container}->{$keyword} ?? '');
     }
 
     public function xml(): string

@@ -29,7 +29,7 @@ class StampService
         $rawResponse = $soapCaller->call('stamp', [
             'xml' => $command->xml(),
         ]);
-        $result = new StampingResult($rawResponse->{'stampResult'} ?? (object) []);
+        $result = new StampingResult('stampResult', $rawResponse);
         return $result;
     }
 }

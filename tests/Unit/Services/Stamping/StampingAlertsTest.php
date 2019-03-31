@@ -11,14 +11,13 @@ class StampingAlertsTest extends TestCase
 {
     public function testCreateEmpty(): void
     {
-        $alerts = new StampingAlerts();
+        $alerts = new StampingAlerts([]);
         $this->assertCount(0, $alerts);
     }
 
     public function testHydrate(): void
     {
-        $alerts = new StampingAlerts();
-        $alerts->hydrate([
+        $input = [
             (object) [
                 'IdIncidencia' => '1',
                 'Uuid' => 'Uuid',
@@ -39,7 +38,9 @@ class StampingAlertsTest extends TestCase
                 'NoCertificadoPac' => 'NoCertificadoPac',
                 'FechaRegistro' => 'FechaRegistro',
             ],
-        ]);
+        ];
+
+        $alerts = new StampingAlerts($input);
 
         $this->assertCount(2, $alerts);
         $expectedId = 1;

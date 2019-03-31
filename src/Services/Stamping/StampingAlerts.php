@@ -15,26 +15,17 @@ class StampingAlerts implements Countable, IteratorAggregate
     /** @var ArrayObject */
     private $alerts;
 
-    public function __construct()
+    public function __construct(array $collection)
     {
         $this->alerts = new ArrayObject();
+        foreach ($collection as $item) {
+            $this->alerts->append(new StampingAlert($item));
+        }
     }
 
     public function count(): int
     {
         return $this->alerts->count();
-    }
-
-    public function hydrate(array $collection): void
-    {
-        foreach ($collection as $item) {
-            $this->insert(new StampingAlert($item));
-        }
-    }
-
-    public function insert(StampingAlert $alert): void
-    {
-        $this->alerts[] = $alert;
     }
 
     public function first(): StampingAlert
