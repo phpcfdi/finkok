@@ -21,5 +21,6 @@ class InvokeStampServiceTest extends TestCase
         $command = new StampingCommand($xml);
         $result = $service->stamp($command);
         $this->assertGreaterThan(0, $result->alerts()->count());
+        $this->assertStringContainsString('fecha', $result->alerts()->first()->message());
     }
 }
