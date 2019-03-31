@@ -4,22 +4,68 @@ declare(strict_types=1);
 
 namespace PhpCfdi\Finkok\Services\Stamping;
 
+use stdClass;
+
 class StampingResult
 {
-    /** @var array */
-    private $alerts = [];
+    /** @var StampingAlerts */
+    private $alerts;
 
-    public static function makeFromSoapResponse(object $response): self
+    /** @var stdClass */
+    private $data;
+
+    public function __construct(stdClass $data)
     {
-        return new self();
+        $this->data = $data;
+        $this->alerts = new StampingAlerts();
+        $alerts = $data->{'Incidencias'}->{'Incidencia'} ?? null;
+        if (! is_array($alerts)) {
+            $alerts = [];
+        }
+        $this->alerts->hydrate($alerts);
     }
 
-    public function hasAlerts(): bool
+    private function get(string $keyword): string
     {
-        return (count($this->alerts) > 0);
+        return strval($this->data->{$keyword} ?? '');
     }
 
-    public function alerts(): array
+    public function xml(): string
+    {
+        return $this->get('xml');
+    }
+
+    public function uuid(): string
+    {
+        return $this->get('UUID');
+    }
+
+    public function faultstring(): string
+    {
+        return $this->get('faultstring');
+    }
+
+    public function date(): string
+    {
+        return $this->get('Fecha');
+    }
+
+    public function statusCode(): string
+    {
+        return $this->get('CodEstatus');
+    }
+
+    public function seal(): string
+    {
+        return $this->get('SatSeal');
+    }
+
+    public function certificateSat(): string
+    {
+        return $this->get('NoCertificadoSAT');
+    }
+
+    public function alerts(): StampingAlerts
     {
         return $this->alerts;
     }
