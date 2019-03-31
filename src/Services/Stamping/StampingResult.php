@@ -30,6 +30,11 @@ class StampingResult
         $this->alerts = new StampingAlerts($alerts);
     }
 
+    public function rawData(): stdClass
+    {
+        return $this->data;
+    }
+
     private function get(string $keyword): string
     {
         return strval($this->data->{$this->container}->{$keyword} ?? '');
