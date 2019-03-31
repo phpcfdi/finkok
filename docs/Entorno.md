@@ -12,7 +12,10 @@ Los datos se encuentran en `tests/_files/certs/`:
 - `TCM970625MB1.cer` Archivo de certificado (formato DER)
 - `TCM970625MB1.key` Archivo de llave privada (formato DER)
 - `TCM970625MB1.password.bin` Archivo con el password del certificado
- 
+
 Esta información es pública, por lo tanto no hay problema en publicarla aquí.
 
-
+Recuerda registrar este RFC en tu panel de <https://demo-facturacion.finkok.com/>
+Si no lo haces verás errores como estos:
+- `No ha registrado el RFC emisor bajo la cuenta de Finkok`
+- `Sorry there was an error when validating the reseller and user`
