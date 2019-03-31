@@ -58,14 +58,20 @@ class FinkokSettings
         return $this->soapFactory;
     }
 
-    public function soapCaller(Services $service): SoapCaller
+    /**
+     * This method created a configured SoapCaller with wsdLocation and default options
+     *
+     * @uses SoapFactory
+     * @param Services $service
+     * @return SoapCaller
+     */
+    public function createCallerForService(Services $service): SoapCaller
     {
-        $soapFactory = $this->soapFactory();
-        $endpoint = $this->environment()->endpoint($service);
+        $wsdlLocation = $this->environment()->endpoint($service);
         $defaultOptions = [
             'username' => $this->username(),
             'password' => $this->password(),
         ];
-        return $soapFactory->createSoapCaller($endpoint, $defaultOptions);
+        return $this->soapFactory()->createSoapCaller($wsdlLocation, $defaultOptions);
     }
 }

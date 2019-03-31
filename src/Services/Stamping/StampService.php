@@ -35,6 +35,6 @@ class StampService
 
     protected function createSoapCaller(): SoapCaller
     {
-        return $this->settings()->soapCaller(Services::stamping());
+        return $this->settings()->createCallerForService(Services::stamping());
     }
 }
