@@ -33,18 +33,19 @@ class SoapCaller
         return $this->extraParameters;
     }
 
-    public function call(string $methodName, array $parameters): stdClass
+    public function call(string $methodName, array $finalParameters): stdClass
     {
-        $parameters = array_merge($parameters, $this->extraParameters());
+        $finalParameters = $this->finalParameters($finalParameters);
         $soap = $this->soapClient();
         try {
-            return $soap->__soapCall($methodName, [$parameters]);
+            return $soap->__soapCall($methodName, $finalParameters);
         } catch (Throwable $exception) {
-            throw new RuntimeException(
-                sprintf('Soap call to %s fail: %s', $methodName, $exception->getMessage()),
-                0,
-                $exception
-            );
+            throw new RuntimeException(sprintf('Fail soap call to %s', $methodName), 0, $exception);
         }
+    }
+
+    public function finalParameters(array $parameters): array
+    {
+        return [array_merge($parameters, $this->extraParameters())];
     }
 }

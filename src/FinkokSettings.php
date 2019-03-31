@@ -62,11 +62,10 @@ class FinkokSettings
     {
         $soapFactory = $this->soapFactory();
         $endpoint = $this->environment()->endpoint($service);
-        $soapClient = $soapFactory->createSoapClient($endpoint);
         $defaultOptions = [
             'username' => $this->username(),
             'password' => $this->password(),
         ];
-        return $soapFactory->createSoapCaller($soapClient, $defaultOptions);
+        return $soapFactory->createSoapCaller($endpoint, $defaultOptions);
     }
 }

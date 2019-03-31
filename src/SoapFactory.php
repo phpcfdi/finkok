@@ -8,18 +8,18 @@ use SoapClient;
 
 class SoapFactory
 {
-    public function createSoapClient(string $endpoint): SoapClient
+    public function createSoapClient(string $wsdlLocation): SoapClient
     {
-        return new SoapClient($endpoint . '?singleWsdl', [
+        return new SoapClient($wsdlLocation, [
             'features' => SOAP_SINGLE_ELEMENT_ARRAYS,
             'cache_wsdl' => WSDL_CACHE_MEMORY,
             'exceptions' => true,
-            'trace' => true,
+            // 'trace' => true,
         ]);
     }
 
-    public function createSoapCaller(SoapClient $soapClient, array $defaultOptions): SoapCaller
+    public function createSoapCaller(string $wsdlLocation, array $defaultOptions): SoapCaller
     {
-        return new SoapCaller($soapClient, $defaultOptions);
+        return new SoapCaller($this->createSoapClient($wsdlLocation), $defaultOptions);
     }
 }
