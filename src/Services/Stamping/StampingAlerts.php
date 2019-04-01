@@ -8,7 +8,6 @@ use ArrayIterator;
 use ArrayObject;
 use Countable;
 use IteratorAggregate;
-use RuntimeException;
 
 class StampingAlerts implements Countable, IteratorAggregate
 {
@@ -23,6 +22,14 @@ class StampingAlerts implements Countable, IteratorAggregate
         }
     }
 
+    public function get(int $index): StampingAlert
+    {
+        if (! isset($this->alerts[$index])) {
+            return new StampingAlert((object) []);
+        }
+        return $this->alerts[$index];
+    }
+
     public function count(): int
     {
         return $this->alerts->count();
@@ -30,10 +37,7 @@ class StampingAlerts implements Countable, IteratorAggregate
 
     public function first(): StampingAlert
     {
-        if (! isset($this->alerts[0])) {
-            throw new RuntimeException('There are no stamping alerts');
-        }
-        return $this->alerts[0];
+        return $this->get(0);
     }
 
     /**

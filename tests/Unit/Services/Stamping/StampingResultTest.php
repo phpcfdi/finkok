@@ -15,4 +15,11 @@ class StampingResultTest extends TestCase
         $response = new StampingResult('stampResult', $data);
         $this->assertCount(2, $response->alerts());
     }
+
+    public function testHasAlerts(): void
+    {
+        $data = json_decode($this->fileContentPath('stamp-response-with-alerts.json'));
+        $response = new StampingResult('stampResult', $data);
+        $this->assertTrue($response->hasAlerts());
+    }
 }

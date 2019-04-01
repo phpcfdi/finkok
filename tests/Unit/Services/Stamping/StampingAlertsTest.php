@@ -49,4 +49,25 @@ class StampingAlertsTest extends TestCase
             $expectedId = $expectedId + 1;
         }
     }
+
+    public function testGettingAnAlertByIndex(): void
+    {
+        $data = json_decode($this->fileContentPath('stamp-response-with-alerts.json'));
+        $alerts = new StampingAlerts($data->{'stampResult'}->{'Incidencias'}->{'Incidencia'} ?? []);
+        $this->assertSame('FAKE2', $alerts->get(1)->errorCode());
+    }
+
+    public function testGettingANonExistentAlertByIndexReturnsEmptyAlert(): void
+    {
+        $alerts = new StampingAlerts([]);
+        $this->assertCount(0, $alerts);
+        $this->assertEmpty($alerts->get(100)->errorCode());
+    }
+
+    public function testGettingFirstAlertOnEmptyCollectionReturnsEmptyAlert(): void
+    {
+        $alerts = new StampingAlerts([]);
+        $this->assertCount(0, $alerts);
+        $this->assertEmpty($alerts->first()->errorCode());
+    }
 }

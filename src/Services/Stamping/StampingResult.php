@@ -79,4 +79,9 @@ class StampingResult
     {
         return $this->alerts;
     }
+
+    public function hasAlerts(): bool
+    {
+        return ($this->alerts->count() > 0);
+    }
 }
