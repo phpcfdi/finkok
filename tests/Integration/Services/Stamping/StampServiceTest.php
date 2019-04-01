@@ -73,6 +73,36 @@ class StampServiceTest extends TestCase
         );
     }
 
+    public function testStampValidPrecfdiAndConsumeStamped(): void
+    {
+        $precfdi = (new RandomPreCfdi())->createValid();
+        $command = new StampingCommand($precfdi);
+        $settings = $this->createSettingsFromEnvironment();
+
+        $service = new StampService($settings);
+        $firstResult = $service->stamp($command);
+        $this->assertSame('Comprobante timbrado satisfactoriamente', $firstResult->statusCode());
+
+        $stampedService = new StampedService($settings);
+        $secondResult = $stampedService->stamped($command);
+
+        $this->assertNotSame(
+            '603',
+            $secondResult->alerts()->first()->errorCode(),
+            'Finkok no debería responder con una incidencia 603, Ticket #17287'
+        );
+
+        if ('' === $secondResult->uuid()) {
+            $this->markTestSkipped('Finkok no está devolviendo la información esperada, Ticket #17287');
+        }
+
+        $this->assertSame(
+            $firstResult->uuid(),
+            $secondResult->uuid(),
+            'Finkok does not return the same UUID for recently created stamp'
+        );
+    }
+
     /**
      * @param array $previous
      * @depends testStampValidPrecfdi
