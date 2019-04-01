@@ -80,11 +80,15 @@ class StampServiceTest extends TestCase
         $settings = $this->createSettingsFromEnvironment();
         $stampedService = new StampedService($settings);
 
-        // try this for 1 minute max
-        $runUntilTime = time() + 60;
+        // try this for 10 seconds max
+        $runUntilTime = time() + 10;
         do {
             $stampedResult = $stampedService->stamped($command);
-        } while ('' === $stampedResult->uuid() && $runUntilTime <= time());
+            if ('' === $stampedResult->uuid() && $runUntilTime <= time()) {
+                sleep(1);
+                continue;
+            }
+        } while (false);
 
         $this->assertSame($stampResult->uuid(), $stampResult->uuid(), 'No se pudo recuperar el CFDI recién creado');
 
