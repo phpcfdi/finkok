@@ -87,3 +87,15 @@ entonces se devolverá un código `307` y ya. No se espera que devuelva el conte
 ## Reporte
 
 2019-03-31 16:10 <https://support.finkok.com/support/tickets/17287>
+
+## Actualización 2019-04-01.1
+
+Han modificado su documentación -*¡zorro astuto!*- y este es el comportamiento esperado:
+
+> Al llamar a stamp dos veces con el mismo precfdi, la segunda vez puede regresar
+> *o puede no regresar* los datos del cfdi previamente firmado.
+
+Por lo que, al menos para el método `stamp`, que no regrese el `xml` o `uuid` es considerado dentro de lo esperado.
+
+Para el método `stamped` es otra historia, porque el error devuelto por este método es una incidencia
+`603: El CFDI no contiene un timbre previo`.
