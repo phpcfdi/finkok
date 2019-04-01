@@ -46,8 +46,6 @@ class StampServiceTest extends TestCase
 
     public function testStampValidPrecfdiTwoConsecutiveTimes(): void
     {
-        $this->markTestSkipped('Finkok no está devolviendo la información esperada, finkok-bug?');
-
         $precfdi = (new RandomPreCfdi())->createValid();
         $command = new StampingCommand($precfdi);
 
@@ -58,6 +56,16 @@ class StampServiceTest extends TestCase
         $this->assertSame('Comprobante timbrado satisfactoriamente', $firstResult->statusCode());
 
         $secondResult = $service->stamp($command);
+        $this->assertSame(
+            '307',
+            $secondResult->alerts()->first()->errorCode(),
+            'Finkok must alert that it was previously stamped'
+        );
+
+        if ('' === $secondResult->uuid()) {
+            $this->markTestSkipped('Finkok no está devolviendo la información esperada, Ticket #17287');
+        }
+
         $this->assertSame(
             $firstResult->uuid(),
             $secondResult->uuid(),
@@ -110,6 +118,11 @@ class StampServiceTest extends TestCase
         $service = new StampService($settings);
 
         $secondResult = $service->stamp($command);
+        $this->assertSame(
+            '307',
+            $secondResult->alerts()->first()->errorCode(),
+            'Finkok must alert that it was previously stamped'
+        );
         $this->assertSame(
             $stampResult->uuid(),
             $secondResult->uuid(),
