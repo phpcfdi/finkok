@@ -18,6 +18,7 @@ Y en <https://wiki.finkok.com/doku.php?id=stamp#ejemplo_de_una_respuesta_con_err
 La respuesta no contiene la información del UUID timbrado previamente.
 
 En su lugar contiene un `stampResult` con `Incidencia:CodigoError` `307`, el `xml` está vacío.
+Los demás valores no son reportados. Es un misterio para mí porqué retorna dos veces la incidencia.
 
 ```json
 {
@@ -60,14 +61,27 @@ Esto parece dar más claridad al error:
 - Se genera el estampado del PRECFDI e inmediatamente se llama a:
     - `stamped`: El CFDI no contiene un timbre previo
     - `stamp`: El CFDI contiene un timbre previo
-- ...después de algunos segundos:
+- ...después de algunos segundos (me ha tocado esperar hasta 8):
     - `stamped`: Lo encuentra y lo devuelve
-    - `stamp`: Lo encuentra y lo devuelve
+    - `stamp`: Algunas veces lo encuentra y lo devuelve
 
-Por lo tanto, parece que en realidad el problema consiste en que internamente Finkok sí reporta que el CFDI fue creado
-pero no lo pone a disposición para poderlo recuperar.
+Por lo tanto, parece que en realidad el problema consiste en que internamente Finkok
+sí reporta que el CFDI fue creado pero no lo pone a disposición para poderlo recuperar.
 
-Los test se pueden ver en 
+Incluso he creado un test que encadena las pruebas, en resumen:
+llama a `stamp` por primera vez,
+llama a `stamped` hasta que devuelve el resultado
+llama a `stamp` por segunda vez.
+Y lo que sucede es que algunas veces el segundo estampado sigue sin contener los datos de XML y UUID.
+
+
+### Servicios afectados
+
+- `stamp`: al menos reporta que el CFDI ya fue timbrado)
+- `stamped`: incluso dice que el CFDI no ha sido timbrado con anterioridad.
+
+El servicio `quick_stamp` se salva de esta cuestión porque establece que en caso de haber un estampado previo
+entonces se devolverá un código `307` y ya. No se espera que devuelva el contenido del estampado previo.
 
 
 ## Reporte
