@@ -35,11 +35,11 @@ réplica de los servicios que ofrece.
 Los servicios se encuentran en <https://wiki.finkok.com/doku.php#documentacion_de_web_services>
 
 - Timbrado: <https://wiki.finkok.com/doku.php?id=wsdl_stamp>
-    - Stamp: <https://wiki.finkok.com/doku.php?id=stamp>
-    - Quick_stamp: <https://wiki.finkok.com/doku.php?id=metodo_quick_stamp>
-    - Stamped: <https://wiki.finkok.com/doku.php?id=stamped>
-    - Query_Pending: <https://wiki.finkok.com/doku.php?id=query_pending>
-    - Sing_Stamp: <https://wiki.finkok.com/doku.php?id=sing_stamp>
+    - [X] Stamp: <https://wiki.finkok.com/doku.php?id=stamp>
+    - [X] Quick_stamp: <https://wiki.finkok.com/doku.php?id=metodo_quick_stamp>
+    - [X] Stamped: <https://wiki.finkok.com/doku.php?id=stamped>
+    - [X] Query_Pending: <https://wiki.finkok.com/doku.php?id=query_pending>
+    - [ ] Sing_Stamp: <https://wiki.finkok.com/doku.php?id=sing_stamp>
 
 ## Timbrado
 

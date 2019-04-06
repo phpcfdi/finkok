@@ -1,0 +1,12 @@
+{
+  "query_pendingResult": {
+    "status": "S",
+    "xml": "<xml/>",
+    "uuid": "uuid",
+    "uuid_status": "uuid_status",
+    "next_attempt": "next_attempt",
+    "attempts": "1",
+    "error": "error",
+    "date": "date"
+  }
+}
