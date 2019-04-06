@@ -78,3 +78,7 @@ Set-Cookie: sessionid=2f06b59dbf811e2b68be49a930692fe7; httponly; Path=/; secure
 
 Lo que **se espera que retorne** es un error, del tipo `"UUID no existente"`
 tal como en una llamada con un UUID mal formado.
+
+## Reporte
+
+2019-04-05 20:10 <https://support.finkok.com/support/tickets/17626>

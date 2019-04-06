@@ -30,6 +30,8 @@ class QueryPendingServiceTest extends TestCase
 
     public function testQueryPendingWithFakeUuid(): void
     {
+        $this->markTestSkipped('Se sabe que finkok tiene un error en este caso, ticket #17626');
+
         $command = new QueryPendingCommand('01234567-0123-0123-0123-012345678901');
 
         $logger = new class() extends AbstractLogger implements LoggerInterface {
