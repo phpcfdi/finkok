@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PhpCfdi\Finkok\Tests\Integration\Services\Stamping;
 
-use PhpCfdi\Finkok\Services\Stamping\StampedService;
 use PhpCfdi\Finkok\Services\Stamping\StampingCommand;
 use PhpCfdi\Finkok\Services\Stamping\StampingResult;
 use PhpCfdi\Finkok\Services\Stamping\StampService;
@@ -13,150 +12,69 @@ use PhpCfdi\Finkok\Tests\TestCase;
 
 class StampServiceTest extends TestCase
 {
+    protected function cachedCommand(): StampingCommand
+    {
+        static $command = null;
+        if (null === $command) {
+            $command = new StampingCommand((new RandomPreCfdi())->createValid());
+        }
+        return $command;
+    }
+
+    protected function cachedStamped(): StampingResult
+    {
+        static $stampingResult = null;
+        if (null === $stampingResult) {
+            $service = $this->createService();
+            $stampingResult = $service->stamp($this->cachedCommand());
+        }
+
+        return $stampingResult;
+    }
+
+    protected function createService(): StampService
+    {
+        $settings = $this->createSettingsFromEnvironment();
+        return new StampService($settings);
+    }
+
+    public function testStampValidPrecfdi(): void
+    {
+        $firstResult = $this->cachedStamped();
+
+        $this->assertSame('Comprobante timbrado satisfactoriamente', $firstResult->statusCode());
+        $this->assertNotEmpty($firstResult->xml());
+        $this->assertNotEmpty($firstResult->uuid());
+        $this->assertStringContainsString($firstResult->uuid(), $firstResult->xml());
+    }
+
+    public function testStampTwiceSamePrecfdi(): void
+    {
+        $firstResult = $this->cachedStamped();
+
+        $secondResult = $this->createService()->stamp($this->cachedCommand());
+        $this->assertNotNull(
+            $secondResult->alerts()->findByErrorCode('307'),
+            'Finkok must alert that it was previously stamped'
+        );
+
+        $this->assertSame(
+            $firstResult->uuid(),
+            $secondResult->uuid(),
+            'Finkok does not return the same UUID for duplicated stamp call'
+        );
+    }
+
     public function testStampPrecfdiWithErrorInDate(): void
     {
-        $precfdi = (new RandomPreCfdi())->createInvalidByDate();
-        $command = new StampingCommand($precfdi);
+        $command = new StampingCommand(
+            (new RandomPreCfdi())->createInvalidByDate()
+        );
 
-        $settings = $this->createSettingsFromEnvironment();
-        $service = new StampService($settings);
+        $service = $this->createService();
         $result = $service->stamp($command);
 
         $this->assertGreaterThan(0, $result->alerts()->count());
         $this->assertSame('Fecha y hora de generación fuera de rango', $result->alerts()->first()->message());
-    }
-
-    public function testStampValidPrecfdi(): array
-    {
-        $precfdi = (new RandomPreCfdi())->createValid();
-        $command = new StampingCommand($precfdi);
-
-        $settings = $this->createSettingsFromEnvironment();
-        $stampService = new StampService($settings);
-        $stampResult = $stampService->stamp($command);
-
-        $this->assertSame('Comprobante timbrado satisfactoriamente', $stampResult->statusCode());
-        $this->assertCount(0, $stampResult->alerts());
-        $this->assertNotEmpty($stampResult->xml());
-        $this->assertNotEmpty($stampResult->uuid());
-        $this->assertStringContainsString($stampResult->uuid(), $stampResult->xml());
-
-        return ['precfdi' => $precfdi, 'stampResult' => $stampResult];
-    }
-
-    public function testStampValidPrecfdiTwoConsecutiveTimes(): void
-    {
-        $precfdi = (new RandomPreCfdi())->createValid();
-        $command = new StampingCommand($precfdi);
-
-        $settings = $this->createSettingsFromEnvironment();
-        $service = new StampService($settings);
-
-        $firstResult = $service->stamp($command);
-        $this->assertSame('Comprobante timbrado satisfactoriamente', $firstResult->statusCode());
-
-        $secondResult = $service->stamp($command);
-        $this->assertSame(
-            '307',
-            $secondResult->alerts()->first()->errorCode(),
-            'Finkok must alert that it was previously stamped'
-        );
-
-        if ('' === $secondResult->uuid()) {
-            $this->markTestSkipped('Finkok no está devolviendo la información esperada, Ticket #17287');
-        }
-
-        $this->assertSame(
-            $firstResult->uuid(),
-            $secondResult->uuid(),
-            'Finkok does not return the same UUID for duplicated stamp'
-        );
-    }
-
-    public function testStampValidPrecfdiAndConsumeStamped(): void
-    {
-        $precfdi = (new RandomPreCfdi())->createValid();
-        $command = new StampingCommand($precfdi);
-        $settings = $this->createSettingsFromEnvironment();
-
-        $service = new StampService($settings);
-        $firstResult = $service->stamp($command);
-        $this->assertSame('Comprobante timbrado satisfactoriamente', $firstResult->statusCode());
-
-        $stampedService = new StampedService($settings);
-        $secondResult = $stampedService->stamped($command);
-
-        $this->assertNotSame(
-            '603',
-            $secondResult->alerts()->first()->errorCode(),
-            'Finkok no debería responder con una incidencia 603, Ticket #17287'
-        );
-
-        if ('' === $secondResult->uuid()) {
-            $this->markTestSkipped('Finkok no está devolviendo la información esperada, Ticket #17287');
-        }
-
-        $this->assertSame(
-            $firstResult->uuid(),
-            $secondResult->uuid(),
-            'Finkok does not return the same UUID for recently created stamp'
-        );
-    }
-
-    /**
-     * @param array $previous
-     * @depends testStampValidPrecfdi
-     * @return array
-     */
-    public function testStampedWithRecentlyCreatedCfdi(array $previous): array
-    {
-        /** @var string $precfdi */
-        /** @var StampingResult $stampResult */
-        ['precfdi' => $precfdi, 'stampResult' => $stampResult] = $previous;
-        $command = new StampingCommand($precfdi);
-
-        $settings = $this->createSettingsFromEnvironment();
-        $stampedService = new StampedService($settings);
-
-        // try this for 10 seconds max
-        $runUntilTime = time() + 10;
-        do {
-            $stampedResult = $stampedService->stamped($command);
-            if ('' === $stampedResult->uuid() && $runUntilTime <= time()) {
-                sleep(1);
-                continue;
-            }
-        } while (false);
-
-        $this->assertSame($stampResult->uuid(), $stampResult->uuid(), 'No se pudo recuperar el CFDI recién creado');
-
-        return ['precfdi' => $precfdi, 'stampResult' => $stampResult];
-    }
-
-    /**
-     * @param array $previous
-     * @depends testStampedWithRecentlyCreatedCfdi
-     */
-    public function testStampTwoConsecutiveTimesCheckingStampedFirst(array $previous): void
-    {
-        /** @var string $precfdi */
-        /** @var StampingResult $stampResult */
-        ['precfdi' => $precfdi, 'stampResult' => $stampResult] = $previous;
-        $command = new StampingCommand($precfdi);
-
-        $settings = $this->createSettingsFromEnvironment();
-        $service = new StampService($settings);
-
-        $secondResult = $service->stamp($command);
-        $this->assertSame(
-            '307',
-            $secondResult->alerts()->first()->errorCode(),
-            'Finkok must alert that it was previously stamped'
-        );
-        $this->assertSame(
-            $stampResult->uuid(),
-            $secondResult->uuid(),
-            'Finkok does not return the same UUID for duplicated stamp'
-        );
     }
 }

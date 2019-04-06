@@ -70,4 +70,13 @@ class StampingAlertsTest extends TestCase
         $this->assertCount(0, $alerts);
         $this->assertEmpty($alerts->first()->errorCode());
     }
+
+    public function testFindByErrorCode(): void
+    {
+        $alerts = new StampingAlerts([
+            (object) ['CodigoError' => '000'],
+        ]);
+        $this->assertNull($alerts->findByErrorCode('0'));
+        $this->assertNotNull($alerts->findByErrorCode('000'));
+    }
 }

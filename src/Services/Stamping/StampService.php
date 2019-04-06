@@ -29,6 +29,11 @@ class StampService
             'xml' => $command->xml(),
         ]);
         $result = new StampingResult('stampResult', $rawResponse);
+        // repeat to fix bad webservice behavior of finkok
+        if ($result->alerts()->findByErrorCode('307') && '' === $result->uuid()) {
+            usleep(200000); // 0.2 seconds
+            $result = $this->stamp($command);
+        }
         return $result;
     }
 }

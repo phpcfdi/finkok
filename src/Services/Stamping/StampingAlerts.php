@@ -11,7 +11,7 @@ use IteratorAggregate;
 
 class StampingAlerts implements Countable, IteratorAggregate
 {
-    /** @var ArrayObject */
+    /** @var ArrayObject|StampingAlert[] */
     private $alerts;
 
     public function __construct(array $collection)
@@ -38,6 +38,16 @@ class StampingAlerts implements Countable, IteratorAggregate
     public function first(): StampingAlert
     {
         return $this->get(0);
+    }
+
+    public function findByErrorCode(string $errorCode): ?StampingAlert
+    {
+        foreach ($this->alerts as $alert) {
+            if ($errorCode === $alert->errorCode()) {
+                return $alert;
+            }
+        }
+        return null;
     }
 
     /**

@@ -13,6 +13,8 @@ Y en <https://wiki.finkok.com/doku.php?id=stamp#ejemplo_de_una_respuesta_con_err
 
 > Cuando ocurre esta incidencia el web sevices de forma automática recupera el XML.
 
+**Solucionado en 2019-04-05**
+
 ## Error encontrado
 
 La respuesta no contiene la información del UUID timbrado previamente.
@@ -99,3 +101,10 @@ Por lo que, al menos para el método `stamp`, que no regrese el `xml` o `uuid` e
 
 Para el método `stamped` es otra historia, porque el error devuelto por este método es una incidencia
 `603: El CFDI no contiene un timbre previo`.
+
+## Actualización 2019-04-05.1
+
+Me responden en el ticket que han modificado el servicio `stamped`.
+
+No debería regresar nunca un error `603: El CFDI no contiene un timbre previo`.
+**Siempre debe regresar los datos del timbrado**.
