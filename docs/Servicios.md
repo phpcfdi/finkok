@@ -45,28 +45,18 @@ Los servicios se encuentran en <https://wiki.finkok.com/doku.php#documentacion_d
 
 Servicios relacionados con la creación de un timbre: Stamp, Quick_stamp y Sing_Stamp.
 
-No recomiendo usar Quick_stamp a menos que se esté haciendo un proceso controlado donde tu garantices que
-nunca ejecutarás dos veces Quick_stamp. Este servicio podría generar duplicados.
+Stamp y Quick_Stamp hacen lo mismo, con estas dos excepciones:
+- Si se hace un *"doble estampado"* `Stamp` retorna (a veces) los datos del CFDI y una incidencia 307,
+  mientras que `Quick_Stamp` retorna una incidencia 307.
+- `Stamp` no regresa timbrado si no pudo enviarlo al SAT, mientras que `Quick_Stamp` deja el CFDI
+  en la cola de envío al SAT.
 
-Como Stamp y Quick_stamp hacen lo mismo deberían devolver la misma respuesta, cierto?
- 
-
-### Stamp
-
-Resultado: A un PRECFDI le agrega el TimbreFiscalDigital
-
-Proceso: si se timbró previamente devuelve el timbre anterior, valida, timbra y encola.
-
-Retorno: cfdi timbrado o errores.
-
-### Quick_stamp
-
-Resultado: A un PRECFDI le agrega el TimbreFiscalDigital
-
-Proceso: valida, timbra, encola en segundo plano.
+No recomiendo usar `Quick_stamp` a menos que no se requiera revisar si el SAT tiene el CFDI inmediatamente.
+Por ejemplo, si tu aplicación debe hacer consultas inmediatas de estado de CFDI ante el SAT.
 
 ### Sing_Stamp
 
-A un PRECFDI sin sello le agrega el TimbreFiscalDigital, para esto debió enviar previamente su certificado y sello.
+A un PRECFDI sin sello le agrega el atributo `Sello` y el `TimbreFiscalDigital`,
+para esto debió enviar previamente su certificado y sello.
 
 No lo voy a implementar por inseguro.
