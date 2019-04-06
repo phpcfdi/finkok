@@ -5,33 +5,10 @@ declare(strict_types=1);
 namespace PhpCfdi\Finkok\Tests\Integration\Services\Stamping;
 
 use PhpCfdi\Finkok\Services\Stamping\QuickStampService;
-use PhpCfdi\Finkok\Services\Stamping\StampingCommand;
-use PhpCfdi\Finkok\Services\Stamping\StampingResult;
-use PhpCfdi\Finkok\Tests\Factories\RandomPreCfdi;
-use PhpCfdi\Finkok\Tests\TestCase;
+use PhpCfdi\Finkok\Tests\Integration\IntegrationTestCase;
 
-class QuickStampServiceTest extends TestCase
+class QuickStampServiceTest extends IntegrationTestCase
 {
-    protected function cachedCommand(): StampingCommand
-    {
-        static $command = null;
-        if (null === $command) {
-            $command = new StampingCommand((new RandomPreCfdi())->createValid());
-        }
-        return $command;
-    }
-
-    protected function cachedStamped(): StampingResult
-    {
-        static $stampingResult = null;
-        if (null === $stampingResult) {
-            $service = $this->createService();
-            $stampingResult = $service->quickstamp($this->cachedCommand());
-        }
-
-        return $stampingResult;
-    }
-
     protected function createService(): QuickStampService
     {
         $settings = $this->createSettingsFromEnvironment();
@@ -40,18 +17,23 @@ class QuickStampServiceTest extends TestCase
 
     public function testQuickStampCreatesStampUsingValidPrecfdi(): void
     {
-        $result = $this->cachedStamped();
+        $command = $this->newStampingCommand();
+        $service = $this->createService();
+        $result = $service->quickstamp($command);
+
         $this->assertSame('Comprobante timbrado satisfactoriamente', $result->statusCode());
+        $this->assertNotEmpty($result->xml());
         $this->assertNotEmpty($result->uuid());
+        $this->assertStringContainsString($result->uuid(), $result->xml());
     }
 
-    public function testStampValidPrecfdiTwoConsecutiveTimesReturnsErrorCode307(): void
+    public function testQuickStampPreviouslyCreatedCfdiReturnsErrorCode307(): void
     {
         // call first to cachedStamped to use previous stamp or create a new one
-        $this->cachedStamped();
+        $this->currentCfdi();
 
         $service = $this->createService();
-        $secondResult = $service->quickstamp($this->cachedCommand());
+        $secondResult = $service->quickstamp($this->currentStampingCommand());
         $this->assertNotNull(
             $secondResult->alerts()->findByErrorCode('307'),
             'Finkok must alert that it was previously stamped'
@@ -60,8 +42,7 @@ class QuickStampServiceTest extends TestCase
 
     public function testQuickStampValidatesAndFailOnPrecfdiWithErrors(): void
     {
-        $precfdi = (new RandomPreCfdi())->createInvalidByDate();
-        $command = new StampingCommand($precfdi);
+        $command = $this->newStampingCommandInvalidDate();
 
         $settings = $this->createSettingsFromEnvironment();
         $service = new QuickStampService($settings);

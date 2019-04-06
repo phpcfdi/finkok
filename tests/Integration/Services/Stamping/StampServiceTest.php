@@ -4,34 +4,11 @@ declare(strict_types=1);
 
 namespace PhpCfdi\Finkok\Tests\Integration\Services\Stamping;
 
-use PhpCfdi\Finkok\Services\Stamping\StampingCommand;
-use PhpCfdi\Finkok\Services\Stamping\StampingResult;
 use PhpCfdi\Finkok\Services\Stamping\StampService;
-use PhpCfdi\Finkok\Tests\Factories\RandomPreCfdi;
-use PhpCfdi\Finkok\Tests\TestCase;
+use PhpCfdi\Finkok\Tests\Integration\IntegrationTestCase;
 
-class StampServiceTest extends TestCase
+class StampServiceTest extends IntegrationTestCase
 {
-    protected function cachedCommand(): StampingCommand
-    {
-        static $command = null;
-        if (null === $command) {
-            $command = new StampingCommand((new RandomPreCfdi())->createValid());
-        }
-        return $command;
-    }
-
-    protected function cachedStamped(): StampingResult
-    {
-        static $stampingResult = null;
-        if (null === $stampingResult) {
-            $service = $this->createService();
-            $stampingResult = $service->stamp($this->cachedCommand());
-        }
-
-        return $stampingResult;
-    }
-
     protected function createService(): StampService
     {
         $settings = $this->createSettingsFromEnvironment();
@@ -40,19 +17,21 @@ class StampServiceTest extends TestCase
 
     public function testStampValidPrecfdi(): void
     {
-        $firstResult = $this->cachedStamped();
+        $command = $this->newStampingCommand();
+        $service = $this->createService();
+        $result = $service->stamp($command);
 
-        $this->assertSame('Comprobante timbrado satisfactoriamente', $firstResult->statusCode());
-        $this->assertNotEmpty($firstResult->xml());
-        $this->assertNotEmpty($firstResult->uuid());
-        $this->assertStringContainsString($firstResult->uuid(), $firstResult->xml());
+        $this->assertSame('Comprobante timbrado satisfactoriamente', $result->statusCode());
+        $this->assertNotEmpty($result->xml());
+        $this->assertNotEmpty($result->uuid());
+        $this->assertStringContainsString($result->uuid(), $result->xml());
     }
 
-    public function testStampTwiceSamePrecfdi(): void
+    public function testStampPreviouslyCreatedCfdi(): void
     {
-        $firstResult = $this->cachedStamped();
+        $firstResult = $this->currentCfdi();
 
-        $secondResult = $this->createService()->stamp($this->cachedCommand());
+        $secondResult = $this->createService()->stamp($this->currentStampingCommand());
         $this->assertNotNull(
             $secondResult->alerts()->findByErrorCode('307'),
             'Finkok must alert that it was previously stamped'
@@ -67,9 +46,7 @@ class StampServiceTest extends TestCase
 
     public function testStampPrecfdiWithErrorInDate(): void
     {
-        $command = new StampingCommand(
-            (new RandomPreCfdi())->createInvalidByDate()
-        );
+        $command = $this->newStampingCommandInvalidDate();
 
         $service = $this->createService();
         $result = $service->stamp($command);

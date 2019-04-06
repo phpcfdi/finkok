@@ -6,21 +6,23 @@ namespace PhpCfdi\Finkok\Tests\Integration\Services\Stamping;
 
 use PhpCfdi\Finkok\Services\Stamping\QueryPendingCommand;
 use PhpCfdi\Finkok\Services\Stamping\QueryPendingService;
-use PhpCfdi\Finkok\Services\Stamping\QuickStampService;
-use PhpCfdi\Finkok\Services\Stamping\StampingCommand;
 use PhpCfdi\Finkok\SoapFactory;
-use PhpCfdi\Finkok\Tests\Factories\RandomPreCfdi;
-use PhpCfdi\Finkok\Tests\TestCase;
+use PhpCfdi\Finkok\Tests\Integration\IntegrationTestCase;
 use Psr\Log\AbstractLogger;
 use Psr\Log\LoggerInterface;
 
-class QueryPendingServiceTest extends TestCase
+class QueryPendingServiceTest extends IntegrationTestCase
 {
+    protected function createService(): QueryPendingService
+    {
+        $settings = $this->createSettingsFromEnvironment();
+        return new QueryPendingService($settings);
+    }
+
     public function testQueryPendingWithInvalidUuid(): void
     {
         $command = new QueryPendingCommand('foo');
-        $settings = $this->createSettingsFromEnvironment();
-        $service = new QueryPendingService($settings);
+        $service = $this->createService();
 
         $result = $service->queryPending($command);
 
@@ -44,6 +46,7 @@ class QueryPendingServiceTest extends TestCase
         $settings->changeSoapFactory(new SoapFactory($logger));
 
         $service = new QueryPendingService($settings);
+        // $service = $this->createService();
 
         $result = $service->queryPending($command);
 
@@ -52,18 +55,13 @@ class QueryPendingServiceTest extends TestCase
 
     public function testQueryPendingWithCreatedCfdiUsingQuickStamp(): void
     {
-        $settings = $this->createSettingsFromEnvironment();
-        $quickStamp = (new QuickStampService($settings))
-            ->quickstamp(
-                new StampingCommand((new RandomPreCfdi())->createValid())
-            );
-        $this->assertNotEmpty($quickStamp->uuid());
+        $quickStamp = $this->currentCfdi();
 
         $command = new QueryPendingCommand($quickStamp->uuid());
-        $service = new QueryPendingService($settings);
+        $service = $this->createService();
         $result = $service->queryPending($command);
 
-        $this->assertTrue(in_array($result->status(), ['N', 'F'], true), 'Finkok result is not N or F');
-        $this->assertSame($result->uuid(), $command->uuid(), 'Finkok response was not for the same uuid requested');
+        $this->assertTrue(in_array($result->status(), ['S', 'F'], true), 'Finkok result is not S or F');
+        $this->assertSame($result->uuid(), $command->uuid(), 'Finkok response does not include the requested uuid');
     }
 }
