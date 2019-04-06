@@ -6,6 +6,9 @@ namespace PhpCfdi\Finkok\Services\Stamping;
 
 use PhpCfdi\Finkok\Definitions\Services;
 use PhpCfdi\Finkok\FinkokSettings;
+use PhpCfdi\Finkok\SoapFactory;
+use Psr\Log\AbstractLogger;
+use Psr\Log\LoggerInterface;
 
 class QueryPendingService
 {
