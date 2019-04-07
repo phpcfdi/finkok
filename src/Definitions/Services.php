@@ -8,6 +8,7 @@ use Eclipxe\Enum\Enum;
 
 /**
  * @method static self stamping()
+ * @method static self utilities()
  */
 class Services extends Enum
 {
@@ -15,6 +16,7 @@ class Services extends Enum
     {
         return [
             'stamping' => '/servicios/soap/stamp.wsdl',
+            'utilities' => '/servicios/soap/utilities.wsdl',
         ];
     }
 }

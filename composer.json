@@ -56,7 +56,7 @@
         ],
         "dev:test": [
             "vendor/bin/phplint",
-            "vendor/bin/phpunit --testdox --verbose --stop-on-failure",
+            "vendor/bin/phpunit --testdox --verbose --stop-on-failure tests/Unit",
             "find . -type f -name .phpunit.result.cache -delete",
             "vendor/bin/phpstan analyse --no-progress --verbose --level max src/ tests/"
         ],
