@@ -32,25 +32,12 @@ class QueryPendingServiceTest extends IntegrationTestCase
 
     public function testQueryPendingWithFakeUuid(): void
     {
-        $this->markTestSkipped('Se sabe que finkok tiene un error en este caso, ticket #17626');
-
         $command = new QueryPendingCommand('01234567-0123-0123-0123-012345678901');
-
-        $logger = new class() extends AbstractLogger implements LoggerInterface {
-            public function log($level, $message, array $context = []): void
-            {
-                echo PHP_EOL, $level, PHP_EOL, print_r(json_decode($message), true);
-            }
-        };
-        $settings = $this->createSettingsFromEnvironment();
-        $settings->changeSoapFactory(new SoapFactory($logger));
-
-        $service = new QueryPendingService($settings);
-        // $service = $this->createService();
+        $service = $this->createService();
 
         $result = $service->queryPending($command);
 
-        $this->assertSame('????', $result->error());
+        $this->assertSame('UUID 01234567-0123-0123-0123-012345678901 No Encontrado', $result->error());
     }
 
     public function testQueryPendingWithCreatedCfdiUsingQuickStamp(): void

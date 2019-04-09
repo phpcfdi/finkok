@@ -82,3 +82,8 @@ tal como en una llamada con un UUID mal formado.
 ## Reporte
 
 2019-04-05 20:10 <https://support.finkok.com/support/tickets/17626>
+
+# Actualización 2019-04-08.1
+
+Respondieron con una corrección al servicio en entorno de pruebas, ahora devuelve el mensaje:
+`UUID 01234567-0123-0123-0123-012345678901 No Encontrado`.
