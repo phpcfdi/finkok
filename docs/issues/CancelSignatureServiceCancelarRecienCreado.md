@@ -9,7 +9,7 @@ con el el parámetro `store_pending` en `false`,
 se encuentra con una respuesta `205` en lugar de la esperada `201`.
 No importa si se creó el timbre usando `quick_stamp` o `stamp`.
 
-* Valores documentados de la validación de la cancelación del CFDI
+Valores documentados de la validación de la cancelación del CFDI
   <https://wiki.finkok.com/doku.php?id=tipificacion#validacion_de_la_cancelacion_del_cfdi>
 
 * 201 - Petición de cancelación realizada exitosamente
@@ -188,4 +188,22 @@ X-Content-Type-Options: nosniff
 
 ## Reporte
 
-2019-04-10 En preparación...
+2019-04-10 16:50 https://support.finkok.com/support/tickets/17700
+
+Para no esperar el tiempo de respuesta habitual he marcado me han brindado excelente soporte técnico.
+Resultado: El error no es de Finkok, es del SAT.
+
+El servicio de cancelación funciona como un puente con el SAT, entre otras cosas, porque el SAT no tiene
+abierto el servicio al público en general, solo a los PAC.
+
+El error 205 no lo reporta Finkok, lo reporta el SAT (se puede ver en el acuse). Lo que lleva a preguntarnos:
+¿Porqué entonces el SAT responde con Vigente/Cancelable en el servicio de consulta, y luego response con 205?
+Porque es el SAT. Lo más probable es que por un lado almacene los CFDI y los ingrese en varios repositorios de
+información, y por otros lugares consume esos repositorios. Luego entonces, el servicio de estado podría
+retornar que sí existe y está vigente mientras que el servicio de cancelación podría decir que no existe.
+
+## Solución
+
+No existesolución. Solo se puede mitigar el problema intentando más tarde.
+
+El SAT no tiene una forma para poder advertir si se presentará un error 205.
