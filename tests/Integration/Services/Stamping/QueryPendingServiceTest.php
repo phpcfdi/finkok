@@ -6,10 +6,7 @@ namespace PhpCfdi\Finkok\Tests\Integration\Services\Stamping;
 
 use PhpCfdi\Finkok\Services\Stamping\QueryPendingCommand;
 use PhpCfdi\Finkok\Services\Stamping\QueryPendingService;
-use PhpCfdi\Finkok\SoapFactory;
 use PhpCfdi\Finkok\Tests\Integration\IntegrationTestCase;
-use Psr\Log\AbstractLogger;
-use Psr\Log\LoggerInterface;
 
 class QueryPendingServiceTest extends IntegrationTestCase
 {
