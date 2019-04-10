@@ -12,7 +12,7 @@ class CancelSignatureResult
     public $container;
 
     /** @var CancelledDocuments */
-    private $alerts;
+    private $documents;
 
     /** @var stdClass */
     private $data;
@@ -28,7 +28,7 @@ class CancelSignatureResult
             $documents = [];
         }
 
-        $this->alerts = new CancelledDocuments($documents);
+        $this->documents = new CancelledDocuments($documents);
     }
 
     public function rawData(): stdClass
@@ -63,6 +63,6 @@ class CancelSignatureResult
 
     public function documents(): CancelledDocuments
     {
-        return $this->alerts;
+        return $this->documents;
     }
 }

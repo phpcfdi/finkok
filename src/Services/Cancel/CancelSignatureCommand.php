@@ -14,6 +14,12 @@ class CancelSignatureCommand
     /** @var CancelStorePending */
     private $storePending;
 
+    /**
+     * CancelSignatureCommand constructor.
+     *
+     * @param string $xml The signed xml
+     * @param CancelStorePending|null $storePending Defaults to CancelStorePending::no()
+     */
     public function __construct(string $xml, CancelStorePending $storePending = null)
     {
         $this->xml = $xml;
