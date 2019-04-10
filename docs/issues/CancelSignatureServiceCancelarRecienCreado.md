@@ -4,8 +4,13 @@
 El servicio [`Cancel_Signature`](https://wiki.finkok.com/doku.php?id=cancelsigned_method)
 *realiza la cancelación de un comprobante CFDI por medio de un XML desarrollado como la firma*.
 
-Al llamar a la cancelación se encuentra con una respuesta `205` en lugar de la esperada `201`.
-<https://wiki.finkok.com/doku.php?id=tipificacion#validacion_de_la_cancelacion_del_cfdi>
+Al llamar a la cancelación con una firma válida para un CFDI recién creado,
+con el el parámetro `store_pending` en `false`,
+se encuentra con una respuesta `205` en lugar de la esperada `201`.
+No importa si se creó el timbre usando `quick_stamp` o `stamp`.
+
+* Valores documentados de la validación de la cancelación del CFDI
+  <https://wiki.finkok.com/doku.php?id=tipificacion#validacion_de_la_cancelacion_del_cfdi>
 
 * 201 - Petición de cancelación realizada exitosamente
 * 202 - Petición de cancelación realizada Previamente
@@ -13,7 +18,11 @@ Al llamar a la cancelación se encuentra con una respuesta `205` en lugar de la 
 * 205 - UUID No encontrado
 * no_cancelable - El UUID contiene CFDI relacionados
 
-Sin embargo, sí devuelve un acuse de cancelación, lo que aumenta la incertidumbre de su funcionamiento.
+Es importante destacar que, si se consulta el método `get_sat_status` la respuesta que obtenemos es:
+
+- EsCancelable: Cancelable sin aceptación
+- CodigoEstatus: S - Comprobante obtenido satisfactoriamente.
+- Estado: Vigente
 
 * Request headers
 

@@ -4,9 +4,12 @@ declare(strict_types=1);
 
 namespace PhpCfdi\Finkok\Tests\Integration;
 
+use CfdiUtils\Cfdi;
+use PhpCfdi\Finkok\Services\Cancel\GetSatStatusCommand;
 use PhpCfdi\Finkok\Services\Stamping\QuickStampService;
 use PhpCfdi\Finkok\Services\Stamping\StampingCommand;
 use PhpCfdi\Finkok\Services\Stamping\StampingResult;
+use PhpCfdi\Finkok\Services\Stamping\StampService;
 use PhpCfdi\Finkok\Tests\Factories\RandomPreCfdi;
 use PhpCfdi\Finkok\Tests\TestCase;
 
@@ -33,18 +36,41 @@ class IntegrationTestCase extends TestCase
         return static::$statics['stampingCommand'];
     }
 
-    public function newCfdi(StampingCommand $stampingCommand): StampingResult
+    public function quickStamp(StampingCommand $stampingCommand): StampingResult
     {
         $settings = $this->createSettingsFromEnvironment();
         $service = new QuickStampService($settings);
         return $service->quickstamp($stampingCommand);
     }
 
+    public function stamp(StampingCommand $stampingCommand): StampingResult
+    {
+        $settings = $this->createSettingsFromEnvironment();
+        $service = new StampService($settings);
+        return $service->stamp($stampingCommand);
+    }
+
+    /**
+     * El método utilizado para crear el estampado es QuickStamp
+     *
+     * @return StampingResult
+     */
     public function currentCfdi(): StampingResult
     {
         if (! isset(static::$statics['cfdi'])) {
-            static::$statics['cfdi'] = $this->newCfdi($this->currentStampingCommand());
+            static::$statics['cfdi'] = $this->quickStamp($this->currentStampingCommand());
         }
         return static::$statics['cfdi'];
+    }
+
+    public function createGetSatStatusCommandFromCfdiContents(string $xmlContents): GetSatStatusCommand
+    {
+        $cfdiReader = Cfdi::newFromString($xmlContents)->getQuickReader();
+        return new GetSatStatusCommand(
+            $cfdiReader->emisor['Rfc'],
+            $cfdiReader->receptor['Rfc'],
+            $cfdiReader->complemento->timbreFiscalDigital['uuid'],
+            $cfdiReader['total']
+        );
     }
 }

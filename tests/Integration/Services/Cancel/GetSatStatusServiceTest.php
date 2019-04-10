@@ -4,27 +4,15 @@ declare(strict_types=1);
 
 namespace PhpCfdi\Finkok\Tests\Integration\Services\Cancel;
 
-use CfdiUtils\Cfdi;
 use PhpCfdi\Finkok\Services\Cancel\GetSatStatusCommand;
 use PhpCfdi\Finkok\Services\Cancel\GetSatStatusService;
-use PhpCfdi\Finkok\SoapFactory;
 use PhpCfdi\Finkok\Tests\Integration\IntegrationTestCase;
-use Psr\Log\AbstractLogger;
-use Psr\Log\LoggerInterface;
 
 class GetSatStatusServiceTest extends IntegrationTestCase
 {
     protected function createService(): GetSatStatusService
     {
-        $consoleLogger = new class() extends AbstractLogger implements LoggerInterface {
-            public function log($level, $message, array $context = []): void
-            {
-                print_r(json_decode($message));
-            }
-        };
-        $soapFactory = new SoapFactory();
-        $soapFactory->setLogger($consoleLogger);
-        $settings = $this->createSettingsFromEnvironment($soapFactory);
+        $settings = $this->createSettingsFromEnvironment();
         return new GetSatStatusService($settings);
     }
 
@@ -43,19 +31,12 @@ class GetSatStatusServiceTest extends IntegrationTestCase
         $this->assertSame('No Encontrado', $result->cfdi());
     }
 
-    public function testQueryOnNewStampedCfdi(): void
+    public function testQueryOnCurrentStampedCfdi(): void
     {
         $cfdi = $this->currentCfdi();
         $this->assertNotEmpty($cfdi->uuid(), 'Cannot create a CFDI to GetSatStatus');
 
-        $cfdiReader = Cfdi::newFromString($cfdi->xml())->getQuickReader();
-
-        $command = new GetSatStatusCommand(
-            $cfdiReader->emisor['Rfc'],
-            $cfdiReader->receptor['Rfc'],
-            $cfdi->uuid(),
-            $cfdiReader['total']
-        );
+        $command = $this->createGetSatStatusCommandFromCfdiContents($cfdi->xml());
         $service = $this->createService();
         $result = $service->query($command);
 

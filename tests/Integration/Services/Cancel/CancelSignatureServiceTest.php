@@ -4,8 +4,11 @@ declare(strict_types=1);
 
 namespace PhpCfdi\Finkok\Tests\Integration\Services\Cancel;
 
+use PhpCfdi\Finkok\FinkokSettings;
 use PhpCfdi\Finkok\Services\Cancel\CancelSignatureCommand;
 use PhpCfdi\Finkok\Services\Cancel\CancelSignatureService;
+use PhpCfdi\Finkok\Services\Cancel\GetSatStatusResult;
+use PhpCfdi\Finkok\Services\Cancel\GetSatStatusService;
 use PhpCfdi\Finkok\SoapFactory;
 use PhpCfdi\Finkok\Tests\Integration\IntegrationTestCase;
 use PhpCfdi\XmlCancelacion\Capsule;
@@ -41,6 +44,13 @@ class CancelSignatureServiceTest extends IntegrationTestCase
         return new CancelSignatureCommand($xmlCancelacion);
     }
 
+    protected function querySatStatus(FinkokSettings $settings, string $cfdi): GetSatStatusResult
+    {
+        $command = $this->createGetSatStatusCommandFromCfdiContents($cfdi);
+        $service = new GetSatStatusService($settings);
+        return $service->query($command);
+    }
+
     public function testCancelNonExistentUuid(): void
     {
         $service = $this->createService();
@@ -54,16 +64,24 @@ class CancelSignatureServiceTest extends IntegrationTestCase
 
     public function testCancelNewStampedCfdi(): void
     {
-        $cfdi = $this->newCfdi($this->newStampingCommand());
+        $service = $this->createService();
+
+        // given a cfdi
+        $cfdi = $this->stamp($this->newStampingCommand());
         $this->assertNotEmpty($cfdi->uuid(), 'Cannot create a CFDI to cancel');
 
-        $command = $this->createCommand(
-            new Capsule('TCM970625MB1', [$cfdi->uuid()])
-        );
-        $service = $this->createService();
+        // check that it has a correct status
+        $beforeCancelStatus = $this->querySatStatus($service->settings(), $cfdi->xml());
+        $this->assertSame('Vigente', $beforeCancelStatus->cfdi());
+        $this->assertStringStartsWith('Cancelable ', $beforeCancelStatus->cancellable());
+
+        // perform cancel
+        $command = $this->createCommand(new Capsule('TCM970625MB1', [$cfdi->uuid()]));
         $result = $service->cancelSignature($command);
+
         print_r(['$result' => $result->rawData()]);
 
+        // check cancel result
         $document = $result->documents()->first();
         $this->assertSame($cfdi->uuid(), $document->uuid());
         $this->assertSame(
