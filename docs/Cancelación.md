@@ -68,6 +68,22 @@ Siempre que uses el *Pending buffer* deberás utilizar el servicio `query_pendin
 que precísamente consulta el *pending buffer* para obtener el estado de la cancelación de una
 solicitud que se quedo pendiente de cancelar debido a una falla en el sistema de SAT.
 
+### Get_Sat_Status
+
+Este servicio no se encuentra debidamente documentado.
+
+Si se encuentra un error que reporta que la expresión no se encuentra bien formada puede ser porque alguno
+de los componentes que conforman esta operación es incorrecto.
+
+En una prueba, estableciendo el valor de total a un valor incorrecto, la respuesta encontrada indica:
+`CodigoEstatus: N 601 - La expresión impresa proporcionada no es válida.`, `Estado: Vigente` y
+`EsCancelable: Cancelable sin aceptación`. El problema es que `Estado` debería decir `No encontrado`.
+
+Desconozco porqué en los parámetros de consulta no se solicitan los últimos 8 caracteres del sello digital
+del emisor del comprobante (parte de la expresión impresa en `fe`). Esto indicaría que al PAC no le exigen
+todos los datos o bien el PAC los completa con la información que tiene del CFDI, en ese caso, me queda la
+duda de ¿porqué entonces no completa toda la expresión y requiere solo el UUID?.
+
 ### Dudas de funcionamiento
 
 Suponiendo que se presenta la solicitud de cancelación por dos folios (A y B), donde A es cancelable sin autorización
@@ -87,3 +103,7 @@ Acerca del servicio `Get_Receipt`:
   al consultar los acuses de forma individual
   ¿se retornaría siempre el mismo acuse?
  
+¿Cuáles son los servicios de pasarela?, hasta el momento solo tengo `cancel_signature` y `get_sat_status`.
+Otros posibles son: `get_receipt`, `accept_reject`, `get_pending` y `get_related`.
+En todos estos servicios, si no se pudo contactar al SAT, se devuelve `708`?
+
