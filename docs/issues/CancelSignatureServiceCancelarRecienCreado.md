@@ -204,6 +204,8 @@ retornar que sí existe y está vigente mientras que el servicio de cancelación
 
 ## Solución
 
-No existesolución. Solo se puede mitigar el problema intentando más tarde.
+No existe solución.
+
+Solo se puede reconocer el error e intentar más tarde.
 
 El SAT no tiene una forma para poder advertir si se presentará un error 205.
