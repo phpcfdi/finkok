@@ -75,22 +75,38 @@ class CancelSignatureServiceTest extends IntegrationTestCase
         $this->assertSame('Vigente', $beforeCancelStatus->cfdi());
         $this->assertStringStartsWith('Cancelable ', $beforeCancelStatus->cancellable());
 
-        // perform cancel
+        // create command
         $command = $this->createCommand(new Capsule('TCM970625MB1', [$cfdi->uuid()]));
-        $result = $service->cancelSignature($command);
 
-        print_r(['$result' => $result->rawData()]);
+        // evaluate if known response was 205 (SAT cannot cancel UUID because it is not internally available yet)
+        // or Finkok response was 708 (Finkok cannot contact SAT servers)
+        // this is common to happend on testing but not in production since the time
+        // elapsed from stamping and cancelling is often more than 120 seconds
+        $repeatUntil = strtotime('now + 120 seconds');
+        do {
+            // perform cancel
+            $result = $service->cancelSignature($command);
+            $document = $result->documents()->first();
+            // do not try again if found a SAT issue is **not** found
+            if (! ('708' === $result->statusCode() || '205' === $document->documentStatus())) {
+                break;
+            }
+            // do not try again if in the loop for more than allowed
+            if (time() > $repeatUntil) {
+                break;
+            }
+            // wait and repeat
+            sleep(5);
+        } while (true);
 
         // check cancel result
-        $document = $result->documents()->first();
-        $this->assertSame($cfdi->uuid(), $document->uuid());
         $this->assertSame(
             '201', // 201 - Petición de cancelación realizada exitosamente
             $document->documentStatus(),
-            'Finkok did not return 201 EstatusUUID on CancelSignature'
+            'SAT did not return 201 EstatusUUID on CancelSignature, is the service down?'
         );
         $this->assertNotEmpty($result->voucher(), 'Finkok did not return voucher (Acuse) on CancelSignature');
-        $this->assertNotEmpty($result->date());
-        $this->assertSame('TCM970625MB1', $result->rfc());
+        $this->assertNotEmpty($result->date(), 'Finkok did not return the cancellation date');
+        $this->assertSame('TCM970625MB1', $result->rfc(), 'Finkok did not return expected RFC');
     }
 }
