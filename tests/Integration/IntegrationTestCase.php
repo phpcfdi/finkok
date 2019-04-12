@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PhpCfdi\Finkok\Tests\Integration;
 
 use CfdiUtils\Cfdi;
+use PhpCfdi\Finkok\Services\Cancel\CancelSignatureCommand;
 use PhpCfdi\Finkok\Services\Cancel\GetSatStatusCommand;
 use PhpCfdi\Finkok\Services\Stamping\QuickStampService;
 use PhpCfdi\Finkok\Services\Stamping\StampingCommand;
@@ -12,6 +13,9 @@ use PhpCfdi\Finkok\Services\Stamping\StampingResult;
 use PhpCfdi\Finkok\Services\Stamping\StampService;
 use PhpCfdi\Finkok\Tests\Factories\RandomPreCfdi;
 use PhpCfdi\Finkok\Tests\TestCase;
+use PhpCfdi\XmlCancelacion\Capsule;
+use PhpCfdi\XmlCancelacion\CapsuleSigner;
+use PhpCfdi\XmlCancelacion\Credentials;
 
 class IntegrationTestCase extends TestCase
 {
@@ -72,5 +76,16 @@ class IntegrationTestCase extends TestCase
             $cfdiReader->complemento->timbreFiscalDigital['uuid'],
             $cfdiReader['total']
         );
+    }
+
+    protected function createCancelSignatureCommandFromCapsule(Capsule $capsule): CancelSignatureCommand
+    {
+        $credentials = new Credentials(
+            $this->filePath('certs/TCM970625MB1.cer'),
+            $this->filePath('certs/TCM970625MB1.key.pem'),
+            trim($this->fileContentPath('certs/TCM970625MB1.password.bin'))
+        );
+        $xmlCancelacion = (new CapsuleSigner())->sign($capsule, $credentials);
+        return new CancelSignatureCommand($xmlCancelacion);
     }
 }
