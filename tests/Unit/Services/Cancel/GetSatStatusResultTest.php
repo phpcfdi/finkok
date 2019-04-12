@@ -13,7 +13,6 @@ class GetSatStatusResultTest extends TestCase
     {
         $data = json_decode($this->fileContentPath('cancel-get-sat-status-response.json'));
         $result = new GetSatStatusResult($data);
-        print_r(['$data' => $data, '$result' => $result]);
         $this->assertSame('S - Comprobante obtenido satisfactoriamente.', $result->query());
         $this->assertSame('Vigente', $result->cfdi());
         $this->assertSame('Cancelable sin aceptación', $result->cancellable());

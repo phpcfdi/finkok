@@ -37,7 +37,7 @@ Documentación del servicio: <https://wiki.finkok.com/doku.php?id=cancel>
 ### Respuestas de cancelación por UUID
 
 Estas son las respuestas que puede dar el SAT para cada uno de los UUID incluídos en la solicitud.
-<https://wiki.finkok.com/doku.php?id=tipificacion#validacion_de_la_cancelacion_del_cfdi> 
+<https://wiki.finkok.com/doku.php?id=tipificacion#validacion_de_la_cancelacion_del_cfdi>
 
 * no_cancelable - El UUID contiene CFDI relacionados
 * 201 - Petición de cancelación realizada exitosamente
