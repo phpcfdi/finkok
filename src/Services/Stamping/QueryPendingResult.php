@@ -4,30 +4,14 @@ declare(strict_types=1);
 
 namespace PhpCfdi\Finkok\Services\Stamping;
 
+use PhpCfdi\Finkok\Services\AbstractResult;
 use stdClass;
 
-class QueryPendingResult
+class QueryPendingResult extends AbstractResult
 {
-    /** @var string */
-    public $container;
-
-    /** @var stdClass */
-    private $data;
-
-    public function __construct(string $container, stdClass $data)
+    public function __construct(stdClass $data)
     {
-        $this->container = $container;
-        $this->data = $data;
-    }
-
-    public function rawData(): stdClass
-    {
-        return $this->data;
-    }
-
-    private function get(string $keyword): string
-    {
-        return strval($this->data->{$this->container}->{$keyword} ?? '');
+        parent::__construct($data, 'query_pendingResult');
     }
 
     public function status(): string

@@ -4,41 +4,24 @@ declare(strict_types=1);
 
 namespace PhpCfdi\Finkok\Services\Cancel;
 
+use PhpCfdi\Finkok\Services\AbstractResult;
 use stdClass;
 
-class CancelSignatureResult
+class CancelSignatureResult extends AbstractResult
 {
-    /** @var string */
-    public $container;
-
     /** @var CancelledDocuments */
     private $documents;
 
-    /** @var stdClass */
-    private $data;
-
     public function __construct(stdClass $data)
     {
-        $container = 'cancel_signatureResult';
-        $this->container = $container;
-        $this->data = $data;
-
-        $documents = $data->{$container}->{'Folios'}->{'Folio'} ?? null;
-        if (! is_array($documents)) {
-            $documents = [];
-        }
-
-        $this->documents = new CancelledDocuments($documents);
+        parent::__construct($data, 'cancel_signatureResult');
+        $documents = $this->findInDescendent($data, 'cancel_signatureResult', 'Folios', 'Folio');
+        $this->documents = new CancelledDocuments(is_array($documents) ? $documents : []);
     }
 
-    public function rawData(): stdClass
+    public function documents(): CancelledDocuments
     {
-        return $this->data;
-    }
-
-    private function get(string $keyword): string
-    {
-        return strval($this->data->{$this->container}->{$keyword} ?? '');
+        return $this->documents;
     }
 
     public function voucher(): string
@@ -59,10 +42,5 @@ class CancelSignatureResult
     public function statusCode(): string
     {
         return $this->get('CodEstatus');
-    }
-
-    public function documents(): CancelledDocuments
-    {
-        return $this->documents;
     }
 }

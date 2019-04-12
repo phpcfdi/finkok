@@ -28,7 +28,7 @@ class QueryPendingService
         $rawResponse = $soapCaller->call('query_pending', [
             'uuid' => $command->uuid(),
         ]);
-        $result = new QueryPendingResult('query_pendingResult', $rawResponse);
+        $result = new QueryPendingResult($rawResponse);
         return $result;
     }
 }

@@ -4,26 +4,14 @@ declare(strict_types=1);
 
 namespace PhpCfdi\Finkok\Services\Cancel;
 
+use PhpCfdi\Finkok\Services\AbstractResult;
 use stdClass;
 
-class GetSatStatusResult
+class GetSatStatusResult extends AbstractResult
 {
-    /** @var stdClass */
-    private $data;
-
     public function __construct(stdClass $data)
     {
-        $this->data = $data;
-    }
-
-    public function rawData(): stdClass
-    {
-        return $this->data;
-    }
-
-    private function get(string $keyword): string
-    {
-        return strval($this->data->{'get_sat_statusResult'}->{'sat'}->{$keyword} ?? '');
+        parent::__construct($data, 'get_sat_statusResult', 'sat');
     }
 
     public function query(): string

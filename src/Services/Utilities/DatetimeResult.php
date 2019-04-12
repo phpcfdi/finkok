@@ -4,26 +4,14 @@ declare(strict_types=1);
 
 namespace PhpCfdi\Finkok\Services\Utilities;
 
+use PhpCfdi\Finkok\Services\AbstractResult;
 use stdClass;
 
-class DatetimeResult
+class DatetimeResult extends AbstractResult
 {
-    /** @var stdClass */
-    private $data;
-
     public function __construct(stdClass $data)
     {
-        $this->data = $data;
-    }
-
-    public function rawData(): stdClass
-    {
-        return $this->data;
-    }
-
-    private function get(string $keyword): string
-    {
-        return strval($this->data->{'datetimeResult'}->{$keyword} ?? '');
+        parent::__construct($data, 'datetimeResult');
     }
 
     public function datetime(): string

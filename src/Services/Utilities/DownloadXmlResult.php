@@ -4,26 +4,14 @@ declare(strict_types=1);
 
 namespace PhpCfdi\Finkok\Services\Utilities;
 
+use PhpCfdi\Finkok\Services\AbstractResult;
 use stdClass;
 
-class DownloadXmlResult
+class DownloadXmlResult extends AbstractResult
 {
-    /** @var stdClass */
-    private $data;
-
     public function __construct(stdClass $data)
     {
-        $this->data = $data;
-    }
-
-    public function rawData(): stdClass
-    {
-        return $this->data;
-    }
-
-    private function get(string $keyword): string
-    {
-        return strval($this->data->{'get_xmlResult'}->{$keyword} ?? '');
+        parent::__construct($data, 'get_xmlResult');
     }
 
     public function xml(): string

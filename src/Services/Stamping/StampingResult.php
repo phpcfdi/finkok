@@ -4,40 +4,19 @@ declare(strict_types=1);
 
 namespace PhpCfdi\Finkok\Services\Stamping;
 
+use PhpCfdi\Finkok\Services\AbstractResult;
 use stdClass;
 
-class StampingResult
+class StampingResult extends AbstractResult
 {
-    /** @var string */
-    public $container;
-
     /** @var StampingAlerts */
     private $alerts;
 
-    /** @var stdClass */
-    private $data;
-
     public function __construct(string $container, stdClass $data)
     {
-        $this->container = $container;
-        $this->data = $data;
-
-        $alerts = $data->{$container}->{'Incidencias'}->{'Incidencia'} ?? null;
-        if (! is_array($alerts)) {
-            $alerts = [];
-        }
-
-        $this->alerts = new StampingAlerts($alerts);
-    }
-
-    public function rawData(): stdClass
-    {
-        return $this->data;
-    }
-
-    private function get(string $keyword): string
-    {
-        return strval($this->data->{$this->container}->{$keyword} ?? '');
+        parent::__construct($data, $container);
+        $alerts = $this->findInDescendent($data, $container, 'Incidencias', 'Incidencia');
+        $this->alerts = new StampingAlerts(is_array($alerts) ? $alerts : []);
     }
 
     public function xml(): string
