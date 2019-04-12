@@ -12,15 +12,15 @@ class CancelSignatureCommandTest extends TestCase
 {
     public function testCommandDefaultValue(): void
     {
-        $stamping = new CancelSignatureCommand('xml');
-        $this->assertFalse($stamping->storePending()->asBool(), 'Default value for store pending should be FALSE');
+        $command = new CancelSignatureCommand('xml');
+        $this->assertFalse($command->storePending()->asBool(), 'Default value for store pending should be FALSE');
     }
 
     public function testCommandValues(): void
     {
         $storePending = CancelStorePending::yes();
-        $stamping = new CancelSignatureCommand('xml', $storePending);
-        $this->assertSame('xml', $stamping->xml());
-        $this->assertEquals($storePending, $stamping->storePending());
+        $command = new CancelSignatureCommand('xml', $storePending);
+        $this->assertSame('xml', $command->xml());
+        $this->assertEquals($storePending, $command->storePending());
     }
 }

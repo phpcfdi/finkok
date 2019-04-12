@@ -11,10 +11,10 @@ class GetSatStatusCommandTest extends TestCase
 {
     public function testCommandValues(): void
     {
-        $stamping = new GetSatStatusCommand('emisor', 'receptor', 'uuid', 'total');
-        $this->assertSame('emisor', $stamping->rfcIssuer());
-        $this->assertSame('receptor', $stamping->rfcRecipient());
-        $this->assertSame('uuid', $stamping->uuid());
-        $this->assertSame('total', $stamping->total());
+        $command = new GetSatStatusCommand('emisor', 'receptor', 'uuid', 'total');
+        $this->assertSame('emisor', $command->rfcIssuer());
+        $this->assertSame('receptor', $command->rfcRecipient());
+        $this->assertSame('uuid', $command->uuid());
+        $this->assertSame('total', $command->total());
     }
 }
