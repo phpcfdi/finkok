@@ -5,56 +5,28 @@ declare(strict_types=1);
 namespace PhpCfdi\Finkok\Services\Cancel;
 
 use ArrayIterator;
-use ArrayObject;
-use Countable;
-use IteratorAggregate;
+use PhpCfdi\Finkok\Services\AbstractCollection;
+use stdClass;
 
-class CancelledDocuments implements Countable, IteratorAggregate
+/**
+ * @method CancelledDocument get(int $index)
+ * @method CancelledDocument first()
+ * @method ArrayIterator|CancelledDocument[] getIterator()
+ */
+class CancelledDocuments extends AbstractCollection
 {
-    /** @var ArrayObject|CancelledDocument[] */
-    private $documents;
-
-    public function __construct(array $collection)
+    protected function createItemFromStdClass(stdClass $content): object
     {
-        $this->documents = new ArrayObject();
-        foreach ($collection as $item) {
-            $this->documents->append(new CancelledDocument($item));
-        }
-    }
-
-    public function get(int $index): CancelledDocument
-    {
-        if (! isset($this->documents[$index])) {
-            return new CancelledDocument((object) []);
-        }
-        return $this->documents[$index];
-    }
-
-    public function count(): int
-    {
-        return $this->documents->count();
-    }
-
-    public function first(): CancelledDocument
-    {
-        return $this->get(0);
+        return new CancelledDocument($content);
     }
 
     public function find(string $uuid): ?CancelledDocument
     {
-        foreach ($this->documents as $document) {
+        foreach ($this->collection as $document) {
             if ($uuid === $document->uuid()) {
                 return $document;
             }
         }
         return null;
-    }
-
-    /**
-     * @return ArrayIterator|CancelledDocument[]
-     */
-    public function getIterator(): ArrayIterator
-    {
-        return $this->documents->getIterator();
     }
 }
