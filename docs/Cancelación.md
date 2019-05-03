@@ -137,6 +137,7 @@ donde A es cancelable sin autorización y B es no cancelable.
 - ¿El SAT responderá con un acuse de cancelación cancelando A (201), pero rechazando B (no_cancelable)?
     R: Se desconoce, se podría hacer una prueba al respecto.
     R: En la primer prueba realizada regresó estado de 201 para ambos CFDI, se está investigando
+    R: La respuesta 201 significa que la *solicitud* fue recibida, no que el CFDI fue cancelado.
 
 Acerca del servicio `Get_Receipt`:
  
