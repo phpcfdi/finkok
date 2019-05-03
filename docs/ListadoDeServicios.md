@@ -54,12 +54,13 @@ Servicios para trabajar cancelaciones con CFDI de otro PAC
 ## Retenciones
 
 - [ ] `Stamp`: Firma un CFDI RET, si fue firmado previamente retorna (a veces) el timbrado previo.
-- [ ] `Stamped`
-- [ ] `Cancel`
-- [ ] `get_receipt`
+- [ ] `Stamped`:  Regresa la información de un XML timbrado previamente.
+- [ ] `cancel_signature`: (implementado en entorno demo)
+- [ ] `get_receipt`: Devuelve el acuse de recibo asociado a un UUID.
 
 ## Servicios que no se implementarán
 
 - `Sing_Stamp` (timbrado cfdi): Crea el sello y firma un CFDI, llave privada y contraseña compartida.
 - `cancel` (cancelación cfdi): Manda cancelar pero requiere envío del certificado, llave privada y contraseña compartida.
+- `cancel` (retenciones): Manda cancelar pero requiere envío del certificado, llave privada y contraseña compartida.
 - `sign_cancel` (cancelación cfdi): Manda cancelar pero requiere certificado, llave privada y contraseña compartida.
