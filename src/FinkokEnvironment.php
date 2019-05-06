@@ -43,6 +43,11 @@ class FinkokEnvironment
 
     public function endpoint(Definitions\Services $service): string
     {
-        return $this->server() . $service->value();
+        $environment = $this->environment;
+        if ($service->isManifest()) {
+            $environment = (new Definitions\EnvironmentManifest($environment->index()));
+        }
+
+        return $environment->value() . $service->value();
     }
 }

@@ -10,6 +10,12 @@ use Eclipxe\Enum\Enum;
  * @method static self stamping()
  * @method static self utilities()
  * @method static self cancel()
+ * @method static self manifest()
+ *
+ * @method bool isStamping()
+ * @method bool isUtilities()
+ * @method bool isCancel()
+ * @method bool isManifest()
  */
 class Services extends Enum
 {
@@ -19,6 +25,7 @@ class Services extends Enum
             'stamping' => '/servicios/soap/stamp.wsdl',
             'utilities' => '/servicios/soap/utilities.wsdl',
             'cancel' => '/servicios/soap/cancel.wsdl',
+            'manifest' => '/servicios/soap/firmar.wsdl',
         ];
     }
 }

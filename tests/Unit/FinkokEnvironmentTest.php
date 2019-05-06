@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PhpCfdi\Finkok\Tests\Unit;
 
+use PhpCfdi\Finkok\Definitions\EnvironmentManifest;
+use PhpCfdi\Finkok\Definitions\Services;
 use PhpCfdi\Finkok\FinkokEnvironment;
 use PhpCfdi\Finkok\Tests\TestCase;
 
@@ -21,5 +23,16 @@ class FinkokEnvironmentTest extends TestCase
         $environment = FinkokEnvironment::makeProduction();
         $this->assertFalse($environment->isDevelopment(), 'Must return false for development');
         $this->assertTrue($environment->isProduction(), 'Must return true for production');
+    }
+
+    public function testEndpointOverridesWhenServiceIsManifest(): void
+    {
+        $environment = FinkokEnvironment::makeDevelopment();
+
+        $cancel = $environment->endpoint(Services::cancel());
+        $this->assertStringStartsWith($environment->server(), $cancel);
+
+        $manifest = $environment->endpoint(Services::manifest());
+        $this->assertStringStartsWith(EnvironmentManifest::development()->value(), $manifest);
     }
 }
