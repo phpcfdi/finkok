@@ -14,15 +14,18 @@ class ReportCreditResult extends AbstractResult
     public function __construct(stdClass $data)
     {
         parent::__construct($data, 'report_creditResult');
+        $this->items = [];
 
-        $items = [];
-        foreach ($this->findInDescendent($data, 'report_creditResult', 'result', 'ReportTotalCredit') as $item) {
-            $items[] = [
+        $items = $this->findInDescendent($data, 'report_creditResult', 'result', 'ReportTotalCredit');
+        if (! is_array($items)) {
+            $items = [];
+        }
+        foreach ($items as $item) {
+            $this->items[] = [
                 'credit' => strval($item->credit),
                 'date' => strval($item->date),
             ];
         }
-        $this->items = $items;
     }
 
     public function items(): array

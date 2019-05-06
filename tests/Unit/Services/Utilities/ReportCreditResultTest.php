@@ -30,4 +30,11 @@ class ReportCreditResultTest extends TestCase
 
         $this->assertSame($expected, $obtained);
     }
+
+    public function testResultUsingEmptyResponse(): void
+    {
+        $data = json_decode($this->fileContentPath('utilities-report-credit-zero-items-response.json'));
+        $result = new ReportCreditResult($data);
+        $this->assertCount(0, $result->items());
+    }
 }
