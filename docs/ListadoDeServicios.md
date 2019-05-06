@@ -58,6 +58,11 @@ Servicios para trabajar cancelaciones con CFDI de otro PAC
 - [ ] `cancel_signature`: (implementado en entorno demo)
 - [ ] `get_receipt`: Devuelve el acuse de recibo asociado a un UUID.
 
+## Manifiesto de Finkok
+
+- [ ] `get_contracts`: Obtiene los textos para ser firmados
+- [ ] `sign_contract`: Envía los textos firmados con la FIEL
+
 ## Servicios que no se implementarán
 
 - `Sing_Stamp` (timbrado cfdi): Crea el sello y firma un CFDI, llave privada y contraseña compartida.
