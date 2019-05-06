@@ -1,0 +1,12 @@
+{
+  "report_totalResult" : {
+    "result": {
+      "ReportTotal": [
+        {
+          "total": 123,
+          "taxpayer_id": "TCM970625MB1"
+        }
+      ]
+    }
+  }
+}
