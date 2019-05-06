@@ -34,9 +34,9 @@ Servicios para trabajar cancelaciones con CFDI de otro PAC
 
 - [X] `datetime`: Obtiene la hora de los servidores de Finkok
 - [X] `get_xml`: Obtiene un CFDI firmado usando su UUID (de los últimos 3 meses)
-- [ ] `report_credit`: Obtener un reporte por RFC de los créditos añadidos
-- [ ] `report_total`: Obtener un reporte por RFC del total de timbres consumidos por fechas
-- [ ] `report_uuid`: Obtener un reporte de UUID con fecha de emisión por RFC
+- [X] `report_credit`: Obtener un reporte por RFC de los créditos añadidos
+- [X] `report_total`: Obtener un reporte por RFC del total de timbres consumidos por fechas
+- [X] `report_uuid`: Obtener un reporte de UUID con fecha de emisión por RFC
 
 ## Registro de clientes
 
