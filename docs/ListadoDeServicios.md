@@ -60,8 +60,8 @@ Servicios para trabajar cancelaciones con CFDI de otro PAC
 
 ## Manifiesto de Finkok
 
-- [ ] `get_contracts`: Obtiene los textos para ser firmados
-- [ ] `sign_contract`: Envía los textos firmados con la FIEL
+- [X] `get_contracts`: Obtiene los textos para ser firmados
+- [X] `sign_contract`: Envía los textos firmados con la FIEL
 
 ## Servicios que no se implementarán
 
