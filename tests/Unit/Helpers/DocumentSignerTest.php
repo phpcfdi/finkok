@@ -17,9 +17,9 @@ class DocumentSignerTest extends TestCase
         $date = new DateTimeImmutable('2019-01-13 14:15:16');
         $content = 'Lorem Ipsum';
 
-        $certificate = $this->filePath('certs/TCM970625MB1.cer');
-        $privateKey = $this->filePath('certs/TCM970625MB1.key.pem');
-        $passPhrase = trim($this->fileContentPath('certs/TCM970625MB1.password.bin'));
+        $certificate = $this->filePath('fiel/TCM970625MB1.cer.pem');
+        $privateKey = $this->filePath('fiel/TCM970625MB1.key.pem');
+        $passPhrase = trim($this->fileContentPath('fiel/TCM970625MB1.password.bin'));
 
         $docSigner = new DocumentSigner($rfc, $date, $content);
         $this->assertSame($rfc, $docSigner->rfc());
