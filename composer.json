@@ -22,8 +22,10 @@
         "php": ">=7.2",
         "ext-json": "*",
         "ext-soap": "*",
+        "ext-dom": "*",
+        "psr/log": "^1.1",
         "eclipxe/enum": "^0.2.0",
-        "psr/log": "^1.1"
+        "robrichards/xmlseclibs": "^3.0"
     },
     "require-dev": {
         "eclipxe/cfdiutils": "^2.10",
