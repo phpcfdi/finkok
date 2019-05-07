@@ -24,6 +24,12 @@ class FinkokSettings
     /** @var SoapFactory */
     private $soapFactory;
 
+    /** @var string */
+    private $usernameKey = 'username';
+
+    /** @var string */
+    private $passwordKey = 'password';
+
     public function __construct(string $username, string $password, FinkokEnvironment $environment = null)
     {
         if ('' === $username) {
@@ -41,6 +47,16 @@ class FinkokSettings
     public function changeSoapFactory(SoapFactory $soapFactory): void
     {
         $this->soapFactory = $soapFactory;
+    }
+
+    public function changeUsernameKey(string $usernameKey): void
+    {
+        $this->usernameKey = $usernameKey;
+    }
+
+    public function changePasswordKey(string $passwordKey): void
+    {
+        $this->passwordKey = $passwordKey;
     }
 
     public function username(): string
@@ -66,17 +82,22 @@ class FinkokSettings
     /**
      * This method created a configured SoapCaller with wsdLocation and default options
      *
-     * @uses SoapFactory
      * @param Services $service
      * @return SoapCaller
+     * @uses SoapFactory
      */
     public function createCallerForService(Services $service): SoapCaller
     {
         $wsdlLocation = $this->environment()->endpoint($service);
-        $defaultOptions = [
-            'username' => $this->username(),
-            'password' => $this->password(),
+        $credentials = $this->credentialsParameters();
+        return $this->soapFactory()->createSoapCaller($wsdlLocation, $credentials);
+    }
+
+    public function credentialsParameters(): array
+    {
+        return [
+            $this->usernameKey => $this->username(),
+            $this->passwordKey => $this->password(),
         ];
-        return $this->soapFactory()->createSoapCaller($wsdlLocation, $defaultOptions);
     }
 }

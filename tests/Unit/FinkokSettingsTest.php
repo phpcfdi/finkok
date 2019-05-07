@@ -44,4 +44,24 @@ class FinkokSettingsTest extends TestCase
         $settings = new FinkokSettings('u', 'p', $environment);
         $this->assertTrue($settings->environment()->isProduction());
     }
+
+    public function testCreateCallerForServiceUsesDefaultUsernameAndPassword(): void
+    {
+        $settings = new FinkokSettings('u', 'p');
+        $this->assertSame([
+            'username' => 'u',
+            'password' => 'p',
+        ], $settings->credentialsParameters());
+    }
+
+    public function testCreateCallerChangingUsernameAndPasswordKeys(): void
+    {
+        $settings = new FinkokSettings('u', 'p');
+        $settings->changeUsernameKey('x-username');
+        $settings->changePasswordKey('x-password');
+        $this->assertSame([
+            'x-username' => 'u',
+            'x-password' => 'p',
+        ], $settings->credentialsParameters());
+    }
 }
