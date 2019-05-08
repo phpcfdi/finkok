@@ -9,29 +9,11 @@ use PhpCfdi\Finkok\Services\Cancel\CancelSignatureService;
 use PhpCfdi\Finkok\Services\Cancel\GetReceiptCommand;
 use PhpCfdi\Finkok\Services\Cancel\GetReceiptService;
 use PhpCfdi\Finkok\Services\Cancel\GetSatStatusService;
-use PhpCfdi\Finkok\SoapFactory;
 use PhpCfdi\Finkok\Tests\Integration\IntegrationTestCase;
 use PhpCfdi\XmlCancelacion\Capsule;
-use Psr\Log\AbstractLogger;
-use Psr\Log\LoggerInterface;
 
 class CancelServicesTest extends IntegrationTestCase
 {
-    protected function createSoapFactoryWithPrintToScreen(): SoapFactory
-    {
-        parent::setUp();
-
-        $consoleLogger = new class() extends AbstractLogger implements LoggerInterface {
-            public function log($level, $message, array $context = []): void
-            {
-                echo PHP_EOL, print_r(json_decode($message), true);
-            }
-        };
-        $soapFactory = new SoapFactory();
-        $soapFactory->setLogger($consoleLogger);
-        return $soapFactory;
-    }
-
     public function testCreateCfdiThenGetSatStatusThenCancelSignatureThenGetReceipt(): void
     {
         $settings = $this->createSettingsFromEnvironment();
