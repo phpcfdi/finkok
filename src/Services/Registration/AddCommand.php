@@ -9,7 +9,7 @@ class AddCommand
     /** @var string */
     private $rfc;
 
-    /** @var string */
+    /** @var CustomerType */
     private $type;
 
     /** @var string */
@@ -23,13 +23,13 @@ class AddCommand
 
     public function __construct(
         string $rfc,
-        string $type,
-        string $certificate,
-        string $privateKey,
-        string $passPhrase
+        ?CustomerType $type = null,
+        string $certificate = '',
+        string $privateKey = '',
+        string $passPhrase = ''
     ) {
         $this->rfc = $rfc;
-        $this->type = $type;
+        $this->type = $type ?? CustomerType::ondemand();
         $this->certificate = $certificate;
         $this->privateKey = $privateKey;
         $this->passPhrase = $passPhrase;
@@ -40,7 +40,7 @@ class AddCommand
         return $this->rfc;
     }
 
-    public function type(): string
+    public function type(): CustomerType
     {
         return $this->type;
     }
