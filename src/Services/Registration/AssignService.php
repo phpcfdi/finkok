@@ -24,7 +24,7 @@ class AssignService
 
     public function assign(AssignCommand $command): AssignResult
     {
-        $soapCaller = $this->settings()->createCallerForService(Services::stamping());
+        $soapCaller = $this->settings()->createCallerForService(Services::registration());
         $rawResponse = $soapCaller->call('assign', [
             'taxpayer_id' => $command->rfc(),
             'credit' => $command->credit(),
