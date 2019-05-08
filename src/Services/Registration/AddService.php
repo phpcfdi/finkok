@@ -29,7 +29,7 @@ class AddService
         $soapCaller = $this->settings()->createCallerForService(Services::registration());
         $rawResponse = $soapCaller->call('add', array_filter([
             'taxpayer_id' => $command->rfc(),
-            'type_user' => $command->type(),
+            'type_user' => $command->type()->value(),
             // added is not included until documented by Finkok
             // 'added' => $command->date()->format('Y-m-d\TH:i:s'),
             'cer' => $command->certificate(),
