@@ -31,4 +31,13 @@ class CustomerTest extends TestCase
         $this->assertSame('MAG041126GT8', $customer->rfc());
         $this->assertSame(20, $customer->credit());
     }
+
+    public function testCustomerTypePrepaid(): void
+    {
+        $ondemandCustomer = new Customer((object) ['credit' => -1]);
+        $this->assertTrue($ondemandCustomer->customerType()->isOndemand());
+
+        $prepaidCustomer = new Customer((object) ['credit' => 0]);
+        $this->assertTrue($prepaidCustomer->customerType()->isPrepaid());
+    }
 }

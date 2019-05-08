@@ -41,6 +41,14 @@ class Customer
         return intval($this->get('credit'));
     }
 
+    public function customerType(): CustomerType
+    {
+        if (-1 === $this->credit()) {
+            return CustomerType::ondemand();
+        }
+        return CustomerType::prepaid();
+    }
+
     public function values(): array
     {
         return (array) $this->data;
