@@ -47,6 +47,7 @@ class ObtainServiceTest extends TestCase
         $service->obtain($command);
 
         $caller = $soapFactory->latestSoapCaller;
-        $this->assertArrayNotHasKey('taxpayer_id', $caller->latestCallParameters);
+        $this->assertArrayHasKey('taxpayer_id', $caller->latestCallParameters);
+        $this->assertSame('', $caller->latestCallParameters['taxpayer_id']);
     }
 }
