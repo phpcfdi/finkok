@@ -27,4 +27,22 @@ class CustomersTest extends TestCase
         $this->assertSame('LAN7008173R5', $known->rfc(), 'known rfc finding must match');
         $this->assertNull($customers->findByRfc('AAA010101AAA'));
     }
+
+    public function testGetByRfcUsingExistentRfc(): void
+    {
+        $expectedRfc = 'LAN7008173R5';
+        $data = json_decode($this->fileContentPath('registration-get-response-2-items.json'));
+        $customers = new Customers($data->getResult->users->ResellerUser);
+        $this->assertSame($expectedRfc, $customers->getByRfc($expectedRfc)->rfc());
+    }
+
+    public function testGetByRfcUsingNonExistentRfcThrowsException(): void
+    {
+        $data = json_decode($this->fileContentPath('registration-get-response-2-items.json'));
+        $customers = new Customers($data->getResult->users->ResellerUser);
+
+        $this->expectException(\LogicException::class);
+        $this->expectExceptionMessage('There is no customer with RFC AAA010101AAA');
+        $customers->getByRfc('AAA010101AAA');
+    }
 }
