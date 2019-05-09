@@ -40,10 +40,10 @@ Servicios para trabajar cancelaciones con CFDI de otro PAC
 
 ## Registro de clientes
 
-- [ ] `assign`: Asignar créditos a un cliente que va a timbrar bajo la cuenta de un socio de negocios de Finkok
-- [ ] `add`: Agregar un cliente que va a timbrar bajo la cuenta de un socio de negocios de Finkok
-- [ ] `edit`: Editar el estatus de un cliente, como lo es suspender o activar
-- [ ] `get`: Listado o el status del RFC Emisor que este ingresando y tenga registrado en su cuenta
+- [X] `assign`: Asignar créditos a un cliente que va a timbrar bajo la cuenta de un socio de negocios de Finkok
+- [X] `add`: Agregar un cliente que va a timbrar bajo la cuenta de un socio de negocios de Finkok
+- [X] `edit`: Editar el estatus de un cliente, como lo es suspender o activar
+- [X] `get`: Listado o el status del RFC Emisor que este ingresando y tenga registrado en su cuenta
 
 ## Tokens
 
