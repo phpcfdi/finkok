@@ -69,7 +69,7 @@ class DocumentSigner
         $objDSig->sign($objKey);
         $objDSig->add509Cert($certificateFile, true, true);
 
-        $objDSig->appendSignature($document->documentElement);
+        $objDSig->appendSignature($root);
         return $document->saveXML();
     }
 }
