@@ -24,4 +24,16 @@ class EditCommandTest extends TestCase
         $this->assertSame($keyfile, $command->privateKey());
         $this->assertSame($passPhrase, $command->passPhrase());
     }
+
+    public function testEditCommandCreationWithMinimalArguments(): void
+    {
+        $rfc = 'x-rfc';
+        $status = CustomerStatus::suspended();
+        $command = new EditCommand($rfc, $status);
+        $this->assertSame($rfc, $command->rfc());
+        $this->assertSame($status, $command->status());
+        $this->assertSame('', $command->certificate());
+        $this->assertSame('', $command->privateKey());
+        $this->assertSame('', $command->passPhrase());
+    }
 }

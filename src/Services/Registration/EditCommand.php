@@ -24,9 +24,9 @@ class EditCommand
     public function __construct(
         string $rfc,
         CustomerStatus $status,
-        string $certificate,
-        string $privateKey,
-        string $passPhrase
+        string $certificate = '',
+        string $privateKey = '',
+        string $passPhrase = ''
     ) {
         $this->rfc = $rfc;
         $this->status = $status;
