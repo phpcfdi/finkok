@@ -13,6 +13,7 @@ class CustomerTest extends TestCase
     {
         $customer = new Customer((object) []);
         $this->assertSame([], $customer->values());
+        $this->assertTrue($customer->status()->isSuspended(), 'Status used if not set must be suspended');
     }
 
     public function testCreateWithSampleData(): void

@@ -11,9 +11,22 @@ class Customer
     /** @var stdClass */
     private $data;
 
+    /** @var CustomerStatus */
+    private $status;
+
+    /** @var CustomerType */
+    private $type;
+
     public function __construct(stdClass $raw)
     {
         $this->data = $raw;
+        $rawStatus = strval($this->get('status'));
+        if (in_array($rawStatus, CustomerStatus::toArray())) {
+            $this->status = new CustomerStatus($rawStatus);
+        } else {
+            $this->status = CustomerStatus::suspended();
+        }
+        $this->type = (-1 === $this->credit()) ? CustomerType::ondemand() : CustomerType::prepaid();
     }
 
     private function get(string $keyword): string
@@ -23,7 +36,7 @@ class Customer
 
     public function status(): CustomerStatus
     {
-        return new CustomerStatus($this->get('status'));
+        return $this->status;
     }
 
     public function counter(): int
@@ -43,10 +56,7 @@ class Customer
 
     public function customerType(): CustomerType
     {
-        if (-1 === $this->credit()) {
-            return CustomerType::ondemand();
-        }
-        return CustomerType::prepaid();
+        return $this->type;
     }
 
     public function values(): array
