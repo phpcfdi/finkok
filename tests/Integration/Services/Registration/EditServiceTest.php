@@ -13,9 +13,6 @@ class EditServiceTest extends RegistrationIntegrationTestCase
     protected function createService(): EditService
     {
         $editService = new EditService($this->createSettingsFromEnvironment());
-        $editService->settings()->soapFactory()->setLogger(
-            $this->createLoggerPrintToScreen()
-        );
         return $editService;
     }
 
