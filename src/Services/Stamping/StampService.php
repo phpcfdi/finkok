@@ -25,15 +25,18 @@ class StampService
     public function stamp(StampingCommand $command): StampingResult
     {
         $soapCaller = $this->settings()->createCallerForService(Services::stamping());
-        $rawResponse = $soapCaller->call('stamp', [
-            'xml' => $command->xml(),
-        ]);
-        $result = new StampingResult('stampResult', $rawResponse);
-        // repeat to fix bad webservice behavior of finkok
-        if ($result->alerts()->findByErrorCode('307') && '' === $result->uuid()) {
-            usleep(200000); // 0.2 seconds
-            $result = $this->stamp($command);
-        }
+        // Finkok, repeat to fix bad webservice behavior of remote stamp method
+        // This will not be fixed according to Finkok
+        do {
+            $rawResponse = $soapCaller->call('stamp', [
+                'xml' => $command->xml(),
+            ]);
+            $result = new StampingResult('stampResult', $rawResponse);
+            if ($result->alerts()->findByErrorCode('307') && '' === $result->uuid()) {
+                usleep(200000); // 0.2 seconds
+                continue;
+            }
+        } while (false);
         return $result;
     }
 }
