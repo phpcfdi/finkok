@@ -6,9 +6,8 @@ namespace PhpCfdi\Finkok\Tests\Integration\Services\Registration;
 
 use PhpCfdi\Finkok\Services\Registration\ObtainCommand;
 use PhpCfdi\Finkok\Services\Registration\ObtainService;
-use PhpCfdi\Finkok\Tests\Integration\IntegrationTestCase;
 
-class ObtainServiceTest extends IntegrationTestCase
+class ObtainServiceTest extends RegistrationIntegrationTestCase
 {
     protected function createService(): ObtainService
     {
@@ -32,7 +31,10 @@ class ObtainServiceTest extends IntegrationTestCase
 
         $this->assertSame('', $result->message());
         $this->assertSame(1, count($result->customers()));
-        $this->assertSame('TCM970625MB1', $result->customers()->getByRfc('TCM970625MB1')->rfc());
+        $customer = $result->customers()->getByRfc('TCM970625MB1');
+        $this->assertSame('TCM970625MB1', $customer->rfc());
+        $this->assertSame('A', $customer->status());
+        $this->assertTrue($customer->customerType()->isOndemand());
     }
 
     public function testConsumeObtainServiceGettingAllRecords(): void
