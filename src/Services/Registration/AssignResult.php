@@ -11,7 +11,7 @@ class AssignResult extends AbstractResult
 {
     public function __construct(stdClass $data)
     {
-        parent::__construct($data, 'assingResult');
+        parent::__construct($data, 'assignResult');
     }
 
     public function success(): bool
