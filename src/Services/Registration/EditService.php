@@ -29,7 +29,7 @@ class EditService
         $soapCaller = $this->settings()->createCallerForService(Services::registration());
         $rawResponse = $soapCaller->call('edit', array_filter([
             'taxpayer_id' => $command->rfc(),
-            'status' => $command->status(),
+            'status' => $command->status()->value(),
             'cer' => $command->certificate(),
             'key' => $command->privateKey(),
             'passphrase' => $command->passPhrase(),

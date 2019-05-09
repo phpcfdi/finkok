@@ -9,7 +9,7 @@ class EditCommand
     /** @var string */
     private $rfc;
 
-    /** @var string */
+    /** @var CustomerStatus */
     private $status;
 
     /** @var string */
@@ -23,7 +23,7 @@ class EditCommand
 
     public function __construct(
         string $rfc,
-        string $status,
+        CustomerStatus $status,
         string $certificate,
         string $privateKey,
         string $passPhrase
@@ -40,7 +40,7 @@ class EditCommand
         return $this->rfc;
     }
 
-    public function status(): string
+    public function status(): CustomerStatus
     {
         return $this->status;
     }
