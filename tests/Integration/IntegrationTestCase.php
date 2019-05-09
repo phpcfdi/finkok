@@ -16,6 +16,8 @@ use PhpCfdi\Finkok\Tests\TestCase;
 use PhpCfdi\XmlCancelacion\Capsule;
 use PhpCfdi\XmlCancelacion\CapsuleSigner;
 use PhpCfdi\XmlCancelacion\Credentials;
+use Psr\Log\AbstractLogger;
+use Psr\Log\LoggerInterface;
 
 class IntegrationTestCase extends TestCase
 {
@@ -87,5 +89,15 @@ class IntegrationTestCase extends TestCase
         );
         $xmlCancelacion = (new CapsuleSigner())->sign($capsule, $credentials);
         return new CancelSignatureCommand($xmlCancelacion);
+    }
+
+    protected function createLoggerPrintToScreen(): LoggerInterface
+    {
+        return new class() extends AbstractLogger implements LoggerInterface {
+            public function log($level, $message, array $context = []): void
+            {
+                echo PHP_EOL, print_r(json_decode($message), true);
+            }
+        };
     }
 }
