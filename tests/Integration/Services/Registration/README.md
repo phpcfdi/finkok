@@ -24,5 +24,14 @@ Se espera que el RFC de pruebas TCM970625MB1 esté activo.
 
 Se espera que el RFC XDEL000101XX1 esté registrado.
 
-La prueba consiste en obtener el registro actual, la prueba consiste en marcarlo como ondemand,
+La prueba consiste en obtener el registro actual, en marcarlo como ondemand,
 cambiarlo a prepaid con 10 créditos, agregarle 15 créditos, dejarlo como ondemand.
+
+## Pruebas de Edit
+
+Se espera que el RFC ABCD010101AAA (que es inválido) no esté registrado.
+
+Se espera que el RFC XDEL000101XX1 esté registrado.
+
+La prueba consiste en obtener el registro actual, marcarlo como activo si no lo está,
+cambiarlo a suspendido, cambiarlo a activo.
