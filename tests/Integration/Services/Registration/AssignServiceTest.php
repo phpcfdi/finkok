@@ -9,13 +9,18 @@ use PhpCfdi\Finkok\Services\Registration\AssignService;
 
 class AssignServiceTest extends RegistrationIntegrationTestCase
 {
+    protected function createService(): AssignService
+    {
+        return new AssignService($this->createSettingsFromEnvironment());
+    }
+
     public function testAssignServiceToOnDemandAccount(): void
     {
         $rfc = 'XDEL000101XX1';
-        $service = new AssignService($this->createSettingsFromEnvironment());
+        $service = $this->createService();
 
         // if it is not ondemand change it
-        if (-1 !== $this->findCustomerOrFail($rfc)) {
+        if (-1 !== $this->findCustomerOrFail($rfc)->credit()) {
             $this->assertSame(-1, $service->assign(new AssignCommand($rfc, -1))->credit());
         }
 
@@ -27,5 +32,17 @@ class AssignServiceTest extends RegistrationIntegrationTestCase
 
         $this->assertSame(-1, $service->assign(new AssignCommand($rfc, -1))->credit(), 'Mark as ondemand');
         $this->assertSame(-1, $this->findCustomerOrFail($rfc)->credit(), 'get did not report same credits as assign');
+    }
+
+    public function testAssignUsingNonRegisteredRfc(): void
+    {
+        $rfc = 'ABCD010101AAA';
+        $this->assertNull($this->findCustomer($rfc), "For this test RFC $rfc must not exists");
+
+        $service = $this->createService();
+        $result = $service->assign(new AssignCommand($rfc, 100));
+
+        $this->assertFalse($result->success());
+        $this->assertSame('RFC no encontrado', $result->message());
     }
 }
