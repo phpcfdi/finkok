@@ -33,11 +33,17 @@ class GetSatStatusServiceTest extends IntegrationTestCase
 
     public function testQueryOnCurrentStampedCfdi(): void
     {
-        $cfdi = $this->currentCfdi();
+        $cfdi = $this->stamp($this->newStampingCommand());
         $this->assertNotEmpty($cfdi->uuid(), 'Cannot create a CFDI to GetSatStatus');
 
         $command = $this->createGetSatStatusCommandFromCfdiContents($cfdi->xml());
         $service = $this->createService();
+
+        // try until 30 seconds or status is not 'No Encontrado'
+        $this->waitUntil(function () use ($command, $service): bool {
+            return ('No Encontrado' !== $service->query($command)->cfdi());
+        }, 30, 1, 'Cannot assert cfdi status before get_sat_status is not: No Encontrado');
+
         $result = $service->query($command);
 
         $this->assertSame('Vigente', $result->cfdi());

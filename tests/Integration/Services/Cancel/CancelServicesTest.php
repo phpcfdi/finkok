@@ -8,6 +8,7 @@ use PhpCfdi\Finkok\Definitions\ReceiptType;
 use PhpCfdi\Finkok\Services\Cancel\CancelSignatureService;
 use PhpCfdi\Finkok\Services\Cancel\GetReceiptCommand;
 use PhpCfdi\Finkok\Services\Cancel\GetReceiptService;
+use PhpCfdi\Finkok\Services\Cancel\GetSatStatusResult;
 use PhpCfdi\Finkok\Services\Cancel\GetSatStatusService;
 use PhpCfdi\Finkok\Tests\Integration\IntegrationTestCase;
 use PhpCfdi\XmlCancelacion\Capsule;
@@ -17,16 +18,22 @@ class CancelServicesTest extends IntegrationTestCase
     public function testCreateCfdiThenGetSatStatusThenCancelSignatureThenGetReceipt(): void
     {
         $settings = $this->createSettingsFromEnvironment();
-        // $settings->changeSoapFactory($this->createSoapFactoryWithPrintToScreen());
 
         // given a cfdi
         $cfdi = $this->stamp($this->newStampingCommand());
         $this->assertNotEmpty($cfdi->uuid(), 'Cannot create a CFDI to test against');
 
         // check that it has a correct status
-        $beforeCancelStatus = (new GetSatStatusService($settings))->query(
-            $this->createGetSatStatusCommandFromCfdiContents($cfdi->xml())
-        );
+        /** @var GetSatStatusResult $beforeCancelStatus */
+        $beforeCancelStatus = null;
+        $this->waitUntil(function () use (&$beforeCancelStatus, $settings, $cfdi): bool {
+            $beforeCancelStatus = (new GetSatStatusService($settings))->query(
+                $this->createGetSatStatusCommandFromCfdiContents($cfdi->xml())
+            );
+            echo PHP_EOL, 'status: ', $beforeCancelStatus->cfdi();
+            return ('No Encontrado' !== $beforeCancelStatus->cfdi());
+        }, 30, 1, 'Cannot assert cfdi before cancel status is not: No Encontrado');
+
         $this->assertSame('Vigente', $beforeCancelStatus->cfdi());
         $this->assertStringStartsWith('Cancelable ', $beforeCancelStatus->cancellable());
 
@@ -36,7 +43,7 @@ class CancelServicesTest extends IntegrationTestCase
         // evaluate if known response was 205, 708 or 300
         // this is common to happend on testing but not in production since the time
         // elapsed from stamping and cancelling is often more than 2 minutes
-        $repeatUntil = strtotime('now + 5 minutes');
+        $repeatUntil = strtotime('now +5 minutes');
         do {
             // perform cancel
             $result = (new CancelSignatureService($settings))->cancelSignature($command);

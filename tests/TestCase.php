@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace PhpCfdi\Finkok\Tests;
 
+use Closure;
 use PhpCfdi\Finkok\FinkokEnvironment;
 use PhpCfdi\Finkok\FinkokSettings;
 use PhpCfdi\Finkok\SoapFactory;
+use RuntimeException;
 
 class TestCase extends \PHPUnit\Framework\TestCase
 {
@@ -21,6 +23,27 @@ class TestCase extends \PHPUnit\Framework\TestCase
             $settings->changeSoapFactory($soapFactory);
         }
         return $settings;
+    }
+
+    protected function waitUntil(
+        Closure $checkFunction,
+        int $maxSeconds,
+        int $waitSeconds,
+        string $exceptionMessage = ''
+    ): void {
+        $repeatUntil = time() + $maxSeconds;
+        do {
+            if ($checkFunction()) {
+                return;
+            }
+            if (time() > $repeatUntil) {
+                break;
+            }
+            sleep($waitSeconds);
+        } while (true);
+        if ('' !== $exceptionMessage) {
+            throw new RuntimeException($exceptionMessage);
+        }
     }
 
     public static function filePath(string $append = ''): string
