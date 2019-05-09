@@ -25,7 +25,7 @@ class EditService
     public function edit(EditCommand $command): EditResult
     {
         $this->settings()->changeUsernameKey('reseller_username');
-        $this->settings()->changeUsernameKey('reseller_password');
+        $this->settings()->changePasswordKey('reseller_password');
         $soapCaller = $this->settings()->createCallerForService(Services::registration());
         $rawResponse = $soapCaller->call('edit', array_filter([
             'taxpayer_id' => $command->rfc(),
