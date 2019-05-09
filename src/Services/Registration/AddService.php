@@ -25,7 +25,7 @@ class AddService
     public function add(AddCommand $command): AddResult
     {
         $this->settings()->changeUsernameKey('reseller_username');
-        $this->settings()->changeUsernameKey('reseller_password');
+        $this->settings()->changePasswordKey('reseller_password');
         $soapCaller = $this->settings()->createCallerForService(Services::registration());
         $rawResponse = $soapCaller->call('add', array_filter([
             'taxpayer_id' => $command->rfc(),
