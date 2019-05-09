@@ -21,9 +21,9 @@ class Customer
         return strval($this->data->{$keyword} ?? '');
     }
 
-    public function status(): string
+    public function status(): CustomerStatus
     {
-        return $this->get('status');
+        return new CustomerStatus($this->get('status'));
     }
 
     public function counter(): int

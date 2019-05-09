@@ -11,7 +11,7 @@ use Eclipxe\Enum\Enum;
  * @method static self suspended()
  *
  * @method bool isActive()
- * @method bool isSispended()
+ * @method bool isSuspended()
  */
 class CustomerStatus extends Enum
 {

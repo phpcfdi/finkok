@@ -26,7 +26,7 @@ class CustomerTest extends TestCase
         $customer = new Customer((object) $predefinedData);
         $this->assertSame($predefinedData, $customer->values());
 
-        $this->assertSame('S', $customer->status());
+        $this->assertTrue($customer->status()->isSuspended());
         $this->assertSame(10, $customer->counter());
         $this->assertSame('MAG041126GT8', $customer->rfc());
         $this->assertSame(20, $customer->credit());

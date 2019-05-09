@@ -33,7 +33,7 @@ class ObtainServiceTest extends RegistrationIntegrationTestCase
         $this->assertSame(1, count($result->customers()));
         $customer = $result->customers()->getByRfc('TCM970625MB1');
         $this->assertSame('TCM970625MB1', $customer->rfc());
-        $this->assertSame('A', $customer->status());
+        $this->assertTrue($customer->status()->isActive());
         $this->assertTrue($customer->customerType()->isOndemand());
     }
 
