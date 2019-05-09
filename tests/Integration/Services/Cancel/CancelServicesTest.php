@@ -30,7 +30,6 @@ class CancelServicesTest extends IntegrationTestCase
             $beforeCancelStatus = (new GetSatStatusService($settings))->query(
                 $this->createGetSatStatusCommandFromCfdiContents($cfdi->xml())
             );
-            echo PHP_EOL, 'status: ', $beforeCancelStatus->cfdi();
             return ('No Encontrado' !== $beforeCancelStatus->cfdi());
         }, 30, 1, 'Cannot assert cfdi before cancel status is not: No Encontrado');
 
