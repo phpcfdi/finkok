@@ -36,7 +36,8 @@ class StampService
                 usleep(200000); // 0.2 seconds
                 continue;
             }
-        } while (false);
+            break;
+        } while (true);
         return $result;
     }
 }
