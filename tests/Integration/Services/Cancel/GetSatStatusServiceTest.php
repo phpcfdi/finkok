@@ -42,7 +42,7 @@ class GetSatStatusServiceTest extends IntegrationTestCase
         // try until 30 seconds or status is not 'No Encontrado'
         $this->waitUntil(function () use ($command, $service): bool {
             return ('No Encontrado' !== $service->query($command)->cfdi());
-        }, 30, 1, 'Cannot assert cfdi status before get_sat_status is not: No Encontrado');
+        }, 60, 1, 'Cannot assert cfdi status before get_sat_status is not: No Encontrado');
 
         $result = $service->query($command);
 

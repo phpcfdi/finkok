@@ -31,7 +31,7 @@ class CancelServicesTest extends IntegrationTestCase
                 $this->createGetSatStatusCommandFromCfdiContents($cfdi->xml())
             );
             return ('No Encontrado' !== $beforeCancelStatus->cfdi());
-        }, 30, 1, 'Cannot assert cfdi before cancel status is not: No Encontrado');
+        }, 60, 1, 'Cannot assert cfdi before cancel status is not: No Encontrado');
 
         $this->assertSame('Vigente', $beforeCancelStatus->cfdi());
         $this->assertStringStartsWith('Cancelable ', $beforeCancelStatus->cancellable());
