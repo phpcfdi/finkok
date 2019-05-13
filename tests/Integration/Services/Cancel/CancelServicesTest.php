@@ -38,20 +38,23 @@ class CancelServicesTest extends IntegrationTestCase
 
         // Create cancel signature command from capsule
         $command = $this->createCancelSignatureCommandFromCapsule(new Capsule('TCM970625MB1', [$cfdi->uuid()]));
+        $service = new CancelSignatureService($settings);
 
-        // evaluate if known response was 205, 708 or 300
+        // evaluate if known response was 205 or 708
         // this is common to happend on testing but not in production since the time
         // elapsed from stamping and cancelling is often more than 2 minutes
         $repeatUntil = strtotime('now +5 minutes');
         do {
             // perform cancel
-            $result = (new CancelSignatureService($settings))->cancelSignature($command);
+            $result = $service->cancelSignature($command);
             $document = $result->documents()->first();
+            if ('300' === $result->statusCode()) {
+                $this->fail('StatusCode 300 was fixed by Finkok, ticket #17743');
+            }
             // do not try again if a SAT issue is **not** found
             // 708: Fink ok cannot connect to SAT
-            // 300: ?
             // 205: SAT does not have the uuid available for cancellation
-            if (! (in_array($result->statusCode(), ['708', '300'], true) || '205' === $document->documentStatus())) {
+            if ('708' !== $result->statusCode() && '205' !== $document->documentStatus()) {
                 break;
             }
             // do not try again if in the loop for more than allowed
