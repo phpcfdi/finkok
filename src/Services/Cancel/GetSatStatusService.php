@@ -31,7 +31,20 @@ class GetSatStatusService
             'uuid' => $command->uuid(),
             'total' => $command->total(),
         ]);
-        $result = new GetSatStatusResult($rawResponse);
+        return new GetSatStatusResult($rawResponse);
+    }
+
+    public function queryUntilFoundOrTime(GetSatStatusCommand $command, int $waitSeconds = 60): GetSatStatusResult
+    {
+        $runUntilTime = time() + $waitSeconds;
+        do {
+            $result = $this->query($command);
+            if ('No Encontrado' === $result->cfdi() && time() <= $runUntilTime) {
+                usleep(200000);
+                continue;
+            }
+            break;
+        } while (true);
         return $result;
     }
 }
