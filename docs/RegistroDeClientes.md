@@ -9,6 +9,8 @@ Los métodos son: get (implementado como obtain), add, edit y assign.
 
 Existen dos parámetros que no tienen uso real: added y coupon. Al momento no se piensa implementarlos.
 Estos campos no se muestran en la interfaz del portal ni se pueden obtener por el método get.
+Fueron creados para un cliente de Finkok y por lo visto no piensan documentar claramente
+su uso o su omisión (ticket #19340).
 
 No está documentado lo que devuelve por respuesta, solo dice que devuelve success y message.
 Cuando se agrega un cliente que ya existe, en lugar de devolver FALSE en success, devuelve TRUE.
