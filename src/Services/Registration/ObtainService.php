@@ -24,9 +24,11 @@ class ObtainService
 
     public function obtain(ObtainCommand $command): ObtainResult
     {
-        $this->settings()->changeUsernameKey('reseller_username');
-        $this->settings()->changePasswordKey('reseller_password');
-        $soapCaller = $this->settings()->createCallerForService(Services::registration());
+        $soapCaller = $this->settings()->createCallerForService(
+            Services::registration(),
+            'reseller_username',
+            'reseller_password'
+        );
         $rawResponse = $soapCaller->call('get', [
             'taxpayer_id' => $command->rfc(),
         ]);

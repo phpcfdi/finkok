@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace PhpCfdi\Finkok\Tests\Unit;
 
+use PhpCfdi\Finkok\Definitions\Services;
 use PhpCfdi\Finkok\Exceptions\InvalidArgumentException;
 use PhpCfdi\Finkok\FinkokEnvironment;
 use PhpCfdi\Finkok\FinkokSettings;
+use PhpCfdi\Finkok\Tests\Fakes\FakeSoapFactory;
 use PhpCfdi\Finkok\Tests\TestCase;
 
 class FinkokSettingsTest extends TestCase
@@ -48,20 +50,30 @@ class FinkokSettingsTest extends TestCase
     public function testCreateCallerForServiceUsesDefaultUsernameAndPassword(): void
     {
         $settings = new FinkokSettings('u', 'p');
+        $settings->changeSoapFactory(new FakeSoapFactory());
+        $service = $settings->createCallerForService(Services::stamping());
         $this->assertSame([
             'username' => 'u',
             'password' => 'p',
-        ], $settings->credentialsParameters());
+        ], $service->extraParameters());
     }
 
-    public function testCreateCallerChangingUsernameAndPasswordKeys(): void
+    public function testCreateCallerForServiceChangingUsernameAndPassword(): void
     {
         $settings = new FinkokSettings('u', 'p');
-        $settings->changeUsernameKey('x-username');
-        $settings->changePasswordKey('x-password');
+        $settings->changeSoapFactory(new FakeSoapFactory());
+        $service = $settings->createCallerForService(Services::stamping(), 'x-u', 'x-p');
         $this->assertSame([
-            'x-username' => 'u',
-            'x-password' => 'p',
-        ], $settings->credentialsParameters());
+            'x-u' => 'u',
+            'x-p' => 'p',
+        ], $service->extraParameters());
+    }
+
+    public function testCreateCallerForServiceChangingToEmptyUsernameAndPassword(): void
+    {
+        $settings = new FinkokSettings('u', 'p');
+        $settings->changeSoapFactory(new FakeSoapFactory());
+        $service = $settings->createCallerForService(Services::stamping(), '', '');
+        $this->assertSame([], $service->extraParameters());
     }
 }

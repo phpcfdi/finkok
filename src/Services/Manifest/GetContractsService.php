@@ -24,7 +24,8 @@ class GetContractsService
 
     public function obtainContracts(GetContractsCommand $command): GetContractsResult
     {
-        $soapCaller = $this->settings()->createCallerForService(Services::manifest());
+        // this empty string are for ommiting sending username and password
+        $soapCaller = $this->settings()->createCallerForService(Services::manifest(), '', '');
         $rawResponse = $soapCaller->call('get_contracts', [
             'taxpayer_id' => $command->rfc(),
             'name' => $command->name(),
