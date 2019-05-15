@@ -8,8 +8,6 @@ use PhpCfdi\Finkok\Definitions\ReceiptType;
 use PhpCfdi\Finkok\Services\Cancel\CancelSignatureService;
 use PhpCfdi\Finkok\Services\Cancel\GetReceiptCommand;
 use PhpCfdi\Finkok\Services\Cancel\GetReceiptService;
-use PhpCfdi\Finkok\Services\Cancel\GetSatStatusResult;
-use PhpCfdi\Finkok\Services\Cancel\GetSatStatusService;
 use PhpCfdi\Finkok\Tests\Integration\IntegrationTestCase;
 use PhpCfdi\XmlCancelacion\Capsule;
 
@@ -24,15 +22,10 @@ class CancelServicesTest extends IntegrationTestCase
         $this->assertNotEmpty($cfdi->uuid(), 'Cannot create a CFDI to test against');
 
         // check that it has a correct status
-        /** @var GetSatStatusResult $beforeCancelStatus */
-        $beforeCancelStatus = null;
-        $this->waitUntil(function () use (&$beforeCancelStatus, $settings, $cfdi): bool {
-            $beforeCancelStatus = (new GetSatStatusService($settings))->query(
-                $this->createGetSatStatusCommandFromCfdiContents($cfdi->xml())
-            );
-            return ('No Encontrado' !== $beforeCancelStatus->cfdi());
-        }, 60, 1, 'Cannot assert cfdi before cancel status is not: No Encontrado');
-
+        $beforeCancelStatus = $this->checkCanGetSatStatusOrFail(
+            $cfdi->xml(),
+            'Cannot assert cfdi before cancel status is not: No Encontrado'
+        );
         $this->assertSame('Vigente', $beforeCancelStatus->cfdi());
         $this->assertStringStartsWith('Cancelable ', $beforeCancelStatus->cancellable());
 
@@ -41,7 +34,7 @@ class CancelServicesTest extends IntegrationTestCase
         $service = new CancelSignatureService($settings);
 
         // evaluate if known response was 205 or 708
-        // this is common to happend on testing but not in production since the time
+        // this is common to happen on testing but not in production since the time
         // elapsed from stamping and cancelling is often more than 2 minutes
         $repeatUntil = strtotime('now +5 minutes');
         do {
