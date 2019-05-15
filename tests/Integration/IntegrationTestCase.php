@@ -7,6 +7,8 @@ namespace PhpCfdi\Finkok\Tests\Integration;
 use CfdiUtils\Cfdi;
 use PhpCfdi\Finkok\Services\Cancel\CancelSignatureCommand;
 use PhpCfdi\Finkok\Services\Cancel\GetSatStatusCommand;
+use PhpCfdi\Finkok\Services\Cancel\GetSatStatusResult;
+use PhpCfdi\Finkok\Services\Cancel\GetSatStatusService;
 use PhpCfdi\Finkok\Services\Stamping\QuickStampService;
 use PhpCfdi\Finkok\Services\Stamping\StampingCommand;
 use PhpCfdi\Finkok\Services\Stamping\StampingResult;
@@ -16,6 +18,7 @@ use PhpCfdi\Finkok\Tests\TestCase;
 use PhpCfdi\XmlCancelacion\Capsule;
 use PhpCfdi\XmlCancelacion\CapsuleSigner;
 use PhpCfdi\XmlCancelacion\Credentials;
+use RuntimeException;
 
 class IntegrationTestCase extends TestCase
 {
@@ -87,5 +90,21 @@ class IntegrationTestCase extends TestCase
         );
         $xmlCancelacion = (new CapsuleSigner())->sign($capsule, $credentials);
         return new CancelSignatureCommand($xmlCancelacion);
+    }
+
+    protected function checkCanGetSatStatusOrFail(
+        string $cfdiContents,
+        string $exceptionMessage = ''
+    ): GetSatStatusResult {
+        $service = new GetSatStatusService($this->createSettingsFromEnvironment());
+        $command = $this->createGetSatStatusCommandFromCfdiContents($cfdiContents);
+        $result = $service->queryUntilFoundOrTime($command);
+        if ('No Encontrado' === $result->cfdi()) {
+            if ('' === $exceptionMessage) {
+                $exceptionMessage = sprintf('Cannot found UUID %s at SAT using GetSatStatusService', $command->uuid());
+            }
+            throw new RuntimeException($exceptionMessage);
+        }
+        return $result;
     }
 }
