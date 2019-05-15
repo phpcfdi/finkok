@@ -24,16 +24,10 @@ class GetContractsService
 
     public function obtainContracts(GetContractsCommand $command): GetContractsResult
     {
-        // Note that we are sending addrees and address, this is because Finkok is changing
-        // this service on demo and don't know when it will enter production
-
-        // Once is confirmed that this is applied to development and production environment remove "addrees"
-
         $soapCaller = $this->settings()->createCallerForService(Services::manifest());
         $rawResponse = $soapCaller->call('get_contracts', [
             'taxpayer_id' => $command->rfc(),
             'name' => $command->name(),
-            'addrees' => $command->address(),
             'address' => $command->address(),
             'email' => $command->email(),
         ]);

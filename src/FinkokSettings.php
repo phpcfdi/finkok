@@ -89,7 +89,11 @@ class FinkokSettings
     public function createCallerForService(Services $service): SoapCaller
     {
         $wsdlLocation = $this->environment()->endpoint($service);
-        $credentials = $this->credentialsParameters();
+        if ($service->isManifest()) {
+            $credentials = [];
+        } else {
+            $credentials = $this->credentialsParameters();
+        }
         return $this->soapFactory()->createSoapCaller($wsdlLocation, $credentials);
     }
 

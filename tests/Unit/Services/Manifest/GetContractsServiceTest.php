@@ -31,9 +31,8 @@ class GetContractsServiceTest extends TestCase
         $this->assertSame($command->rfc(), $caller->latestCallParameters['taxpayer_id']);
         $this->assertArrayHasKey('name', $caller->latestCallParameters);
         $this->assertSame($command->name(), $caller->latestCallParameters['name']);
-        // yes, Finkok has this typo: addrees
-        $this->assertArrayHasKey('addrees', $caller->latestCallParameters);
-        $this->assertSame($command->address(), $caller->latestCallParameters['addrees']);
+        $this->assertArrayHasKey('address', $caller->latestCallParameters);
+        $this->assertSame($command->address(), $caller->latestCallParameters['address']);
         $this->assertArrayHasKey('email', $caller->latestCallParameters);
         $this->assertSame($command->email(), $caller->latestCallParameters['email']);
     }
