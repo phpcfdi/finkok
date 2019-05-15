@@ -69,7 +69,6 @@ class EditServiceTest extends RegistrationIntegrationTestCase
         $result = $service->edit(new EditCommand($rfc, CustomerStatus::active()));
 
         $this->assertFalse($result->success());
-        // Finkok report this error when an unregistered customer is sent to edit (Ticket #19861)
-        $this->assertSame('ERROR: Cer o Key Invalido', $result->message());
+        $this->assertSame('ERROR: El rfc no se ecuentra registrado', $result->message());
     }
 }
