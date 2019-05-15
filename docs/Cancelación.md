@@ -7,9 +7,11 @@ Los servicios de paso son:
 
 - `cancel_signature`: Manda cancelar usando una solicitud de cancelación firmada.
 - `get_sat_status`: Consulta el estado de un CFDI.
-- `accept_reject`: permite al receptor de una factura Aceptar o Rechazar una determinada cancelación.
 - `get_pending`: consultar cuantas solicitudes de cancelación tiene pendientes un receptor.
+- `accept_reject`: permite al receptor de una factura Aceptar o Rechazar una determinada cancelación.
+    (*no recomendado*, requiere certificado, llave privada y contraseña compártida)
 - `get_related`: obtener una lista de los UUIDs relacionados del CFDI que se está intentando cancelar.
+    (*no recomendado*, requiere certificado, llave privada y contraseña compártida)
 
 Los servicios de ayuda son:
 
@@ -170,3 +172,18 @@ Acerca del servicio `Get_Receipt`:
 Para los servicios de pasarela, si no se pudo contactar al SAT, se devuelve `708`?
     R: No, existen varios mensajes de error e incluso excepciones.
     Finkok está analizando el tema para unificarlas.
+
+### Servicios que requieren certificado, llave y contraseña compartida
+
+Los servicios `accept_reject` y `get_related` requieren que se les envíe certificado, llave y contraseña compartida.
+En Finkok preparan la solicitud al SAT, la firman usando los datos y luego la envían al SAT.
+
+Se podría simplemente recibir la solicitud ya firmada, sin embargo, no cuentan con los métodos implementados.
+He puesto el ticket #20586 esperando que los puedan implementar.
+
+Nunca compartas tu llave privada y contraseña, nunca se la entregues al PAC. No solo es un problema de seguridad.
+Es un problema fiscal y legal con consecuencias terribles. Si alguien pudiera tener acceso a estos datos podría
+utilizarlos para crear CFDI en tu nombre que legalmente no podrás reclamar que no fueron creadas por ti. 
+
+No implementaré estos servicios, mi mejor recomendación es que consideres usar otro PAC o solicitarle a Finkok
+que fabrique estos métodos.
