@@ -37,6 +37,12 @@ class PreCfdiCreatorHelper
     /** @var string */
     private $passPhrase;
 
+    /** @var string */
+    private $relation = '';
+
+    /** @var string[] */
+    private $relatedUuids = [];
+
     public function __construct(
         string $cerFile,
         string $keyPemFile,
@@ -71,6 +77,12 @@ class PreCfdiCreatorHelper
     public function setConceptoAmount(float $conceptoAmount): void
     {
         $this->conceptoAmount = $conceptoAmount;
+    }
+
+    public function setRelatedCfdis(string $relation, string ...$uuids): void
+    {
+        $this->relation = $relation;
+        $this->relatedUuids = $uuids;
     }
 
     public function getEmisorRfc(): string
@@ -131,6 +143,13 @@ class PreCfdiCreatorHelper
             'MetodoPago' => 'PUE',
             'LugarExpedicion' => '86000',
         ]);
+        if ('' !== $this->relation && count($this->relatedUuids) > 0) {
+            $relacionados = $comprobante->getCfdiRelacionados();
+            foreach ($this->relatedUuids as $relatedUuid) {
+                $relacionados->addCfdiRelacionado(['UUID' => $relatedUuid]);
+            }
+            $relacionados['TipoRelacion'] = $this->relation;
+        }
         $comprobante->addEmisor([
             'Rfc' => $this->getEmisorRfc(),
             'Nombre' => 'ACCEM SERVICIOS EMPRESARIALES SC',
