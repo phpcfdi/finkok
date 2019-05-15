@@ -19,7 +19,7 @@ Servicios implementados de cancelación:
 Servicios para trabajar con solicitudes de cancelación:
 
 - [ ] `accept_reject`: permite al receptor de una factura Aceptar o Rechazar una determinada cancelación.
-- [ ] `get_pending`: consultar cuantas solicitudes de cancelación tiene pendientes un receptor.
+- [ ] `get_pending`: consultar la lista de los UUID pendientes por cancelar que tiene el receptor.
 - [ ] `get_related`: obtener una lista de los UUIDs relacionados del CFDI que se está intentando cancelar.
 
 Servicios para trabajar cancelaciones con CFDI de otro PAC

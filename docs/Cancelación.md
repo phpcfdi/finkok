@@ -129,6 +129,20 @@ del emisor del comprobante (parte de la expresión impresa en `fe`). Esto indica
 todos los datos o bien el PAC los completa con la información que tiene del CFDI, en ese caso, me queda la
 duda de ¿porqué entonces no completa toda la expresión y requiere únicamente el UUID?.
 
+### Servicio Finkok Cancel get_pending
+
+Obtiene un listado de UUID que están pendientes por aprobar o denegar. La lista puede estar vacía.
+
+En la documentación de Finkok <https://wiki.finkok.com/doku.php?id=get_pending> solo está documentado
+el arreglo `uuids`, sin embargo, también existe la variable `error`.
+
+Al revisar las pruebas de integración, es muy difícil crear un caso automatizado, básicamente porque
+toma alrededor de 16 minutos el crear un CFDI y que este aparezca como "Cancelable con autorización".
+
+Desde 2016-05-14 que comencé la implementación, la lista devuelve los UUID
+8096FF0F-6C49-41D3-B041-940A9DBBB5F2 y 4B2430D3-9714-4ED8-8084-6347914F93D6.
+Lo desconozco, pero podría ser, que esta fuera una respuesta predeterminada.
+
 ### Dudas de funcionamiento
 
 Suponiendo que se presenta la solicitud de cancelación por dos folios (A y B),
