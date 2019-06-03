@@ -69,6 +69,6 @@ class EditServiceTest extends RegistrationIntegrationTestCase
         $result = $service->edit(new EditCommand($rfc, CustomerStatus::active()));
 
         $this->assertFalse($result->success());
-        $this->assertSame('ERROR: El rfc no se ecuentra registrado', $result->message());
+        $this->assertSame('ERROR: El rfc no se encuentra registrado', $result->message());
     }
 }
