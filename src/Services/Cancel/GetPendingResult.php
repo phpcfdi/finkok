@@ -9,6 +9,7 @@ use stdClass;
 
 class GetPendingResult extends AbstractResult
 {
+    /** @var string[] */
     private $uuids;
 
     public function __construct(stdClass $data)
@@ -21,6 +22,7 @@ class GetPendingResult extends AbstractResult
         $this->uuids = $items;
     }
 
+    /** @return string[] */
     public function uuids(): array
     {
         return $this->uuids;

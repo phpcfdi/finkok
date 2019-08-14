@@ -9,6 +9,7 @@ use stdClass;
 
 class ReportUuidResult extends AbstractResult
 {
+    /** @var array[] */
     private $items;
 
     public function __construct(stdClass $data)
@@ -28,6 +29,7 @@ class ReportUuidResult extends AbstractResult
         }
     }
 
+    /** @var array[] */
     public function items(): array
     {
         return $this->items;
