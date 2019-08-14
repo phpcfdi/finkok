@@ -58,20 +58,20 @@ class SignContractsServiceTest extends IntegrationTestCase
 
     public function testSignContractsUsingCsd(): void
     {
-        $certificateFile = $this->filePath('certs/TCM970625MB1.cer.pem');
-        $privateKeyFile = $this->filePath('certs/TCM970625MB1.key.pem');
-        $passPhrase = trim($this->fileContentPath('certs/TCM970625MB1.password.bin'));
+        $certificateFile = $this->filePath('certs/EKU9003173C9.cer.pem');
+        $privateKeyFile = $this->filePath('certs/EKU9003173C9.key.pem');
+        $passPhrase = trim($this->fileContentPath('certs/EKU9003173C9.password.bin'));
 
-        $result = $this->consumeSignContracts('TCM970625MB1', $certificateFile, $privateKeyFile, $passPhrase);
+        $result = $this->consumeSignContracts('EKU9003173C9', $certificateFile, $privateKeyFile, $passPhrase);
         $this->assertFalse($result->success());
         $this->assertSame('La firma del Aviso de privacidad no es FIEL', trim($result->message()));
     }
 
     public function testSignContractsUsingNotRegisteredRfc(): void
     {
-        $certificateFile = $this->filePath('fiel/TCM970625MB1.cer.pem');
-        $privateKeyFile = $this->filePath('fiel/TCM970625MB1.key.pem');
-        $passPhrase = trim($this->fileContentPath('fiel/TCM970625MB1.password.bin'));
+        $certificateFile = $this->filePath('fiel/EKU9003173C9.cer.pem');
+        $privateKeyFile = $this->filePath('fiel/EKU9003173C9.key.pem');
+        $passPhrase = trim($this->fileContentPath('fiel/EKU9003173C9.password.bin'));
 
         $result = $this->consumeSignContracts('COSC8001137NA', $certificateFile, $privateKeyFile, $passPhrase);
         $this->assertFalse($result->success());
@@ -80,11 +80,11 @@ class SignContractsServiceTest extends IntegrationTestCase
 
     public function testSignContractsUsingFiel(): void
     {
-        $certificateFile = $this->filePath('fiel/TCM970625MB1.cer.pem');
-        $privateKeyFile = $this->filePath('fiel/TCM970625MB1.key.pem');
-        $passPhrase = trim($this->fileContentPath('fiel/TCM970625MB1.password.bin'));
+        $certificateFile = $this->filePath('fiel/EKU9003173C9.cer.pem');
+        $privateKeyFile = $this->filePath('fiel/EKU9003173C9.key.pem');
+        $passPhrase = trim($this->fileContentPath('fiel/EKU9003173C9.password.bin'));
 
-        $result = $this->consumeSignContracts('TCM970625MB1', $certificateFile, $privateKeyFile, $passPhrase);
+        $result = $this->consumeSignContracts('EKU9003173C9', $certificateFile, $privateKeyFile, $passPhrase);
         $this->assertTrue($result->success());
         $this->assertSame('Proceso exitoso', $result->message());
     }

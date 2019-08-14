@@ -25,7 +25,7 @@ class GetContractsServiceTest extends IntegrationTestCase
     public function testObtainContracts(): void
     {
         $command = new GetContractsCommand(
-            'TCM970625MB1',
+            'EKU9003173C9',
             'Empresa Conocida SA de CV',
             'Cuauhtémoc #123, Colonia Centro, Villahermosa, Tabasco. CP 86000',
             'legal@empresa-conocida.mx'

@@ -16,7 +16,7 @@ class ReportUuidServiceTest extends IntegrationTestCase
     {
         $until = new DateTimeImmutable('now');
         $since = $until->setDate(intval($until->format('Y')), 1, 1)->setTime(0, 0, 0);
-        $command = new ReportUuidCommand('TCM970625MB1', 'I', $since, $until);
+        $command = new ReportUuidCommand('EKU9003173C9', 'I', $since, $until);
         $settings = $this->createSettingsFromEnvironment();
         $service = new ReportUuidService($settings);
         $result = $service->reportUuid($command);

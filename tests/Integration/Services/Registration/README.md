@@ -17,8 +17,8 @@ Después puedes solicitar a Finkok que se eliminen estos RFC vía correo electr�
 
 Se espera que el RFC ABCD010101AAA (que es inválido) no esté registrado.
 
-Se espera que el RFC de pruebas TCM970625MB1 esté registrado como ilimitado (CustomerType::onDemand())
-Se espera que el RFC de pruebas TCM970625MB1 esté activo.
+Se espera que el RFC de pruebas EKU9003173C9 esté registrado como ilimitado (CustomerType::onDemand())
+Se espera que el RFC de pruebas EKU9003173C9 esté activo.
 
 ## Pruebas de Assign
 

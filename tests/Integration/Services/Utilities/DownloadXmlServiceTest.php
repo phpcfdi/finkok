@@ -20,7 +20,7 @@ class DownloadXmlServiceTest extends IntegrationTestCase
     {
         $service = $this->createService();
 
-        $command = new DownloadXmlCommand('01234567-0123-0123-0123-012345678901', 'TCM970625MB1', 'I');
+        $command = new DownloadXmlCommand('01234567-0123-0123-0123-012345678901', 'EKU9003173C9', 'I');
         $result = $service->downloadXml($command);
         $this->assertSame('UUID Does not Exists', $result->error());
     }
@@ -31,7 +31,7 @@ class DownloadXmlServiceTest extends IntegrationTestCase
         $this->assertNotEmpty($previousStamp->uuid(), 'Finkok did not create CFDI');
 
         $service = $this->createService();
-        $command = new DownloadXmlCommand($previousStamp->uuid(), 'TCM970625MB1', 'I');
+        $command = new DownloadXmlCommand($previousStamp->uuid(), 'EKU9003173C9', 'I');
         $result = $service->downloadXml($command);
 
         $this->assertSame(

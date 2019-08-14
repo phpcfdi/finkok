@@ -18,9 +18,9 @@ class RandomPreCfdi
     public function createHelper(): PreCfdiCreatorHelper
     {
         return new PreCfdiCreatorHelper(
-            TestCase::filePath('certs/TCM970625MB1.cer'),
-            TestCase::filePath('certs/TCM970625MB1.key.pem'),
-            trim(TestCase::fileContentPath('certs/TCM970625MB1.password.bin'))
+            TestCase::filePath('certs/EKU9003173C9.cer'),
+            TestCase::filePath('certs/EKU9003173C9.key.pem'),
+            trim(TestCase::fileContentPath('certs/EKU9003173C9.password.bin'))
         );
     }
 

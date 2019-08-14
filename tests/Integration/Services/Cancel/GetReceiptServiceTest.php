@@ -22,7 +22,7 @@ class GetReceiptServiceTest extends IntegrationTestCase
         $service = $this->createService();
 
         $command = new GetReceiptCommand(
-            'TCM970625MB1',
+            'EKU9003173C9',
             '12345678-1234-1234-1234-123456789012',
             ReceiptType::cancellation()
         );

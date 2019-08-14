@@ -31,7 +31,7 @@ class AddServiceTest extends RegistrationIntegrationTestCase
 
     public function testConsumeAddServiceUsingExistentRfc(): void
     {
-        $customer = new AddCommand('TCM970625MB1');
+        $customer = new AddCommand('EKU9003173C9');
         $service = $this->createService();
         $result = $service->add($customer);
 

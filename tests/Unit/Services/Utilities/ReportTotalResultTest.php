@@ -14,7 +14,7 @@ class ReportTotalResultTest extends TestCase
         $data = json_decode($this->fileContentPath('utilities-report-total-response.json'));
         $result = new ReportTotalResult($data);
 
-        $this->assertSame('TCM970625MB1', $result->rfc());
+        $this->assertSame('EKU9003173C9', $result->rfc());
         $this->assertSame('123', $result->total());
     }
 

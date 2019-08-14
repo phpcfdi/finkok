@@ -13,12 +13,13 @@ class ReportTotalServiceTest extends IntegrationTestCase
 {
     public function testReportTotalServiceInPast(): void
     {
-        $command = new ReportTotalCommand('TCM970625MB1', 'I', 2019, 1, 2019, 4);
+        $thisMonth = intval(date('m'));
+        $command = new ReportTotalCommand('EKU9003173C9', 'I', 2019, $thisMonth, 2019, $thisMonth);
         $settings = $this->createSettingsFromEnvironment();
         $service = new ReportTotalService($settings);
         $result = $service->reportTotal($command);
         $this->assertNotSame('', $result->total());
-        $this->assertSame('TCM970625MB1', $result->rfc());
+        $this->assertSame('EKU9003173C9', $result->rfc());
     }
 
     public function testReportTotalServiceCurrentMonth(): void
@@ -26,11 +27,11 @@ class ReportTotalServiceTest extends IntegrationTestCase
         $today = new DateTime('today');
         $year = intval($today->format('Y'));
         $month = intval($today->format('m'));
-        $command = new ReportTotalCommand('TCM970625MB1', 'I', $year, $month);
+        $command = new ReportTotalCommand('EKU9003173C9', 'I', $year, $month);
         $settings = $this->createSettingsFromEnvironment();
         $service = new ReportTotalService($settings);
         $result = $service->reportTotal($command);
         $this->assertNotSame('', $result->total());
-        $this->assertSame('TCM970625MB1', $result->rfc());
+        $this->assertSame('EKU9003173C9', $result->rfc());
     }
 }

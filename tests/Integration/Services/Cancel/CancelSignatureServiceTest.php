@@ -18,7 +18,7 @@ class CancelSignatureServiceTest extends IntegrationTestCase
 
     public function testCancelNonExistentUuid(): void
     {
-        $cancelData = new Capsule('TCM970625MB1', ['12345678-1234-1234-1234-123456789012']);
+        $cancelData = new Capsule('EKU9003173C9', ['12345678-1234-1234-1234-123456789012']);
         $command = $this->createCancelSignatureCommandFromCapsule($cancelData);
 
         $service = $this->createService();

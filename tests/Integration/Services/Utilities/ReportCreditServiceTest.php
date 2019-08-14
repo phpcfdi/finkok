@@ -13,7 +13,7 @@ class ReportCreditServiceTest extends IntegrationTestCase
 {
     public function testReportCreditService(): void
     {
-        $command = new ReportCreditCommand('TCM970625MB1');
+        $command = new ReportCreditCommand('EKU9003173C9');
         $settings = $this->createSettingsFromEnvironment();
         $service = new ReportCreditService($settings);
         $result = $service->reportCredit($command);

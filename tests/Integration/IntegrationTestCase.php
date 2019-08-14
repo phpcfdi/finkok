@@ -84,9 +84,9 @@ class IntegrationTestCase extends TestCase
     protected function createCancelSignatureCommandFromCapsule(Capsule $capsule): CancelSignatureCommand
     {
         $credentials = new Credentials(
-            $this->filePath('certs/TCM970625MB1.cer'),
-            $this->filePath('certs/TCM970625MB1.key.pem'),
-            trim($this->fileContentPath('certs/TCM970625MB1.password.bin'))
+            $this->filePath('certs/EKU9003173C9.cer'),
+            $this->filePath('certs/EKU9003173C9.key.pem'),
+            trim($this->fileContentPath('certs/EKU9003173C9.password.bin'))
         );
         $xmlCancelacion = (new CapsuleSigner())->sign($capsule, $credentials);
         return new CancelSignatureCommand($xmlCancelacion);

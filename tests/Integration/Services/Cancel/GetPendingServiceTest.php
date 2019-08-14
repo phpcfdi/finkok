@@ -17,7 +17,7 @@ class GetPendingServiceTest extends IntegrationTestCase
         // but this is simply unpractical for *this* test suite because
         // it takes around 16 minutes to have a CFDI with status "cancelable con autorizacion"
         $settings = $this->createSettingsFromEnvironment();
-        $command = new GetPendingCommand('TCM970625MB1');
+        $command = new GetPendingCommand('EKU9003173C9');
         $service = new GetPendingService($settings);
         $result = $service->obtainPending($command);
 

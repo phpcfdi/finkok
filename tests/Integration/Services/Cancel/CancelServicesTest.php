@@ -30,7 +30,7 @@ class CancelServicesTest extends IntegrationTestCase
         $this->assertStringStartsWith('Cancelable ', $beforeCancelStatus->cancellable());
 
         // Create cancel signature command from capsule
-        $command = $this->createCancelSignatureCommandFromCapsule(new Capsule('TCM970625MB1', [$cfdi->uuid()]));
+        $command = $this->createCancelSignatureCommandFromCapsule(new Capsule('EKU9003173C9', [$cfdi->uuid()]));
         $service = new CancelSignatureService($settings);
 
         // evaluate if known response was 205 or 708
@@ -43,6 +43,9 @@ class CancelServicesTest extends IntegrationTestCase
             $document = $result->documents()->first();
             if ('300' === $result->statusCode()) {
                 $this->fail('StatusCode 300 was fixed by Finkok, ticket #17743');
+            }
+            if ('304' === $result->statusCode()) {
+                $this->fail('StatusCode 304: "Certificado revocado o caduco", do you must change the CSD?');
             }
             // do not try again if a SAT issue is **not** found
             // 708: Fink ok cannot connect to SAT
@@ -67,11 +70,11 @@ class CancelServicesTest extends IntegrationTestCase
         // check result properties
         $this->assertNotEmpty($result->voucher(), 'Finkok did not return voucher (Acuse) on CancelSignature');
         $this->assertNotEmpty($result->date(), 'Finkok did not return the cancellation date');
-        $this->assertSame('TCM970625MB1', $result->rfc(), 'Finkok did not return expected RFC');
+        $this->assertSame('EKU9003173C9', $result->rfc(), 'Finkok did not return expected RFC');
 
         // Consume GetReceiptService
         $receipt = (new GetReceiptService($settings))->download(
-            new GetReceiptCommand('TCM970625MB1', $cfdi->uuid(), ReceiptType::cancellation())
+            new GetReceiptCommand('EKU9003173C9', $cfdi->uuid(), ReceiptType::cancellation())
         );
         $this->assertSame($result->voucher(), $receipt->receipt());
     }

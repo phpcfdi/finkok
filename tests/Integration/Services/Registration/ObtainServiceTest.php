@@ -30,12 +30,12 @@ class ObtainServiceTest extends RegistrationIntegrationTestCase
     public function testConsumeObtainServiceGettingOwnRfc(): void
     {
         $service = $this->createService();
-        $result = $service->obtain(new ObtainCommand('TCM970625MB1'));
+        $result = $service->obtain(new ObtainCommand('EKU9003173C9'));
 
         $this->assertSame('', $result->message());
         $this->assertSame(1, count($result->customers()));
-        $customer = $result->customers()->getByRfc('TCM970625MB1');
-        $this->assertSame('TCM970625MB1', $customer->rfc());
+        $customer = $result->customers()->getByRfc('EKU9003173C9');
+        $this->assertSame('EKU9003173C9', $customer->rfc());
         $this->assertTrue($customer->status()->isActive());
         $this->assertTrue($customer->customerType()->isOndemand());
     }
@@ -47,6 +47,6 @@ class ObtainServiceTest extends RegistrationIntegrationTestCase
 
         $this->assertSame('', $result->message());
         $this->assertGreaterThanOrEqual(1, count($result->customers()));
-        $this->assertSame('TCM970625MB1', $result->customers()->getByRfc('TCM970625MB1')->rfc());
+        $this->assertSame('EKU9003173C9', $result->customers()->getByRfc('EKU9003173C9')->rfc());
     }
 }

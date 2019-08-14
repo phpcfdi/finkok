@@ -21,10 +21,10 @@ class ReportTotalServiceTest extends TestCase
         $settings = $this->createSettingsFromEnvironment($soapFactory);
         $service = new ReportTotalService($settings);
 
-        $command = new ReportTotalCommand('TCM970625MB1', 'R', 2019, 1, 2019, 3);
+        $command = new ReportTotalCommand('EKU9003173C9', 'R', 2019, 1, 2019, 3);
         $result = $service->reportTotal($command);
         $this->assertSame('123', $result->total());
-        $this->assertSame('TCM970625MB1', $result->rfc());
+        $this->assertSame('EKU9003173C9', $result->rfc());
 
         $caller = $soapFactory->latestSoapCaller;
         $this->assertSame('report_total', $caller->latestCallMethodName);
