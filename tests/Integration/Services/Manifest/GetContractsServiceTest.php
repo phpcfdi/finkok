@@ -10,6 +10,12 @@ use PhpCfdi\Finkok\Tests\Integration\IntegrationTestCase;
 
 class GetContractsServiceTest extends IntegrationTestCase
 {
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->markTestSkipped('Manifest service is not working anymore, is that because Finkok is not a PAC?');
+    }
+
     private function createService(): GetContractsService
     {
         $settings = $this->createSettingsFromEnvironment();

@@ -15,6 +15,12 @@ use PhpCfdi\Finkok\Tests\Integration\IntegrationTestCase;
 
 class SignContractsServiceTest extends IntegrationTestCase
 {
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->markTestSkipped('Manifest service is not working anymore, is that because Finkok is not a PAC?');
+    }
+
     private function consumeSignContracts(
         string $rfc,
         string $certificateFile,
