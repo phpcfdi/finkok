@@ -29,7 +29,7 @@
     },
     "require-dev": {
         "eclipxe/cfdiutils": "^2.10",
-        "phpcfdi/xml-cancelacion": "^0.2.1",
+        "phpcfdi/xml-cancelacion": "^0.4.1",
         "phpunit/phpunit": "^8.0",
         "overtrue/phplint": "^1.0",
         "squizlabs/php_codesniffer": "^3.0",
@@ -59,8 +59,8 @@
         ],
         "dev:test": [
             "vendor/bin/phplint",
+            "@dev:check-style",
             "vendor/bin/phpunit --testdox --verbose --stop-on-failure tests/Unit",
-            "find . -type f -name .phpunit.result.cache -delete",
             "vendor/bin/phpstan analyse --no-progress --verbose --level max src/ tests/"
         ],
         "dev:coverage": [
