@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PhpCfdi\Finkok\Tests;
 
+use DateTimeImmutable;
 use PhpCfdi\Finkok\FinkokEnvironment;
 use PhpCfdi\Finkok\FinkokSettings;
 use PhpCfdi\Finkok\SoapFactory;
@@ -23,13 +24,13 @@ class TestCase extends \PHPUnit\Framework\TestCase
             $settings->changeSoapFactory($soapFactory);
         }
 
-        if ('yes' === strval(getenv('FINKOK_LOG_CALLS'))) {
+        if (boolval(getenv('FINKOK_LOG_CALLS'))) {
             $settings->soapFactory()->setLogger(
                 $this->createLoggerPrinter(
                     sprintf(
                         '%s/../build/tests/%s-%s-%s.txt',
                         __DIR__,
-                        (new \DateTimeImmutable())->format('YmdHis.u'),
+                        (new DateTimeImmutable())->format('YmdHis.u'),
                         $this->getName(),
                         uniqid()
                     )
