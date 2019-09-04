@@ -23,19 +23,19 @@ class TestCase extends \PHPUnit\Framework\TestCase
             $settings->changeSoapFactory($soapFactory);
         }
 
-        /*
-        $settings->soapFactory()->setLogger(
-            $this->createLoggerPrinter(
-                sprintf(
-                    '%s/../build/tests/%s-%s-%s.txt',
-                    __DIR__,
-                    (new \DateTimeImmutable())->format('YmdHis.u'),
-                    $this->getName(),
-                    uniqid()
+        if ('yes' === strval(getenv('FINKOK_LOG_CALLS'))) {
+            $settings->soapFactory()->setLogger(
+                $this->createLoggerPrinter(
+                    sprintf(
+                        '%s/../build/tests/%s-%s-%s.txt',
+                        __DIR__,
+                        (new \DateTimeImmutable())->format('YmdHis.u'),
+                        $this->getName(),
+                        uniqid()
+                    )
                 )
-            )
-        );
-        */
+            );
+        }
         return $settings;
     }
 
