@@ -48,7 +48,7 @@ class SoapCaller implements LoggerAwareInterface
             $result = $soap->__soapCall($methodName, [$finalParameters]);
             $this->logger->debug(strval(json_encode([
                 $methodName => $this->extractSoapClientTrace($soap),
-            ], JSON_PRETTY_PRINT)));
+            ], JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE)));
             return $result;
         } catch (Throwable $exception) {
             $this->logger->error(strval(json_encode(
