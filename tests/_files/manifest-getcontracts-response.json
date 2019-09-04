@@ -1,0 +1,8 @@
+{
+  "get_contractsResult": {
+    "success": true,
+    "contract": "predefined-contract",
+    "privacy": "predefined-privacy",
+    "error": "predefined-error"
+  }
+}

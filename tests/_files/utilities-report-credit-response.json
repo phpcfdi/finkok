@@ -1,0 +1,16 @@
+{
+  "report_creditResult" : {
+    "result": {
+      "ReportTotalCredit": [
+        {
+          "credit": 100,
+          "date": "2019-01-13T14:15:16.171819"
+        },
+        {
+          "credit": 200,
+          "date": "2019-01-15T16:17:18.192021"
+        }
+      ]
+    }
+  }
+}

@@ -1,6 +1,6 @@
 {
     "name": "phpcfdi/finkok",
-    "description": "",
+    "description": "Librería para conectar con la API de servicios de FINKOK",
     "keywords": ["phpcfdi", "sat", "cfdi", "finkok"],
     "homepage": "https://github.com/phpcfdi/finkok",
     "license": "MIT",
@@ -19,14 +19,23 @@
         }
     },
     "require": {
-        "php": ">=7.2"
+        "php": ">=7.2",
+        "ext-json": "*",
+        "ext-soap": "*",
+        "ext-dom": "*",
+        "psr/log": "^1.1",
+        "eclipxe/enum": "^0.2.0",
+        "robrichards/xmlseclibs": "^3.0"
     },
     "require-dev": {
+        "eclipxe/cfdiutils": "^2.10",
+        "phpcfdi/xml-cancelacion": "^0.4.1",
         "phpunit/phpunit": "^8.0",
         "overtrue/phplint": "^1.0",
         "squizlabs/php_codesniffer": "^3.0",
         "friendsofphp/php-cs-fixer": "^2.4",
-        "phpstan/phpstan-shim": "^0.11"
+        "phpstan/phpstan-shim": "^0.11",
+        "symfony/dotenv": "^4.2"
     },
     "autoload": {
         "psr-4": {
@@ -50,8 +59,8 @@
         ],
         "dev:test": [
             "vendor/bin/phplint",
-            "vendor/bin/phpunit --testdox --verbose --stop-on-failure",
-            "find . -type f -name .phpunit.result.cache -delete",
+            "@dev:check-style",
+            "vendor/bin/phpunit --testdox --verbose --stop-on-failure tests/Unit",
             "vendor/bin/phpstan analyse --no-progress --verbose --level max src/ tests/"
         ],
         "dev:coverage": [

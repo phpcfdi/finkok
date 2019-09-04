@@ -1,0 +1,10 @@
+{
+  "get_sat_statusResult": {
+    "sat": {
+      "CodigoEstatus": "S - Comprobante obtenido satisfactoriamente.",
+      "Estado": "Vigente",
+      "EsCancelable": "Cancelable sin aceptación",
+      "EstatusCancelacion": "En proceso"
+    }
+  }
+}
