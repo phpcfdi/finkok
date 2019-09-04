@@ -19,7 +19,7 @@ objetos de tipo `\SoapClient`.
 Por lo tanto, parece que tenemos dos objetos que son relevantes y parece que serán usados siempre:
 `SoapClientFactory` y `FinkokSettings`.
 
-Voy a intentar evitar los servicios que signifiquen enviar a Finkok el certificado o llave privada.
+Voy a evitar los servicios que signifiquen enviar a Finkok el certificado o llave privada.
 Nunca compartas tus certificados y llaves privadas, ni con tu PAC.
 
 ## Entornos de producción y pruebas
@@ -41,22 +41,3 @@ Los servicios se encuentran en <https://wiki.finkok.com/doku.php#documentacion_d
     - [X] Query_Pending: <https://wiki.finkok.com/doku.php?id=query_pending>
     - [ ] Sing_Stamp: <https://wiki.finkok.com/doku.php?id=sing_stamp>
 
-## Timbrado
-
-Servicios relacionados con la creación de un timbre: Stamp, Quick_stamp y Sing_Stamp.
-
-Stamp y Quick_Stamp hacen lo mismo, con estas dos excepciones:
-- Si se hace un *"doble estampado"* `Stamp` retorna (a veces) los datos del CFDI y una incidencia 307,
-  mientras que `Quick_Stamp` retorna una incidencia 307.
-- `Stamp` no regresa timbrado si no pudo enviarlo al SAT, mientras que `Quick_Stamp` deja el CFDI
-  en la cola de envío al SAT.
-
-No recomiendo usar `Quick_stamp` a menos que no se requiera revisar si el SAT tiene el CFDI inmediatamente.
-Por ejemplo, si tu aplicación debe hacer consultas inmediatas de estado de CFDI ante el SAT.
-
-### Sing_Stamp
-
-A un PRECFDI sin sello le agrega el atributo `Sello` y el `TimbreFiscalDigital`,
-para esto debió enviar previamente su certificado y sello.
-
-No lo voy a implementar por inseguro.

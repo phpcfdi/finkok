@@ -133,12 +133,33 @@ respectivamente.
 
 Y para firmar un contrato con XMLSEC conforme a Finkok tenemos la gran ayuda de la clase `DocumentSigner`.
 
+## Notas de implementación
+
+Durante el proceso de implementación he creado diversas notas y documentos:
+
+- [Cancelación](docs/Cancelación.md): Información del proceso de cancelación, métodos, acuses, pending buffer, etc.
+
+- [Servicios](docs/Servicios.md): Documentación básica de servicios.
+
+- [Listado de servicios](docs/ListadoDeServicios.md): Listado de todos los servicios disponibles de Finkok y si están
+  o no implementados, así como un listado de los servicios que no se implementarán.
+
+- [Registro de clientes](docs/RegistroDeClientes.md): Si vas a trabajar con la capacidad de Finkok de *sub-distribuidor*
+  y así poder administrar los datos de clientes.
+
+- [Entorno de Pruebas](docs/EntornoDePruebas.md): Documentación de cómo funciona y como configurar el entorno de pruebas.
+
+- Problemas encontrados:
+    - [Cancelación de un CFDI recién creado](docs/issues/CancelSignatureServiceCancelarRecienCreado.md)
+    - [Consumir queryPending con un CFDI recién creado](docs/issues/QueryPendingServiceUuidNoExistente.md)
+    - [Consumir stamp para generar un doble estampado no devuelve los datos](docs/issues/StampServiceDobleEstampado.md)
+
 ## Compatilibilidad
 
 Esta librería se mantendrá compatible con al menos la versión con
 [soporte activo de PHP](http://php.net/supported-versions.php) más reciente.
 
-También utilizamos [Versionado Semántico 2.0.0](https://semver.org/lang/es/) por lo que puedes usar esta librería
+También utilizamos [Versionado Semántico 2.0.0](docs/SEMVER.md) por lo que puedes usar esta librería
 sin temor a romper tu aplicación.
 
 ## Contribuciones
@@ -148,7 +169,7 @@ y recuerda revisar el archivo de tareas pendientes [TODO][] y el [CHANGELOG][].
 
 ## Copyright and License
 
-The phpcfdi/finkok library is copyright © [Carlos C Soto](http://eclipxe.com.mx/)
+The phpcfdi/finkok library is copyright © [PhpCfdi](https://github.com/phpcfdi)
 and licensed for use under the MIT License (MIT). Please see [LICENSE][] for more information.
 
 [contributing]: https://github.com/phpcfdi/finkok/blob/master/CONTRIBUTING.md

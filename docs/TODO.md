@@ -17,6 +17,9 @@
 
 - Fortalecer los comandos como DownloadXml (get_xml) que el tipo solo puede ser I - CFDI o R - Retenciones
 
+- Depender de `phpcfdi/credentials` para las actividades relacionadas a firmado,
+  si es que no lo hace `robrichards/xmlseclibs`
+
 ## Documentación
 
 - Servicios:

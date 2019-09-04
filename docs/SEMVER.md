@@ -3,7 +3,7 @@
 Respetamos el estándar [Versionado Semántico 2.0.0](https://semver.org/lang/es/).
 
 En resumen, [SemVer](https://semver.org/) es un sistema de versiones de tres componentes `X.Y.Z`
-que nombraremos así: ` Breaking . Feature . Fix `, donde:
+que nombraremos así: `[ Breaking ] . [ Feature ] . [ Fix ]`, donde:
 
 - `Breaking`: Rompe la compatibilidad de código con versiones anteriores.
 - `Feature`: Agrega una nueva característica que es compatible con lo anterior.
@@ -28,6 +28,9 @@ Esto significa que:
 Las versiones que inician con cero, por ejemplo `0.y.z`, no se ajustan a las reglas de versionado.
 Se considera que estas versiones son previas a la madurez del proyecto y por lo tanto
 introducen cambios sin previo aviso.
+
+Sin embargo, nos apegaremos a `[ 0 ] . [ Breaking ] . [ Feature || Fix ]`. Lo que significa que `0.3.0`
+no es compatible con `0.2.15` pero `0.3.4` sí es compatible con `0.3.0`.
 
 ## `@internal` no rompe compatibilidad
 

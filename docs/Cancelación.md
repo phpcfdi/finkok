@@ -107,7 +107,7 @@ enviarlo al SAT, el SAT le responde con este acuse. Si por alguna extraña razó
 el CFDI, yo muestro la firma del PAC y con eso sería suficiente. El PAC puede utilizar ese comprobante
 para asegurarle al SAT que se lo entregó *y que lo recibió*.
 
-El CFDI de cancelación representa la respuesta del SAT a una solicitud de cancelación.
+El acuse de cancelación representa la respuesta del SAT a una solicitud de cancelación.
 Dicha solicitud no la hace el PAC (como el Timbre Fiscal Digital), esta solicitud es hecha por el contribuyente
 y se firma con su llave privada e incluye el certificado y la llave pública.
 Si por alguna extraña razón, el SAT diera por desconocida una cancelación o por cancelado un CFDI,
@@ -141,7 +141,7 @@ el arreglo `uuids`, sin embargo, también existe la variable `error`.
 Al revisar las pruebas de integración, es muy difícil crear un caso automatizado, básicamente porque
 toma alrededor de 16 minutos el crear un CFDI y que este aparezca como "Cancelable con autorización".
 
-Desde 2016-05-14 que comencé la implementación, la lista devuelve los UUID
+Desde 2019-05-14 que comencé la implementación, la lista devuelve los UUID
 8096FF0F-6C49-41D3-B041-940A9DBBB5F2 y 4B2430D3-9714-4ED8-8084-6347914F93D6.
 Lo desconozco, pero podría ser, que esta fuera una respuesta predeterminada.
 

@@ -13,7 +13,7 @@ Fueron creados para un cliente de Finkok y por lo visto no piensan documentar cl
 su uso o su omisión (ticket #19340).
 
 No está documentado lo que devuelve por respuesta, solo dice que devuelve success y message.
-Cuando se agrega un cliente que ya existe, en lugar de devolver FALSE en success, devuelve TRUE.
+Cuando se agrega un cliente que ya existe previamente, en lugar de devolver FALSE en success, devuelve TRUE.
 Por lo que podría entenderse success como que el cliente existe o no.
 
 ## Método get (implementado como obtain)
