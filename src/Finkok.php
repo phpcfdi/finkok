@@ -1,0 +1,108 @@
+<?php
+
+declare(strict_types=1);
+
+namespace PhpCfdi\Finkok;
+
+use BadMethodCallException;
+use InvalidArgumentException;
+use PhpCfdi\Finkok\Services\Cancel;
+use PhpCfdi\Finkok\Services\Manifest;
+use PhpCfdi\Finkok\Services\Registration;
+use PhpCfdi\Finkok\Services\Stamping;
+use PhpCfdi\Finkok\Services\Utilities;
+
+/**
+ * Helper class to invoke execute Finkok commands and get the result
+ *
+ * @method Stamping\StampingResult stamp(Stamping\StampingCommand $command)
+ * @method Stamping\StampingResult quickstamp(Stamping\StampingCommand $command)
+ * @method Stamping\StampingResult stamped(Stamping\StampingCommand $command)
+ * @method Stamping\QueryPendingResult stampQueryPending(Stamping\QueryPendingCommand $command)
+ * @method Cancel\CancelSignatureResult cancelSignature(Cancel\CancelSignatureCommand $command)
+ * @method Cancel\GetPendingResult getPendingToCancel(Cancel\GetPendingCommand $command)
+ * @method Cancel\GetReceiptResult getCancelReceipt(Cancel\GetReceiptResult $command)
+ * @method Cancel\GetSatStatusResult getSatStatus(Cancel\GetSatStatusCommand $command)
+ * @method Utilities\DatetimeResult datetime()
+ * @method Utilities\DownloadXmlResult downloadXml(Utilities\DownloadXmlCommand $command)
+ * @method Utilities\ReportCreditResult reportCredit(Utilities\ReportCreditCommand $command)
+ * @method Utilities\ReportTotalResult reportTotal(Utilities\ReportTotalCommand $command)
+ * @method Utilities\ReportUuidResult reportUuid(Utilities\ReportUuidCommand $command)
+ * @method Manifest\GetContractsResult getContracts(Manifest\GetContractsCommand $command)
+ * @method Manifest\SignContractsResult signContracts(Manifest\SignContractsCommand $command)
+ * @method Registration\AddResult registrationAdd(Registration\AddCommand $command)
+ * @method Registration\AssignResult registrationAssign(Registration\AssignCommand $command)
+ * @method Registration\EditResult registrationEdit(Registration\EditCommand $command)
+ * @method Registration\ObtainResult registrationObtain(Registration\ObtainCommand $command)
+ */
+class Finkok
+{
+    protected const SERVICES_MAP = [
+        'stamp' => [Stamping\StampService::class, Stamping\StampingCommand::class],
+        'quickstamp' => [Stamping\QuickStampService::class, Stamping\StampingCommand::class],
+        'stamped' => [Stamping\StampedService::class, Stamping\StampingCommand::class],
+        'stampQueryPending' => [Stamping\QueryPendingService::class, Stamping\QueryPendingCommand::class],
+        'cancelSignature' => [Cancel\CancelSignatureService::class, Cancel\CancelSignatureCommand::class],
+        'getPendingToCancel' => [Cancel\GetPendingService::class, Cancel\GetPendingCommand::class],
+        'getCancelReceipt' => [Cancel\GetReceiptService::class, Cancel\GetReceiptResult::class],
+        'getSatStatus' => [Cancel\GetSatStatusService::class, Cancel\GetSatStatusCommand::class],
+        'datetime' => [Utilities\DatetimeService::class, ''],
+        'downloadXml' => [Utilities\DownloadXmlService::class, Utilities\DownloadXmlCommand::class],
+        'reportCredit' => [Utilities\ReportCreditService::class, Utilities\ReportCreditCommand::class],
+        'reportTotal' => [Utilities\ReportTotalService::class, Utilities\ReportTotalCommand::class],
+        'reportUuid' => [Utilities\ReportUuidService::class, Utilities\ReportUuidCommand::class],
+        'getContracts' => [Manifest\GetContractsService::class, Manifest\GetContractsCommand::class],
+        'signContracts' => [Manifest\SignContractsService::class, Manifest\SignContractsCommand::class],
+    ];
+
+    /** @var FinkokSettings */
+    private $settings;
+
+    public function __construct(FinkokSettings $factory)
+    {
+        $this->settings = $factory;
+    }
+
+    public function settings(): FinkokSettings
+    {
+        return $this->settings;
+    }
+
+    public function __call($name, $arguments)
+    {
+        if (array_key_exists($name, static::SERVICES_MAP)) {
+            $command = $this->checkCommand($name, $arguments[0] ?? null);
+            $service = $this->createService($name);
+            $result = $this->executeService($name, $service, $command);
+            return $result;
+        }
+        throw new BadMethodCallException(sprintf('Helper %s is not registered', $name));
+    }
+
+    protected function checkCommand(string $method, $command)
+    {
+        $expected = static::SERVICES_MAP[$method][1];
+        if ('' === $expected) {
+            return null;
+        }
+        if (! is_a($command, $expected)) {
+            $type = (is_object($command)) ? get_class($command) : gettype($command);
+            throw new InvalidArgumentException(
+                sprintf('Call %s::%s expect %s but received %s', static::class, $method, $expected, $type)
+            );
+        }
+        return $command;
+    }
+
+    protected function createService(string $method)
+    {
+        $serviceClass = static::SERVICES_MAP[$method][0];
+        $service = new $serviceClass($this->settings);
+        return $service;
+    }
+
+    protected function executeService(string $method, $service, $command)
+    {
+        return $service->{$method}($command);
+    }
+}

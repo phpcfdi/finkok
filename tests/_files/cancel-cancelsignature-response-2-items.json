@@ -1,0 +1,22 @@
+{
+  "cancel_signatureResult": {
+    "Folios": {
+      "Folio": [
+        {
+          "UUID": "11111111-2222-3333-4444-000000000001",
+          "EstatusUUID": "201",
+          "EstatusCancelacion": "Cancelado sin aceptación"
+        },
+        {
+          "UUID": "11111111-2222-3333-4444-000000000002",
+          "EstatusUUID": "no_cancelable",
+          "EstatusCancelacion": ""
+        }
+      ]
+    },
+    "Acuse": "voucher",
+    "Fecha": "2019-04-05 16:29:47.138032",
+    "RfcEmisor": "LAN7008173R5",
+    "CodEstatus": "304"
+  }
+}

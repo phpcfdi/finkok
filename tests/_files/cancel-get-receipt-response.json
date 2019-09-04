@@ -1,0 +1,10 @@
+{
+  "get_receiptResult": {
+    "success": true,
+    "uuid": "x-uuid",
+    "receipt": "x-receipt",
+    "taxpayer_id": "x-rfc",
+    "error": "x-error",
+    "date": "x-date"
+  }
+}

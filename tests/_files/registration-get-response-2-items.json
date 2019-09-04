@@ -1,0 +1,21 @@
+{
+  "getResult": {
+    "message": "predefined-message",
+    "users": {
+      "ResellerUser": [
+        {
+          "status": "S",
+          "counter": 0,
+          "taxpayer_id": "MAG041126GT8",
+          "credit": 0
+        },
+        {
+          "status": "A",
+          "counter": 26,
+          "taxpayer_id": "LAN7008173R5",
+          "credit": 74
+        }
+      ]
+    }
+  }
+}

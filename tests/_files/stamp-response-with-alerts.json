@@ -1,0 +1,17 @@
+{
+  "stampResult": {
+    "xml": "",
+    "Incidencias": {
+      "Incidencia": [
+        {
+          "CodigoError": "FAKE1",
+          "MensajeIncidencia": "Error falso 1"
+        },
+        {
+          "CodigoError": "FAKE2",
+          "MensajeIncidencia": "Error falso 2"
+        }
+      ]
+    }
+  }
+}
