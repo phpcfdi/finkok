@@ -3,18 +3,13 @@ filter:
     - 'tests/'
     - 'vendor/'
 
+# see https://scrutinizer-ci.com/docs/tools/php/php-scrutinizer/
 build:
   nodes:
-    analysis:
-      environment:
-        php:
-          version: "7.3"
-      project_setup:
-        override: true
+    php:
       tests:
         override:
           - php-scrutinizer-run --enable-security-analysis
-          - phpcs-run --standard=phpcs.xml.dist src/ tests/
           - command: vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover
             coverage:
               file: coverage.clover
