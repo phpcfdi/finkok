@@ -18,8 +18,8 @@ class EnvironmentManifest extends Enum
     protected static function overrideValues(): array
     {
         return [
-            'development' => 'https://manifiesto.finkok.com:8008/',
-            'production' => 'https://manifiesto.finkok.com/',
+            'development' => 'https://manifiesto.cfdiquadrum.com.mx:8008/',
+            'production' => 'https://manifiesto.cfdiquadrum.com.mx/',
         ];
     }
 }

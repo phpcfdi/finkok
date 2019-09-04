@@ -15,12 +15,6 @@ use PhpCfdi\Finkok\Tests\Integration\IntegrationTestCase;
 
 class SignContractsServiceTest extends IntegrationTestCase
 {
-    protected function setUp(): void
-    {
-        parent::setUp();
-        $this->markTestSkipped('Manifest service is not working anymore, is that because Finkok is not a PAC?');
-    }
-
     private function consumeSignContracts(
         string $rfc,
         string $certificateFile,
@@ -63,8 +57,8 @@ class SignContractsServiceTest extends IntegrationTestCase
         $passPhrase = trim($this->fileContentPath('certs/EKU9003173C9.password.bin'));
 
         $result = $this->consumeSignContracts('EKU9003173C9', $certificateFile, $privateKeyFile, $passPhrase);
-        $this->assertFalse($result->success());
         $this->assertSame('La firma del Aviso de privacidad no es FIEL', trim($result->message()));
+        $this->assertFalse($result->success());
     }
 
     public function testSignContractsUsingNotRegisteredRfc(): void
@@ -74,8 +68,8 @@ class SignContractsServiceTest extends IntegrationTestCase
         $passPhrase = trim($this->fileContentPath('fiel/EKU9003173C9.password.bin'));
 
         $result = $this->consumeSignContracts('COSC8001137NA', $certificateFile, $privateKeyFile, $passPhrase);
-        $this->assertFalse($result->success());
         $this->assertSame('No se registro el RFC bajo la cuenta de Finkok', $result->message());
+        $this->assertFalse($result->success());
     }
 
     public function testSignContractsUsingFiel(): void
@@ -85,7 +79,7 @@ class SignContractsServiceTest extends IntegrationTestCase
         $passPhrase = trim($this->fileContentPath('fiel/EKU9003173C9.password.bin'));
 
         $result = $this->consumeSignContracts('EKU9003173C9', $certificateFile, $privateKeyFile, $passPhrase);
-        $this->assertTrue($result->success());
         $this->assertSame('Proceso exitoso', $result->message());
+        $this->assertTrue($result->success());
     }
 }

@@ -10,12 +10,6 @@ use PhpCfdi\Finkok\Tests\Integration\IntegrationTestCase;
 
 class GetContractsServiceTest extends IntegrationTestCase
 {
-    protected function setUp(): void
-    {
-        parent::setUp();
-        $this->markTestSkipped('Manifest service is not working anymore, is that because Finkok is not a PAC?');
-    }
-
     private function createService(): GetContractsService
     {
         $settings = $this->createSettingsFromEnvironment();
@@ -46,7 +40,8 @@ class GetContractsServiceTest extends IntegrationTestCase
         $this->assertNotEmpty($contract, 'Cannot decode contract statement');
         $this->assertStringContainsString($command->rfc(), $contract);
         $this->assertStringContainsString($command->name(), $contract);
-        $this->assertStringContainsString($command->email(), $contract);
-        $this->assertStringContainsString($command->address(), $contract);
+        // on the new manifest with Quadrum it does not include email or address
+        // $this->assertStringContainsString($command->email(), $contract);
+        // $this->assertStringContainsString($command->address(), $contract);
     }
 }
