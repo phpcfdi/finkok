@@ -8,6 +8,7 @@ use BadMethodCallException;
 use InvalidArgumentException;
 use PhpCfdi\Finkok\Services\Cancel;
 use PhpCfdi\Finkok\Services\Manifest;
+use PhpCfdi\Finkok\Services\Registration;
 use PhpCfdi\Finkok\Services\Stamping;
 use PhpCfdi\Finkok\Services\Utilities;
 
@@ -29,6 +30,10 @@ use PhpCfdi\Finkok\Services\Utilities;
  * @method Utilities\ReportUuidResult reportUuid(Utilities\ReportUuidCommand $command)
  * @method Manifest\GetContractsResult getContracts(Manifest\GetContractsCommand $command)
  * @method Manifest\SignContractsResult signContracts(Manifest\SignContractsCommand $command)
+ * @method Registration\AddResult registrationAdd(Registration\AddCommand $command)
+ * @method Registration\AssignResult registrationAssign(Registration\AssignCommand $command)
+ * @method Registration\EditResult registrationEdit(Registration\EditCommand $command)
+ * @method Registration\ObtainResult registrationObtain(Registration\ObtainCommand $command)
  */
 class Finkok
 {
