@@ -64,7 +64,7 @@ class FinkokSettings
     }
 
     /**
-     * This method created a configured SoapCaller with wsdLocation and default options
+     * This method created a configured SoapCaller with wsdlLocation and default options
      *
      * @param Services $service
      * @param string $usernameKey defaults to username, if empty then it will be ommited
