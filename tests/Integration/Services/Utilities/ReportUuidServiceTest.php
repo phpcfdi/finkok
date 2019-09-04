@@ -21,6 +21,7 @@ class ReportUuidServiceTest extends IntegrationTestCase
         $service = new ReportUuidService($settings);
         $result = $service->reportUuid($command);
         // cannot assert anything since is unknown if it has contents
+        $this->assertSame('', $result->error());
         $this->assertInstanceOf(ReportUuidResult::class, $result);
     }
 }

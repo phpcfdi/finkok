@@ -15,6 +15,9 @@ class ReportTotalResult extends AbstractResult
     /** @var string */
     private $total;
 
+    /** @var string */
+    private $error;
+
     public function __construct(stdClass $data)
     {
         parent::__construct($data, 'report_totalResult');
@@ -22,6 +25,7 @@ class ReportTotalResult extends AbstractResult
         $result = $items[0] ?? (object) [];
         $this->rfc = $result->taxpayer_id ?? '';
         $this->total = strval($result->total ?? '');
+        $this->error = $this->get('error');
     }
 
     public function rfc(): string
@@ -32,5 +36,10 @@ class ReportTotalResult extends AbstractResult
     public function total(): string
     {
         return $this->total;
+    }
+
+    public function error(): string
+    {
+        return $this->error;
     }
 }

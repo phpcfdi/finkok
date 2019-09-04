@@ -34,4 +34,9 @@ class ReportCreditResult extends AbstractResult
     {
         return $this->items;
     }
+
+    public function error(): string
+    {
+        return $this->get('error');
+    }
 }

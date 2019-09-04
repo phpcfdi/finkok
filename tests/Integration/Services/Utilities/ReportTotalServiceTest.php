@@ -18,6 +18,7 @@ class ReportTotalServiceTest extends IntegrationTestCase
         $settings = $this->createSettingsFromEnvironment();
         $service = new ReportTotalService($settings);
         $result = $service->reportTotal($command);
+        $this->assertSame('', $result->error());
         $this->assertNotSame('', $result->total());
         $this->assertSame('EKU9003173C9', $result->rfc());
     }

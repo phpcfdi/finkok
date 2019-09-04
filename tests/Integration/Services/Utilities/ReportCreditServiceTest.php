@@ -19,6 +19,7 @@ class ReportCreditServiceTest extends IntegrationTestCase
         $result = $service->reportCredit($command);
         // cannot assert anything since credit is unknown
         // this may change if implement credit services
+        $this->assertSame('', $result->error());
         $this->assertInstanceOf(ReportCreditResult::class, $result);
     }
 }
