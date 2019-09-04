@@ -16,8 +16,8 @@ class TestCase extends \PHPUnit\Framework\TestCase
     public function createSettingsFromEnvironment(SoapFactory $soapFactory = null): FinkokSettings
     {
         $settings = new FinkokSettings(
-            strval(getenv('FINKOK_USERNAME')),
-            strval(getenv('FINKOK_PASSWORD')),
+            strval(getenv('FINKOK_USERNAME')) ?: 'username-non-set',
+            strval(getenv('FINKOK_PASSWORD')) ?: 'password-non-set',
             FinkokEnvironment::makeDevelopment()
         );
         if (null !== $soapFactory) {
