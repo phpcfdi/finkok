@@ -12,6 +12,9 @@ require_once __DIR__ . '/../vendor/autoload.php';
 
 call_user_func(function (): void {
     /** @noinspection PhpFullyQualifiedNameUsageInspection */
-    $dotenv = new \Symfony\Component\Dotenv\Dotenv();
-    $dotenv->load(__DIR__ . '/.env');
+    $envFile = __DIR__ . '/.env';
+    if (file_exists($envFile) && ! is_dir($envFile)) {
+        $dotenv = new \Symfony\Component\Dotenv\Dotenv();
+        $dotenv->load($envFile);
+    }
 });
