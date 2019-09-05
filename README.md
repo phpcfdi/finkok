@@ -54,6 +54,12 @@ if ($stampResult->hasAlerts()) { // stamp es un objeto con propiedades nombradas
 }
 ```
 
+Y también hay otros ejemplos explicados:
+
+- [Cancelación de un UUID firmada](docs/Ejemplos/CancelacionFirmada.md)
+
+Y todos los test de integración, donde se prueba la comunicación y respuestas contra la plataforma de pruebas.
+
 ## Métodos implementados
 
 La librería utiliza un modelo basado en comando, servicio y resultado.
@@ -150,9 +156,11 @@ Durante el proceso de implementación he creado diversas notas y documentos:
 - [Entorno de Pruebas](docs/EntornoDePruebas.md): Documentación de cómo funciona y como configurar el entorno de pruebas.
 
 - Problemas encontrados:
-    - [Cancelación de un CFDI recién creado](docs/issues/CancelSignatureServiceCancelarRecienCreado.md)
-    - [Consumir queryPending con un CFDI recién creado](docs/issues/QueryPendingServiceUuidNoExistente.md)
-    - [Consumir stamp para generar un doble estampado no devuelve los datos](docs/issues/StampServiceDobleEstampado.md)
+    - [X] [Cancelación de un CFDI recién creado](docs/issues/CancelSignatureServiceCancelarRecienCreado.md)
+    - [X] [Consumir queryPending con un CFDI recién creado](docs/issues/QueryPendingServiceUuidNoExistente.md)
+    - [X] [Consumir stamp para generar un doble estampado no devuelve los datos](docs/issues/StampServiceDobleEstampado.md)
+    - [ ] Falta servicio que no requiera CSD/FIEL para aceptar o rechazar una solicitud de cancelación
+    - [ ] Falta servicio que no requiera CSD/FIEL para obtener los CFDI relacionados
 
 ## Compatilibilidad
 
