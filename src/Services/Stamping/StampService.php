@@ -32,7 +32,7 @@ class StampService
                 'xml' => $command->xml(),
             ]);
             $result = new StampingResult('stampResult', $rawResponse);
-            if ($result->alerts()->findByErrorCode('307') && '' === $result->uuid()) {
+            if (null !== $result->alerts()->findByErrorCode('307') && '' === $result->uuid()) {
                 usleep(200000); // 0.2 seconds
                 continue;
             }
