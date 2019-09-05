@@ -41,18 +41,26 @@ class Finkok
         'stamp' => [Stamping\StampService::class, Stamping\StampingCommand::class],
         'quickstamp' => [Stamping\QuickStampService::class, Stamping\StampingCommand::class],
         'stamped' => [Stamping\StampedService::class, Stamping\StampingCommand::class],
-        'stampQueryPending' => [Stamping\QueryPendingService::class, Stamping\QueryPendingCommand::class],
+        'stampQueryPending' => [
+            Stamping\QueryPendingService::class,
+            Stamping\QueryPendingCommand::class,
+            'queryPending', // override method name on service
+        ],
         'cancelSignature' => [Cancel\CancelSignatureService::class, Cancel\CancelSignatureCommand::class],
-        'getPendingToCancel' => [Cancel\GetPendingService::class, Cancel\GetPendingCommand::class],
-        'getCancelReceipt' => [Cancel\GetReceiptService::class, Cancel\GetReceiptResult::class],
-        'getSatStatus' => [Cancel\GetSatStatusService::class, Cancel\GetSatStatusCommand::class],
+        'getPendingToCancel' => [Cancel\GetPendingService::class, Cancel\GetPendingCommand::class, 'obtainPending'],
+        'getCancelReceipt' => [Cancel\GetReceiptService::class, Cancel\GetReceiptResult::class, 'download'],
+        'getSatStatus' => [Cancel\GetSatStatusService::class, Cancel\GetSatStatusCommand::class, 'query'],
         'datetime' => [Utilities\DatetimeService::class, ''],
         'downloadXml' => [Utilities\DownloadXmlService::class, Utilities\DownloadXmlCommand::class],
         'reportCredit' => [Utilities\ReportCreditService::class, Utilities\ReportCreditCommand::class],
         'reportTotal' => [Utilities\ReportTotalService::class, Utilities\ReportTotalCommand::class],
         'reportUuid' => [Utilities\ReportUuidService::class, Utilities\ReportUuidCommand::class],
-        'getContracts' => [Manifest\GetContractsService::class, Manifest\GetContractsCommand::class],
-        'signContracts' => [Manifest\SignContractsService::class, Manifest\SignContractsCommand::class],
+        'getContracts' => [Manifest\GetContractsService::class, Manifest\GetContractsCommand::class, 'obtainContracts'],
+        'signContracts' => [
+            Manifest\SignContractsService::class,
+            Manifest\SignContractsCommand::class,
+            'sendSignedContracts',
+        ],
     ];
 
     /** @var FinkokSettings */
@@ -103,6 +111,12 @@ class Finkok
 
     protected function executeService(string $method, $service, $command)
     {
+        $method = static::SERVICES_MAP[$method][2] ?? $method;
+        if (! is_callable([$service, $method])) {
+            throw new BadMethodCallException(
+                sprintf('The service %s does not have a method %s', get_class($service), $method)
+            );
+        }
         return $service->{$method}($command);
     }
 }

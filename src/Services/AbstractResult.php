@@ -18,12 +18,13 @@ abstract class AbstractResult
     public function __construct(stdClass $data, string ...$meanLocation)
     {
         $this->data = $data;
-        $this->root = $this->findInDescendent($data, ...$meanLocation);
-        if (! $this->root instanceof stdClass) {
+        $root = $this->findInDescendent($data, ...$meanLocation);
+        if (! $root instanceof stdClass) {
             throw new InvalidArgumentException(
                 sprintf('Unable to find mean object at /%s', implode('/', $meanLocation))
             );
         }
+        $this->root = $root;
     }
 
     public function rawData(): stdClass
