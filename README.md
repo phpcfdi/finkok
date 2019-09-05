@@ -54,6 +54,12 @@ if ($stampResult->hasAlerts()) { // stamp es un objeto con propiedades nombradas
 }
 ```
 
+Y también hay otros ejemplos explicados:
+
+- [Cancelación de un UUID firmada](docs/Ejemplos/CancelacionFirmada.md)
+
+Y todos los test de integración, donde se prueba la comunicación y respuestas contra la plataforma de pruebas.
+
 ## Métodos implementados
 
 La librería utiliza un modelo basado en comando, servicio y resultado.
