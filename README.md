@@ -156,9 +156,9 @@ Durante el proceso de implementación he creado diversas notas y documentos:
 - [Entorno de Pruebas](docs/EntornoDePruebas.md): Documentación de cómo funciona y como configurar el entorno de pruebas.
 
 - Problemas encontrados:
-    - [Cancelación de un CFDI recién creado](docs/issues/CancelSignatureServiceCancelarRecienCreado.md)
-    - [Consumir queryPending con un CFDI recién creado](docs/issues/QueryPendingServiceUuidNoExistente.md)
-    - [Consumir stamp para generar un doble estampado no devuelve los datos](docs/issues/StampServiceDobleEstampado.md)
+    - [X] [Cancelación de un CFDI recién creado](docs/issues/CancelSignatureServiceCancelarRecienCreado.md)
+    - [X] [Consumir queryPending con un CFDI recién creado](docs/issues/QueryPendingServiceUuidNoExistente.md)
+    - [X] [Consumir stamp para generar un doble estampado no devuelve los datos](docs/issues/StampServiceDobleEstampado.md)
 
 ## Compatilibilidad
 
