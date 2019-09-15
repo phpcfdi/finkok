@@ -1,0 +1,33 @@
+{
+  "get_related_signatureResult": {
+    "Padres": {
+      "Padre": [
+        {
+          "uuid": "11111111-2222-3333-4444-000000000001",
+          "receptor": "EKU9003173C9",
+          "emisor": "LAN7008173R5"
+        },
+        {
+          "uuid": "11111111-2222-3333-4444-000000000002",
+          "receptor": "EKU9003173C9",
+          "emisor": "LAN7008173R5"
+        }
+      ]
+    },
+    "Hijos": {
+      "Hijo": [
+        {
+          "uuid": "11111111-2222-3333-4444-000000000003",
+          "receptor": "EKU9003173C9",
+          "emisor": "LAN7008173R5"
+        },
+        {
+          "uuid": "11111111-2222-3333-4444-000000000004",
+          "receptor": "EKU9003173C9",
+          "emisor": "LAN7008173R5"
+        }
+      ]
+    },
+    "error": "predefined-error"
+  }
+}
