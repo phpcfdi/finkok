@@ -23,6 +23,7 @@ use PhpCfdi\Finkok\Services\Utilities;
  * @method Cancel\GetPendingResult getPendingToCancel(Cancel\GetPendingCommand $command)
  * @method Cancel\GetReceiptResult getCancelReceipt(Cancel\GetReceiptResult $command)
  * @method Cancel\GetSatStatusResult getSatStatus(Cancel\GetSatStatusCommand $command)
+ * @method Cancel\GetRelatedSignatureResult getRelatedSignature(Cancel\GetRelatedSignatureCommand $command)
  * @method Utilities\DatetimeResult datetime()
  * @method Utilities\DownloadXmlResult downloadXml(Utilities\DownloadXmlCommand $command)
  * @method Utilities\ReportCreditResult reportCredit(Utilities\ReportCreditCommand $command)
@@ -50,6 +51,10 @@ class Finkok
         'getPendingToCancel' => [Cancel\GetPendingService::class, Cancel\GetPendingCommand::class, 'obtainPending'],
         'getCancelReceipt' => [Cancel\GetReceiptService::class, Cancel\GetReceiptResult::class, 'download'],
         'getSatStatus' => [Cancel\GetSatStatusService::class, Cancel\GetSatStatusCommand::class, 'query'],
+        'getRelatedSignature' => [
+            Cancel\GetRelatedSignatureService::class,
+            Cancel\GetRelatedSignatureCommand::class,
+        ],
         'datetime' => [Utilities\DatetimeService::class, ''],
         'downloadXml' => [Utilities\DownloadXmlService::class, Utilities\DownloadXmlCommand::class],
         'reportCredit' => [Utilities\ReportCreditService::class, Utilities\ReportCreditCommand::class],
