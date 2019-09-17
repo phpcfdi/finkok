@@ -81,13 +81,18 @@ class IntegrationTestCase extends TestCase
         );
     }
 
-    protected function createCancelSignatureCommandFromCapsule(Capsule $capsule): CancelSignatureCommand
+    protected function createCredentials(): Credentials
     {
-        $credentials = new Credentials(
+        return new Credentials(
             $this->filePath('certs/EKU9003173C9.cer'),
             $this->filePath('certs/EKU9003173C9.key.pem'),
             trim($this->fileContentPath('certs/EKU9003173C9.password.bin'))
         );
+    }
+
+    protected function createCancelSignatureCommandFromCapsule(Capsule $capsule): CancelSignatureCommand
+    {
+        $credentials = $this->createCredentials();
         $xmlCancelacion = (new CapsuleSigner())->sign($capsule, $credentials);
         return new CancelSignatureCommand($xmlCancelacion);
     }
