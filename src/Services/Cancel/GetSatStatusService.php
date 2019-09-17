@@ -34,7 +34,7 @@ class GetSatStatusService
         return new GetSatStatusResult($rawResponse);
     }
 
-    public function queryUntilFoundOrTime(GetSatStatusCommand $command, int $waitSeconds = 60): GetSatStatusResult
+    public function queryUntilFoundOrTime(GetSatStatusCommand $command, int $waitSeconds = 120): GetSatStatusResult
     {
         $runUntilTime = time() + $waitSeconds;
         do {

@@ -99,11 +99,12 @@ class IntegrationTestCase extends TestCase
 
     protected function checkCanGetSatStatusOrFail(
         string $cfdiContents,
-        string $exceptionMessage = ''
+        string $exceptionMessage = '',
+        int $waitSeconds = 120
     ): GetSatStatusResult {
         $service = new GetSatStatusService($this->createSettingsFromEnvironment());
         $command = $this->createGetSatStatusCommandFromCfdiContents($cfdiContents);
-        $result = $service->queryUntilFoundOrTime($command);
+        $result = $service->queryUntilFoundOrTime($command, $waitSeconds);
         if ('No Encontrado' === $result->cfdi()) {
             if ('' === $exceptionMessage) {
                 $exceptionMessage = sprintf('Cannot found UUID %s at SAT using GetSatStatusService', $command->uuid());
