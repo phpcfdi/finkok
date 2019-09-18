@@ -20,6 +20,8 @@
 - Depender de `phpcfdi/credentials` para las actividades relacionadas a firmado,
   si es que no lo hace `robrichards/xmlseclibs`
 
+- Poder configurar en Travis CI la ejecución de tests de integración
+
 ## Documentación
 
 - Servicios:
