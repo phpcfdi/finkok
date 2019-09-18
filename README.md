@@ -159,8 +159,8 @@ Durante el proceso de implementación he creado diversas notas y documentos:
     - [X] [Cancelación de un CFDI recién creado](docs/issues/CancelSignatureServiceCancelarRecienCreado.md)
     - [X] [Consumir queryPending con un CFDI recién creado](docs/issues/QueryPendingServiceUuidNoExistente.md)
     - [X] [Consumir stamp para generar un doble estampado no devuelve los datos](docs/issues/StampServiceDobleEstampado.md)
-    - [ ] Falta servicio que no requiera CSD/FIEL para aceptar o rechazar una solicitud de cancelación
-    - [ ] Falta servicio que no requiera CSD/FIEL para obtener los CFDI relacionados
+    - [X] Falta servicio que no requiera CSD/FIEL para aceptar o rechazar una solicitud de cancelación
+    - [X] Falta servicio que no requiera CSD/FIEL para obtener los CFDI relacionados
 
 ## Compatilibilidad
 
