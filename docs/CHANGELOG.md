@@ -6,6 +6,12 @@
 
 Nos apegamos a [SEMVER](SEMVER.md), revisa la información para entender mejor el control de versiones.
 
+## Version 0.1.2 2019-09-17
+
+- Implementación del servicio `get_related_signature` que obtiene los UUID relacionados (descendientes y ascendentes)
+  de un determinado UUID.
+
+
 ## Version 0.1.1 2019-09-04
 
 - Los nombres de los métodos en `Finkok` algunas veces son los mismos que en los servicios, pero en otras cambia,
