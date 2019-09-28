@@ -16,7 +16,7 @@ use PhpCfdi\Finkok\Services\Stamping\StampService;
 use PhpCfdi\Finkok\Tests\Factories\RandomPreCfdi;
 use PhpCfdi\Finkok\Tests\TestCase;
 use PhpCfdi\XmlCancelacion\Capsules\Cancellation as CancellationCapsule;
-use PhpCfdi\XmlCancelacion\Credentials;
+use PhpCfdi\XmlCancelacion\Credentials as XmlCancelacionCredentials;
 use PhpCfdi\XmlCancelacion\XmlCancelacionHelper;
 use RuntimeException;
 
@@ -84,7 +84,7 @@ class IntegrationTestCase extends TestCase
     protected function createCancelSignatureCommandFromCapsule(CancellationCapsule $capsule): CancelSignatureCommand
     {
         $credential = $this->createCsdCredential();
-        $helper = new XmlCancelacionHelper(Credentials::createWithPhpCfdiCredential($credential));
+        $helper = new XmlCancelacionHelper(XmlCancelacionCredentials::createWithPhpCfdiCredential($credential));
         $xmlCancelacion = $helper->signCapsule($capsule);
         return new CancelSignatureCommand($xmlCancelacion);
     }

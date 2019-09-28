@@ -6,7 +6,7 @@ namespace PhpCfdi\Finkok\Helpers;
 
 use PhpCfdi\Credentials\Credential;
 use PhpCfdi\Finkok\Definitions\RfcRole;
-use PhpCfdi\XmlCancelacion\Credentials;
+use PhpCfdi\XmlCancelacion\Credentials as XmlCancelacionCredentials;
 use PhpCfdi\XmlCancelacion\XmlCancelacionHelper;
 
 class GetRelatedSigner
@@ -53,7 +53,7 @@ class GetRelatedSigner
 
     public function sign(Credential $credential): string
     {
-        $helper = new XmlCancelacionHelper(Credentials::createWithPhpCfdiCredential($credential));
+        $helper = new XmlCancelacionHelper(XmlCancelacionCredentials::createWithPhpCfdiCredential($credential));
         return $helper->signObtainRelated($this->uuid(), $this->role(), $this->pacRfc());
     }
 }
