@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace PhpCfdi\Finkok\Tests\Unit\Helpers;
 
 use DateTimeImmutable;
+use DOMDocument;
+use LogicException;
+use PhpCfdi\Credentials\Credential;
 use PhpCfdi\Finkok\Helpers\DocumentSigner;
 
 use PhpCfdi\Finkok\Tests\TestCase;
@@ -30,5 +33,20 @@ class DocumentSignerTest extends TestCase
         // the comparison does not check white spacing,
         // lorem-ipsum-signed.xml is formatted for better reading
         $this->assertXmlStringEqualsXmlFile($this->filePath('lorem-ipsum-signed.xml'), $signed);
+    }
+
+    public function testSignDocumentUsingCredentialWithoutRootElement(): void
+    {
+        $rfc = 'COSC8001137NA';
+        $date = new DateTimeImmutable('2019-01-13 14:15:16');
+        $content = 'Lorem Ipsum';
+        $docSigner = new DocumentSigner($rfc, $date, $content);
+
+        /** @var Credential $credential */
+        $credential = $this->createMock(Credential::class);
+        $documentWithoutRootElement = new DOMDocument();
+        $this->expectException(LogicException::class);
+        $this->expectExceptionMessage('The DOM Document does not contains a root element');
+        $docSigner->signDocumentUsingCredential($documentWithoutRootElement, $credential);
     }
 }

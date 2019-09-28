@@ -46,6 +46,14 @@ class DocumentSigner
 
     public function sign(string $certificateFile, string $privateKeyFile, string $passPhrase): string
     {
+        $credential = Credential::openFiles($certificateFile, $privateKeyFile, $passPhrase);
+        $document = $this->createDocumentToSign();
+        $this->signDocumentUsingCredential($document, $credential);
+        return $document->saveXML();
+    }
+
+    public function createDocumentToSign(): DOMDocument
+    {
         $document = new DOMDocument('1.0', 'UTF-8');
         $root = $document->createElement('documento');
         $document->appendChild($root);
@@ -53,11 +61,7 @@ class DocumentSigner
         $contract->setAttribute('rfc', $this->rfc());
         $contract->setAttribute('fecha', $this->date()->format('Y-m-d\TH:i:s'));
         $root->appendChild($contract);
-
-        $credential = Credential::openFiles($certificateFile, $privateKeyFile, $passPhrase);
-        $this->signDocumentUsingCredential($document, $credential);
-
-        return $document->saveXML();
+        return $document;
     }
 
     public function signDocumentUsingCredential(DOMDocument $document, Credential $credential): void
