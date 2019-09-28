@@ -54,9 +54,9 @@ class GetRelatedSignatureServiceTest extends IntegrationTestCase
         $second = $this->stamp($this->newStampingCommandRelated('04', $first->uuid()));
         $third = $this->stamp($this->newStampingCommandRelated('04', $second->uuid()));
 
-        $this->checkCanGetSatStatusOrFail($first->xml(), 'Unable to create first CFDI for testing get related', 120);
-        $this->checkCanGetSatStatusOrFail($second->xml(), 'Unable to create second CFDI for testing get related', 120);
-        $this->checkCanGetSatStatusOrFail($third->xml(), 'Unable to create third CFDI for testing get related', 120);
+        $this->checkCanGetSatStatusOrFail($first->xml(), 'Unable to create first CFDI for testing get related');
+        $this->checkCanGetSatStatusOrFail($second->xml(), 'Unable to create second CFDI for testing get related');
+        $this->checkCanGetSatStatusOrFail($third->xml(), 'Unable to create third CFDI for testing get related');
 
         $command = $this->createGetRelatedSignatureCommand($second->uuid());
         $service = $this->createService();
