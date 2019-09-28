@@ -15,9 +15,9 @@ use PhpCfdi\Finkok\Services\Stamping\StampingResult;
 use PhpCfdi\Finkok\Services\Stamping\StampService;
 use PhpCfdi\Finkok\Tests\Factories\RandomPreCfdi;
 use PhpCfdi\Finkok\Tests\TestCase;
-use PhpCfdi\XmlCancelacion\Capsule;
-use PhpCfdi\XmlCancelacion\CapsuleSigner;
+use PhpCfdi\XmlCancelacion\Capsules\Cancellation as CancellationCapsule;
 use PhpCfdi\XmlCancelacion\Credentials;
+use PhpCfdi\XmlCancelacion\XmlCancelacionHelper;
 use RuntimeException;
 
 class IntegrationTestCase extends TestCase
@@ -81,19 +81,11 @@ class IntegrationTestCase extends TestCase
         );
     }
 
-    protected function createCredentials(): Credentials
+    protected function createCancelSignatureCommandFromCapsule(CancellationCapsule $capsule): CancelSignatureCommand
     {
-        return new Credentials(
-            $this->filePath('certs/EKU9003173C9.cer'),
-            $this->filePath('certs/EKU9003173C9.key.pem'),
-            trim($this->fileContentPath('certs/EKU9003173C9.password.bin'))
-        );
-    }
-
-    protected function createCancelSignatureCommandFromCapsule(Capsule $capsule): CancelSignatureCommand
-    {
-        $credentials = $this->createCredentials();
-        $xmlCancelacion = (new CapsuleSigner())->sign($capsule, $credentials);
+        $credential = $this->createCsdCredential();
+        $helper = new XmlCancelacionHelper(Credentials::createWithPhpCfdiCredential($credential));
+        $xmlCancelacion = $helper->signCapsule($capsule);
         return new CancelSignatureCommand($xmlCancelacion);
     }
 

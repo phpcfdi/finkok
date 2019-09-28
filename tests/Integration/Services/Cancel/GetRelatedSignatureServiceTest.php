@@ -22,9 +22,8 @@ class GetRelatedSignatureServiceTest extends IntegrationTestCase
 
     protected function createGetRelatedSignatureCommand(string $uuid): GetRelatedSignatureCommand
     {
-        $credentials = $this->createCredentials();
-        $signer = new GetRelatedSigner($uuid, $credentials->rfc(), RfcRole::emitter());
-        $xml = $signer->signUsingCredentials($credentials);
+        $signer = new GetRelatedSigner($uuid, RfcRole::issuer());
+        $xml = $signer->sign($this->createCsdCredential());
         return new GetRelatedSignatureCommand($xml);
     }
 

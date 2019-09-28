@@ -11,14 +11,18 @@ use PhpCfdi\Finkok\Tests\TestCase;
 
 class GetRelatedSignerTest extends TestCase
 {
-    public function testCreateSignature(): void
+    public function testCreateAndSign(): void
     {
-        $certificate = $this->filePath('certs/EKU9003173C9.cer.pem');
-        $privateKey = $this->filePath('certs/EKU9003173C9.key.pem');
-        $passPhrase = trim($this->fileContentPath('certs/EKU9003173C9.password.bin'));
+        $uuid = '4CE93193-9E57-4BB0-9E03-09BAB53D392E';
+        $role = RfcRole::issuer();
 
-        $signer = new GetRelatedSigner('4CE93193-9E57-4BB0-9E03-09BAB53D392E', 'EKU9003173C9', RfcRole::emitter());
-        $signed = $signer->sign($certificate, $privateKey, $passPhrase);
-        $this->assertXmlStringEqualsXmlFile($this->filePath('cancel-get-related-signature-raw.xml'), $signed);
+        $signer = new GetRelatedSigner($uuid, $role);
+        $this->assertSame($uuid, $signer->uuid());
+        $this->assertSame($role, $signer->role());
+        $this->assertSame($signer::DEFAULT_PACRFC, $signer->pacRfc());
+
+        $signed = $signer->sign($this->createCsdCredential());
+
+        $this->assertXmlStringEqualsXmlFile($this->filePath('cancel-get-related-signature-format.xml'), $signed);
     }
 }

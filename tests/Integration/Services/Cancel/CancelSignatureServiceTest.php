@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace PhpCfdi\Finkok\Tests\Integration\Services\Cancel;
 
+use DateTimeImmutable;
 use PhpCfdi\Finkok\Services\Cancel\CancelSignatureService;
 use PhpCfdi\Finkok\Tests\Integration\IntegrationTestCase;
-use PhpCfdi\XmlCancelacion\Capsule;
+use PhpCfdi\XmlCancelacion\Capsules\Cancellation as CancellationCapsule;
 
 class CancelSignatureServiceTest extends IntegrationTestCase
 {
@@ -18,7 +19,8 @@ class CancelSignatureServiceTest extends IntegrationTestCase
 
     public function testCancelNonExistentUuid(): void
     {
-        $cancelData = new Capsule('EKU9003173C9', ['12345678-1234-1234-1234-123456789012']);
+        $now = new DateTimeImmutable();
+        $cancelData = new CancellationCapsule('EKU9003173C9', ['12345678-1234-1234-1234-123456789012'], $now);
         $command = $this->createCancelSignatureCommandFromCapsule($cancelData);
 
         $service = $this->createService();

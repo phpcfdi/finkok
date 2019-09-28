@@ -6,6 +6,8 @@ namespace PhpCfdi\Finkok\Helpers;
 
 use DateTimeImmutable;
 use DOMDocument;
+use LogicException;
+use PhpCfdi\Credentials\Credential;
 use RobRichards\XMLSecLibs\XMLSecurityDSig;
 use RobRichards\XMLSecLibs\XMLSecurityKey;
 
@@ -51,8 +53,19 @@ class DocumentSigner
         $contract->setAttribute('rfc', $this->rfc());
         $contract->setAttribute('fecha', $this->date()->format('Y-m-d\TH:i:s'));
         $root->appendChild($contract);
-        $document->normalizeDocument();
 
+        $credential = Credential::openFiles($certificateFile, $privateKeyFile, $passPhrase);
+        $this->signDocumentUsingCredential($document, $credential);
+
+        return $document->saveXML();
+    }
+
+    public function signDocumentUsingCredential(DOMDocument $document, Credential $credential): void
+    {
+        $root = $document->documentElement;
+        if (null === $root) {
+            throw new LogicException('The DOM Document does not contains a root element');
+        }
         $objDSig = new XMLSecurityDSig();
         $objDSig->setCanonicalMethod(XMLSecurityDSig::EXC_C14N);
         $objDSig->addReference(
@@ -63,13 +76,12 @@ class DocumentSigner
         );
 
         $objKey = new XMLSecurityKey(XMLSecurityKey::RSA_SHA1, ['type' => 'private']);
-        $objKey->passphrase = $passPhrase; // set passphrase before loading key
-        $objKey->loadKey($privateKeyFile, true, false);
+        $objKey->passphrase = $credential->privateKey()->passPhrase(); // set passphrase before loading key
+        $objKey->loadKey($credential->privateKey()->pem(), false, false);
 
         $objDSig->sign($objKey);
-        $objDSig->add509Cert($certificateFile, true, true);
+        $objDSig->add509Cert($credential->certificate()->pem(), true, false);
 
         $objDSig->appendSignature($root);
-        return $document->saveXML();
     }
 }

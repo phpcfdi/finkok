@@ -27,13 +27,15 @@
         "ext-json": "*",
         "ext-soap": "*",
         "ext-dom": "*",
+        "ext-openssl": "*",
         "psr/log": "^1.1",
         "eclipxe/enum": "^0.2.0",
+        "phpcfdi/credentials": "^1.0.1",
+        "phpcfdi/xml-cancelacion": "master-dev",
         "robrichards/xmlseclibs": "^3.0"
     },
     "require-dev": {
         "eclipxe/cfdiutils": "^2.10",
-        "phpcfdi/xml-cancelacion": "^0.4.1",
         "phpunit/phpunit": "^8.0",
         "overtrue/phplint": "^1.0",
         "squizlabs/php_codesniffer": "^3.0",

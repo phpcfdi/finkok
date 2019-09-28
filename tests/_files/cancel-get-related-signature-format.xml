@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <PeticionConsultaRelacionados xmlns="http://cancelacfd.sat.gob.mx" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" RfcEmisor="EKU9003173C9" RfcPacEnviaSolicitud="CVD110412TF6" RfcReceptor="" Uuid="4CE93193-9E57-4BB0-9E03-09BAB53D392E">
   <Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
     <SignedInfo>
