@@ -47,9 +47,11 @@ class CancelServicesTest extends IntegrationTestCase
                 $this->fail('StatusCode 304: "Certificado revocado o caduco", do you must change the CSD?');
             }
             // do not try again if a SAT issue is **not** found
-            // 708: Fink ok cannot connect to SAT
+            // 708: Finkok cannot connect to SAT
             // 205: SAT does not have the uuid available for cancellation
-            if ('708' !== $result->statusCode() && '205' !== $document->documentStatus()) {
+            // UUID Not Found: WTF SAT, why do you don't have the UUID in your system?
+            if (! in_array($result->statusCode(), ['708', 'UUID Not Found'], true)
+                && '205' !== $document->documentStatus()) {
                 break;
             }
             // do not try again if in the loop for more than allowed
