@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace PhpCfdi\Finkok\Tests\Integration;
 
 use CfdiUtils\Cfdi;
+use DateTimeImmutable;
+use PhpCfdi\Finkok\Helpers\CancelSigner;
 use PhpCfdi\Finkok\Services\Cancel\CancelSignatureCommand;
 use PhpCfdi\Finkok\Services\Cancel\GetSatStatusCommand;
 use PhpCfdi\Finkok\Services\Cancel\GetSatStatusResult;
@@ -15,9 +17,6 @@ use PhpCfdi\Finkok\Services\Stamping\StampingResult;
 use PhpCfdi\Finkok\Services\Stamping\StampService;
 use PhpCfdi\Finkok\Tests\Factories\RandomPreCfdi;
 use PhpCfdi\Finkok\Tests\TestCase;
-use PhpCfdi\XmlCancelacion\Capsules\Cancellation as CancellationCapsule;
-use PhpCfdi\XmlCancelacion\Credentials as XmlCancelacionCredentials;
-use PhpCfdi\XmlCancelacion\XmlCancelacionHelper;
 use RuntimeException;
 
 class IntegrationTestCase extends TestCase
@@ -81,12 +80,14 @@ class IntegrationTestCase extends TestCase
         );
     }
 
-    protected function createCancelSignatureCommandFromCapsule(CancellationCapsule $capsule): CancelSignatureCommand
-    {
+    protected function createCancelSignatureCommandFromUuid(
+        string $uuid,
+        ?DateTimeImmutable $dateTime = null
+    ): CancelSignatureCommand {
         $credential = $this->createCsdCredential();
-        $helper = new XmlCancelacionHelper(XmlCancelacionCredentials::createWithPhpCfdiCredential($credential));
-        $xmlCancelacion = $helper->signCapsule($capsule);
-        return new CancelSignatureCommand($xmlCancelacion);
+        $signer = new CancelSigner(['12345678-1234-1234-1234-123456789012'], $dateTime);
+        $command = new CancelSignatureCommand($signer->sign($credential));
+        return $command;
     }
 
     protected function checkCanGetSatStatusOrFail(

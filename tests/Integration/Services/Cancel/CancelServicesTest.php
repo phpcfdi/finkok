@@ -4,13 +4,11 @@ declare(strict_types=1);
 
 namespace PhpCfdi\Finkok\Tests\Integration\Services\Cancel;
 
-use DateTimeImmutable;
 use PhpCfdi\Finkok\Definitions\ReceiptType;
 use PhpCfdi\Finkok\Services\Cancel\CancelSignatureService;
 use PhpCfdi\Finkok\Services\Cancel\GetReceiptCommand;
 use PhpCfdi\Finkok\Services\Cancel\GetReceiptService;
 use PhpCfdi\Finkok\Tests\Integration\IntegrationTestCase;
-use PhpCfdi\XmlCancelacion\Capsules\Cancellation as CancellationCapsule;
 
 class CancelServicesTest extends IntegrationTestCase
 {
@@ -31,8 +29,7 @@ class CancelServicesTest extends IntegrationTestCase
         $this->assertStringStartsWith('Cancelable ', $beforeCancelStatus->cancellable());
 
         // Create cancel signature command from capsule
-        $cancelData = new CancellationCapsule('EKU9003173C9', [$cfdi->uuid()], new DateTimeImmutable());
-        $command = $this->createCancelSignatureCommandFromCapsule($cancelData);
+        $command = $this->createCancelSignatureCommandFromUuid($cfdi->uuid());
         $service = new CancelSignatureService($settings);
 
         // evaluate if known response was 205 or 708
