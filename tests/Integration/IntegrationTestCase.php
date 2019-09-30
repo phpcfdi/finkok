@@ -85,7 +85,7 @@ class IntegrationTestCase extends TestCase
         ?DateTimeImmutable $dateTime = null
     ): CancelSignatureCommand {
         $credential = $this->createCsdCredential();
-        $signer = new CancelSigner(['12345678-1234-1234-1234-123456789012'], $dateTime);
+        $signer = new CancelSigner([$uuid], $dateTime);
         $command = new CancelSignatureCommand($signer->sign($credential));
         return $command;
     }
