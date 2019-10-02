@@ -29,15 +29,3 @@ réplica de los servicios que ofrece.
 
 - Producción: `https://facturacion.finkok.com`
 - Pruebas: `https://demo-facturacion.finkok.com`
-
-## Documentación de servicios
-
-Los servicios se encuentran en <https://wiki.finkok.com/doku.php#documentacion_de_web_services>
-
-- Timbrado: <https://wiki.finkok.com/doku.php?id=wsdl_stamp>
-    - [X] Stamp: <https://wiki.finkok.com/doku.php?id=stamp>
-    - [X] Quick_stamp: <https://wiki.finkok.com/doku.php?id=metodo_quick_stamp>
-    - [X] Stamped: <https://wiki.finkok.com/doku.php?id=stamped>
-    - [X] Query_Pending: <https://wiki.finkok.com/doku.php?id=query_pending>
-    - [ ] Sing_Stamp: <https://wiki.finkok.com/doku.php?id=sing_stamp>
-
