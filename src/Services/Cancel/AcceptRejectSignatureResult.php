@@ -17,7 +17,7 @@ class AcceptRejectSignatureResult extends AbstractResult
 
     public function __construct(stdClass $data)
     {
-        $container = 'accept_rejectResult';
+        $container = 'accept_reject_signatureResult';
         parent::__construct($data, $container);
         $aceptacion = $this->findInDescendent($data, $container, 'aceptacion');
         $rechazo = $this->findInDescendent($data, $container, 'rechazo');
