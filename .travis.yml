@@ -9,7 +9,7 @@ env:
     - FINKOK_SNID="SN03192650"
     - FINKOK_USERNAME="carlos.c.soto@flintgrp.com"
     - FINKOK_REGISTRATION_ADD_CREATE_RANDOM_RFC="1"
-    - secure: T7b+oKq2e9MT7eu9WwbtMGLvTyLxeXLND1x/sbslsoVQFDqITmEj9P/wldiRzWorR9GnJNqFeCNVKHFZiG5CK7KpbRc6hQQI6/JbBh0F+josR84MLXX7XGcLLDg2/EYnFmMV0TbIRlSOlR+RR4VQUkzcKecDR1BzIZbPIv8w8yImE6M9y/614ow0rO6zcWYitRgVo0ItlzvndYmvTSxIgaVkWCRj/p3xagQ5x+dM2w75bQMKK4fpDuy38kSmtFVfMMiqu3lsCS2HiiFMNSfozNta6ZFPUOPuOETlQ5xpUU7o/0b5s4DCGYNeE1kS9dcWkPVO5H6aDj2hmEHLshoEKQDS0ivWNzukKMalMa5YPlvkxfuffsWIQe0CVeeckjdi478MkuQkS1GY+JQZvqU5HZ7We5YQYY2XaeHjUQziCrXSyNMdcmrYF2A08ohQMzN6JSYszN5Pk84oSveWA65e3BQRJIvdqcZSLLW9t+tiwm1N/TST2prgP6sGVUJPUIvs30uwswWovAbM3SbThl76jjQkSbMaHDiL83At4G0pv21pRLyDPehrTOguejeJX3yKg988VnqqnqcysuF+w15njSQ8peXmja5Cis822CijI/+RAZekEaoWQrdThIQgKq5viyJrQkdioVJ3IzDblqXBa4aIKaE58qMOWsxO1WRXuvk=
+    - secure: "ajV+IUMfdMpreFcSb9kqC7canrZKjDaCTB00iKT+30nwaSRQLBGdvdr9he7auFgb0EkwCxggndHI9Nm7B4p8W8SJ7oE2N1rr36wy8Ae9S5caqIShs5CCmpbH9bGQbx4h0RGnjTOyrw0ApLPWFk/7qfzBbTlXiYsexdAE0fKewiiLKKNcCyajut8HQ3f1HCJN3AdCPP5V0SF/vFO4uF75oI7ryFq7lIDxjF7+yNzbu14IYZGuirmzNH/2o+KklmBEdIpKxrFt9gbtlLV1/iCB8WVTTEkPGyDm4ZXuqLpUYvrGwYV4Yk4AjqE/5faYdgePVjZTR0osWwA+5qPgfVhlRWko8aq4U4OFcyWAEau7na8tMGkQch47zGGVekdm/1PjrYTubd3cDF7BTAZY/XlBjZ3lFho95ta4zb414pybPZxn8fdB6FgnlumRZc2NWlDzwh+48EUQcUavAJLJJx9p3GsN394wEoJLUs88rSBmx2bKk4LCdGWbi7OeouTvHUK41tcoMgiHJ2eLKF8b9PnIAtfWDmJUAlBl2AvaSr5j0wt/pM9GCjaPxb/UP7ZWzexxdEmKEHMY77mp6QLiYUHtO1Q2NmA1U0lVgL+L7mWYs7zchhkyZ9diMYaUyc/xYRpTCqrcnWNmuRR3BxjeQRr6N0qQNDClj7CNhy0pv5bhzZI="
 
 matrix:
   allow_failures:
@@ -24,10 +24,7 @@ cache:
     - $HOME/.composer
 
 before_script:
-  - |
-    if [ "$FULL_BUILD_PHP_VERSION" != "$TRAVIS_PHP_VERSION" ]; then
-      phpenv config-rm xdebug.ini || true
-    fi
+  - phpenv config-rm xdebug.ini || true
   - travis_retry composer install --no-interaction --prefer-dist
 
 script:
@@ -36,9 +33,9 @@ script:
   - vendor/bin/phpcbf --colors -sp src/ tests/
   - |
     if [ "$FULL_BUILD_PHP_VERSION" != "$TRAVIS_PHP_VERSION" ]; then
-      vendor/bin/phpunit --testdox --verbose tests/Unit/
+      vendor/bin/phpunit --testdox --verbose
     else
-      vendor/bin/phpunit --testdox --verbose --coverage-clover coverage.xml tests/
+      phpdbg -qrr vendor/bin/phpunit --testdox --verbose --coverage-clover coverage.xml
     fi
   - vendor/bin/phpstan analyse --no-progress --verbose --level max src/ tests/
 
