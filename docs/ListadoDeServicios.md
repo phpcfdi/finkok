@@ -18,9 +18,9 @@ Servicios implementados de cancelación:
 
 Servicios para trabajar con solicitudes de cancelación:
 
-- [ ] `accept_reject`: permite al receptor de una factura Aceptar o Rechazar una determinada cancelación.
+- [X] `accept_reject_signature`: permite al receptor de una factura Aceptar o Rechazar una determinada cancelación.
 - [X] `get_pending`: consultar la lista de los UUID pendientes por cancelar que tiene el receptor.
-- [ ] `get_related`: obtener una lista de los UUIDs relacionados del CFDI que se está intentando cancelar.
+- [X] `get_related_signature`: obtener una lista de los UUIDs relacionados del CFDI que se está intentando cancelar.
 
 Servicios para trabajar cancelaciones con CFDI de otro PAC
 
@@ -65,7 +65,13 @@ Servicios para trabajar cancelaciones con CFDI de otro PAC
 
 ## Servicios que no se implementarán
 
-- `Sing_Stamp` (timbrado cfdi): Crea el sello y firma un CFDI, llave privada y contraseña compartida.
-- `cancel` (cancelación cfdi): Manda cancelar pero requiere envío del certificado, llave privada y contraseña compartida.
-- `cancel` (retenciones): Manda cancelar pero requiere envío del certificado, llave privada y contraseña compartida.
-- `sign_cancel` (cancelación cfdi): Manda cancelar pero requiere certificado, llave privada y contraseña compartida.
+No se implementan estos servicios porque utilizan la llave privada y contraseña de un CSD.
+
+Se han implementado los servicios análogos que permiten realizar estas tareas enviando los XML firmados.
+
+- `Sing_Stamp` (timbrado cfdi): Crea el sello y firma un CFDI con llave privada y contraseña compartida.
+- `cancel` (cancelación cfdi): Cancelación de CFDI regular.
+- `cancel` (retenciones): Cancelación de CFDI de retenciones.
+- `sign_cancel` (cancelación cfdi): Cancelación de CFDI regular con llave privada y contraseña compartida.
+- `accept_reject` (cancelación cfdi): Aceptar o rechazar la cancelación de un UUID.
+- `get_related` (cancelación cfdi): Obtiene los UUID relacionados de un UUID.
