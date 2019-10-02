@@ -32,6 +32,8 @@ composer require phpcfdi/finkok
 ```php
 <?php
 
+declare(strict_types=1);
+
 use PhpCfdi\Finkok\Finkok;
 use PhpCfdi\Finkok\FinkokEnvironment;
 use PhpCfdi\Finkok\FinkokSettings;
