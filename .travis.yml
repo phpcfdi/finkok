@@ -3,6 +3,14 @@ language: php
 # php compatibility
 php: ["7.2", "7.3", "7.4snapshot"]
 
+env:
+  global:
+    - FULL_BUILD_PHP_VERSION="7.3"
+    - FINKOK_SNID="SN03192650"
+    - FINKOK_USERNAME="carlos.c.soto@flintgrp.com"
+    - FINKOK_REGISTRATION_ADD_CREATE_RANDOM_RFC="1"
+    - secure: T7b+oKq2e9MT7eu9WwbtMGLvTyLxeXLND1x/sbslsoVQFDqITmEj9P/wldiRzWorR9GnJNqFeCNVKHFZiG5CK7KpbRc6hQQI6/JbBh0F+josR84MLXX7XGcLLDg2/EYnFmMV0TbIRlSOlR+RR4VQUkzcKecDR1BzIZbPIv8w8yImE6M9y/614ow0rO6zcWYitRgVo0ItlzvndYmvTSxIgaVkWCRj/p3xagQ5x+dM2w75bQMKK4fpDuy38kSmtFVfMMiqu3lsCS2HiiFMNSfozNta6ZFPUOPuOETlQ5xpUU7o/0b5s4DCGYNeE1kS9dcWkPVO5H6aDj2hmEHLshoEKQDS0ivWNzukKMalMa5YPlvkxfuffsWIQe0CVeeckjdi478MkuQkS1GY+JQZvqU5HZ7We5YQYY2XaeHjUQziCrXSyNMdcmrYF2A08ohQMzN6JSYszN5Pk84oSveWA65e3BQRJIvdqcZSLLW9t+tiwm1N/TST2prgP6sGVUJPUIvs30uwswWovAbM3SbThl76jjQkSbMaHDiL83At4G0pv21pRLyDPehrTOguejeJX3yKg988VnqqnqcysuF+w15njSQ8peXmja5Cis822CijI/+RAZekEaoWQrdThIQgKq5viyJrQkdioVJ3IzDblqXBa4aIKaE58qMOWsxO1WRXuvk=
+
 matrix:
   allow_failures:
     - php: "7.4snapshot"
@@ -16,15 +24,31 @@ cache:
     - $HOME/.composer
 
 before_script:
-  - phpenv config-rm xdebug.ini || true
+  - |
+    if [ "$FULL_BUILD_PHP_VERSION" != "$TRAVIS_PHP_VERSION" ]; then
+      phpenv config-rm xdebug.ini || true
+    fi
   - travis_retry composer install --no-interaction --prefer-dist
 
 script:
   - vendor/bin/phplint
   - vendor/bin/php-cs-fixer fix --verbose
   - vendor/bin/phpcbf --colors -sp src/ tests/
-  - vendor/bin/phpunit --testdox --verbose tests/Unit/
+  - |
+    if [ "$FULL_BUILD_PHP_VERSION" != "$TRAVIS_PHP_VERSION" ]; then
+      vendor/bin/phpunit --testdox --verbose tests/Unit/
+    else
+      vendor/bin/phpunit --testdox --verbose --coverage-clover coverage.xml tests/
+    fi
   - vendor/bin/phpstan analyse --no-progress --verbose --level max src/ tests/
+
+after_success:
+  - |
+    if [ "$FULL_BUILD_PHP_VERSION" == "$TRAVIS_PHP_VERSION" -a -f coverage.xml ]; then
+      wget https://scrutinizer-ci.com/ocular.phar
+      php ocular.phar code-coverage:upload --format=php-clover coverage.xml
+      echo "Scrutinizer code coverage upload status: $?"
+    fi
 
 notifications:
   email: false
