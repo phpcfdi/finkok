@@ -6,7 +6,6 @@ namespace PhpCfdi\Finkok\Tests\Integration\Services\Cancel;
 
 use PhpCfdi\Finkok\Services\Cancel\CancelSignatureService;
 use PhpCfdi\Finkok\Tests\Integration\IntegrationTestCase;
-use PhpCfdi\XmlCancelacion\Capsule;
 
 class CancelSignatureServiceTest extends IntegrationTestCase
 {
@@ -18,11 +17,8 @@ class CancelSignatureServiceTest extends IntegrationTestCase
 
     public function testCancelNonExistentUuid(): void
     {
-        $cancelData = new Capsule('EKU9003173C9', ['12345678-1234-1234-1234-123456789012']);
-        $command = $this->createCancelSignatureCommandFromCapsule($cancelData);
-
+        $command = $this->createCancelSignatureCommandFromUuid('12345678-1234-1234-1234-123456789012');
         $service = $this->createService();
-
         $result = $service->cancelSignature($command);
         $this->assertSame('UUID Not Found', $result->statusCode());
     }

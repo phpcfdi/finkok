@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PhpCfdi\Finkok\Tests;
 
 use DateTimeImmutable;
+use PhpCfdi\Credentials\Credential;
 use PhpCfdi\Finkok\FinkokEnvironment;
 use PhpCfdi\Finkok\FinkokSettings;
 use PhpCfdi\Finkok\SoapFactory;
@@ -59,6 +60,21 @@ class TestCase extends \PHPUnit\Framework\TestCase
                 );
             }
         };
+    }
+
+    protected function obtainCsdCertificatePrivateKeyData(): array
+    {
+        return [
+            'certificate' => $this->filePath('certs/EKU9003173C9.cer'),
+            'privateKey' => $this->filePath('certs/EKU9003173C9.key.pem'),
+            'passPhrase' => trim($this->fileContentPath('certs/EKU9003173C9.password.bin')),
+        ];
+    }
+
+    protected function createCsdCredential(): Credential
+    {
+        $cerKey = $this->obtainCsdCertificatePrivateKeyData();
+        return Credential::openFiles($cerKey['certificate'], $cerKey['privateKey'], $cerKey['passPhrase']);
     }
 
     public static function filePath(string $append = ''): string

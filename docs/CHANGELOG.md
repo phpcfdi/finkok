@@ -6,6 +6,23 @@
 
 Nos apegamos a [SEMVER](SEMVER.md), revisa la información para entender mejor el control de versiones.
 
+## Version 0.2.0 2019-10-02
+
+- Implementación del servicio `get_related_signature` que obtiene los UUID relacionados (descendientes y ascendentes)
+  de un determinado UUID sin compartir la llave privada.
+- Implementación del servicio `accept_reject_signature` que acepta o rechaza la solicitud de cancelación de un UUID
+  sin compartir la llave privada.
+- Se crean objetos de ayuda para generar las firmas que se requieren para el SAT.
+- Se depende ahora de [`phpcfdi/xml-cancelacion:^1.0.1`](https://github.com/phpcfdi/xml-cancelacion) y
+  [`phpcfdi/credentials:^1.0.1`](https://github.com/phpcfdi/credentials).
+- Se empieza a usar `eclipxe/micro-catalog` para los mensajes conocidos del SAT relacionados con un mensaje
+  de aceptación o rechazo de solicitud de cancelación.
+
+BC Changes:
+
+- Default parameter value for for parameter `$waitSeconds` of `GetSatStatusService#queryUntilFoundOrTime()`
+  changed from `60` to `120`. 
+
 ## Version 0.1.1 2019-09-04
 
 - Los nombres de los métodos en `Finkok` algunas veces son los mismos que en los servicios, pero en otras cambia,

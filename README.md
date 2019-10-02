@@ -32,6 +32,8 @@ composer require phpcfdi/finkok
 ```php
 <?php
 
+declare(strict_types=1);
+
 use PhpCfdi\Finkok\Finkok;
 use PhpCfdi\Finkok\FinkokEnvironment;
 use PhpCfdi\Finkok\FinkokSettings;
@@ -105,9 +107,21 @@ contiene es la respuesta de cancelación presentada al SAT.
 * `getCancelReceipt(Cancel\GetReceiptResult $command): Cancel\GetReceiptResult`
 
 Gracias a `getPendingToCancel` se puede obtener el listado de CFDI pendientes por cancelar por
-parte de un receptor. Próximanente implementaremos los métodos para aceptar y rechazar una solicitud.
+parte de un receptor.
 
 * `getPendingToCancel(Cancel\GetPendingCommand $command): Cancel\GetPendingResult`
+
+Se pueden obtener los UUID relacionados hijos (que el UUID consultado relaciona)
+y padres (que relacionan al UUID consultado) usando `getRelatedSignature`.
+Tal como el método `cancelSignature` este método requiere de un mensaje firmado.
+
+* `getRelatedSignature(Cancel\GetRelatedSignatureCommand $command): Cancel\GetRelatedSignatureResult`
+
+A su vez, se puede aceptar o rechazar una solicitud de cancelación usando `acceptRejectSignature`.
+Este método puede trabajar con varios UUID, pero Finkok recomienda que solo se realice uno a la vez.
+Tal como el método `cancelSignature` este método requiere de un mensaje firmado.
+
+* `acceptRejectSignature(Cancel\AcceptRejectSignatureCommand $command): Cancel\AcceptRejectSignatureResult`
 
 ### Utilerías y manejo de clientes
 
@@ -137,7 +151,45 @@ respectivamente.
 * `getContracts(Manifest\GetContractsCommand $command): Manifest\GetContractsResult`
 * `signContracts(Manifest\SignContractsCommand $command): Manifest\SignContractsResult`
 
-Y para firmar un contrato con XMLSEC conforme a Finkok tenemos la gran ayuda de la clase `DocumentSigner`.
+### Ayuda para firmado XML para SAT y Finkok
+
+Esta librería implementa el firmado CSD de los mensajes con el SAT para Cancelar, Obtener UUID relacionados
+y Aceptación o rechazo de solicitud de cancelación.
+Toda la lógica involucrada en la creación de los XML firmados se encuentra en la librería
+[`phpcfdi/xml-cancelacion`](https://github.com/phpcfdi/xml-cancelacion).
+
+También implementa el firmado con FIEL de *manifiestos* con Finkok.
+
+Para estas tareas se han creado los siguientes objetos que permiten realizar el firmado de la información:
+
+- `Helpers\CancelSigner`: Ayuda a firmar una solicitud de cancelación.
+- `Helpers\GetRelatedSigner`: Ayuda a firmar una solicitud de información de UUID relacionados.
+- `Helpers\AcceptRejectSigner`: Ayuda a firmar una respuesta de cancelación de 1 UUID.
+- `Helpers\DocumentSigner`: Ayuda a firmar los documentos de *manifiesto* de Finkok.
+
+A su vez, estos métodos utilizan la librería [`phpcfdi/credentials`](https://github.com/phpcfdi/credentials)
+para poder crear las firmas y la información requerida por el SAT o Finkok.
+
+Ejemplo de cómo crear una solicitud de cancelación firmada de 1 UUID con certificado y llave privada en un archivo.
+
+```php
+<?php
+declare(strict_types=1);
+
+use PhpCfdi\Credentials\Credential;
+use PhpCfdi\Finkok\Helpers\CancelSigner;
+use PhpCfdi\Finkok\Services\Cancel\CancelSignatureCommand;
+
+// el objeto con el que se van a firmar las solicitudes
+$credential = Credential::openFiles('certificate.cer', 'privateKey.pem', 'password');
+
+// el firmador de datos
+$signer = new CancelSigner(['11111111-2222-3333-4444-000000000001']);
+$signedXml = $signer->sign($credential);
+
+// el comando a pasar al método Finkok::cancelSignature o al comando CancelSignatureService
+$cancelCommand = new CancelSignatureCommand($signedXml);
+```
 
 ## Notas de implementación
 
@@ -159,8 +211,8 @@ Durante el proceso de implementación he creado diversas notas y documentos:
     - [X] [Cancelación de un CFDI recién creado](docs/issues/CancelSignatureServiceCancelarRecienCreado.md)
     - [X] [Consumir queryPending con un CFDI recién creado](docs/issues/QueryPendingServiceUuidNoExistente.md)
     - [X] [Consumir stamp para generar un doble estampado no devuelve los datos](docs/issues/StampServiceDobleEstampado.md)
-    - [ ] Falta servicio que no requiera CSD/FIEL para aceptar o rechazar una solicitud de cancelación
-    - [ ] Falta servicio que no requiera CSD/FIEL para obtener los CFDI relacionados
+    - [X] Falta servicio que no requiera CSD/FIEL para aceptar o rechazar una solicitud de cancelación
+    - [X] Falta servicio que no requiera CSD/FIEL para obtener los CFDI relacionados
 
 ## Compatilibilidad
 

@@ -13,21 +13,18 @@ composer require phpcfdi/xml-cancelacion
 ```
 
 ```php
-<?php
+<?php declare(strict_types=1);
 
-use PhpCfdi\Finkok\Definitions\CancelStorePending;use PhpCfdi\Finkok\Finkok;
+use PhpCfdi\Finkok\Finkok;
 use PhpCfdi\Finkok\FinkokEnvironment;
 use PhpCfdi\Finkok\FinkokSettings;
 use PhpCfdi\Finkok\Services\Cancel\CancelSignatureCommand;
-use PhpCfdi\XmlCancelacion\Capsule;
-use PhpCfdi\XmlCancelacion\CapsuleSigner;
-use PhpCfdi\XmlCancelacion\Credentials;
+use PhpCfdi\XmlCancelacion\XmlCancelacionHelper;
 
-$cancelXml = (new CapsuleSigner())->sign(
-    new Capsule('EKU9003173C9', ['11111111-2222-3333-4444-000000000001'], new DateTimeImmutable()),
-    new Credentials('certificado.cer', 'llaveprivada.key.pem', '12345678a')
-);
+$cancelXml = (new XmlCancelacionHelper())
+    ->setNewCredentials('EKU9003173C9.cer', 'EKU9003173C9.key.pem', '12345678a')
+    ->signCancellation('11111111-2222-3333-4444-000000000001', new DateTimeImmutable());
 
 $finkok = new Finkok(new FinkokSettings('finkok-usuario', 'finkok-password', FinkokEnvironment::makeProduction()));
-$result = $finkok->cancelSignature(new CancelSignatureCommand($cancelXml, CancelStorePending::no()));
+$result = $finkok->cancelSignature(new CancelSignatureCommand($cancelXml));
 ```

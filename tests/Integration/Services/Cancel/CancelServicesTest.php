@@ -9,7 +9,6 @@ use PhpCfdi\Finkok\Services\Cancel\CancelSignatureService;
 use PhpCfdi\Finkok\Services\Cancel\GetReceiptCommand;
 use PhpCfdi\Finkok\Services\Cancel\GetReceiptService;
 use PhpCfdi\Finkok\Tests\Integration\IntegrationTestCase;
-use PhpCfdi\XmlCancelacion\Capsule;
 
 class CancelServicesTest extends IntegrationTestCase
 {
@@ -30,7 +29,7 @@ class CancelServicesTest extends IntegrationTestCase
         $this->assertStringStartsWith('Cancelable ', $beforeCancelStatus->cancellable());
 
         // Create cancel signature command from capsule
-        $command = $this->createCancelSignatureCommandFromCapsule(new Capsule('EKU9003173C9', [$cfdi->uuid()]));
+        $command = $this->createCancelSignatureCommandFromUuid($cfdi->uuid());
         $service = new CancelSignatureService($settings);
 
         // evaluate if known response was 205 or 708

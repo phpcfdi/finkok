@@ -13,20 +13,23 @@
   La segunda opción genera mutabilidad al poderse manipular el input.
   La tercera opción es no permitir manipular en input una vez que está dentro del resultado.
 
-- Integrar la aceptación y el rechazo de una solicitud de cancelación.
-
 - Fortalecer los comandos como DownloadXml (get_xml) que el tipo solo puede ser I - CFDI o R - Retenciones
 
-- Depender de `phpcfdi/credentials` para las actividades relacionadas a firmado,
-  si es que no lo hace `robrichards/xmlseclibs`
+- Poder configurar en Travis CI la ejecución de tests de integración
+
+- AcceptRejectSigner debería permitir aceptar y/o rechazar más de 1 solo UUID a la vez
+
+- Agregar un caso para hacer una prueba positiva de AcceptRejectSignatureService.
+  Para hacer esta prueba se requieren 2 RFC (A y B), en este momento solo tenemos 1.
+  Crear un CFDI donde A es Emisor y B es Receptor que requiera autorización (por ejemplo, por monto)
+  A hace la solicitud de cancelación
+  B hace la consulta de pendientes y ve el UUID
+  B acepta la cancelación 
+  B hace la consulta de pendientes y ya no ve el UUID
+  Se consulta el estado del UUID y está cancelado
 
 ## Documentación
 
 - Servicios:
     - Servicios que reintentan por errores de Finkok
     - Parámetros added y coupon de registration add
-    
-- Cómo ejecutar las pruebas
-    - Configuración del entorno
-    - Pruebas unitarias
-    - Pruebas de integración

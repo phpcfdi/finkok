@@ -29,7 +29,11 @@ class ReportUuidResult extends AbstractResult
         }
     }
 
-    /** @var array[] */
+    /**
+     * The returned array contains an array with keys date (string) and uuid (string)
+     *
+     * @return array[]
+     */
     public function items(): array
     {
         return $this->items;

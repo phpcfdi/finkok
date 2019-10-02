@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace PhpCfdi\Finkok\Tests\Integration;
 
 use CfdiUtils\Cfdi;
+use DateTimeImmutable;
+use PhpCfdi\Finkok\Helpers\CancelSigner;
 use PhpCfdi\Finkok\Services\Cancel\CancelSignatureCommand;
 use PhpCfdi\Finkok\Services\Cancel\GetSatStatusCommand;
 use PhpCfdi\Finkok\Services\Cancel\GetSatStatusResult;
@@ -15,9 +17,6 @@ use PhpCfdi\Finkok\Services\Stamping\StampingResult;
 use PhpCfdi\Finkok\Services\Stamping\StampService;
 use PhpCfdi\Finkok\Tests\Factories\RandomPreCfdi;
 use PhpCfdi\Finkok\Tests\TestCase;
-use PhpCfdi\XmlCancelacion\Capsule;
-use PhpCfdi\XmlCancelacion\CapsuleSigner;
-use PhpCfdi\XmlCancelacion\Credentials;
 use RuntimeException;
 
 class IntegrationTestCase extends TestCase
@@ -81,24 +80,24 @@ class IntegrationTestCase extends TestCase
         );
     }
 
-    protected function createCancelSignatureCommandFromCapsule(Capsule $capsule): CancelSignatureCommand
-    {
-        $credentials = new Credentials(
-            $this->filePath('certs/EKU9003173C9.cer'),
-            $this->filePath('certs/EKU9003173C9.key.pem'),
-            trim($this->fileContentPath('certs/EKU9003173C9.password.bin'))
-        );
-        $xmlCancelacion = (new CapsuleSigner())->sign($capsule, $credentials);
-        return new CancelSignatureCommand($xmlCancelacion);
+    protected function createCancelSignatureCommandFromUuid(
+        string $uuid,
+        ?DateTimeImmutable $dateTime = null
+    ): CancelSignatureCommand {
+        $credential = $this->createCsdCredential();
+        $signer = new CancelSigner([$uuid], $dateTime);
+        $command = new CancelSignatureCommand($signer->sign($credential));
+        return $command;
     }
 
     protected function checkCanGetSatStatusOrFail(
         string $cfdiContents,
-        string $exceptionMessage = ''
+        string $exceptionMessage = '',
+        int $waitSeconds = 120
     ): GetSatStatusResult {
         $service = new GetSatStatusService($this->createSettingsFromEnvironment());
         $command = $this->createGetSatStatusCommandFromCfdiContents($cfdiContents);
-        $result = $service->queryUntilFoundOrTime($command);
+        $result = $service->queryUntilFoundOrTime($command, $waitSeconds);
         if ('No Encontrado' === $result->cfdi()) {
             if ('' === $exceptionMessage) {
                 $exceptionMessage = sprintf('Cannot found UUID %s at SAT using GetSatStatusService', $command->uuid());
