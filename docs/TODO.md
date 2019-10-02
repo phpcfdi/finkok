@@ -22,6 +22,8 @@
 
 - Poder configurar en Travis CI la ejecución de tests de integración
 
+- AcceptRejectSigner debería permitir aceptar y/o rechazar más de 1 solo UUID a la vez
+
 ## Documentación
 
 - Servicios:
