@@ -3,6 +3,8 @@
 declare(strict_types=1);
 
 // report all errors
+use Symfony\Component\Dotenv\Dotenv;
+
 error_reporting(-1);
 
 date_default_timezone_set('America/Mexico_City');
@@ -14,7 +16,7 @@ call_user_func(function (): void {
     /** @noinspection PhpFullyQualifiedNameUsageInspection */
     $envFile = __DIR__ . '/.env';
     if (file_exists($envFile) && ! is_dir($envFile)) {
-        $dotenv = new \Symfony\Component\Dotenv\Dotenv();
+        $dotenv = new Dotenv();
         $dotenv->load($envFile);
     }
 });
