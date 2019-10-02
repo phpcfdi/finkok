@@ -23,7 +23,7 @@ class CancelSignatureServiceTest extends TestCase
         $service = new CancelSignatureService($settings);
 
         $command = new CancelSignatureCommand('x-xml', CancelStorePending::yes());
-        $result = $service->CancelSignature($command);
+        $result = $service->cancelSignature($command);
         $this->assertCount(2, $result->documents());
         $this->assertSame('voucher', $result->voucher());
         $this->assertSame('LAN7008173R5', $result->rfc());
