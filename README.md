@@ -117,6 +117,12 @@ Tal como el método `cancelSignature` este método requiere de un mensaje firmad
 
 * `getRelatedSignature(Cancel\GetRelatedSignatureCommand $command): Cancel\GetRelatedSignatureResult`
 
+A su vez, se puede aceptar o rechazar una solicitud de cancelación usando `acceptRejectSignature`.
+Este método puede trabajar con varios UUID, pero Finkok recomienda que solo se realice uno a la vez.
+Tal como el método `cancelSignature` este método requiere de un mensaje firmado.
+
+* `acceptRejectSignature(Cancel\AcceptRejectSignatureCommand $command): Cancel\AcceptRejectSignatureResult`
+
 ### Utilerías y manejo de clientes
 
 Obtener la hora de Finkok (por si estás teniendo problemas de CFDI fuera de tiempo):
