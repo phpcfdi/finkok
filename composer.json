@@ -32,7 +32,8 @@
         "eclipxe/enum": "^0.2.0",
         "phpcfdi/credentials": "^1.0.1",
         "phpcfdi/xml-cancelacion": "master-dev",
-        "robrichards/xmlseclibs": "^3.0"
+        "robrichards/xmlseclibs": "^3.0",
+        "eclipxe/micro-catalog": "^0.1.0"
     },
     "require-dev": {
         "eclipxe/cfdiutils": "^2.10",

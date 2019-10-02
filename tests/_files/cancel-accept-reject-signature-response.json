@@ -1,0 +1,21 @@
+{
+  "accept_rejectResult": {
+    "aceptacion": [
+      {
+        "Acepta": {
+          "status": "1001",
+          "uuid": "12345678-1234-1234-1234-000000000001"
+        }
+      }
+    ],
+    "rechazo": [
+      {
+        "Rechaza": {
+          "status": "1002",
+          "uuid": "12345678-1234-1234-1234-000000000002"
+        }
+      }
+    ],
+    "error": "predefined-error"
+  }
+}
