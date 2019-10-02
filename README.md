@@ -107,9 +107,15 @@ contiene es la respuesta de cancelación presentada al SAT.
 * `getCancelReceipt(Cancel\GetReceiptResult $command): Cancel\GetReceiptResult`
 
 Gracias a `getPendingToCancel` se puede obtener el listado de CFDI pendientes por cancelar por
-parte de un receptor. Próximanente implementaremos los métodos para aceptar y rechazar una solicitud.
+parte de un receptor.
 
 * `getPendingToCancel(Cancel\GetPendingCommand $command): Cancel\GetPendingResult`
+
+Se pueden obtener los UUID relacionados hijos (que el UUID consultado relaciona)
+y padres (que relacionan al UUID consultado) usando `getRelatedSignature`.
+Tal como el método `cancelSignature` este método requiere de un mensaje firmado.
+
+* `getRelatedSignature(Cancel\GetRelatedSignatureCommand $command): Cancel\GetRelatedSignatureResult`
 
 ### Utilerías y manejo de clientes
 
