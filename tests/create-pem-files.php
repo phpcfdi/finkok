@@ -7,9 +7,8 @@ use PhpCfdi\Finkok\Tests\TestCase;
 
 require __DIR__ . '/bootstrap.php';
 
-$openSsl = new OpenSSL();
-
-$converter = function (string $cerFile, string $keyFile, string $passPhrase) use ($openSsl): void {
+$converter = function (string $cerFile, string $keyFile, string $passPhrase): void {
+    $openSsl = new OpenSSL();
     $cerFilePem = $cerFile . '.pem';
     $keyFilePem = $keyFile . '.pem';
     if (file_exists($cerFilePem)) {
