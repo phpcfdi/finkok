@@ -5,11 +5,12 @@ php: ["7.2", "7.3", "7.4snapshot"]
 
 env:
   global:
-    - FULL_BUILD_PHP_VERSION="7.3"
     - FINKOK_SNID="SN03192650"
     - FINKOK_USERNAME="carlos.c.soto@flintgrp.com"
     - FINKOK_REGISTRATION_ADD_CREATE_RANDOM_RFC="1"
-    - secure: "UaXK7xL96dOLk6V7BP9BbcL3BB3V6wTzGHmYGTkYKzlpJGsD5xRzDg5fNMgI1GTDd5UbrKERCz9QlJN8rlOIPsk4s6abrJvtGW5MYT0iizi8H0N7sZfR7i3pakRMi3Sa0inuwNaPk62tYilrCQ65IKpFH5v7sruYIYYIGCeYF+Fbkn85g19ZTGCJdn5ajcg8D8zo5UlNyN72XXlXutaXA0ozFCVgzcNBKGZKRwGXL6DT1qJQqK9RqUD0DyjEhF2u5X9rQgx9Jv1apiPkukadg2MXnI3kRZJLh4oWOOc/N6I2SRKnBhYg9GFghu+PEoc+F0Kz320LOJGpEP9watthG955Ki8ap4mBR0gJmxIQxrlM3PCvSN++Di84RVRApIi8DcRq6sbcsABRga5snABFDHlgWgrMy+uWxRts0ExJdaFWYLQm1ZK8+rmcsrcimSIuKzEnkPCxmj1eTt5G9fdNqSK3EsOas9IewSdW9hr2805S/dYGEVeiJRSzjtHh2GgyBT9PRJJzWDnwMb/2/f4x5gabnDYC9ObYaNgFm/YHbX8SAh2nh5HP30FBHv/ghtiOOmwfEAySBNrG4p20vTHbUDDS11YYaes2PUJYzsvsqAzI6IDnISkMRjTknZ0jeZzndhNDdiCOD/oLpVAXusb4Bsk8YOsYWJGksHUM5EICFL4="
+    - FINKOK_LOG_CALLS="0"
+    - secure: "BGouECVCbSZ2LUtUrxHFkvIB4pn+7IHk+sp5hgX/baoEgOBhzasvNI/YVGCBYCAul0q1Af8WpJmFTwKrYY/fXZGcD4E5HN7yUF0MCQx9tDZrpIgOeSdiKGxUHU/ijkunDP11R5i4PMj8VB5uptOmjJmkxxjEf/Emz/YIA71MvB2LIjQWgE5XWpNkui0/XWtFih9/ZWEesJrrnWcddSHOQxYb2u2bg9yt4gq3snmaj71Mbw9nOHQy6zxxVbeS5DtLd3oLoxlM++C2xB59iiAaZv+unFFau7BNhfqYv9MerdhARtSmSXJY5jNOatZWzZx8hZe1kqG0Ar/GsctUxIpSX6MdDbl2Ewrheqhme1lWicBssKBA3UPyxaHuiIU9vcZD67sLKo079Dr4NjqV0e2raOZTjtNKMUcvPlj2X0GYFXnVfDIVaKxChZ+CaUXXS+ROVmYYMrv7yeFqLKGW/sLqBRSZ+6j/uBcXx9e6ryL7RpKLuykHAAnXKvXuksB4puvw2EYpR/XynCw//ZzhC9wq0oFhafHzU2NecOYT3OLGMQxS+/v2gZxjzbo7HRUX0aUBQmn2bJIPRlIf0BlWoy4tUc1+GBWjebQVdZc6NYM63hi+A9r9pXUlrs5Abx7F6QVgkxDHpWSRnAvkXhvMg42zaYNz2+jXxyTW0F9wRr1FHzE="
+    - PHPUNIT_TEST_PATH=$( test -n "$FINKOK_PASSWORD" && echo -n tests/ || echo -n tests/Unit/ )
 
 matrix:
   allow_failures:
@@ -24,8 +25,6 @@ cache:
     - $HOME/.composer
 
 before_script:
-  - printenv FINKOK_PASSWORD
-  - true && false
   - phpenv config-rm xdebug.ini || true
   - travis_retry composer install --no-interaction --prefer-dist
 
@@ -33,17 +32,12 @@ script:
   - vendor/bin/phplint
   - vendor/bin/php-cs-fixer fix --verbose
   - vendor/bin/phpcbf --colors -sp src/ tests/
-  - |
-    if [ "$FULL_BUILD_PHP_VERSION" != "$TRAVIS_PHP_VERSION" ]; then
-      vendor/bin/phpunit --testdox --verbose
-    else
-      phpdbg -qrr vendor/bin/phpunit --testdox --verbose --coverage-clover coverage.xml
-    fi
+  - phpdbg -qrr vendor/bin/phpunit --testdox --verbose --coverage-clover coverage.xml $PHPUNIT_TEST_PATH
   - vendor/bin/phpstan analyse --no-progress --verbose --level max src/ tests/
 
 after_success:
   - |
-    if [ "$FULL_BUILD_PHP_VERSION" == "$TRAVIS_PHP_VERSION" -a -f coverage.xml ]; then
+    if [ -f "coverage.xml" ]; then
       wget https://scrutinizer-ci.com/ocular.phar
       php ocular.phar code-coverage:upload --format=php-clover coverage.xml
       echo "Scrutinizer code coverage upload status: $?"
