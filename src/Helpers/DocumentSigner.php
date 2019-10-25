@@ -47,6 +47,11 @@ class DocumentSigner
     public function sign(string $certificateFile, string $privateKeyFile, string $passPhrase): string
     {
         $credential = Credential::openFiles($certificateFile, $privateKeyFile, $passPhrase);
+        return $this->signUsingCredential($credential);
+    }
+
+    public function signUsingCredential(Credential $credential): string
+    {
         $document = $this->createDocumentToSign();
         $this->signDocumentUsingCredential($document, $credential);
         return $document->saveXML();
