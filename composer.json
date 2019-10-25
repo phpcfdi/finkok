@@ -33,7 +33,8 @@
         "phpcfdi/credentials": "^1.0.1",
         "phpcfdi/xml-cancelacion": "^1.0.1",
         "robrichards/xmlseclibs": "^3.0",
-        "eclipxe/micro-catalog": "^0.1.0"
+        "eclipxe/micro-catalog": "^0.1.0",
+        "phpcfdi/cfdi-expresiones": "^3.0"
     },
     "require-dev": {
         "eclipxe/cfdiutils": "^2.10",
