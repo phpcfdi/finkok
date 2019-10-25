@@ -34,18 +34,17 @@ composer require phpcfdi/finkok
 
 declare(strict_types=1);
 
-use PhpCfdi\Finkok\Finkok;
 use PhpCfdi\Finkok\FinkokEnvironment;
 use PhpCfdi\Finkok\FinkokSettings;
-use PhpCfdi\Finkok\Services\Stamping\StampingCommand;
+use PhpCfdi\Finkok\QuickFinkok;
 
 $settings = new FinkokSettings('user@host.com', 'secret', FinkokEnvironment::makeProduction());
-$finkok = new Finkok($settings);
+$finkok = new QuickFinkok($settings);
 
 // el PreCFDI a firmar, podría venir de CfdiUtils ;) $creator->asXml()
 $precfdi = file_get_contents('precfdi-to-sign.xml');
 
-$stampResult = $finkok->stamp(new StampingCommand($precfdi)); // <- aquí contactamos a Finkok
+$stampResult = $finkok->stamp($precfdi); // <- aquí contactamos a Finkok
 
 if ($stampResult->hasAlerts()) { // stamp es un objeto con propiedades nombradas
     foreach ($stampResult->alerts() as $alert) {
@@ -58,9 +57,13 @@ if ($stampResult->hasAlerts()) { // stamp es un objeto con propiedades nombradas
 
 Y también hay otros ejemplos explicados:
 
-- [Cancelación de un UUID firmada](docs/Ejemplos/CancelacionFirmada.md)
+- [Timbrado](docs/Ejemplos/Timbrado.md)
+- [Cancelación firmada de un UUID](docs/Ejemplos/CancelacionFirmada.md)
 
 Y todos los test de integración, donde se prueba la comunicación y respuestas contra la plataforma de pruebas.
+
+Se recomienda utilizar la clase `PhpCfdi\Finkok\QuickFinkok` para un uso rápido de los comandos de finkok,
+sin embargo, se pueden utilizar un modo totalmente explícito y granular por *comando*, *servicio* y *resultado*.
 
 ## Métodos implementados
 
@@ -170,7 +173,8 @@ Para estas tareas se han creado los siguientes objetos que permiten realizar el 
 A su vez, estos métodos utilizan la librería [`phpcfdi/credentials`](https://github.com/phpcfdi/credentials)
 para poder crear las firmas y la información requerida por el SAT o Finkok.
 
-Ejemplo de cómo crear una solicitud de cancelación firmada de 1 UUID con certificado y llave privada en un archivo.
+La clase `QuickFinkok` ahorra el proceso de firmar peticiones y lo hace de forma automática, sin embargo,
+se muestra el siguiente ejemplo de cancelación firmada de 1 UUID con certificado y llave privada en archivos.
 
 ```php
 <?php
@@ -229,7 +233,7 @@ y recuerda revisar el archivo de tareas pendientes [TODO][] y el [CHANGELOG][].
 
 ## Copyright and License
 
-The phpcfdi/finkok library is copyright © [PhpCfdi](https://github.com/phpcfdi)
+The phpcfdi/finkok library is copyright © [PhpCfdi](https://www.phpcfdi.com)
 and licensed for use under the MIT License (MIT). Please see [LICENSE][] for more information.
 
 [contributing]: https://github.com/phpcfdi/finkok/blob/master/CONTRIBUTING.md
@@ -244,7 +248,7 @@ and licensed for use under the MIT License (MIT). Please see [LICENSE][] for mor
 [coverage]: https://scrutinizer-ci.com/g/phpcfdi/finkok/code-structure/master/code-coverage/src
 [downloads]: https://packagist.org/packages/phpcfdi/finkok
 
-[badge-source]: http://img.shields.io/badge/source-phpcfdi/finkok-blue?style=flat-square
+[badge-source]: https://img.shields.io/badge/source-phpcfdi/finkok-blue?style=flat-square
 [badge-release]: https://img.shields.io/github/release/phpcfdi/finkok?style=flat-square
 [badge-license]: https://img.shields.io/github/license/phpcfdi/finkok?style=flat-square
 [badge-build]: https://img.shields.io/travis/phpcfdi/finkok/master?style=flat-square
