@@ -18,4 +18,13 @@ class GetContractsResultTest extends TestCase
         $this->assertSame('predefined-contract', $result->contract());
         $this->assertSame('predefined-error', $result->error());
     }
+
+    public function testCreateFromData(): void
+    {
+        $result = GetContractsResult::createFromData(true, 'x-contract', 'x-privacy', 'x-error');
+        $this->assertTrue($result->success());
+        $this->assertSame('x-privacy', $result->privacy());
+        $this->assertSame('x-contract', $result->contract());
+        $this->assertSame('x-error', $result->error());
+    }
 }

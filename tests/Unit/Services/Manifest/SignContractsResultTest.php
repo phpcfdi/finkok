@@ -16,4 +16,11 @@ class SignContractsResultTest extends TestCase
         $this->assertTrue($result->success());
         $this->assertSame('predefined-message', $result->message());
     }
+
+    public function testCreateFromData(): void
+    {
+        $result = SignContractsResult::createFromData(true, 'x-message');
+        $this->assertTrue($result->success());
+        $this->assertSame('x-message', $result->message());
+    }
 }
