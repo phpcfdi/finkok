@@ -6,6 +6,14 @@
 
 Nos apegamos a [SEMVER](SEMVER.md), revisa la información para entender mejor el control de versiones.
 
+## Version 0.2.1 2019-10-25
+
+- Se mejora la experiencia de uso de la librería con la clase `QuickFinkok`, contiene una serie de métodos
+  que crean el *comando*, el *servicio*, ejecutan el *servicio* y retornan el *resultado*.
+- Todos los métodos de `QuickFinkok` tienen bloques de ayuda con ligas a la documentación oficial de Finkok.
+- Se agrega un objeto de ayuda `GetSatStatusExtractor` que utiliza `phpcfdi/cfdi-expresiones` para poder obtener
+  los datos necesarios para consultar el estado SAT de de un CFDI 3.3, CFDI 3.2 o RET 1.0.
+
 ## Version 0.2.0 2019-10-02
 
 - Implementación del servicio `get_related_signature` que obtiene los UUID relacionados (descendientes y ascendentes)

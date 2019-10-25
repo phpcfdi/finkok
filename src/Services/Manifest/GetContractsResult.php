@@ -14,6 +14,18 @@ class GetContractsResult extends AbstractResult
         parent::__construct($data, 'get_contractsResult');
     }
 
+    public static function createFromData(bool $success, string $contract, string $privacy, string $error): self
+    {
+        return new self((object) [
+            'get_contractsResult' => (object) [
+                'success' => $success,
+                'contract' => $contract,
+                'privacy' => $privacy,
+                'error' => $error,
+            ],
+        ]);
+    }
+
     public function success(): bool
     {
         return boolval($this->get('success'));
