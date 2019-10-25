@@ -370,9 +370,8 @@ EOT;
                 $this->identicalTo('x-email')
             );
         $finkok->expects($this->once())
-            ->method('customerSendContracts')->willReturn(
-                $signContractsResult
-            )->with(
+            ->method('customerSendContracts')->willReturn($signContractsResult)
+            ->with(
                 $this->identicalTo('x-snid'),
                 $this->stringContains($getContractsResult->privacy()),
                 $this->stringContains($getContractsResult->contract())
