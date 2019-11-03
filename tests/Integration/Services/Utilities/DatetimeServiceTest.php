@@ -6,11 +6,27 @@ namespace PhpCfdi\Finkok\Tests\Integration\Services\Utilities;
 
 use PhpCfdi\Finkok\FinkokEnvironment;
 use PhpCfdi\Finkok\FinkokSettings;
+use PhpCfdi\Finkok\QuickFinkok;
 use PhpCfdi\Finkok\Services\Utilities\DatetimeService;
 use PhpCfdi\Finkok\Tests\Integration\IntegrationTestCase;
 
 class DatetimeServiceTest extends IntegrationTestCase
 {
+    public function testTwoWellKnownDifferentPostalCodes(): void
+    {
+        $postalCodeCancun = '77500';
+        $postalCodeTijuana = '22000';
+        $settings = $this->createSettingsFromEnvironment();
+        $finkok = new QuickFinkok($settings);
+        $tsCancun = strtotime($finkok->serversDateTime($postalCodeCancun)->datetime());
+        $tsTijuana = strtotime($finkok->serversDateTime($postalCodeTijuana)->datetime());
+        $this->assertGreaterThanOrEqual(
+            3600,
+            $tsCancun - $tsTijuana + 1,
+            'Cancún and Tijuana must always have a different time at least for 1 hour'
+        );
+    }
+
     public function testConsumeDateTimeService(): void
     {
         $settings = $this->createSettingsFromEnvironment();

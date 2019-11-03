@@ -26,6 +26,7 @@ use PhpCfdi\Finkok\Services\Utilities;
  * @method Cancel\GetRelatedSignatureResult getRelatedSignature(Cancel\GetRelatedSignatureCommand $command)
  * @method Cancel\AcceptRejectSignatureResult acceptRejectSignature(Cancel\AcceptRejectSignatureCommand $command)
  * @method Utilities\DatetimeResult datetime()
+ * @method Utilities\DatetimeResult datetimePostalCode(Utilities\DatetimeCommand $command)
  * @method Utilities\DownloadXmlResult downloadXml(Utilities\DownloadXmlCommand $command)
  * @method Utilities\ReportCreditResult reportCredit(Utilities\ReportCreditCommand $command)
  * @method Utilities\ReportTotalResult reportTotal(Utilities\ReportTotalCommand $command)
@@ -61,6 +62,7 @@ class Finkok
             Cancel\AcceptRejectSignatureCommand::class,
         ],
         'datetime' => [Utilities\DatetimeService::class, ''],
+        'datetimePostalCode' => [Utilities\DatetimeService::class, Utilities\DatetimeCommand::class, 'datetime'],
         'downloadXml' => [Utilities\DownloadXmlService::class, Utilities\DownloadXmlCommand::class],
         'reportCredit' => [Utilities\ReportCreditService::class, Utilities\ReportCreditCommand::class],
         'reportTotal' => [Utilities\ReportTotalService::class, Utilities\ReportTotalCommand::class],

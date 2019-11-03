@@ -247,13 +247,15 @@ class QuickFinkok
     /**
      * Obtener la fecha exacta de los servidores de timbrado para realizar el XML del CFDI
      *
+     * @param string $postalCode Si está vacío se utiliza el horario de America/Mexico_City
      * @return Utilities\DatetimeResult
      * @see https://wiki.finkok.com/doku.php?id=datetime
      */
-    public function serversDateTime(): Utilities\DatetimeResult
+    public function serversDateTime(string $postalCode = ''): Utilities\DatetimeResult
     {
+        $command = new Utilities\DatetimeCommand($postalCode);
         $service = new Utilities\DatetimeService($this->settings());
-        return $service->datetime();
+        return $service->datetime($command);
     }
 
     /**
