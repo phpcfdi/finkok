@@ -12,7 +12,7 @@ use PhpCfdi\Finkok\SoapFactory;
 use Psr\Log\AbstractLogger;
 use Psr\Log\LoggerInterface;
 
-class TestCase extends \PHPUnit\Framework\TestCase
+abstract class TestCase extends \PHPUnit\Framework\TestCase
 {
     public function createSettingsFromEnvironment(SoapFactory $soapFactory = null): FinkokSettings
     {

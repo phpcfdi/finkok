@@ -19,7 +19,7 @@ use PhpCfdi\Finkok\Tests\Factories\RandomPreCfdi;
 use PhpCfdi\Finkok\Tests\TestCase;
 use RuntimeException;
 
-class IntegrationTestCase extends TestCase
+abstract class IntegrationTestCase extends TestCase
 {
     /** @var array */
     protected static $statics = [];
