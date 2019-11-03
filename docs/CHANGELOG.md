@@ -19,6 +19,7 @@ Nos apegamos a [SEMVER](SEMVER.md), revisa la información para entender mejor e
   de `America/Mexico_City`. La hora devuelta no tiene especificación de zona horaria, es decir, no especifica
   cuánto tiempo hay de diferencia entre la hora devuelta y GMT.
 - Se utiliza PHPUnit versión `8.4`, desde `8.4.2` las clases de testeo que se extienden sean abstractas.
+- Se elimina la dependencia de `overtrue/phplint`.
 
 ## Version 0.2.1 2019-10-25
 
