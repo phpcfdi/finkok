@@ -6,6 +6,20 @@
 
 Nos apegamos a [SEMVER](SEMVER.md), revisa la información para entender mejor el control de versiones.
 
+## Cambios para la siguiente versión que rompa compatibilidad
+
+- `PhpCfdi\Finkok\Services\Utilities\DatetimeService::datetime(DatetimeCommand $command = null)`
+  no debe usar la opción de nulo, fue puesta para compatibilidad con versiones previas a `0.2.2`.
+  No así el las fachadas `Finkok` y `QuickFinkok`.
+
+## Version 0.2.2 2019-11-02
+
+- Se agrega el soporte del servicio que obtiene la hora de los servidores de Finkok usando un código postal.
+  Si no se especifica un código postal entonces se usa el predeterminado que corresponde a la zona horaria
+  de `America/Mexico_City`. La hora devuelta no tiene especificación de zona horaria, es decir, no especifica
+  cuánto tiempo hay de diferencia entre la hora devuelta y GMT.
+- Se utiliza PHPUnit versión `8.4`, desde `8.4.2` las clases de testeo que se extienden sean abstractas.
+
 ## Version 0.2.1 2019-10-25
 
 - Se mejora la experiencia de uso de la librería con la clase `QuickFinkok`, contiene una serie de métodos
