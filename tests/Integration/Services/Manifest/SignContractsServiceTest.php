@@ -33,8 +33,8 @@ class SignContractsServiceTest extends IntegrationTestCase
         $srvGetContracts = new GetContractsService($settings);
         $resGetContracts = $srvGetContracts->obtainContracts($cmdGetContracts);
 
-        $privacy = strval(base64_decode($resGetContracts->privacy()));
-        $contract = strval(base64_decode($resGetContracts->contract()));
+        $privacy = $resGetContracts->privacy();
+        $contract = $resGetContracts->contract();
 
         $signDate = new DateTimeImmutable('now');
         $privacyDocument = new DocumentSigner($rfc, $signDate, $privacy);
