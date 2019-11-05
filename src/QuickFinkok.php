@@ -9,6 +9,7 @@ use PhpCfdi\Credentials\Credential;
 use PhpCfdi\Finkok\Definitions\CancelAnswer;
 use PhpCfdi\Finkok\Definitions\ReceiptType;
 use PhpCfdi\Finkok\Definitions\RfcRole;
+use PhpCfdi\Finkok\Definitions\SignedDocumentFormat;
 use PhpCfdi\Finkok\Services\Cancel;
 use PhpCfdi\Finkok\Services\Manifest;
 use PhpCfdi\Finkok\Services\Registration;
@@ -446,5 +447,24 @@ class QuickFinkok
         $privacy = (new Helpers\DocumentSigner($rfc, $signedOn, $documents->privacy()))->signUsingCredential($fiel);
         $contract = (new Helpers\DocumentSigner($rfc, $signedOn, $documents->contract()))->signUsingCredential($fiel);
         return $this->customerSendContracts($snid, $privacy, $contract);
+    }
+
+    /**
+     * Obtiene los documentos legales (aviso de privacidad y contrato) previamente firmados con el SNID y RFC
+     *
+     * @param string $snid
+     * @param string $rfc
+     * @param SignedDocumentFormat|null $format
+     * @return Manifest\GetSignedContractsResult
+     */
+    public function customerGetSignedContracts(
+        string $snid,
+        string $rfc,
+        SignedDocumentFormat $format = null
+    ): Manifest\GetSignedContractsResult {
+        $format = $format ?? SignedDocumentFormat::xml();
+        $command = new Manifest\GetSignedContractsCommand($snid, $rfc, $format);
+        $service = new Manifest\GetSignedContractsService($this->settings());
+        return $service->getSignedContracts($command);
     }
 }
