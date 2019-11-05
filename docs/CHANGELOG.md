@@ -12,6 +12,17 @@ Nos apegamos a [SEMVER](SEMVER.md), revisa la información para entender mejor e
   no debe usar la opción de nulo, fue puesta para compatibilidad con versiones previas a `0.2.2`.
   No así el las fachadas `Finkok` y `QuickFinkok`.
 
+## Version 0.2.3 2019-11-05
+
+- El método `QuickFinkok::customerSignAndSendContracts` no estaba funcionando correctamente porque asumía
+  que el contenido de obtener los contratos estaba en texto plano, pero estaba codificado en `base64`.
+- La respuesta de obtener contratos automáticamente se decodifica de `base64` a texto plano.
+    - Esto afecta a los métodos `GetContractsResult::contract()` y `GetContractsResult::privacy()`
+- Se agrega el soporte del servicio para obtener el manifiesto previamente firmado a partir del SNID y el RFC.
+    - Servicio: `PhpCfdi\Finkok\Services\Manifest\GetSignedContractsService`
+    - Helper `QuickFinkok`: `QuickFinkok::customerGetSignedContracts()`
+    - Helper `Finkok`: `Finkok::getSignedContracts()`
+
 ## Version 0.2.2 2019-11-02
 
 - Se agrega el soporte del servicio que obtiene la hora de los servidores de Finkok usando un código postal.
