@@ -22,6 +22,8 @@ Nos apegamos a [SEMVER](SEMVER.md), revisa la información para entender mejor e
     - Servicio: `PhpCfdi\Finkok\Services\Manifest\GetSignedContractsService`
     - Helper `QuickFinkok`: `QuickFinkok::customerGetSignedContracts()`
     - Helper `Finkok`: `Finkok::getSignedContracts()`
+- Se actualiza `robrichards/xmlseclibs` a la versión 3.0.4 por el problema de seguridad CVE-2019-3465,
+  que aunque no se usa para este propósito se evita depender de esta versión.
 
 ## Version 0.2.2 2019-11-02
 
