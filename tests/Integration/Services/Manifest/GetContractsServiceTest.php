@@ -33,8 +33,8 @@ class GetContractsServiceTest extends IntegrationTestCase
         $this->assertNotEmpty($result->contract());
         $this->assertEmpty($result->error());
 
-        $privacy = strval(base64_decode($result->privacy()));
-        $contract = strval(base64_decode($result->contract()));
+        $privacy = $result->privacy();
+        $contract = $result->contract();
 
         $this->assertNotEmpty($privacy, 'Cannot decode privacy statement');
         $this->assertNotEmpty($contract, 'Cannot decode contract statement');

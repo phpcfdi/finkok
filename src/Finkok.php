@@ -33,6 +33,7 @@ use PhpCfdi\Finkok\Services\Utilities;
  * @method Utilities\ReportUuidResult reportUuid(Utilities\ReportUuidCommand $command)
  * @method Manifest\GetContractsResult getContracts(Manifest\GetContractsCommand $command)
  * @method Manifest\SignContractsResult signContracts(Manifest\SignContractsCommand $command)
+ * @method Manifest\GetSignedContractsResult getSignedContracts(Manifest\GetSignedContractsCommand $command)
  * @method Registration\AddResult registrationAdd(Registration\AddCommand $command)
  * @method Registration\AssignResult registrationAssign(Registration\AssignCommand $command)
  * @method Registration\EditResult registrationEdit(Registration\EditCommand $command)
@@ -72,6 +73,10 @@ class Finkok
             Manifest\SignContractsService::class,
             Manifest\SignContractsCommand::class,
             'sendSignedContracts',
+        ],
+        'getSignedContracts' => [
+            Manifest\GetSignedContractsService::class,
+            Manifest\GetSignedContractsCommand::class,
         ],
     ];
 

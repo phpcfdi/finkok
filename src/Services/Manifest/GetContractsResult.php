@@ -19,8 +19,8 @@ class GetContractsResult extends AbstractResult
         return new self((object) [
             'get_contractsResult' => (object) [
                 'success' => $success,
-                'contract' => $contract,
-                'privacy' => $privacy,
+                'contract' => base64_encode($contract),
+                'privacy' => base64_encode($privacy),
                 'error' => $error,
             ],
         ]);
@@ -33,12 +33,12 @@ class GetContractsResult extends AbstractResult
 
     public function contract(): string
     {
-        return strval($this->get('contract'));
+        return base64_decode(strval($this->get('contract')), true) ?: '';
     }
 
     public function privacy(): string
     {
-        return strval($this->get('privacy'));
+        return base64_decode(strval($this->get('privacy')), true) ?: '';
     }
 
     public function error(): string

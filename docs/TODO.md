@@ -2,8 +2,6 @@
 
 - Los reportes que devuelven una cuenta deberían retornar un entero
 
-- Al usar get_contracts, decodificar el base64
-
 - La forma en que están hechos los objetos result es mezclada, algunas propiedades las obtiene cuando se solicitan
   y otras propiedades las obtiene en la creación del objeto. El problema es que se guarda la referencia al objeto
   stdClass de entrada, por lo que podría ser manipulado externamente y devolver resultados diferentes.
