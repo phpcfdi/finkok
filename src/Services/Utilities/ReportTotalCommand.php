@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PhpCfdi\Finkok\Services\Utilities;
 
-use DateTime;
+use DateTimeImmutable;
 use LogicException;
 
 class ReportTotalCommand
@@ -43,8 +43,9 @@ class ReportTotalCommand
     ) {
         $endYear = $endYear ?: $startYear;
         $endMonth = $endMonth ?: $startMonth;
-        $today = new DateTime('today');
+        $today = $this->today();
         $currentYear = intval($today->format('Y'));
+        $currentPeriod = sprintf('%04d-%02d', $currentYear, intval($today->format('m')));
 
         $this->rfc = $rfc;
         $this->type = $type;
@@ -74,7 +75,7 @@ class ReportTotalCommand
             );
         }
 
-        if ($this->startPeriod < $this->endPeriod && $this->endPeriod >= $today->format('Y-m')) {
+        if ($this->startPeriod < $this->endPeriod && $this->endPeriod >= $currentPeriod) {
             throw new LogicException(sprintf('Cannot combine multiple past months with current/future months'));
         }
     }
@@ -106,13 +107,18 @@ class ReportTotalCommand
 
     public function endString(): string
     {
-        $date = (new DateTime())->setDate($this->endYear, $this->endMonth, 1);
-        $today = new DateTime('today');
+        $date = new DateTimeImmutable(sprintf('%04d-%02d-01', $this->endYear, $this->endMonth));
+        $today = $this->today();
         if ($this->endPeriod() === $today->format('Y-m')) {
             $date = $today;
         } else {
-            $date->modify('+ 1 month');
+            $date = $date->modify('+ 1 month');
         }
         return sprintf('%sT00:00:00', $date->format('Y-m-d'));
+    }
+
+    protected function today(): DateTimeImmutable
+    {
+        return new DateTimeImmutable('today');
     }
 }

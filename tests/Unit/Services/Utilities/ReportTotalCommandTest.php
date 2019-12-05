@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PhpCfdi\Finkok\Tests\Unit\Services\Utilities;
 
 use DateTime;
+use DateTimeImmutable;
 use LogicException;
 use PhpCfdi\Finkok\Services\Utilities\ReportTotalCommand;
 use PhpCfdi\Finkok\Tests\TestCase;
@@ -136,9 +137,32 @@ class ReportTotalCommandTest extends TestCase
 
     public function testCreateWithStartPeriodInPastAndEndPeriodInFuture(): void
     {
-        $today = new DateTime('today + 1 month');
+        $today = new DateTimeImmutable('2019-12-05T12:13:14');
+        $year = intval($today->format('Y'));
+        $month = intval($today->format('m'));
         $this->expectException(LogicException::class);
         $this->expectExceptionMessage('Cannot combine multiple past months with current/future months');
-        new ReportTotalCommand('x-rfc', 'I', 2019, 1, intval($today->format('Y')), intval($today->format('m')));
+        new class($today, 'x-rfc', 'I', 2019, 1, $year, $month) extends ReportTotalCommand {
+            /** @var DateTimeImmutable */
+            private $today;
+
+            public function __construct(
+                DateTimeImmutable $today,
+                string $rfc,
+                string $type,
+                int $startYear,
+                int $startMonth,
+                int $endYear = 0,
+                int $endMonth = 0
+            ) {
+                $this->today = $today;
+                parent::__construct($rfc, $type, $startYear, $startMonth, $endYear, $endMonth);
+            }
+
+            protected function today(): DateTimeImmutable
+            {
+                return $this->today;
+            }
+        };
     }
 }

@@ -12,6 +12,17 @@ Nos apegamos a [SEMVER](SEMVER.md), revisa la información para entender mejor e
   no debe usar la opción de nulo, fue puesta para compatibilidad con versiones previas a `0.2.2`.
   No así el las fachadas `Finkok` y `QuickFinkok`.
 
+## Version 0.2.4 2019-12-05
+
+- Se modifica el test porque en diciembre no se podía crear el escenario para validar la excepción en
+  la creación del comando `ReportTotalCommand`. De todas formas se lanzaba una excepción, pero no la esperada.
+- Se dotó a `ReportTotalCommand` de un método para devolver la fecha actual, para poder testear.
+- `ReportTotalCommand` usa `DateTimeImmutable` en lugar de `DateTime` (cambio interno).
+- Se cambia la dependencia de desarrollo para usar `symfony/dotenv` versión `^5.0`.
+- Se modificó la carga del archivo de environment porque `symfony/dotenv:5.x` no usa `putenv` por defecto.
+- Travis-CI: Se cambió la versión de PHP `7.4snapshot` a `7.4`.
+- Scrutinizer-CI: Se agregaron los comandos para actualizar composer e instalar paquetes en lugar de ser inferidos.
+
 ## Version 0.2.3 2019-11-05
 
 - El método `QuickFinkok::customerSignAndSendContracts` no estaba funcionando correctamente porque asumía
