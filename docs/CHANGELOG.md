@@ -21,6 +21,7 @@ Nos apegamos a [SEMVER](SEMVER.md), revisa la información para entender mejor e
 - Se cambia la dependencia de desarrollo para usar `symfony/dotenv` versión `^5.0`.
 - Se modificó la carga del archivo de environment porque `symfony/dotenv:5.x` no usa `putenv` por defecto.
 - Travis-CI: Se cambió la versión de PHP `7.4snapshot` a `7.4`.
+- Scrutinizer-CI: Se agregaron los comandos para actualizar composer e instalar paquetes en lugar de ser inferidos.
 
 ## Version 0.2.3 2019-11-05
 
