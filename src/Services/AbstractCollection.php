@@ -10,13 +10,22 @@ use Countable;
 use IteratorAggregate;
 use stdClass;
 
+/**
+ * @template TItem of object
+ * @implements IteratorAggregate<int, TItem>
+ */
 abstract class AbstractCollection implements Countable, IteratorAggregate
 {
+    /**
+     * @param stdClass $content
+     * @return TItem
+     */
     abstract protected function createItemFromStdClass(stdClass $content): object;
 
-    /** @var ArrayObject */
+    /** @var ArrayObject<int, TItem> */
     protected $collection;
 
+    /** @param array<stdClass> $collection */
     public function __construct(array $collection)
     {
         $this->collection = new ArrayObject();
@@ -25,6 +34,10 @@ abstract class AbstractCollection implements Countable, IteratorAggregate
         }
     }
 
+    /**
+     * @param int $index
+     * @return TItem
+     */
     public function get(int $index): object
     {
         if (! isset($this->collection[$index])) {
@@ -38,11 +51,13 @@ abstract class AbstractCollection implements Countable, IteratorAggregate
         return $this->collection->count();
     }
 
+    /** @return TItem */
     public function first(): object
     {
         return $this->get(0);
     }
 
+    /** @return ArrayIterator<int, TItem> */
     public function getIterator(): ArrayIterator
     {
         return $this->collection->getIterator();

@@ -12,6 +12,7 @@ use stdClass;
  * @method RelatedItem get(int $index)
  * @method RelatedItem first()
  * @method ArrayIterator|RelatedItem[] getIterator()
+ * @extends AbstractCollection<RelatedItem>
  */
 class RelatedItems extends AbstractCollection
 {

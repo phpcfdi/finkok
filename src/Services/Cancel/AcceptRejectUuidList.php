@@ -14,6 +14,7 @@ use stdClass;
  * @method AcceptRejectUuidItem get(int $index)
  * @method AcceptRejectUuidItem first()
  * @method ArrayIterator|AcceptRejectUuidItem[] getIterator()
+ * @extends AbstractCollection<AcceptRejectUuidItem>
  */
 class AcceptRejectUuidList extends AbstractCollection
 {

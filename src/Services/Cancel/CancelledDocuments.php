@@ -12,6 +12,7 @@ use stdClass;
  * @method CancelledDocument get(int $index)
  * @method CancelledDocument first()
  * @method ArrayIterator|CancelledDocument[] getIterator()
+ * @extends AbstractCollection<CancelledDocument>
  */
 class CancelledDocuments extends AbstractCollection
 {

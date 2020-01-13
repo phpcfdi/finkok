@@ -13,6 +13,7 @@ use stdClass;
  * @method Customer get(int $index)
  * @method Customer first()
  * @method ArrayIterator|Customer[] getIterator()
+ * @extends AbstractCollection<Customer>
  */
 class Customers extends AbstractCollection
 {

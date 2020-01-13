@@ -12,6 +12,7 @@ use stdClass;
  * @method StampingAlert get(int $index)
  * @method StampingAlert first()
  * @method ArrayIterator|StampingAlert[] getIterator()
+ * @extends AbstractCollection<StampingAlert>
  */
 class StampingAlerts extends AbstractCollection
 {
