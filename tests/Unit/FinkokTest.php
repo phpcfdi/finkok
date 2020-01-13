@@ -91,7 +91,7 @@ class FinkokTest extends TestCase
 
     public function testMagicCallWithInvalidParameter(): void
     {
-        /** @var StampingCommand $result */
+        /** @var StampingCommand&MockObject $command */
         $command = $this->createMock(StampingCommand::class);
         /** @var FinkokSettings&MockObject $settings */
         $settings = $this->createMock(FinkokSettings::class);
@@ -134,7 +134,7 @@ class FinkokTest extends TestCase
         $result = $this->createMock(GetContractsResult::class);
         /** @var GetContractsCommand $command */
         $command = $this->createMock(GetContractsCommand::class);
-        /** @var GetContractsService $command */
+        /** @var GetContractsService&MockObject $service */
         $service = $this->createMock(GetContractsService::class);
         $service->expects($this->once())->method('obtainContracts')->willReturn($result);
 
