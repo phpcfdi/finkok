@@ -41,9 +41,10 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
         return $settings;
     }
 
-    protected function createLoggerPrinter($outputFile = 'php://stdout'): LoggerInterface
+    protected function createLoggerPrinter(string $outputFile = 'php://stdout'): LoggerInterface
     {
         return new class($outputFile) extends AbstractLogger implements LoggerInterface {
+            /** @var string */
             public $outputFile;
 
             public function __construct(string $outputFile)

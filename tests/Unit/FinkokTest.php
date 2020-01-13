@@ -162,7 +162,7 @@ class FinkokTest extends TestCase
                 return parent::SERVICES_MAP;
             }
 
-            public function exposeCreateService(string $method)
+            public function exposeCreateService(string $method): object
             {
                 return $this->createService($method);
             }

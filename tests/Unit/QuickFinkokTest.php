@@ -43,6 +43,10 @@ class QuickFinkokTest extends TestCase
         );
     }
 
+    /**
+     * @param string $key
+     * @return mixed
+     */
     private function obtainParameterFromLatestCall(string $key)
     {
         return $this->soapFactory->latestSoapCaller->latestCallParameters[$key] ?? null;

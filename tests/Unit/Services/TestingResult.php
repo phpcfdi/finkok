@@ -8,7 +8,11 @@ use PhpCfdi\Finkok\Services\AbstractResult;
 
 class TestingResult extends AbstractResult
 {
-    public function exposeFindInData(...$search)
+    /**
+     * @param string ...$search
+     * @return mixed
+     */
+    public function exposeFindInData(string ...$search)
     {
         return $this->findInDescendent($this->data, ...$search);
     }
