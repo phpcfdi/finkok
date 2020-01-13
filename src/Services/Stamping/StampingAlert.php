@@ -61,6 +61,7 @@ class StampingAlert
         return $this->get('FechaRegistro');
     }
 
+    /** @return array<mixed> */
     public function values(): array
     {
         return (array) $this->data;

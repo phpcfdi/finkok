@@ -59,6 +59,7 @@ class Customer
         return $this->type;
     }
 
+    /** @return array<mixed> */
     public function values(): array
     {
         return (array) $this->data;

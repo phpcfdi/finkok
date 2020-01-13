@@ -16,7 +16,7 @@ class GetSatStatusExtractor
     /**
      * GetSatStatusExtractor constructor.
      *
-     * @param array $expressionData
+     * @param array<mixed> $expressionData
      */
     public function __construct(array $expressionData)
     {
