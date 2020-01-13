@@ -14,13 +14,11 @@ class FinkokEnvironment
         $this->environment = $environment;
     }
 
-    /** @return static */
     public static function makeDevelopment(): self
     {
         return new self(Definitions\Environment::development());
     }
 
-    /** @return static */
     public static function makeProduction(): self
     {
         return new self(Definitions\Environment::production());
