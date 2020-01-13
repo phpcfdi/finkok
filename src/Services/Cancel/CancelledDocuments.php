@@ -22,7 +22,7 @@ class CancelledDocuments extends AbstractCollection
 
     public function find(string $uuid): ?CancelledDocument
     {
-        foreach ($this->collection as $document) {
+        foreach ($this->getIterator() as $document) {
             if ($uuid === $document->uuid()) {
                 return $document;
             }

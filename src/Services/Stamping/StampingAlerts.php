@@ -22,8 +22,7 @@ class StampingAlerts extends AbstractCollection
 
     public function findByErrorCode(string $errorCode): ?StampingAlert
     {
-        /** @var StampingAlert $alert */
-        foreach ($this->collection as $alert) {
+        foreach ($this->getIterator() as $alert) {
             if ($errorCode === $alert->errorCode()) {
                 return $alert;
             }
