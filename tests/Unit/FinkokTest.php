@@ -157,6 +157,7 @@ class FinkokTest extends TestCase
         /** @var FinkokSettings&MockObject $settings */
         $settings = $this->createMock(FinkokSettings::class);
         $exposer = new class($settings) extends Finkok {
+            /** @return array<array<mixed>> */
             public function exposeServicesMap(): array
             {
                 return parent::SERVICES_MAP;

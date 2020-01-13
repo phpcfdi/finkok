@@ -32,6 +32,10 @@ class QuickFinkokTest extends TestCase
         return $finkok;
     }
 
+    /**
+     * @param string $serviceName
+     * @param array<mixed> $expectedParameters
+     */
     private function performTestOnLatestCall(string $serviceName, array $expectedParameters = []): void
     {
         $lastCall = $this->soapFactory->latestSoapCaller;

@@ -52,6 +52,11 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
                 $this->outputFile = $outputFile;
             }
 
+            /**
+             * @param mixed $level
+             * @param string $message
+             * @param array<mixed> $context
+             */
             public function log($level, $message, array $context = []): void
             {
                 file_put_contents(
@@ -63,6 +68,7 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
         };
     }
 
+    /** @return array<string, string> */
     protected function obtainCsdCertificatePrivateKeyData(): array
     {
         return [

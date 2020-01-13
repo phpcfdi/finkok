@@ -21,7 +21,7 @@ use RuntimeException;
 
 abstract class IntegrationTestCase extends TestCase
 {
-    /** @var array */
+    /** @var array<mixed> */
     protected static $statics = [];
 
     public function newStampingCommand(): StampingCommand
