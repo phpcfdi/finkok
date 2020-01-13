@@ -28,7 +28,7 @@ class GetSatStatusExtractor
         ];
     }
 
-    public static function fromXmlDocument(DOMDocument $document)
+    public static function fromXmlDocument(DOMDocument $document): self
     {
         $discoverer = new DiscoverExtractor();
         return new self($discoverer->obtain($document));
