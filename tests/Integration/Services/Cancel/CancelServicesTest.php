@@ -71,10 +71,19 @@ class CancelServicesTest extends IntegrationTestCase
         $this->assertNotEmpty($result->date(), 'Finkok did not return the cancellation date');
         $this->assertSame('EKU9003173C9', $result->rfc(), 'Finkok did not return expected RFC');
 
-        // Consume GetReceiptService
+        // Consume GetReceiptService and assert that the response is the same (as XML and as string)
         $receipt = (new GetReceiptService($settings))->download(
             new GetReceiptCommand('EKU9003173C9', $cfdi->uuid(), ReceiptType::cancellation())
         );
-        $this->assertSame($result->voucher(), $receipt->receipt());
+        $this->assertXmlStringEqualsXmlString(
+            $result->voucher(),
+            $receipt->receipt(),
+            'El acuse que proviene del método get_receipt no coincide con el acuse de la cancelación'
+        );
+        $this->assertSame(
+            $result->voucher(),
+            $receipt->receipt(),
+            'El acuse que proviene del método get_receipt no es exactamente el mismo que el acuse de la cancelación'
+        );
     }
 }
