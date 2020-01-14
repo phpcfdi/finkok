@@ -1,5 +1,8 @@
 # phpcfdi/finkok To Do List
 
+- Revisar el estado del ticket https://support.finkok.com/support/tickets/41438 y modificar el test
+  `DownloadXmlServiceTest::testStampAndConsumeStampedImmediately`.
+
 - Agregar la integración de CFDI de retenciones y pagos
 
 - Los reportes que devuelven una cuenta deberían retornar un entero
