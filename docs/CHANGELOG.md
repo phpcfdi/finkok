@@ -18,6 +18,7 @@ Nos apegamos a [SEMVER](SEMVER.md), revisa la información para entender mejor e
 - Se agrega el método `StampingResult::faultCode()` para obtener la respuesta en `faultcode`.
 - Se renombra el método `StampingResult::faultstring()` a `StampingResult::faultString()`.
 - Se agrega el servicio de retenciones (para CFDI de retenciones e información de pagos).
+- Se crean fábricas básicas de CFDI RET para poder testear.
 
 ## Version 0.2.5 2020-01-14
 
