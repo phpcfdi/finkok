@@ -29,6 +29,11 @@ class SoapFactory implements LoggerAwareInterface
         ]);
     }
 
+    /**
+     * @param string $wsdlLocation
+     * @param array<mixed> $defaultOptions
+     * @return SoapCaller
+     */
     public function createSoapCaller(string $wsdlLocation, array $defaultOptions): SoapCaller
     {
         $caller = new SoapCaller($this->createSoapClient($wsdlLocation), $defaultOptions);

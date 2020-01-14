@@ -18,7 +18,7 @@ class EditServiceTest extends RegistrationIntegrationTestCase
 
     public function testConsumeEditServiceUsingExistentRfc(): void
     {
-        $rfc = 'XDEL000101XX1';
+        $rfc = self::CUSTOMER_RFC;
         $service = $this->createService();
 
         if (! $this->findCustomerOrFail($rfc)->status()->isActive()) {
@@ -44,7 +44,7 @@ class EditServiceTest extends RegistrationIntegrationTestCase
 
     public function testConsumeEditServiceDoubleEditWithSameData(): void
     {
-        $rfc = 'XDEL000101XX1';
+        $rfc = self::CUSTOMER_RFC;
         $service = $this->createService();
 
         if (! $this->findCustomerOrFail($rfc)->status()->isActive()) {
@@ -62,7 +62,7 @@ class EditServiceTest extends RegistrationIntegrationTestCase
 
     public function testConsumeEditServiceUsingNotRegisteredRfc(): void
     {
-        $rfc = 'ABCD010101AAA';
+        $rfc = self::CUSTOMER_NON_EXISTENT;
         $this->assertNull($this->findCustomer($rfc), "For this test RFC $rfc must not exists");
 
         $service = $this->createService();

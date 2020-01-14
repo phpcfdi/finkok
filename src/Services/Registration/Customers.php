@@ -4,10 +4,17 @@ declare(strict_types=1);
 
 namespace PhpCfdi\Finkok\Services\Registration;
 
+use ArrayIterator;
 use LogicException;
 use PhpCfdi\Finkok\Services\AbstractCollection;
 use stdClass;
 
+/**
+ * @method Customer get(int $index)
+ * @method Customer first()
+ * @method ArrayIterator|Customer[] getIterator()
+ * @extends AbstractCollection<Customer>
+ */
 class Customers extends AbstractCollection
 {
     protected function createItemFromStdClass(stdClass $content): object
@@ -26,8 +33,7 @@ class Customers extends AbstractCollection
 
     public function findByRfc(string $rfc): ?Customer
     {
-        /** @var Customer $customer */
-        foreach ($this->collection as $customer) {
+        foreach ($this->getIterator() as $customer) {
             if ($rfc === $customer->rfc()) {
                 return $customer;
             }

@@ -36,6 +36,7 @@ class CancelledDocument
         return $this->get('EstatusCancelacion');
     }
 
+    /** @return array<mixed> */
     public function values(): array
     {
         return (array) $this->data;

@@ -91,7 +91,7 @@ class FinkokTest extends TestCase
 
     public function testMagicCallWithInvalidParameter(): void
     {
-        /** @var StampingCommand $result */
+        /** @var StampingCommand&MockObject $command */
         $command = $this->createMock(StampingCommand::class);
         /** @var FinkokSettings&MockObject $settings */
         $settings = $this->createMock(FinkokSettings::class);
@@ -134,7 +134,7 @@ class FinkokTest extends TestCase
         $result = $this->createMock(GetContractsResult::class);
         /** @var GetContractsCommand $command */
         $command = $this->createMock(GetContractsCommand::class);
-        /** @var GetContractsService $command */
+        /** @var GetContractsService&MockObject $service */
         $service = $this->createMock(GetContractsService::class);
         $service->expects($this->once())->method('obtainContracts')->willReturn($result);
 
@@ -157,12 +157,13 @@ class FinkokTest extends TestCase
         /** @var FinkokSettings&MockObject $settings */
         $settings = $this->createMock(FinkokSettings::class);
         $exposer = new class($settings) extends Finkok {
+            /** @return array<array<mixed>> */
             public function exposeServicesMap(): array
             {
                 return parent::SERVICES_MAP;
             }
 
-            public function exposeCreateService(string $method)
+            public function exposeCreateService(string $method): object
             {
                 return $this->createService($method);
             }
@@ -171,7 +172,10 @@ class FinkokTest extends TestCase
         foreach ($servicesMap as $methodName => $definition) {
             $finalMethodName = $definition[2] ?? $methodName;
             $service = $exposer->exposeCreateService($methodName);
-            $this->assertTrue(is_callable([$service, $finalMethodName]));
+            $this->assertTrue(
+                is_callable([$service, $finalMethodName]),
+                "The finalMethodName $methodName was not found"
+            );
         }
     }
 }

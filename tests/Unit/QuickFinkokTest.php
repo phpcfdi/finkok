@@ -32,6 +32,10 @@ class QuickFinkokTest extends TestCase
         return $finkok;
     }
 
+    /**
+     * @param string $serviceName
+     * @param array<mixed> $expectedParameters
+     */
     private function performTestOnLatestCall(string $serviceName, array $expectedParameters = []): void
     {
         $lastCall = $this->soapFactory->latestSoapCaller;
@@ -43,6 +47,10 @@ class QuickFinkokTest extends TestCase
         );
     }
 
+    /**
+     * @param string $key
+     * @return mixed
+     */
     private function obtainParameterFromLatestCall(string $key)
     {
         return $this->soapFactory->latestSoapCaller->latestCallParameters[$key] ?? null;
@@ -285,6 +293,21 @@ EOT;
         $this->performTestOnLatestCall('edit', [
             'taxpayer_id' => 'x-rfc',
             'status' => CustomerStatus::suspended()->value(),
+        ]);
+        $this->assertEquals($rawData, $result->rawData());
+    }
+
+    public function testCustomersSwitch(): void
+    {
+        $rawData = json_decode($this->fileContentPath('registration-switch-response.json'));
+        $finkok = $this->createdPreparedQuickFinkok($rawData);
+
+        $type = CustomerType::prepaid();
+        $result = $finkok->customersSwitch('x-rfc', $type);
+
+        $this->performTestOnLatestCall('switch', [
+            'taxpayer_id' => 'x-rfc',
+            'type_user' => $type->value(),
         ]);
         $this->assertEquals($rawData, $result->rawData());
     }

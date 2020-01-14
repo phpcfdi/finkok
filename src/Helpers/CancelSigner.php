@@ -11,7 +11,7 @@ use PhpCfdi\XmlCancelacion\XmlCancelacionHelper;
 
 class CancelSigner
 {
-    /** @var array */
+    /** @var array<string> */
     private $uuids;
 
     /** @var DateTimeImmutable */
@@ -20,7 +20,7 @@ class CancelSigner
     /**
      * CancelSigner constructor
      *
-     * @param array $uuid
+     * @param array<string> $uuid
      * @param DateTimeImmutable|null $dateTime If null or ommited then use current time and time zone
      */
     public function __construct(array $uuid, ?DateTimeImmutable $dateTime = null)
@@ -29,6 +29,7 @@ class CancelSigner
         $this->dateTime = $dateTime ?? new DateTimeImmutable();
     }
 
+    /** @return array<string> */
     public function uuids(): array
     {
         return $this->uuids;

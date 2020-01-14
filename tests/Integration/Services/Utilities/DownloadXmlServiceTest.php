@@ -34,11 +34,17 @@ class DownloadXmlServiceTest extends IntegrationTestCase
         $command = new DownloadXmlCommand($previousStamp->uuid(), 'EKU9003173C9', 'I');
         $result = $service->downloadXml($command);
 
-        $this->assertSame(
+        $this->assertXmlStringEqualsXmlString(
             $previousStamp->xml(),
             $result->xml(),
-            'Finkok does not return the same XML for recently created stamp using get_xml'
+            'Finkok does not return equal XML for recently created stamp using get_xml'
         );
         $this->assertEmpty($result->error(), 'Finkok must not return an error');
+        // finkok ticket: https://support.finkok.com/support/tickets/41438
+        // $this->assertSame(
+        //     $previousStamp->xml(),
+        //     $result->xml(),
+        //     'Finkok does not return exactly the same XML for recently created stamp using get_xml'
+        // );
     }
 }

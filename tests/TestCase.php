@@ -41,9 +41,10 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
         return $settings;
     }
 
-    protected function createLoggerPrinter($outputFile = 'php://stdout'): LoggerInterface
+    protected function createLoggerPrinter(string $outputFile = 'php://stdout'): LoggerInterface
     {
         return new class($outputFile) extends AbstractLogger implements LoggerInterface {
+            /** @var string */
             public $outputFile;
 
             public function __construct(string $outputFile)
@@ -51,6 +52,11 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
                 $this->outputFile = $outputFile;
             }
 
+            /**
+             * @param mixed $level
+             * @param string $message
+             * @param array<mixed> $context
+             */
             public function log($level, $message, array $context = []): void
             {
                 file_put_contents(
@@ -62,6 +68,7 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
         };
     }
 
+    /** @return array<string, string> */
     protected function obtainCsdCertificatePrivateKeyData(): array
     {
         return [

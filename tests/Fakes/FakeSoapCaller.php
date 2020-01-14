@@ -15,7 +15,7 @@ class FakeSoapCaller extends SoapCaller
     /** @var string */
     public $latestCallMethodName = '';
 
-    /** @var array */
+    /** @var array<mixed> */
     public $latestCallParameters = [];
 
     public function call(string $methodName, array $parameters): stdClass

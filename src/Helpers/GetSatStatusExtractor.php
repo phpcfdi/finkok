@@ -16,7 +16,7 @@ class GetSatStatusExtractor
     /**
      * GetSatStatusExtractor constructor.
      *
-     * @param array $expressionData
+     * @param array<mixed> $expressionData
      */
     public function __construct(array $expressionData)
     {
@@ -28,7 +28,7 @@ class GetSatStatusExtractor
         ];
     }
 
-    public static function fromXmlDocument(DOMDocument $document)
+    public static function fromXmlDocument(DOMDocument $document): self
     {
         $discoverer = new DiscoverExtractor();
         return new self($discoverer->obtain($document));

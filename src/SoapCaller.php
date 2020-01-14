@@ -17,12 +17,16 @@ class SoapCaller implements LoggerAwareInterface
     /** @var SoapClient */
     private $soapClient;
 
-    /** @var array */
+    /** @var array<mixed> */
     private $extraParameters;
 
     /** @var LoggerInterface */
     private $logger;
 
+    /**
+     * @param SoapClient $soapClient
+     * @param array<mixed> $extraParameters
+     */
     public function __construct(SoapClient $soapClient, array $extraParameters = [])
     {
         $this->soapClient = $soapClient;
@@ -35,11 +39,17 @@ class SoapCaller implements LoggerAwareInterface
         return $this->soapClient;
     }
 
+    /** @return array<mixed> */
     public function extraParameters(): array
     {
         return $this->extraParameters;
     }
 
+    /**
+     * @param string $methodName
+     * @param array<mixed> $parameters
+     * @return stdClass
+     */
     public function call(string $methodName, array $parameters): stdClass
     {
         $finalParameters = $this->finalParameters($parameters);
@@ -59,6 +69,10 @@ class SoapCaller implements LoggerAwareInterface
         }
     }
 
+    /**
+     * @param SoapClient $soapClient
+     * @return array<string, string>
+     */
     protected function extractSoapClientTrace(SoapClient $soapClient): array
     {
         return [
@@ -69,6 +83,10 @@ class SoapCaller implements LoggerAwareInterface
         ];
     }
 
+    /**
+     * @param array<mixed> $parameters
+     * @return array<mixed>
+     */
     public function finalParameters(array $parameters): array
     {
         return array_merge($parameters, $this->extraParameters());

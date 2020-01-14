@@ -12,6 +12,7 @@ use stdClass;
  * @method CancelledDocument get(int $index)
  * @method CancelledDocument first()
  * @method ArrayIterator|CancelledDocument[] getIterator()
+ * @extends AbstractCollection<CancelledDocument>
  */
 class CancelledDocuments extends AbstractCollection
 {
@@ -22,7 +23,7 @@ class CancelledDocuments extends AbstractCollection
 
     public function find(string $uuid): ?CancelledDocument
     {
-        foreach ($this->collection as $document) {
+        foreach ($this->getIterator() as $document) {
             if ($uuid === $document->uuid()) {
                 return $document;
             }

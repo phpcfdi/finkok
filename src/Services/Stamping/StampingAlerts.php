@@ -12,6 +12,7 @@ use stdClass;
  * @method StampingAlert get(int $index)
  * @method StampingAlert first()
  * @method ArrayIterator|StampingAlert[] getIterator()
+ * @extends AbstractCollection<StampingAlert>
  */
 class StampingAlerts extends AbstractCollection
 {
@@ -22,8 +23,7 @@ class StampingAlerts extends AbstractCollection
 
     public function findByErrorCode(string $errorCode): ?StampingAlert
     {
-        /** @var StampingAlert $alert */
-        foreach ($this->collection as $alert) {
+        foreach ($this->getIterator() as $alert) {
             if ($errorCode === $alert->errorCode()) {
                 return $alert;
             }

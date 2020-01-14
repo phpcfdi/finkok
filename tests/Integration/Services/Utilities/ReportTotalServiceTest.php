@@ -13,13 +13,17 @@ class ReportTotalServiceTest extends IntegrationTestCase
 {
     public function testReportTotalServiceInPast(): void
     {
-        $thisMonth = intval(date('m'));
-        $command = new ReportTotalCommand('EKU9003173C9', 'I', 2019, $thisMonth, 2019, $thisMonth);
+        $date = strtotime('previous month');
+        $thisYear = intval(date('Y', $date));
+        $thisMonth = intval(date('m', $date));
+        $command = new ReportTotalCommand('EKU9003173C9', 'I', $thisYear, $thisMonth, $thisYear, $thisMonth);
         $settings = $this->createSettingsFromEnvironment();
         $service = new ReportTotalService($settings);
         $result = $service->reportTotal($command);
-        $this->assertSame('', $result->error());
-        $this->assertNotSame('', $result->total());
+        $this->assertSame('', $result->error(), 'It was not expected to receive an error');
+        if ('' !== $result->total()) {
+            $this->assertTrue(is_numeric($result->total()), 'It was not expected to receive a non-numeric total');
+        }
         $this->assertSame('EKU9003173C9', $result->rfc());
     }
 

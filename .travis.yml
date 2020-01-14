@@ -3,11 +3,6 @@ language: php
 # php compatibility
 php: ["7.2", "7.3", "7.4"]
 
-env:
-  global:
-    - PHP_CS_FIXER_FUTURE_MODE=1
-    - PHP_CS_FIXER_IGNORE_ENV=1
-
 cache:
   - directories:
     - $HOME/.composer

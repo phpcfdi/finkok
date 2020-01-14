@@ -17,6 +17,7 @@ class GetSignedContractsServiceTest extends IntegrationTestCase
         return new GetSignedContractsService($settings);
     }
 
+    /** @return array<string, mixed> */
     public function providerGetSignedContracts(): array
     {
         return [

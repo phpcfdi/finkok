@@ -36,11 +36,13 @@ use PhpCfdi\Finkok\Services\Utilities;
  * @method Manifest\GetSignedContractsResult getSignedContracts(Manifest\GetSignedContractsCommand $command)
  * @method Registration\AddResult registrationAdd(Registration\AddCommand $command)
  * @method Registration\AssignResult registrationAssign(Registration\AssignCommand $command)
+ * @method Registration\SwitchResult registrationSwitch(Registration\SwitchCommand $command)
  * @method Registration\EditResult registrationEdit(Registration\EditCommand $command)
  * @method Registration\ObtainResult registrationObtain(Registration\ObtainCommand $command)
  */
 class Finkok
 {
+    /** @var array<array> */
     protected const SERVICES_MAP = [
         'stamp' => [Stamping\StampService::class, Stamping\StampingCommand::class],
         'quickstamp' => [Stamping\QuickStampService::class, Stamping\StampingCommand::class],
@@ -78,6 +80,11 @@ class Finkok
             Manifest\GetSignedContractsService::class,
             Manifest\GetSignedContractsCommand::class,
         ],
+        'registrationAdd' => [Registration\AddService::class, Registration\AddCommand::class, 'add'],
+        'registrationAssign' => [Registration\AssignService::class, Registration\AssignCommand::class, 'assign'],
+        'registrationSwitch' => [Registration\SwitchService::class, Registration\SwitchCommand::class, 'switch'],
+        'registrationEdit' => [Registration\EditService::class, Registration\EditCommand::class, 'edit'],
+        'registrationObtain' => [Registration\ObtainService::class, Registration\ObtainCommand::class, 'obtain'],
     ];
 
     /** @var FinkokSettings */
@@ -93,7 +100,12 @@ class Finkok
         return $this->settings;
     }
 
-    public function __call($name, $arguments)
+    /**
+     * @param string $name
+     * @param array<mixed> $arguments
+     * @return mixed
+     */
+    public function __call(string $name, array $arguments)
     {
         if (array_key_exists($name, static::SERVICES_MAP)) {
             $command = $this->checkCommand($name, $arguments[0] ?? null);
@@ -104,6 +116,11 @@ class Finkok
         throw new BadMethodCallException(sprintf('Helper %s is not registered', $name));
     }
 
+    /**
+     * @param string $method
+     * @param mixed $command
+     * @return object|null
+     */
     protected function checkCommand(string $method, $command)
     {
         $expected = static::SERVICES_MAP[$method][1];
@@ -119,6 +136,10 @@ class Finkok
         return $command;
     }
 
+    /**
+     * @param string $method
+     * @return object
+     */
     protected function createService(string $method)
     {
         $serviceClass = static::SERVICES_MAP[$method][0];
@@ -126,7 +147,13 @@ class Finkok
         return $service;
     }
 
-    protected function executeService(string $method, $service, $command)
+    /**
+     * @param string $method
+     * @param object $service
+     * @param object|null $command
+     * @return mixed
+     */
+    protected function executeService(string $method, object $service, ?object $command)
     {
         $method = static::SERVICES_MAP[$method][2] ?? $method;
         if (! is_callable([$service, $method])) {
