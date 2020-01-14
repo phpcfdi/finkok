@@ -12,6 +12,20 @@ Nos apegamos a [SEMVER](SEMVER.md), revisa la información para entender mejor e
   no debe usar la opción de nulo, fue puesta para compatibilidad con versiones previas a `0.2.2`.
   No así el las fachadas `Finkok` y `QuickFinkok`.
 
+## Version 0.2.5 2020-01-14
+
+- Se actualiza el año de licencia 2020.
+- Finkok implementó en el registro de clientes el método `switch`, para cambiar a el cliente de `Prepago`
+  a `Ondemand` y viceversa. Se ha creado el método y se incluyó en los helpers `Finkok` y `QuickFinkok`.
+- Se documentó el ticket de Finkok `#41435`: El acuse recibido en el método `get_reciept` es diferente que el
+  obtenido en la respuesta de cancelación.
+- Se agregó un workaround de test de integración al ticket de Finkok `#41438`: El xml devuelto por `get_xml` no
+  contiene la cabecera de xml `<?xml version="1.0" encoding="UTF-8"?>`.
+- Cambios de desarrollo y pruebas:
+    - Se cambió de `phpstan/phpstan-shim` a `phpstan/phpstan`.
+    - Se cambió la versión de `phpstan` de `^0.11` a `^0.12`. Con esto se agregaron muchas definiciones de tipos
+      de datos en los bloques de phpdoc.
+
 ## Version 0.2.4 2019-12-05
 
 - Se modifica el test porque en diciembre no se podía crear el escenario para validar la excepción en
