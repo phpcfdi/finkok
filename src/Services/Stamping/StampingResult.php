@@ -34,6 +34,11 @@ class StampingResult extends AbstractResult
         return $this->get('faultstring');
     }
 
+    public function faultCode(): string
+    {
+        return $this->get('faultcode');
+    }
+
     public function date(): string
     {
         return $this->get('Fecha');
