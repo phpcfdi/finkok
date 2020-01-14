@@ -346,6 +346,21 @@ class QuickFinkok
     }
 
     /**
+     * Edita el tipo de un cliente (prepago/Prepaid o ilimitado/Ondemand)
+     *
+     * @param string $rfc
+     * @param Registration\CustomerType $type
+     * @return Registration\SwitchResult
+     * @see https://wiki.finkok.com/doku.php?id=switch
+     */
+    public function customersSwitch(string $rfc, Registration\CustomerType $type): Registration\SwitchResult
+    {
+        $command = new Registration\SwitchCommand($rfc, $type);
+        $service = new Registration\SwitchService($this->settings());
+        return $service->switch($command);
+    }
+
+    /**
      * Obtiene un listado de clientes registrados, o solo uno si se especifica el RFC
      *
      * @param string $filterByRfc

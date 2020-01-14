@@ -297,6 +297,21 @@ EOT;
         $this->assertEquals($rawData, $result->rawData());
     }
 
+    public function testCustomersSwitch(): void
+    {
+        $rawData = json_decode($this->fileContentPath('registration-switch-response.json'));
+        $finkok = $this->createdPreparedQuickFinkok($rawData);
+
+        $type = CustomerType::prepaid();
+        $result = $finkok->customersSwitch('x-rfc', $type);
+
+        $this->performTestOnLatestCall('switch', [
+            'taxpayer_id' => 'x-rfc',
+            'type_user' => $type->value(),
+        ]);
+        $this->assertEquals($rawData, $result->rawData());
+    }
+
     public function testCustomersAssign(): void
     {
         $rawData = json_decode($this->fileContentPath('registration-assign-response.json'));
