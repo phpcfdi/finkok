@@ -49,7 +49,7 @@ class SwitchServiceTest extends RegistrationIntegrationTestCase
 
     public function testSwitchUsingNonRegisteredRfc(): void
     {
-        $rfc = self::CUSTOMER_RFC;
+        $rfc = self::CUSTOMER_NON_EXISTENT;
         $this->assertNull($this->findCustomer($rfc), "For this test RFC $rfc must not exists");
 
         $service = $this->createService();
