@@ -17,7 +17,7 @@ class ObtainServiceTest extends RegistrationIntegrationTestCase
 
     public function testConsumeObtainServiceGettingNonExistentRecord(): void
     {
-        $rfc = 'ABCD010101AAA';
+        $rfc = self::CUSTOMER_RFC;
         $this->assertNull($this->findCustomer($rfc), "For this test RFC $rfc must not exists");
 
         $service = $this->createService();

@@ -11,11 +11,14 @@ Por este motivo, el test de creación es siempre omitido. Lo puede reactivar est
 variable de entorno FINKOK_REGISTRATION_ADD_CREATE_RANDOM_RFC a "1".
 
 El test implementado busca uno a uno un RFC con la forma XDEL000101XX1.
+Este RFC está definido en `RegistrationIntegrationTestCase::CUSTOMER_RFC`.
+
 Después puedes solicitar a Finkok que se eliminen estos RFC vía correo electrónico, porque sí.
 
 ## Pruebas de ObtainService
 
 Se espera que el RFC ABCD010101AAA (que es inválido) no esté registrado.
+Este RFC está definido en `RegistrationIntegrationTestCase::CUSTOMER_NON_EXISTENT`.
 
 Se espera que el RFC de pruebas EKU9003173C9 esté registrado como ilimitado (CustomerType::onDemand())
 Se espera que el RFC de pruebas EKU9003173C9 esté activo.

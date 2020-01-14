@@ -24,14 +24,26 @@ Cuando se manda vacío significa que se desea obtener todo el listado de cliente
 
 ## Método assign
 
-Este método tiene dos funcionalidades: agrega créditos, o bien, cambia la cuenta de prepaid a ondemand.
+Este método tiene el propósito de incrementar o decrementar créditos a cuentas de tipo prepago.
+
+Tome en cuenta las siguientes consideraciones:
+
+- Para agregar créditos use un número positivo, para reducir use un número negativo.
+- En caso de usarlo con una cuenta ilimitada (on-demand) devuelve un estado de error.
+- En caso de decrementar a un número negativo devuelve un error y se conserva la cantidad de créditos previos.
+
+## Método switch
+
+Este método tiene el propósito de cambiar el tipo de cliente de prepago (prepaid) a iliminado (on-demand).
+
+No genera error si se intenta cambiar al estado actual (ilimitado a ilimitado, o prepago a prepago).
 
 ## Parámetros username/password
 
 Finkok considera una buena idea que para los métodos add, edit y get los parámetros de usuario y contraseña
 no son username/password como los demás. Los parámetros en estos casos son username_reseller/password_reseller.
 
-Pero para assign los parámetros sí son username/password.
+Pero, para los métodos assign y switch, los parámetros sí son username/password.
 
 ## Eliminar un cliente
 
@@ -51,8 +63,4 @@ Supongo que no les importa mucho la automatización de pruebas.
 En la creación de un cliente, no se puede especificar el crédito, sin embargo sí se puede establecer
 si la cuenta es de prepago (prepaid) o ilimitada (ondemand).
 
-En el método edit no se puede cambiar el tipo de cuenta (prepaid/ondemand).
-
-En el método assign se pueden dar créditos a una cuenta, si se especifica el número entero la cuenta
-se establece a prepaid con la cantidad de créditos. Si ya era prepaid entonces se suman a sus créditos.
-Si se establece a -1 el tipo de cuenta se establece como ondemand.
+Con el método switch es con el que se puede cambiar el tipo de cuenta (prepaid/ondemand).
