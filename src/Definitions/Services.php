@@ -12,12 +12,14 @@ use Eclipxe\Enum\Enum;
  * @method static self cancel()
  * @method static self manifest()
  * @method static self registration()
+ * @method static self retentions()
  *
  * @method bool isStamping()
  * @method bool isUtilities()
  * @method bool isCancel()
  * @method bool isManifest()
  * @method bool isRegistration()
+ * @method bool isRetentions()
  */
 class Services extends Enum
 {
@@ -29,6 +31,7 @@ class Services extends Enum
             'cancel' => '/servicios/soap/cancel.wsdl',
             'manifest' => '/servicios/soap/firmar.wsdl',
             'registration' => '/servicios/soap/registration.wsdl',
+            'retentions' => '/servicios/soap/retentions.wsdl',
         ];
     }
 }
