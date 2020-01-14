@@ -36,6 +36,7 @@ use PhpCfdi\Finkok\Services\Utilities;
  * @method Manifest\GetSignedContractsResult getSignedContracts(Manifest\GetSignedContractsCommand $command)
  * @method Registration\AddResult registrationAdd(Registration\AddCommand $command)
  * @method Registration\AssignResult registrationAssign(Registration\AssignCommand $command)
+ * @method Registration\SwitchResult registrationSwitch(Registration\SwitchCommand $command)
  * @method Registration\EditResult registrationEdit(Registration\EditCommand $command)
  * @method Registration\ObtainResult registrationObtain(Registration\ObtainCommand $command)
  */
@@ -79,6 +80,11 @@ class Finkok
             Manifest\GetSignedContractsService::class,
             Manifest\GetSignedContractsCommand::class,
         ],
+        'registrationAdd' => [Registration\AddService::class, Registration\AddCommand::class, 'add'],
+        'registrationAssign' => [Registration\AssignService::class, Registration\AssignCommand::class, 'assign'],
+        'registrationSwitch' => [Registration\SwitchService::class, Registration\SwitchCommand::class, 'switch'],
+        'registrationEdit' => [Registration\EditService::class, Registration\EditCommand::class, 'edit'],
+        'registrationObtain' => [Registration\ObtainService::class, Registration\ObtainCommand::class, 'obtain'],
     ];
 
     /** @var FinkokSettings */

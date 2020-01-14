@@ -172,7 +172,10 @@ class FinkokTest extends TestCase
         foreach ($servicesMap as $methodName => $definition) {
             $finalMethodName = $definition[2] ?? $methodName;
             $service = $exposer->exposeCreateService($methodName);
-            $this->assertTrue(is_callable([$service, $finalMethodName]));
+            $this->assertTrue(
+                is_callable([$service, $finalMethodName]),
+                "The finalMethodName $methodName was not found"
+            );
         }
     }
 }
