@@ -12,6 +12,10 @@ Nos apegamos a [SEMVER](SEMVER.md), revisa la información para entender mejor e
   no debe usar la opción de nulo, fue puesta para compatibilidad con versiones previas a `0.2.2`.
   No así el las fachadas `Finkok` y `QuickFinkok`.
 
+## Version UNRELEASED
+
+- Se agrega el método `StampingAlert::extraInfo()` para obtener la respuesta de la incidencia en `ExtraInfo`.
+
 ## Version 0.2.5 2020-01-14
 
 - Se actualiza el año de licencia 2020.
