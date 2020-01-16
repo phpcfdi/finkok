@@ -418,4 +418,13 @@ EOT;
         $this->assertFalse($result->success());
         $this->assertSame('Unable to get contracts: FOO', $result->message());
     }
+
+    public function testRetentionStamp(): void
+    {
+        $rawData = json_decode($this->fileContentPath('retentions-stamp-response.json'));
+        $finkok = $this->createdPreparedQuickFinkok($rawData);
+        $result = $finkok->retentionStamp('precfdi');
+        $this->performTestOnLatestCall('stamp', ['xml' => 'precfdi']);
+        $this->assertEquals($rawData, $result->rawData());
+    }
 }

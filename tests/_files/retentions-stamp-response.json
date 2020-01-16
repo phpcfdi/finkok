@@ -1,0 +1,38 @@
+{
+    "stampResult": {
+        "xml": "x-xml",
+        "UUID": "x-uuid",
+        "Fecha": "x-date",
+        "faultstring": "x-fault-string",
+        "faultcode": "x-fault-code",
+        "CodEstatus": "x-code-status",
+        "SatSeal": "x-sat-seal",
+        "NoCertificadoSAT": "x-no-certificado-sat",
+        "Incidencias": {
+            "Incidencia": [
+                {
+                    "IdIncidencia": "x1-00001",
+                    "RfcEmisor": "x1-rfc",
+                    "Uuid": "x1-uuid",
+                    "CodigoError": "x1-error-code",
+                    "WorkProcessId": "x1-work-process-id",
+                    "MensajeIncidencia": "x1-message",
+                    "ExtraInfo": "x1-extra-info",
+                    "NoCertificadoPac": "x1-no-certificado-pac",
+                    "FechaRegistro": "x1-registry-date"
+                },
+                {
+                    "IdIncidencia": "x2-00001",
+                    "RfcEmisor": "x2-rfc",
+                    "Uuid": "x2-uuid",
+                    "CodigoError": "x2-error-code",
+                    "WorkProcessId": "x2-work-process-id",
+                    "MensajeIncidencia": "x2-message",
+                    "ExtraInfo": "x2-extra-info",
+                    "NoCertificadoPac": "x2-no-certificado-pac",
+                    "FechaRegistro": "x2-registry-date"
+                }
+            ]
+        }
+    }
+}

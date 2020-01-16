@@ -13,6 +13,7 @@ use PhpCfdi\Finkok\Definitions\SignedDocumentFormat;
 use PhpCfdi\Finkok\Services\Cancel;
 use PhpCfdi\Finkok\Services\Manifest;
 use PhpCfdi\Finkok\Services\Registration;
+use PhpCfdi\Finkok\Services\Retentions;
 use PhpCfdi\Finkok\Services\Stamping;
 use PhpCfdi\Finkok\Services\Utilities;
 
@@ -481,5 +482,12 @@ class QuickFinkok
         $command = new Manifest\GetSignedContractsCommand($snid, $rfc, $format);
         $service = new Manifest\GetSignedContractsService($this->settings());
         return $service->getSignedContracts($command);
+    }
+
+    public function retentionStamp(string $xml): Retentions\StampResult
+    {
+        $command = new Retentions\StampCommand($xml);
+        $service = new Retentions\StampService($this->settings());
+        return $service->stamp($command);
     }
 }
