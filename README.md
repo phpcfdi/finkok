@@ -218,7 +218,7 @@ Durante el proceso de implementación he creado diversas notas y documentos:
     - [X] [Consumir stamp para generar un doble estampado no devuelve los datos](docs/issues/StampServiceDobleEstampado.md)
     - [X] Falta servicio que no requiera CSD/FIEL para aceptar o rechazar una solicitud de cancelación
     - [X] Falta servicio que no requiera CSD/FIEL para obtener los CFDI relacionados
-    - [ ] El acuse de cancelación entregado al cancelar y al solicitar el acuse no coinciden.
+    - [X] [El acuse de cancelación entregado al cancelar y al solicitar el acuse no coinciden](docs/issues/AcuseCancelacionNoCoincidente.md)
 
 ## Compatilibilidad
 

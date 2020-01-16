@@ -14,6 +14,7 @@ Nos apegamos a [SEMVER](SEMVER.md), revisa la información para entender mejor e
 
 ## Version UNRELEASED
 
+- Documentar la solución del problema de acuse recibido al cancelar y al solicitar. Finkok ticket: `#41435`. 
 - Se agrega el método `StampingAlert::extraInfo()` para obtener la respuesta de la incidencia en `ExtraInfo`.
 - Se agrega el método `StampingResult::faultCode()` para obtener la respuesta en `faultcode`.
 - Se renombra el método `StampingResult::faultstring()` a `StampingResult::faultString()`.

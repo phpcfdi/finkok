@@ -1,5 +1,7 @@
 # El acuse de cancelación no coincide
 
+> *Este error de encuenta solucionado*
+
 Cuando se realiza una cancelación (vía `cancel_signature`) una de las respuestas es el acuse de cancelación
 entregado por el SAT. Dicho *acuse* se puede consultar en la respuesta de cancelación como el *voucher*.
 
@@ -25,3 +27,10 @@ CFDI fuese cancelado, el acuse contiene solamente la respuesta a la petición pr
 2019-01-14: Se creó el ticket #41435 <https://support.finkok.com/support/tickets/41435> documentando esta situación
 y se publicará la actualización a pesar de este error, si Finkok decidiera no actualizar su servicio entonces
 se eliminará la comprobación en el test de integración.
+
+2019-01-15: Se confirmó que se sufría de un bug de carrera, cuando se solicita el acuse pero aun no ha sido almacenado
+entonces se devuelve un acuse "fabricado". El problema lo tenían al fabricarlo y esto ha sido corregido.
+Personalmente considero que, al tratarse de un documento "oficial" con firma XML, deberían evitar fabricarlo y mejor
+retornar un error de tipo "Acuse no disponible en este momento, intente más tarde".
+Sin embargo, hay que considerar la poca utilidad del acuse y que en realidad no es relevante,
+siempre que el acuse sea idéntico al retornado por el SAT entonces no debería considerarse un problema.
