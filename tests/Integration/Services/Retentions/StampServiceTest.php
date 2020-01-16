@@ -4,15 +4,8 @@ declare(strict_types=1);
 
 namespace PhpCfdi\Finkok\Tests\Integration\Services\Retentions;
 
-use PhpCfdi\Finkok\Services\Retentions\StampService;
-
 final class StampServiceTest extends RetentionsTestCase
 {
-    protected function createService(): StampService
-    {
-        return new StampService($this->createSettingsFromEnvironment());
-    }
-
     public function testStampInvalidXml(): void
     {
         $result = $this->stampRetentionPreCfdi('invalid xml');

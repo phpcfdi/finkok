@@ -7,6 +7,7 @@ namespace PhpCfdi\Finkok\Tests\Factories;
 use CfdiUtils\Certificado\Certificado;
 use CfdiUtils\Elements\Dividendos10\Dividendos;
 use CfdiUtils\Elements\PagosAExtranjeros10\Pagosaextranjeros;
+use CfdiUtils\Nodes\NodeInterface;
 use CfdiUtils\Retenciones\RetencionesCreator10;
 use DateTimeImmutable;
 use DateTimeZone;
@@ -149,7 +150,7 @@ class PreCfdiRetentionCreatorHelper
 
     /**
      * @param array<string, string> $dividOUtil
-     * @return Dividendos
+     * @return Dividendos<NodeInterface>
      */
     public function createDividendosDividOUtil(array $dividOUtil = []): Dividendos
     {
@@ -171,7 +172,7 @@ class PreCfdiRetentionCreatorHelper
     /**
      * @param array<string, string> $pagosAExtranjeros
      * @param array<string, string> $noBeneficiario
-     * @return Pagosaextranjeros
+     * @return Pagosaextranjeros<NodeInterface>
      */
     public function createPagosAExtranjerosNoBeneficiario(
         array $pagosAExtranjeros = [],
