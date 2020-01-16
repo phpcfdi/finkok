@@ -1,8 +1,5 @@
 # phpcfdi/finkok To Do List
 
-- Revisar el estado del ticket https://support.finkok.com/support/tickets/41438 y modificar el test
-  `DownloadXmlServiceTest::testStampAndConsumeStampedImmediately`.
-
 - Revisar el estado del ticket https://support.finkok.com/support/tickets/41435 y modificar el test
   `CancelServicesTest::testCreateCfdiThenGetSatStatusThenCancelSignatureThenGetReceipt`.
 

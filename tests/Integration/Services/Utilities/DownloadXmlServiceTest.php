@@ -40,11 +40,12 @@ class DownloadXmlServiceTest extends IntegrationTestCase
             'Finkok does not return equal XML for recently created stamp using get_xml'
         );
         $this->assertEmpty($result->error(), 'Finkok must not return an error');
-        // finkok ticket: https://support.finkok.com/support/tickets/41438
-        // $this->assertSame(
-        //     $previousStamp->xml(),
-        //     $result->xml(),
-        //     'Finkok does not return exactly the same XML for recently created stamp using get_xml'
-        // );
+        // see finkok ticket: https://support.finkok.com/support/tickets/41438
+        // it was not returning the xml header
+        $this->assertSame(
+            $previousStamp->xml(),
+            $result->xml(),
+            'Finkok does not return exactly the same XML for recently created stamp using get_xml'
+        );
     }
 }
