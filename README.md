@@ -155,6 +155,13 @@ respectivamente.
 * `getContracts(Manifest\GetContractsCommand $command): Manifest\GetContractsResult`
 * `signContracts(Manifest\SignContractsCommand $command): Manifest\SignContractsResult`
 
+### Retenciones
+
+Los CFDI de Retenciones e información de pagos (RET) siguen un estándar más parecido a CFDI 3.2.
+Su cancelación es inmediata (al contrario de la solicitud de cancelación actual).
+
+* `stamp(Retentions\StampCommand $command): Retentions\StampResult`
+
 ### Ayuda para firmado XML para SAT y Finkok
 
 Esta librería implementa el firmado CSD de los mensajes con el SAT para Cancelar, Obtener UUID relacionados
