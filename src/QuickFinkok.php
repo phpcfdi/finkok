@@ -508,4 +508,21 @@ class QuickFinkok
         return $service->downloadXml($command);
     }
 
+    /**
+     * Este método regresa la información de un XML de retenciones e información de pagos ya timbrado previamente y
+     * que por algún motivo no se pudo recuperar en la primera petición que se realizó,
+     * con este método se puede recuperar el UUID y el XML timbrado
+     *
+     * Nota: el método no está documentado en Finkok
+     *
+     * @param string $preCfdi
+     * @return Retentions\StampedResult
+     * @see https://wiki.finkok.com/doku.php?id=retentions
+     */
+    public function retentionStamped(string $preCfdi): Retentions\StampedResult
+    {
+        $command = new Retentions\StampedCommand($preCfdi);
+        $service = new Retentions\StampedService($this->settings());
+        return $service->stamped($command);
+    }
 }

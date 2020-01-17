@@ -436,4 +436,13 @@ EOT;
         $this->performTestOnLatestCall('get_xml', ['invoice_type' => 'R']);
         $this->assertEquals($rawData, $result->rawData());
     }
+
+    public function testRetentionStamped(): void
+    {
+        $rawData = json_decode($this->fileContentPath('retentions-stamped-response.json'));
+        $finkok = $this->createdPreparedQuickFinkok($rawData);
+        $result = $finkok->retentionStamped('x-xml');
+        $this->performTestOnLatestCall('stamped', ['xml' => 'x-xml']);
+        $this->assertEquals($rawData, $result->rawData());
+    }
 }
