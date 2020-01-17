@@ -427,4 +427,13 @@ EOT;
         $this->performTestOnLatestCall('stamp', ['xml' => 'precfdi']);
         $this->assertEquals($rawData, $result->rawData());
     }
+
+    public function testRetentionDownload(): void
+    {
+        $rawData = (object) ['get_xmlResult' => (object) []];
+        $finkok = $this->createdPreparedQuickFinkok($rawData);
+        $result = $finkok->retentionDownload('x-uuid', 'x-rfc');
+        $this->performTestOnLatestCall('get_xml', ['invoice_type' => 'R']);
+        $this->assertEquals($rawData, $result->rawData());
+    }
 }

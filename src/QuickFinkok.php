@@ -85,7 +85,8 @@ class QuickFinkok
     }
 
     /**
-     * Obtiene el XML de un UUID timbrado en Finkok, solo es posible recuperar los timbrados en los últimos 3 meses
+     * Obtiene el XML de un UUID timbrado en Finkok de tipo CFDI 3.3
+     * solo es posible recuperar los timbrados en los últimos 3 meses.
      *
      * @param string $uuid
      * @param string $rfc
@@ -490,4 +491,21 @@ class QuickFinkok
         $service = new Retentions\StampService($this->settings());
         return $service->stamp($command);
     }
+
+    /**
+     * Obtiene el XML de un UUID timbrado en Finkok de tipo CFDI de retenciones e información de pagos
+     * solo es posible recuperar los timbrados en los últimos 3 meses.
+     *
+     * @param string $uuid
+     * @param string $rfc
+     * @return Utilities\DownloadXmlResult
+     * @see https://wiki.finkok.com/doku.php?id=get_xml
+     */
+    public function retentionDownload(string $uuid, string $rfc): Utilities\DownloadXmlResult
+    {
+        $command = new Utilities\DownloadXmlCommand($uuid, $rfc, 'R');
+        $service = new Utilities\DownloadXmlService($this->settings());
+        return $service->downloadXml($command);
+    }
+
 }

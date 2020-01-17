@@ -162,6 +162,9 @@ Su cancelación es inmediata (al contrario de la solicitud de cancelación actua
 
 * `stamp(Retentions\StampCommand $command): Retentions\StampResult`
 
+Para descargar una retención debe usar el servicio `Utilerias`, método `get_xml` que está implementado previamente.
+Igualmente se ha creado el método `QuickFinkok::retentionDownload($uuid, $rfc)` para simplificar su implementación.
+
 ### Ayuda para firmado XML para SAT y Finkok
 
 Esta librería implementa el firmado CSD de los mensajes con el SAT para Cancelar, Obtener UUID relacionados
