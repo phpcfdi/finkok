@@ -161,6 +161,7 @@ Los CFDI de Retenciones e información de pagos (RET) siguen un estándar más p
 Su cancelación es inmediata (al contrario de la solicitud de cancelación actual).
 
 * `stamp(Retentions\StampCommand $command): Retentions\StampResult`
+* `stamped(Retentions\StampedCommand $command): Retentions\StampedResult`
 
 Para descargar una retención debe usar el servicio `Utilerias`, método `get_xml` que está implementado previamente.
 Igualmente se ha creado el método `QuickFinkok::retentionDownload($uuid, $rfc)` para simplificar su implementación.
