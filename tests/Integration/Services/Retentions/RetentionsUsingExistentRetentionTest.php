@@ -25,6 +25,18 @@ final class RetentionsUsingExistentRetentionTest extends RetentionsTestCase
         );
     }
 
+    public function testStampValidPreCfdiRetentionsTwice(): void
+    {
+        $currentResult = $this->currentRetentionsStampResult();
+        $preCfdi = $this->currentRetentionsPreCfdi(); // this is the same precfdi used on currentStampResult
+
+        $repeatedResult = $this->quickFinkok->retentionStamp($preCfdi);
+
+        $this->assertSame($currentResult->uuid(), $repeatedResult->uuid(), 'UUID on first and second stamp must match');
+        $this->assertSame('Comprobante timbrado previamente', $repeatedResult->statusCode());
+        $this->assertSame('El CFDI contiene un timbre previo', $repeatedResult->alerts()->first()->message());
+    }
+
     public function testStamped(): void
     {
         $currentResult = $this->currentRetentionsStampResult();
@@ -32,6 +44,24 @@ final class RetentionsUsingExistentRetentionTest extends RetentionsTestCase
 
         // consume quickfinkok to simplify the execution
         $downloadResult = $this->quickFinkok->retentionStamped($preCfdi);
+
+        $this->assertXmlStringEqualsXmlString(
+            $currentResult->xml(),
+            $downloadResult->xml(),
+            'Created and downloaded RET must be XML equal'
+        );
+        $this->assertSame(
+            $currentResult->xml(),
+            $downloadResult->xml(),
+            'Created and downloaded RET must be identical'
+        );
+    }
+
+    public function testDownloadRetentionRecentlyCreated(): void
+    {
+        $currentResult = $this->currentRetentionsStampResult();
+
+        $downloadResult = $this->quickFinkok->retentionDownload($currentResult->uuid(), 'EKU9003173C9');
 
         $this->assertXmlStringEqualsXmlString(
             $currentResult->xml(),
