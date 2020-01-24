@@ -40,4 +40,12 @@ EOT;
         $this->assertSame('12345678-1234-1234-1234-000000000001', $command->uuid());
         $this->assertSame('123.45', $command->total());
     }
+
+    public function testConstructWithOtherXml(): void
+    {
+        $fakeCfdi = '<xml/>';
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('Unable to obtain the expression values');
+        GetSatStatusExtractor::fromXmlString($fakeCfdi);
+    }
 }
