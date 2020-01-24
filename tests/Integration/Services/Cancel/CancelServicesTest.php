@@ -50,8 +50,9 @@ class CancelServicesTest extends IntegrationTestCase
             }
             // do not try again if a SAT issue is **not** found
             // 708: Fink ok cannot connect to SAT
+            // 300: SAT authentication cancellation service fail
             // 205: SAT does not have the uuid available for cancellation
-            if ('708' !== $result->statusCode() && '205' !== $document->documentStatus()) {
+            if (! in_array($result->statusCode(), ['708', '300'], true) && '205' !== $document->documentStatus()) {
                 break;
             }
             // do not try again if in the loop for more than allowed
