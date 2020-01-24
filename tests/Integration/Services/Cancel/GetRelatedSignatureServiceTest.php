@@ -81,4 +81,29 @@ class GetRelatedSignatureServiceTest extends IntegrationTestCase
         $this->assertSame($first->uuid(), $result->children()->first()->uuid());
         $this->assertEmpty($result->error());
     }
+
+    /**
+     * Use this method to test specifics UUID, useful for debugging
+     * You have to fill the UUIDS, is expected that 2 relates to 1 and 3 relates to 2, as in previous test
+     *
+     * To enable this test you must add "@test" annotation
+     */
+    public function manualConsumeServiceWithRelated(): void
+    {
+        $first = '4F72BDE6-36FD-4D88-B740-78561BA9B6B3';
+        $second = '527002DF-49FB-4380-886F-5667900722AD';
+        $third = '2A403C20-1F8B-43E4-B15F-96E19CDB6760';
+
+        $command = $this->createGetRelatedSignatureCommand($second);
+        $service = $this->createService();
+        $result = $service->getRelatedSignature($command);
+
+        $this->assertNotEmpty($result->parents()->first()->uuid(), 'Did not receive the parent UUID');
+        $this->assertSame($third, $result->parents()->first()->uuid());
+
+        $this->assertNotEmpty($result->children()->first()->uuid(), 'Did not receive the child UUID');
+        $this->assertSame($first, $result->children()->first()->uuid());
+
+        $this->assertEmpty($result->error(), 'The result must not contain any error');
+    }
 }
