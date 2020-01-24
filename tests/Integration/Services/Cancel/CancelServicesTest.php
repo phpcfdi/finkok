@@ -29,7 +29,6 @@ class CancelServicesTest extends IntegrationTestCase
         $this->assertStringStartsWith('Cancelable ', $beforeCancelStatus->cancellable());
 
         // Create cancel signature command from capsule
-        $command = $this->createCancelSignatureCommandFromUuid($cfdi->uuid());
         $service = new CancelSignatureService($settings);
 
         // evaluate if known response was 205 or 708
@@ -37,6 +36,8 @@ class CancelServicesTest extends IntegrationTestCase
         // elapsed from stamping and cancelling is often more than 2 minutes
         $repeatUntil = strtotime('now +5 minutes');
         do {
+            // build command on every request
+            $command = $this->createCancelSignatureCommandFromUuid($cfdi->uuid());
             // perform cancel
             $result = $service->cancelSignature($command);
             $document = $result->documents()->first();
