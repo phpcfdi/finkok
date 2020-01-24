@@ -52,14 +52,19 @@ class AssignServiceTest extends RegistrationIntegrationTestCase
                 $switchService->switch(new SwitchCommand($rfc, CustomerType::prepaid()))->success(),
                 'Unable to change the customer type to prepaid'
             );
+            $customer = $this->findCustomerOrFail($rfc);
         }
+        $this->assertTrue($customer->customerType()->isPrepaid());
+
         // set credits to zero.
         if ($customer->credit() > 0) {
             $this->assertTrue(
                 $service->assign(new AssignCommand($rfc, -1 * $customer->credit()))->success(),
                 'Unable to set current credits to zero'
             );
+            $customer = $this->findCustomerOrFail($rfc);
         }
+        $this->assertSame(0, $customer->credit());
     }
 
     public function testAssignServiceToPrepaidAccount(): void
