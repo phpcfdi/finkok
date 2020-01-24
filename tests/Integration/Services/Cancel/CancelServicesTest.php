@@ -42,10 +42,11 @@ class CancelServicesTest extends IntegrationTestCase
             $result = $service->cancelSignature($command);
             $document = $result->documents()->first();
             if ('300' === $result->statusCode()) {
-                $this->fail('StatusCode 300 was fixed by Finkok, ticket #17743');
+                // 300: SAT authentication cancellation service fail
+                $this->markTestSkipped('StatusCode 300: SAT authentication service fail. See tickets #17743 & #41594');
             }
             if ('304' === $result->statusCode()) {
-                $this->fail('StatusCode 304: "Certificado revocado o caduco", do you must change the CSD?');
+                $this->fail('StatusCode 304: Certificado revocado o caduco. Do you must change the CSD?');
             }
             // do not try again if a SAT issue is **not** found
             // 708: Fink ok cannot connect to SAT
