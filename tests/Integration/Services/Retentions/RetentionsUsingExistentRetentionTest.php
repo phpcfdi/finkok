@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PhpCfdi\Finkok\Tests\Integration\Services\Retentions;
 
 use PhpCfdi\Finkok\QuickFinkok;
+use PhpCfdi\Finkok\Services\Retentions\StampResult;
 
 /**
  * This class uses a currently signed cfdi to perform test that require this to exists
@@ -14,6 +15,28 @@ final class RetentionsUsingExistentRetentionTest extends RetentionsTestCase
 {
     /** @var QuickFinkok */
     private $quickFinkok;
+
+    /** @var string|null */
+    protected static $staticCurrentStampPrecfdi;
+
+    /** @var StampResult|null */
+    protected static $staticCurrentStampResult;
+
+    protected function currentRetentionsPreCfdi(): string
+    {
+        if (null === static::$staticCurrentStampPrecfdi) {
+            static::$staticCurrentStampPrecfdi = $this->newRetentionsPreCfdi();
+        }
+        return static::$staticCurrentStampPrecfdi;
+    }
+
+    protected function currentRetentionsStampResult(): StampResult
+    {
+        if (null === static::$staticCurrentStampResult) {
+            static::$staticCurrentStampResult = $this->stampRetentionPreCfdi($this->currentRetentionsPreCfdi());
+        }
+        return static::$staticCurrentStampResult;
+    }
 
     protected function setUp(): void
     {
@@ -73,5 +96,12 @@ final class RetentionsUsingExistentRetentionTest extends RetentionsTestCase
             $downloadResult->xml(),
             'Created and downloaded RET must be identical'
         );
+    }
+
+    public function testObtainSatStatus(): void
+    {
+        $currentResult = $this->currentRetentionsStampResult();
+        $status = $this->quickFinkok->satStatusXml($currentResult->xml());
+        $this->assertStringStartsWith('S - ', $status->cfdi());
     }
 }

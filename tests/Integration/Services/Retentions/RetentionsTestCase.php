@@ -12,28 +12,6 @@ use PhpCfdi\Finkok\Tests\Integration\IntegrationTestCase;
 
 abstract class RetentionsTestCase extends IntegrationTestCase
 {
-    /** @var string|null */
-    protected static $staticCurrentStampPrecfdi;
-
-    /** @var StampResult|null */
-    protected static $staticCurrentStampResult;
-
-    protected function currentRetentionsPreCfdi(): string
-    {
-        if (null === static::$staticCurrentStampPrecfdi) {
-            static::$staticCurrentStampPrecfdi = $this->newRetentionsPreCfdi();
-        }
-        return static::$staticCurrentStampPrecfdi;
-    }
-
-    protected function currentRetentionsStampResult(): StampResult
-    {
-        if (null === static::$staticCurrentStampResult) {
-            static::$staticCurrentStampResult = $this->stampRetentionPreCfdi($this->currentRetentionsPreCfdi());
-        }
-        return static::$staticCurrentStampResult;
-    }
-
     protected function newRetentionsPreCfdi(): string
     {
         return (new RandomPreCfdiRetention())->createValid();

@@ -4,11 +4,17 @@ declare(strict_types=1);
 
 namespace PhpCfdi\Finkok\Tests\Integration\Services\Retentions;
 
+use PhpCfdi\Finkok\Services\Retentions\StampCommand;
+
 final class StampServiceTest extends RetentionsTestCase
 {
     public function testStampValidPreCfdiRetentions(): void
     {
-        $result = $this->currentRetentionsStampResult();
+        $preCfdi = $this->newRetentionsPreCfdi();
+        $command = new StampCommand($preCfdi);
+        $service = $this->createStampService();
+        $result = $service->stamp($command);
+
         $this->assertSame('Comprobante timbrado satisfactoriamente', $result->statusCode());
         $this->assertNotEmpty($result->xml());
         $this->assertNotEmpty($result->uuid());

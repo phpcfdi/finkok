@@ -162,6 +162,7 @@ Su cancelación es inmediata (al contrario de la solicitud de cancelación actua
 
 * `stamp(Retentions\StampCommand $command): Retentions\StampResult`
 * `stamped(Retentions\StampedCommand $command): Retentions\StampedResult`
+* `cancelSignature(Retentions\CancelSignatureCommand $command): Retentions\StampedResult`
 
 Para descargar una retención debe usar el servicio `Utilerias`, método `get_xml` que está implementado previamente.
 Igualmente se ha creado el método `QuickFinkok::retentionDownload($uuid, $rfc)` para simplificar su implementación.

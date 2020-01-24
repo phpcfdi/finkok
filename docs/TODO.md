@@ -28,6 +28,11 @@
   B hace la consulta de pendientes y ya no ve el UUID
   Se consulta el estado del UUID y está cancelado
 
+- Las pruebas de servicios no están verificando a dónde se está enviando la solicitud, por lo que podría existir un
+  error al crear el endpoint, el error saldría a la luz en pruebas de integración pero no en pruebas unitarias.
+  Se puede agregar un código como el siguiente (en `...\Tests\Unit\Services\Retentions\CancelSignatureServiceTest`):
+  `$this->assertStringEndsWith(Services::retentions()->value(), $soapFactory->latestWsdlLocation);`
+
 ## Documentación
 
 - Servicios:

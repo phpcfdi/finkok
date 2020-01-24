@@ -525,4 +525,23 @@ class QuickFinkok
         $service = new Retentions\StampedService($this->settings());
         return $service->stamped($command);
     }
+
+    /**
+     * Este método es el encargado de cancelar un CFDIs de retenciones emitido por medio de los web services de Finkok
+     * Durante el proceso no se envía ningún CSD a Finkok y la solicitud firmada es creada usando los datos del CSD
+     *
+     * @param Credential $credential
+     * @param string $uuid
+     * @return Retentions\CancelSignatureResult
+     * @see https://wiki.finkok.com/doku.php?id=cancel_signature_method_retentions
+     * @see https://wiki.finkok.com/doku.php?id=cancel_method_retentions
+     */
+    public function retentionCancel(Credential $credential, string $uuid): Retentions\CancelSignatureResult
+    {
+        $signer = new Helpers\CancelSigner([$uuid]);
+        $signedRequest = $signer->signRetention($credential);
+        $command = new Retentions\CancelSignatureCommand($signedRequest);
+        $service = new Retentions\CancelSignatureService($this->settings());
+        return $service->cancelSignature($command);
+    }
 }
