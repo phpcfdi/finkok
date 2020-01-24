@@ -37,7 +37,9 @@ class AssignServiceTest extends RegistrationIntegrationTestCase
                 $switchService->switch(new SwitchCommand($rfc, CustomerType::ondemand()))->success(),
                 'Unable to change the customer type to on-demand'
             );
+            $customer = $this->findCustomerOrFail($rfc);
         }
+        $this->assertTrue($customer->customerType()->isOndemand());
     }
 
     public function resetCustomerAccountToPrepaidWithZeroCredits(): void
