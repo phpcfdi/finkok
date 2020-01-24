@@ -257,7 +257,7 @@ and licensed for use under the MIT License (MIT). Please see [LICENSE][] for mor
 [source]: https://github.com/phpcfdi/finkok
 [release]: https://github.com/phpcfdi/finkok/releases
 [license]: https://github.com/phpcfdi/finkok/blob/master/LICENSE
-[build]: https://travis-ci.org/phpcfdi/finkok?branch=master
+[build]: https://travis-ci.com/phpcfdi/finkok?branch=master
 [quality]: https://scrutinizer-ci.com/g/phpcfdi/finkok/
 [coverage]: https://scrutinizer-ci.com/g/phpcfdi/finkok/code-structure/master/code-coverage/src
 [downloads]: https://packagist.org/packages/phpcfdi/finkok
@@ -265,7 +265,7 @@ and licensed for use under the MIT License (MIT). Please see [LICENSE][] for mor
 [badge-source]: https://img.shields.io/badge/source-phpcfdi/finkok-blue?style=flat-square
 [badge-release]: https://img.shields.io/github/release/phpcfdi/finkok?style=flat-square
 [badge-license]: https://img.shields.io/github/license/phpcfdi/finkok?style=flat-square
-[badge-build]: https://img.shields.io/travis/phpcfdi/finkok/master?style=flat-square
+[badge-build]: https://img.shields.io/travis/com/phpcfdi/finkok/master?style=flat-square
 [badge-quality]: https://img.shields.io/scrutinizer/g/phpcfdi/finkok/master?style=flat-square
 [badge-coverage]: https://img.shields.io/scrutinizer/coverage/g/phpcfdi/finkok/master?style=flat-square
 [badge-downloads]: https://img.shields.io/packagist/dt/phpcfdi/finkok?style=flat-square
