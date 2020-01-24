@@ -97,11 +97,4 @@ final class RetentionsUsingExistentRetentionTest extends RetentionsTestCase
             'Created and downloaded RET must be identical'
         );
     }
-
-    public function testObtainSatStatus(): void
-    {
-        $currentResult = $this->currentRetentionsStampResult();
-        $status = $this->quickFinkok->satStatusXml($currentResult->xml());
-        $this->assertStringStartsWith('S - ', $status->cfdi());
-    }
 }
