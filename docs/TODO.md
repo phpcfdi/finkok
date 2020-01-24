@@ -1,5 +1,11 @@
 # phpcfdi/finkok To Do List
 
+- Investigar cómo validar firma en acuses y respuestas del SAT
+
+- Crear un namespace común porque hay clases que están interrelacionadas entre el estampado y cancelación
+  de cfdi y de retenciones. Así como las clases abstractas de colecciones y resultados.
+  Esto creará una incompatilidad con versiones previas.
+
 - Agregar la integración de CFDI de retenciones y pagos
 
 - Poder transformar un objeto de tipo `GetSatStatusResult` a `PhpCfdi\SatEstadoCfdi\CfdiStatus`.
@@ -37,6 +43,7 @@
 
 ## Documentación
 
+- Documentar los métodos de `QuickFinkok`
 - Servicios:
     - Servicios que reintentan por errores de Finkok
     - Parámetros added y coupon de registration add
