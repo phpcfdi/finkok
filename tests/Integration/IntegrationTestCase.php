@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PhpCfdi\Finkok\Tests\Integration;
 
-use CfdiUtils\Cfdi;
 use DateTimeImmutable;
 use PhpCfdi\Finkok\Helpers\CancelSigner;
+use PhpCfdi\Finkok\Helpers\GetSatStatusExtractor;
 use PhpCfdi\Finkok\Services\Cancel\CancelSignatureCommand;
 use PhpCfdi\Finkok\Services\Cancel\GetSatStatusCommand;
 use PhpCfdi\Finkok\Services\Cancel\GetSatStatusResult;
@@ -74,13 +74,7 @@ abstract class IntegrationTestCase extends TestCase
 
     public function createGetSatStatusCommandFromCfdiContents(string $xmlContents): GetSatStatusCommand
     {
-        $cfdiReader = Cfdi::newFromString($xmlContents)->getQuickReader();
-        return new GetSatStatusCommand(
-            $cfdiReader->emisor['Rfc'],
-            $cfdiReader->receptor['Rfc'],
-            $cfdiReader->complemento->timbreFiscalDigital['uuid'],
-            $cfdiReader['total']
-        );
+        return GetSatStatusExtractor::fromXmlString($xmlContents)->buildCommand();
     }
 
     protected function createCancelSignatureCommandFromUuid(
