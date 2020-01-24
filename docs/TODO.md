@@ -2,6 +2,8 @@
 
 - Agregar la integración de CFDI de retenciones y pagos
 
+- Poder transformar un objeto de tipo `GetSatStatusResult` a `PhpCfdi\SatEstadoCfdi\CfdiStatus`.
+
 - Los reportes que devuelven una cuenta deberían retornar un entero
 
 - La forma en que están hechos los objetos result es mezclada, algunas propiedades las obtiene cuando se solicitan
