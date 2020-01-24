@@ -39,7 +39,7 @@
     "require-dev": {
         "ext-fileinfo": "*",
         "eclipxe/cfdiutils": "^2.10",
-        "phpunit/phpunit": "^8.4",
+        "phpunit/phpunit": "^8.5",
         "squizlabs/php_codesniffer": "^3.0",
         "friendsofphp/php-cs-fixer": "^2.4",
         "phpstan/phpstan": "^0.12",
