@@ -12,7 +12,7 @@ Nos apegamos a [SEMVER](SEMVER.md), revisa la información para entender mejor e
   no debe usar la opción de nulo, fue puesta para compatibilidad con versiones previas a `0.2.2`.
   No así el las fachadas `Finkok` y `QuickFinkok`.
 
-## Version UNRELEASED
+## Version 0.2.6 2020-01-24
 
 - Documentar la solución del problema de acuse recibido al cancelar y al solicitar. Finkok ticket: `#41435`. 
 - Se agrega el método `StampingAlert::extraInfo()` para obtener la respuesta de la incidencia en `ExtraInfo`.
@@ -22,6 +22,19 @@ Nos apegamos a [SEMVER](SEMVER.md), revisa la información para entender mejor e
 - Se crean fábricas básicas de CFDI RET para poder testear.
 - Se agregan métodos de retenciones (comando, resultado, servicio y método en `QuickFinkok`):
     - Timbrado de retención: La respuesta tiene campos idénticos al timbrado de CFDI.
+    - Cancelación de retención: La respuesta tiene campos idénticos y adicionales al timbrado de CFDI.
+    - Para poder cancelar un RET, fue necesario actualizar a `phpcfdi/xml-cancelacion: ^1.1.0`.
+- El objeto `GetSatStatusExtractor` podía procesar CFDI 3.2, CFDI 3.3 y RET 1.0, sin embargo el método `get_sat_status`
+  sólo puede trabajar con CFDI 3.2, CFDI 3.3, se hacen las adecuaciones correspondientes.
+- Desarrollo:
+    - Se crearon pruebas unitarias para `QueryPendingCommand` y `QueryPendingResult`.
+    - Se reconstruye `createGetSatStatusCommandFromCfdiContents` para que use el helper `GetSatStatusExtractor`.
+    - Se mejoran las acciones `resetCustomerAccountToOnDemand` y `resetCustomerAccountToPrepaidWithZeroCredits`.
+    - Se actualiza de `phpstan/phpstan-shim: ^0.11` a `phpstan/phpstan: ^0.12`.
+    - Se actualiza a `phpunit/phpunit: ^8.5` porque el XSD de la versión previa no está disponible.
+    - Se crean nuevas tareas de desarrollo y mejora. 
+- Issues: A pesar de haber impementado la Cancelación de retención, el test de integración está fallando por un
+  error en el servicio de pruebas del SAT.
 
 ## Version 0.2.5 2020-01-14
 
