@@ -29,7 +29,6 @@ class CancelServicesTest extends IntegrationTestCase
         $this->assertStringStartsWith('Cancelable ', $beforeCancelStatus->cancellable());
 
         // Create cancel signature command from capsule
-        $command = $this->createCancelSignatureCommandFromUuid($cfdi->uuid());
         $service = new CancelSignatureService($settings);
 
         // evaluate if known response was 205 or 708
@@ -37,19 +36,23 @@ class CancelServicesTest extends IntegrationTestCase
         // elapsed from stamping and cancelling is often more than 2 minutes
         $repeatUntil = strtotime('now +5 minutes');
         do {
+            // build command on every request
+            $command = $this->createCancelSignatureCommandFromUuid($cfdi->uuid());
             // perform cancel
             $result = $service->cancelSignature($command);
             $document = $result->documents()->first();
             if ('300' === $result->statusCode()) {
-                $this->fail('StatusCode 300 was fixed by Finkok, ticket #17743');
+                // 300: SAT authentication cancellation service fail
+                $this->markTestSkipped('StatusCode 300: SAT authentication service fail. See tickets #17743 & #41594');
             }
             if ('304' === $result->statusCode()) {
-                $this->fail('StatusCode 304: "Certificado revocado o caduco", do you must change the CSD?');
+                $this->fail('StatusCode 304: Certificado revocado o caduco. Do you must change the CSD?');
             }
             // do not try again if a SAT issue is **not** found
             // 708: Fink ok cannot connect to SAT
+            // 300: SAT authentication cancellation service fail
             // 205: SAT does not have the uuid available for cancellation
-            if ('708' !== $result->statusCode() && '205' !== $document->documentStatus()) {
+            if (! in_array($result->statusCode(), ['708', '300'], true) && '205' !== $document->documentStatus()) {
                 break;
             }
             // do not try again if in the loop for more than allowed

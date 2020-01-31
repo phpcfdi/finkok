@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PhpCfdi\Finkok\Tests\Integration;
 
-use CfdiUtils\Cfdi;
 use DateTimeImmutable;
 use PhpCfdi\Finkok\Helpers\CancelSigner;
+use PhpCfdi\Finkok\Helpers\GetSatStatusExtractor;
 use PhpCfdi\Finkok\Services\Cancel\CancelSignatureCommand;
 use PhpCfdi\Finkok\Services\Cancel\GetSatStatusCommand;
 use PhpCfdi\Finkok\Services\Cancel\GetSatStatusResult;
@@ -21,8 +21,11 @@ use RuntimeException;
 
 abstract class IntegrationTestCase extends TestCase
 {
-    /** @var array<mixed> */
-    protected static $statics = [];
+    /** @var StampingResult|null */
+    protected static $staticCurrentStampingResult = null;
+
+    /** @var StampingCommand|null */
+    protected static $staticCurrentStampingCommand = null;
 
     public function newStampingCommand(): StampingCommand
     {
@@ -36,10 +39,10 @@ abstract class IntegrationTestCase extends TestCase
 
     public function currentStampingCommand(): StampingCommand
     {
-        if (! isset(static::$statics['stampingCommand'])) {
-            static::$statics['stampingCommand'] = $this->newStampingCommand();
+        if (null === static::$staticCurrentStampingCommand) {
+            static::$staticCurrentStampingCommand = $this->newStampingCommand();
         }
-        return static::$statics['stampingCommand'];
+        return static::$staticCurrentStampingCommand;
     }
 
     public function quickStamp(StampingCommand $stampingCommand): StampingResult
@@ -63,21 +66,15 @@ abstract class IntegrationTestCase extends TestCase
      */
     public function currentCfdi(): StampingResult
     {
-        if (! isset(static::$statics['cfdi'])) {
-            static::$statics['cfdi'] = $this->quickStamp($this->currentStampingCommand());
+        if (null === static::$staticCurrentStampingResult) {
+            static::$staticCurrentStampingResult = $this->quickStamp($this->currentStampingCommand());
         }
-        return static::$statics['cfdi'];
+        return static::$staticCurrentStampingResult;
     }
 
     public function createGetSatStatusCommandFromCfdiContents(string $xmlContents): GetSatStatusCommand
     {
-        $cfdiReader = Cfdi::newFromString($xmlContents)->getQuickReader();
-        return new GetSatStatusCommand(
-            $cfdiReader->emisor['Rfc'],
-            $cfdiReader->receptor['Rfc'],
-            $cfdiReader->complemento->timbreFiscalDigital['uuid'],
-            $cfdiReader['total']
-        );
+        return GetSatStatusExtractor::fromXmlString($xmlContents)->buildCommand();
     }
 
     protected function createCancelSignatureCommandFromUuid(

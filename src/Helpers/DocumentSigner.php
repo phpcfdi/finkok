@@ -54,7 +54,7 @@ class DocumentSigner
     {
         $document = $this->createDocumentToSign();
         $this->signDocumentUsingCredential($document, $credential);
-        return $document->saveXML();
+        return strval($document->saveXML());
     }
 
     public function createDocumentToSign(): DOMDocument

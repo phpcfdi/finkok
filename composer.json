@@ -31,19 +31,19 @@
         "psr/log": "^1.1",
         "eclipxe/enum": "^0.2.0",
         "phpcfdi/credentials": "^1.0.1",
-        "phpcfdi/xml-cancelacion": "^1.0.1",
+        "phpcfdi/xml-cancelacion": "^1.1.0",
         "robrichards/xmlseclibs": "^3.0.4",
         "eclipxe/micro-catalog": "^0.1.0",
         "phpcfdi/cfdi-expresiones": "^3.0"
     },
     "require-dev": {
         "ext-fileinfo": "*",
+        "symfony/dotenv": "^5.0",
         "eclipxe/cfdiutils": "^2.10",
-        "phpunit/phpunit": "^8.4",
+        "phpunit/phpunit": "^8.5",
         "squizlabs/php_codesniffer": "^3.0",
         "friendsofphp/php-cs-fixer": "^2.4",
-        "phpstan/phpstan": "^0.12",
-        "symfony/dotenv": "^5.0"
+        "phpstan/phpstan": "^0.12"
     },
     "autoload": {
         "psr-4": {
@@ -71,7 +71,7 @@
             "vendor/bin/phpstan analyse --no-progress --verbose --level max src/ tests/"
         ],
         "dev:coverage": [
-            "@php -dzend_extension=xdebug.so vendor/bin/phpunit --coverage-text --coverage-html build/coverage/html/"
+            "@php -dzend_extension=xdebug.so vendor/bin/phpunit --verbose --coverage-html build/coverage/html/"
         ]
     },
     "scripts-descriptions": {

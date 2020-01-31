@@ -45,4 +45,10 @@ class CancelSigner
         $helper = new XmlCancelacionHelper(XmlCancelacionCredentials::createWithPhpCfdiCredential($credential));
         return $helper->signCancellationUuids($this->uuids(), $this->dateTime());
     }
+
+    public function signRetention(Credential $credential): string
+    {
+        $helper = new XmlCancelacionHelper(XmlCancelacionCredentials::createWithPhpCfdiCredential($credential));
+        return $helper->signRetentionCancellationUuids($this->uuids(), $this->dateTime());
+    }
 }

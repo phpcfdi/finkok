@@ -13,6 +13,7 @@ use PhpCfdi\Finkok\Definitions\SignedDocumentFormat;
 use PhpCfdi\Finkok\Services\Cancel;
 use PhpCfdi\Finkok\Services\Manifest;
 use PhpCfdi\Finkok\Services\Registration;
+use PhpCfdi\Finkok\Services\Retentions;
 use PhpCfdi\Finkok\Services\Stamping;
 use PhpCfdi\Finkok\Services\Utilities;
 
@@ -84,7 +85,8 @@ class QuickFinkok
     }
 
     /**
-     * Obtiene el XML de un UUID timbrado en Finkok, solo es posible recuperar los timbrados en los últimos 3 meses
+     * Obtiene el XML de un UUID timbrado en Finkok de tipo CFDI 3.3
+     * solo es posible recuperar los timbrados en los últimos 3 meses.
      *
      * @param string $uuid
      * @param string $rfc
@@ -481,5 +483,65 @@ class QuickFinkok
         $command = new Manifest\GetSignedContractsCommand($snid, $rfc, $format);
         $service = new Manifest\GetSignedContractsService($this->settings());
         return $service->getSignedContracts($command);
+    }
+
+    public function retentionStamp(string $xml): Retentions\StampResult
+    {
+        $command = new Retentions\StampCommand($xml);
+        $service = new Retentions\StampService($this->settings());
+        return $service->stamp($command);
+    }
+
+    /**
+     * Obtiene el XML de un UUID timbrado en Finkok de tipo CFDI de retenciones e información de pagos
+     * solo es posible recuperar los timbrados en los últimos 3 meses.
+     *
+     * @param string $uuid
+     * @param string $rfc
+     * @return Utilities\DownloadXmlResult
+     * @see https://wiki.finkok.com/doku.php?id=get_xml
+     */
+    public function retentionDownload(string $uuid, string $rfc): Utilities\DownloadXmlResult
+    {
+        $command = new Utilities\DownloadXmlCommand($uuid, $rfc, 'R');
+        $service = new Utilities\DownloadXmlService($this->settings());
+        return $service->downloadXml($command);
+    }
+
+    /**
+     * Este método regresa la información de un XML de retenciones e información de pagos ya timbrado previamente y
+     * que por algún motivo no se pudo recuperar en la primera petición que se realizó,
+     * con este método se puede recuperar el UUID y el XML timbrado
+     *
+     * Nota: el método no está documentado en Finkok
+     *
+     * @param string $preCfdi
+     * @return Retentions\StampedResult
+     * @see https://wiki.finkok.com/doku.php?id=retentions
+     */
+    public function retentionStamped(string $preCfdi): Retentions\StampedResult
+    {
+        $command = new Retentions\StampedCommand($preCfdi);
+        $service = new Retentions\StampedService($this->settings());
+        return $service->stamped($command);
+    }
+
+    /**
+     * Este método es el encargado de cancelar un CFDIs de retenciones emitido por medio de los web services de Finkok
+     * Durante el proceso no se envía ningún CSD a Finkok y la solicitud firmada es creada usando los datos del CSD
+     *
+     * @param Credential $credential
+     * @param string $uuid
+     * @return Retentions\CancelSignatureResult
+     * @see https://wiki.finkok.com/doku.php?id=cancel_signature_method_retentions
+     * @see https://wiki.finkok.com/doku.php?id=cancel_method_retentions
+     */
+    public function retentionCancel(Credential $credential, string $uuid): Retentions\CancelSignatureResult
+    {
+        $signer = new Helpers\CancelSigner([$uuid]);
+        $signedRequest = $signer->signRetention($credential);
+        $command = new Retentions\CancelSignatureCommand($signedRequest);
+        $service = new Retentions\CancelSignatureService($this->settings());
+        return $service->cancelSignature($command);
     }
 }

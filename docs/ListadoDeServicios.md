@@ -1,3 +1,4 @@
+# Listado de servicios de Finkok
 
 ## Timbrado de CFDI
 
@@ -44,6 +45,7 @@ Servicios para trabajar cancelaciones con CFDI de otro PAC
 - [X] `add`: Agregar un cliente que va a timbrar bajo la cuenta de un socio de negocios de Finkok
 - [X] `edit`: Editar el estatus de un cliente, como lo es suspender o activar
 - [X] `get`: Listado o el status del RFC Emisor que este ingresando y tenga registrado en su cuenta
+- [X] `switch`: Cambia el tipo de cliente de prepago a ilimitado y viceversa
 
 ## Tokens
 
@@ -53,9 +55,11 @@ Servicios para trabajar cancelaciones con CFDI de otro PAC
 
 ## Retenciones
 
-- [ ] `Stamp`: Firma un CFDI RET, si fue firmado previamente retorna (a veces) el timbrado previo.
-- [ ] `Stamped`:  Regresa la información de un XML timbrado previamente.
-- [ ] `cancel_signature`: (implementado en entorno demo)
+Estos servicios son de CFDI de retenciones e información de pagos (RET).
+
+- [X] `stamp`: Firma un CFDI RET, si fue firmado previamente retorna el timbrado previo.
+- [ ] `stamped`:  Regresa la información de un XML timbrado previamente.
+- [ ] `cancel_signature`: Cancela un CFDI RET (el modelo de cancelación es el de CFDI 3.2).
 - [ ] `get_receipt`: Devuelve el acuse de recibo asociado a un UUID.
 
 ## Manifiesto de Finkok

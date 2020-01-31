@@ -29,9 +29,14 @@ class StampingResult extends AbstractResult
         return $this->get('UUID');
     }
 
-    public function faultstring(): string
+    public function faultString(): string
     {
         return $this->get('faultstring');
+    }
+
+    public function faultCode(): string
+    {
+        return $this->get('faultcode');
     }
 
     public function date(): string

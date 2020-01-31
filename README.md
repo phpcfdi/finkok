@@ -155,6 +155,18 @@ respectivamente.
 * `getContracts(Manifest\GetContractsCommand $command): Manifest\GetContractsResult`
 * `signContracts(Manifest\SignContractsCommand $command): Manifest\SignContractsResult`
 
+### Retenciones
+
+Los CFDI de Retenciones e información de pagos (RET) siguen un estándar más parecido a CFDI 3.2.
+Su cancelación es inmediata (al contrario de la solicitud de cancelación actual).
+
+* `stamp(Retentions\StampCommand $command): Retentions\StampResult`
+* `stamped(Retentions\StampedCommand $command): Retentions\StampedResult`
+* `cancelSignature(Retentions\CancelSignatureCommand $command): Retentions\StampedResult`
+
+Para descargar una retención debe usar el servicio `Utilerias`, método `get_xml` que está implementado previamente.
+Igualmente se ha creado el método `QuickFinkok::retentionDownload($uuid, $rfc)` para simplificar su implementación.
+
 ### Ayuda para firmado XML para SAT y Finkok
 
 Esta librería implementa el firmado CSD de los mensajes con el SAT para Cancelar, Obtener UUID relacionados
@@ -218,7 +230,8 @@ Durante el proceso de implementación he creado diversas notas y documentos:
     - [X] [Consumir stamp para generar un doble estampado no devuelve los datos](docs/issues/StampServiceDobleEstampado.md)
     - [X] Falta servicio que no requiera CSD/FIEL para aceptar o rechazar una solicitud de cancelación
     - [X] Falta servicio que no requiera CSD/FIEL para obtener los CFDI relacionados
-    - [ ] El acuse de cancelación entregado al cancelar y al solicitar el acuse no coinciden.
+    - [X] [El acuse de cancelación entregado al cancelar y al solicitar el acuse no coinciden](docs/issues/AcuseCancelacionNoCoincidente.md)
+    - [ ] [Error de cancelación de retenciones 1308 - Certificado revocado o caduco](docs/issues/CancelacionRetencionesError1308.md)
 
 ## Compatilibilidad
 
@@ -245,7 +258,7 @@ and licensed for use under the MIT License (MIT). Please see [LICENSE][] for mor
 [source]: https://github.com/phpcfdi/finkok
 [release]: https://github.com/phpcfdi/finkok/releases
 [license]: https://github.com/phpcfdi/finkok/blob/master/LICENSE
-[build]: https://travis-ci.org/phpcfdi/finkok?branch=master
+[build]: https://travis-ci.com/phpcfdi/finkok?branch=master
 [quality]: https://scrutinizer-ci.com/g/phpcfdi/finkok/
 [coverage]: https://scrutinizer-ci.com/g/phpcfdi/finkok/code-structure/master/code-coverage/src
 [downloads]: https://packagist.org/packages/phpcfdi/finkok
@@ -253,7 +266,7 @@ and licensed for use under the MIT License (MIT). Please see [LICENSE][] for mor
 [badge-source]: https://img.shields.io/badge/source-phpcfdi/finkok-blue?style=flat-square
 [badge-release]: https://img.shields.io/github/release/phpcfdi/finkok?style=flat-square
 [badge-license]: https://img.shields.io/github/license/phpcfdi/finkok?style=flat-square
-[badge-build]: https://img.shields.io/travis/phpcfdi/finkok/master?style=flat-square
+[badge-build]: https://img.shields.io/travis/com/phpcfdi/finkok/master?style=flat-square
 [badge-quality]: https://img.shields.io/scrutinizer/g/phpcfdi/finkok/master?style=flat-square
 [badge-coverage]: https://img.shields.io/scrutinizer/coverage/g/phpcfdi/finkok/master?style=flat-square
 [badge-downloads]: https://img.shields.io/packagist/dt/phpcfdi/finkok?style=flat-square

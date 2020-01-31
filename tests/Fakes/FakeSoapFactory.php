@@ -14,6 +14,9 @@ class FakeSoapFactory extends SoapFactory
     /** @var FakeSoapCaller */
     public $latestSoapCaller;
 
+    /** @var string */
+    public $latestWsdlLocation;
+
     /** @var stdClass */
     public $preparedResult;
 
@@ -30,6 +33,7 @@ class FakeSoapFactory extends SoapFactory
         $soapCaller = new FakeSoapCaller($this->createSoapClient($wsdlLocation), $defaultOptions);
         $soapCaller->preparedResult = $this->preparedResult;
         $this->latestSoapCaller = $soapCaller;
+        $this->latestWsdlLocation = $wsdlLocation;
         return $soapCaller;
     }
 }

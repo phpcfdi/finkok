@@ -418,4 +418,31 @@ EOT;
         $this->assertFalse($result->success());
         $this->assertSame('Unable to get contracts: FOO', $result->message());
     }
+
+    public function testRetentionStamp(): void
+    {
+        $rawData = json_decode($this->fileContentPath('retentions-stamp-response.json'));
+        $finkok = $this->createdPreparedQuickFinkok($rawData);
+        $result = $finkok->retentionStamp('precfdi');
+        $this->performTestOnLatestCall('stamp', ['xml' => 'precfdi']);
+        $this->assertEquals($rawData, $result->rawData());
+    }
+
+    public function testRetentionDownload(): void
+    {
+        $rawData = (object) ['get_xmlResult' => (object) []];
+        $finkok = $this->createdPreparedQuickFinkok($rawData);
+        $result = $finkok->retentionDownload('x-uuid', 'x-rfc');
+        $this->performTestOnLatestCall('get_xml', ['invoice_type' => 'R']);
+        $this->assertEquals($rawData, $result->rawData());
+    }
+
+    public function testRetentionStamped(): void
+    {
+        $rawData = json_decode($this->fileContentPath('retentions-stamped-response.json'));
+        $finkok = $this->createdPreparedQuickFinkok($rawData);
+        $result = $finkok->retentionStamped('x-xml');
+        $this->performTestOnLatestCall('stamped', ['xml' => 'x-xml']);
+        $this->assertEquals($rawData, $result->rawData());
+    }
 }

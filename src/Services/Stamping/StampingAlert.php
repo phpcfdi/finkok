@@ -46,6 +46,11 @@ class StampingAlert
         return $this->get('MensajeIncidencia');
     }
 
+    public function extraInfo(): string
+    {
+        return $this->get('ExtraInfo');
+    }
+
     public function rfc(): string
     {
         return $this->get('RfcEmisor');

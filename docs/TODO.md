@@ -1,12 +1,14 @@
 # phpcfdi/finkok To Do List
 
-- Revisar el estado del ticket https://support.finkok.com/support/tickets/41438 y modificar el test
-  `DownloadXmlServiceTest::testStampAndConsumeStampedImmediately`.
+- Investigar cómo validar firma en acuses y respuestas del SAT
 
-- Revisar el estado del ticket https://support.finkok.com/support/tickets/41435 y modificar el test
-  `CancelServicesTest::testCreateCfdiThenGetSatStatusThenCancelSignatureThenGetReceipt`.
+- Crear un namespace común porque hay clases que están interrelacionadas entre el estampado y cancelación
+  de cfdi y de retenciones. Así como las clases abstractas de colecciones y resultados.
+  Esto creará una incompatilidad con versiones previas.
 
 - Agregar la integración de CFDI de retenciones y pagos
+
+- Poder transformar un objeto de tipo `GetSatStatusResult` a `PhpCfdi\SatEstadoCfdi\CfdiStatus`.
 
 - Los reportes que devuelven una cuenta deberían retornar un entero
 
@@ -34,8 +36,14 @@
   B hace la consulta de pendientes y ya no ve el UUID
   Se consulta el estado del UUID y está cancelado
 
+- Las pruebas de servicios no están verificando a dónde se está enviando la solicitud, por lo que podría existir un
+  error al crear el endpoint, el error saldría a la luz en pruebas de integración pero no en pruebas unitarias.
+  Se puede agregar un código como el siguiente (en `...\Tests\Unit\Services\Retentions\CancelSignatureServiceTest`):
+  `$this->assertStringEndsWith(Services::retentions()->value(), $soapFactory->latestWsdlLocation);`
+
 ## Documentación
 
+- Documentar los métodos de `QuickFinkok`
 - Servicios:
     - Servicios que reintentan por errores de Finkok
     - Parámetros added y coupon de registration add
