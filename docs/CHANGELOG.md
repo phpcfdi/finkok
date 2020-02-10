@@ -12,6 +12,13 @@ Nos apegamos a [SEMVER](SEMVER.md), revisa la información para entender mejor e
   no debe usar la opción de nulo, fue puesta para compatibilidad con versiones previas a `0.2.2`.
   No así el las fachadas `Finkok` y `QuickFinkok`.
 
+## Version 0.2.7 2020-02-10
+
+- En las pruebas de integración del servicio `get_related_signature` el SAT tarda en vincular los CFDI recientemente
+  creados, lo que ocasiona que la prueba falle invariablemente al detectar el error
+  `2001 - No Existen cfdi relacionados al folio fiscal.`.
+  Se ha modificado la prueba para que, si encuentra dicho error no rompa el ciclo de testeo y lo vuelva a intentar.
+
 ## Version 0.2.6 2020-01-24
 
 - Documentar la solución del problema de acuse recibido al cancelar y al solicitar. Finkok ticket: `#41435`. 

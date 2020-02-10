@@ -63,8 +63,10 @@ class GetRelatedSignatureServiceTest extends IntegrationTestCase
         $maxtime = strtotime('+5 minutes');
         do {
             $result = $service->getRelatedSignature($command);
-            // SAT is not resolving correctly because I ask for related immediately
-            if ('' !== $result->error()) {
+            // Break the loop if SAT return an error, but the error is not:
+            // 2001 - No Existen cfdi relacionados al folio fiscal.
+            // Testing only: in the wild it is expected to ask for related several seconds after the CFDI were created
+            if ('' !== $result->error() && '2001' !== substr($result->error(), 0, 4)) {
                 break;
             }
             if (1 === $result->parents()->count() && 1 === $result->children()->count()) {
