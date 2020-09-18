@@ -63,6 +63,10 @@ class CancelServicesTest extends IntegrationTestCase
             sleep(5);
         } while (true);
 
+        if ('205' === $document->documentStatus()) {
+            $this->fail('SAT return 205 EstatusUUID: The CFDI was not received by SAT yet.');
+        }
+
         // check result related document
         $this->assertSame(
             '201', // 201 - Petición de cancelación realizada exitosamente

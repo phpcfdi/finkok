@@ -26,17 +26,14 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
         }
 
         if (boolval(getenv('FINKOK_LOG_CALLS'))) {
-            $settings->soapFactory()->setLogger(
-                $this->createLoggerPrinter(
-                    sprintf(
-                        '%s/../build/tests/%s-%s-%s.txt',
-                        __DIR__,
-                        (new DateTimeImmutable())->format('YmdHis.u'),
-                        $this->getName(),
-                        uniqid()
-                    )
-                )
+            $loggerPutputFile = sprintf(
+                '%s/../build/tests/%s-%s-%s.txt',
+                __DIR__,
+                (new DateTimeImmutable())->format('YmdHis.u'),
+                $this->getName(),
+                uniqid()
             );
+            $settings->soapFactory()->setLogger(new LoggerPrinter($loggerPutputFile));
         }
         return $settings;
     }

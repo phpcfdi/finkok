@@ -19,8 +19,9 @@ call_user_func(new class() {
             trigger_error(sprintf('Cannot read testing environment file %s', $environmentFile), E_USER_NOTICE);
             return;
         }
-        $dotDevUsePutenv = true;
-        (new Symfony\Component\Dotenv\Dotenv($dotDevUsePutenv))->load($environmentFile);
+        $dotEnv = new Symfony\Component\Dotenv\Dotenv();
+        $dotEnv->usePutenv(true);
+        $dotEnv->load($environmentFile);
     }
 
     public function environmentFileExists(string $environmentFile): bool
