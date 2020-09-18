@@ -1,9 +1,5 @@
 # CHANGELOG
 
-:us: changes are documented in spanish as it help intented audience to follow changes
-
-:mexico: los cambios están documentados en español para mejor entendimiento
-
 Nos apegamos a [SEMVER](SEMVER.md), revisa la información para entender mejor el control de versiones.
 
 ## Cambios para la siguiente versión que rompa compatibilidad
@@ -32,7 +28,7 @@ Nos apegamos a [SEMVER](SEMVER.md), revisa la información para entender mejor e
     - Cancelación de retención: La respuesta tiene campos idénticos y adicionales al timbrado de CFDI.
     - Para poder cancelar un RET, fue necesario actualizar a `phpcfdi/xml-cancelacion: ^1.1.0`.
 - El objeto `GetSatStatusExtractor` podía procesar CFDI 3.2, CFDI 3.3 y RET 1.0, sin embargo el método `get_sat_status`
-  sólo puede trabajar con CFDI 3.2, CFDI 3.3, se hacen las adecuaciones correspondientes.
+  solo puede trabajar con CFDI 3.2, CFDI 3.3, se hacen las adecuaciones correspondientes.
 - Desarrollo:
     - Se crearon pruebas unitarias para `QueryPendingCommand` y `QueryPendingResult`.
     - Se reconstruye `createGetSatStatusCommandFromCfdiContents` para que use el helper `GetSatStatusExtractor`.
@@ -96,7 +92,7 @@ Nos apegamos a [SEMVER](SEMVER.md), revisa la información para entender mejor e
   que crean el *comando*, el *servicio*, ejecutan el *servicio* y retornan el *resultado*.
 - Todos los métodos de `QuickFinkok` tienen bloques de ayuda con ligas a la documentación oficial de Finkok.
 - Se agrega un objeto de ayuda `GetSatStatusExtractor` que utiliza `phpcfdi/cfdi-expresiones` para poder obtener
-  los datos necesarios para consultar el estado SAT de de un CFDI 3.3, CFDI 3.2 o RET 1.0.
+  los datos necesarios para consultar el estado SAT de un CFDI 3.3, CFDI 3.2 o RET 1.0.
 
 ## Version 0.2.0 2019-10-02
 
@@ -112,14 +108,14 @@ Nos apegamos a [SEMVER](SEMVER.md), revisa la información para entender mejor e
 
 BC Changes:
 
-- Default parameter value for for parameter `$waitSeconds` of `GetSatStatusService#queryUntilFoundOrTime()`
+- Default parameter value for parameter `$waitSeconds` of `GetSatStatusService#queryUntilFoundOrTime()`
   changed from `60` to `120`. 
 
 ## Version 0.1.1 2019-09-04
 
 - Los nombres de los métodos en `Finkok` algunas veces son los mismos que en los servicios, pero en otras cambia,
   en lugar de cambiar este helper, se le puso la definición correcta de nombres para que invoque el nombre
-  correcto en el servicio. Se crearon los test correspondientes para validar que genera un error si el nombre
+  correcto en el servicio. Se crearon las pruebas correspondientes para validar que genera un error si el nombre
   no existe y que todos los métodos de invocación existen en sus respectivos servicios. 
 
 ## Version 0.1.0 2019-09-04
