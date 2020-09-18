@@ -8,6 +8,16 @@ Nos apegamos a [SEMVER](SEMVER.md), revisa la información para entender mejor e
   no debe usar la opción de nulo, fue puesta para compatibilidad con versiones previas a `0.2.2`.
   No así el las fachadas `Finkok` y `QuickFinkok`.
 
+## Version UNRELEASED 2020-09-18
+
+Cambios en el entorno de pruebas. Solo se afecta la rama principal, no se libera una nueva versión.
+
+- El build estaba roto por un problema de tipos detectado por `phpstan` debido a un "soft breaking compatibility change"
+  introducido por `symfony/dotenv:5.1`, se corrige el problema en `tests/bootstrap.php`.
+- Se crea `Finkok\Tests\LoggerPrinter` para facilitar la escritura de los volcados de comunicación.
+- Se agrega `tests/stamp-precfdi-devenv.php` para estampar un precfdi usando la configuración del entorno de desarrollo.
+- Cambios menores en las pruebas.
+
 ## Version 0.2.7 2020-02-10
 
 - En las pruebas de integración del servicio `get_related_signature` el SAT tarda en vincular los CFDI recientemente
