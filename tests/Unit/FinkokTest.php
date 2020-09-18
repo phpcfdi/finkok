@@ -109,12 +109,11 @@ class FinkokTest extends TestCase
     {
         /** @var FinkokSettings&MockObject $settings */
         $settings = $this->createMock(FinkokSettings::class);
-        /** @var Finkok&MockObject $finkok */
+        // extend just to change change method visibility
         $finkok = new class($settings) extends Finkok {
-            public function executeService(string $method, $service, $command)
+            public function executeService(string $method, object $service, ?object $command)
             {
-                $result = parent::executeService($method, $service, $command);
-                return $result;
+                return parent::executeService($method, $service, $command);
             }
         };
 
@@ -124,8 +123,8 @@ class FinkokTest extends TestCase
         $service = $this->createMock(GetContractsService::class);
 
         $this->expectException(BadMethodCallException::class);
-        $this->expectExceptionMessageRegExp('/The service \w+ does not have a method foo$/');
-        $finkok->{'executeService'}('foo', $service, $command);
+        $this->expectExceptionMessageMatches('/The service \w+ does not have a method foo$/');
+        $finkok->executeService('foo', $service, $command);
     }
 
     public function testInvokingOneMappedMagicMethodWithDifferentName(): void
