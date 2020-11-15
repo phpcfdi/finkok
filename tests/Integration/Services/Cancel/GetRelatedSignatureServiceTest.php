@@ -61,7 +61,7 @@ class GetRelatedSignatureServiceTest extends IntegrationTestCase
         $command = $this->createGetRelatedSignatureCommand($second->uuid());
         $service = $this->createService();
         $maxtime = strtotime('+5 minutes');
-        do {
+        while (true) {
             $result = $service->getRelatedSignature($command);
             // Break the loop if SAT return an error, but the error is not:
             // 2001 - No Existen cfdi relacionados al folio fiscal.
@@ -74,10 +74,9 @@ class GetRelatedSignatureServiceTest extends IntegrationTestCase
             }
             if (time() > $maxtime) {
                 $this->fail('After 5 minutes consuming GetRelatedSignatureService didnt get related from SAT');
-                break;
             }
             sleep(5);
-        } while (true);
+        }
 
         $this->assertSame($third->uuid(), $result->parents()->first()->uuid());
         $this->assertSame($first->uuid(), $result->children()->first()->uuid());

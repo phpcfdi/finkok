@@ -9,7 +9,6 @@ use Exception;
 use PhpCfdi\Finkok\FinkokEnvironment;
 use PhpCfdi\Finkok\FinkokSettings;
 use PhpCfdi\Finkok\QuickFinkok;
-use Psr\Log\NullLogger;
 use Throwable;
 
 require_once __DIR__ . '/bootstrap.php';
@@ -44,8 +43,9 @@ exit(call_user_func(new class($argv[1] ?? '') {
                 strval(getenv('FINKOK_PASSWORD')) ?: 'password-non-set',
                 FinkokEnvironment::makeDevelopment()
             );
-            $logger = ($debug) ? new LoggerPrinter() : new NullLogger();
-            $settings->soapFactory()->setLogger($logger);
+            if ($debug) {
+                $settings->soapFactory()->setLogger(new LoggerPrinter());
+            }
             $quickFinkok = new QuickFinkok($settings);
 
             $stamp = $quickFinkok->stamp($preCfdiContents);

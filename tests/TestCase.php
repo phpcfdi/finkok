@@ -9,8 +9,6 @@ use PhpCfdi\Credentials\Credential;
 use PhpCfdi\Finkok\FinkokEnvironment;
 use PhpCfdi\Finkok\FinkokSettings;
 use PhpCfdi\Finkok\SoapFactory;
-use Psr\Log\AbstractLogger;
-use Psr\Log\LoggerInterface;
 
 abstract class TestCase extends \PHPUnit\Framework\TestCase
 {
@@ -26,43 +24,16 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
         }
 
         if (boolval(getenv('FINKOK_LOG_CALLS'))) {
-            $loggerPutputFile = sprintf(
+            $loggerOutputFile = sprintf(
                 '%s/../build/tests/%s-%s-%s.txt',
                 __DIR__,
                 (new DateTimeImmutable())->format('YmdHis.u'),
                 $this->getName(),
                 uniqid()
             );
-            $settings->soapFactory()->setLogger(new LoggerPrinter($loggerPutputFile));
+            $settings->soapFactory()->setLogger(new LoggerPrinter($loggerOutputFile));
         }
         return $settings;
-    }
-
-    protected function createLoggerPrinter(string $outputFile = 'php://stdout'): LoggerInterface
-    {
-        return new class($outputFile) extends AbstractLogger implements LoggerInterface {
-            /** @var string */
-            public $outputFile;
-
-            public function __construct(string $outputFile)
-            {
-                $this->outputFile = $outputFile;
-            }
-
-            /**
-             * @param mixed $level
-             * @param string $message
-             * @param array<mixed> $context
-             */
-            public function log($level, $message, array $context = []): void
-            {
-                file_put_contents(
-                    $this->outputFile,
-                    PHP_EOL . print_r(json_decode($message), true),
-                    FILE_APPEND
-                );
-            }
-        };
     }
 
     /** @return array<string, string> */
