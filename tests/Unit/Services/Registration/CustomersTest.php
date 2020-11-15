@@ -23,7 +23,6 @@ class CustomersTest extends TestCase
         $known = $customers->findByRfc('LAN7008173R5');
         if (null === $known) {
             $this->fail('Could not find a predefined customer in customers');
-            return;
         }
         $this->assertSame('LAN7008173R5', $known->rfc(), 'known rfc finding must match');
         $this->assertNull($customers->findByRfc('AAA010101AAA'));

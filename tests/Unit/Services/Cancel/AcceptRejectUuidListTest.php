@@ -48,7 +48,6 @@ class AcceptRejectUuidListTest extends TestCase
         $found = $this->list->findByUuid($search);
         if (null === $found) {
             $this->fail('Expected UUID was not found');
-            return;
         }
         $this->assertSame($search, $found->uuid());
         $this->assertSame('1001', $found->status()->getCode());

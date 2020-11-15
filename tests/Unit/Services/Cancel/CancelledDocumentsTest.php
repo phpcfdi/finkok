@@ -74,7 +74,6 @@ class CancelledDocumentsTest extends TestCase
         $document = $documents->find($search);
         if (null === $document) {
             $this->fail(sprintf('The expected UUID %s was not found', $search));
-            return;
         }
         $this->assertSame($search, $document->uuid());
     }

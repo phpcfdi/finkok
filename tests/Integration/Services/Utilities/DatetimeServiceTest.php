@@ -38,7 +38,6 @@ class DatetimeServiceTest extends IntegrationTestCase
         $converted = strtotime($result->datetime());
         if (false === $converted) {
             $this->fail(sprintf('Cannot convert %s to a php timestamp', $result->datetime()));
-            return;
         }
 
         $margin = 1;
