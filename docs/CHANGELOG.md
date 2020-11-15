@@ -8,6 +8,16 @@ Nos apegamos a [SEMVER](SEMVER.md), revisa la información para entender mejor e
   no debe usar la opción de nulo, fue puesta para compatibilidad con versiones previas a `0.2.2`.
   No así el las fachadas `Finkok` y `QuickFinkok`.
 
+## Version UNRELEASED 2020-10-14
+
+Cambios en el entorno de pruebas. Solo se afecta la rama principal, no se libera una nueva versión.
+
+- El build estaba roto por un problema de tipos detectado por PHPStan debido a que a partir de la versión `0.12.54`
+  ya detecta las estructuras de control de flujo de PHPUnit.
+- Se reportó a Finkok la mala configuración de `manifiesto.cfdiquadrum.com.mx` al no incluir los
+  certificados intermedios, lo solucionaron de inmediato: <https://support.finkok.com/support/tickets/46648>.
+- Cambios menores en las pruebas.
+
 ## Version UNRELEASED 2020-09-18
 
 Cambios en el entorno de pruebas. Solo se afecta la rama principal, no se libera una nueva versión.
