@@ -12,8 +12,7 @@ class EditServiceTest extends RegistrationIntegrationTestCase
 {
     protected function createService(): EditService
     {
-        $editService = new EditService($this->createSettingsFromEnvironment());
-        return $editService;
+        return new EditService($this->createSettingsFromEnvironment());
     }
 
     public function testConsumeEditServiceUsingExistentRfc(): void

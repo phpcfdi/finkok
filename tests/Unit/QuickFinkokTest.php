@@ -28,8 +28,7 @@ class QuickFinkokTest extends TestCase
         $fakeFactory->preparedResult = $rawData;
         $settings = $this->createSettingsFromEnvironment($fakeFactory);
         $this->soapFactory = $fakeFactory;
-        $finkok = new QuickFinkok($settings);
-        return $finkok;
+        return new QuickFinkok($settings);
     }
 
     /**

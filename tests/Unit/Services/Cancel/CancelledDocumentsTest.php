@@ -23,9 +23,7 @@ class CancelledDocumentsTest extends TestCase
                 'EstatusCancelacion' => 'Cancelado sin aceptación',
             ],
         ];
-
-        $documents = new CancelledDocuments($input);
-        return $documents;
+        return new CancelledDocuments($input);
     }
 
     protected function createTestingUuid(int $index): string
