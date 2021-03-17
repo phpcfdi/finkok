@@ -121,7 +121,7 @@ class Finkok
      * @param mixed $command
      * @return object|null
      */
-    protected function checkCommand(string $method, $command)
+    protected function checkCommand(string $method, $command): ?object
     {
         $expected = static::SERVICES_MAP[$method][1];
         if ('' === $expected) {
@@ -140,7 +140,7 @@ class Finkok
      * @param string $method
      * @return object
      */
-    protected function createService(string $method)
+    protected function createService(string $method): object
     {
         $serviceClass = static::SERVICES_MAP[$method][0];
         $service = new $serviceClass($this->settings);
