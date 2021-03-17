@@ -72,6 +72,7 @@ class SoapCaller implements LoggerAwareInterface
     /**
      * @param SoapClient $soapClient
      * @return array<string, string>
+     * @noinspection PhpUsageOfSilenceOperatorInspection
      */
     protected function extractSoapClientTrace(SoapClient $soapClient): array
     {
