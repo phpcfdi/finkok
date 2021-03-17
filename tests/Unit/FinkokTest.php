@@ -109,9 +109,9 @@ class FinkokTest extends TestCase
     {
         /** @var FinkokSettings&MockObject $settings */
         $settings = $this->createMock(FinkokSettings::class);
-        // extend just to change change method visibility
+        // extend just to access protected method
         $finkok = new class($settings) extends Finkok {
-            public function executeService(string $method, object $service, ?object $command)
+            public function exposedExecuteService(string $method, object $service, ?object $command)
             {
                 return parent::executeService($method, $service, $command);
             }
@@ -124,7 +124,7 @@ class FinkokTest extends TestCase
 
         $this->expectException(BadMethodCallException::class);
         $this->expectExceptionMessageMatches('/The service \w+ does not have a method foo$/');
-        $finkok->executeService('foo', $service, $command);
+        $finkok->exposedExecuteService('foo', $service, $command);
     }
 
     public function testInvokingOneMappedMagicMethodWithDifferentName(): void
