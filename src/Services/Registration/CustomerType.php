@@ -15,6 +15,10 @@ use Eclipxe\Enum\Enum;
  */
 class CustomerType extends Enum
 {
+    /**
+     * @inheritdoc
+     * @noinspection PhpMissingParentCallCommonInspection
+     */
     protected static function overrideValues(): array
     {
         return [
