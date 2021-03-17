@@ -12,7 +12,7 @@ use PhpCfdi\Finkok\Helpers\DocumentSigner;
 
 use PhpCfdi\Finkok\Tests\TestCase;
 
-class DocumentSignerTest extends TestCase
+final class DocumentSignerTest extends TestCase
 {
     public function testCreateDocumentSigner(): void
     {

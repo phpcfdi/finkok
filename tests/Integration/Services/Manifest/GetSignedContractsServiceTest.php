@@ -9,7 +9,7 @@ use PhpCfdi\Finkok\Services\Manifest\GetSignedContractsCommand;
 use PhpCfdi\Finkok\Services\Manifest\GetSignedContractsService;
 use PhpCfdi\Finkok\Tests\Integration\IntegrationTestCase;
 
-class GetSignedContractsServiceTest extends IntegrationTestCase
+final class GetSignedContractsServiceTest extends IntegrationTestCase
 {
     private function createService(): GetSignedContractsService
     {

@@ -7,7 +7,7 @@ namespace PhpCfdi\Finkok\Tests\Unit\Services\Registration;
 use PhpCfdi\Finkok\Services\Registration\ObtainCommand;
 use PhpCfdi\Finkok\Tests\TestCase;
 
-class ObtainCommandTest extends TestCase
+final class ObtainCommandTest extends TestCase
 {
     public function testObtainCommandCreation(): void
     {

@@ -9,7 +9,7 @@ use PhpCfdi\Finkok\Services\Utilities\DownloadXmlService;
 use PhpCfdi\Finkok\Tests\Fakes\FakeSoapFactory;
 use PhpCfdi\Finkok\Tests\TestCase;
 
-class DownloadXmlServiceTest extends TestCase
+final class DownloadXmlServiceTest extends TestCase
 {
     public function testServiceUsingPreparedResult(): void
     {

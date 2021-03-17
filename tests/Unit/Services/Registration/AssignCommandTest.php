@@ -7,7 +7,7 @@ namespace PhpCfdi\Finkok\Tests\Unit\Services\Registration;
 use PhpCfdi\Finkok\Services\Registration\AssignCommand;
 use PhpCfdi\Finkok\Tests\TestCase;
 
-class AssignCommandTest extends TestCase
+final class AssignCommandTest extends TestCase
 {
     public function testAssignCommandCreation(): void
     {

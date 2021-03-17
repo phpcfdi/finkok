@@ -7,7 +7,7 @@ namespace PhpCfdi\Finkok\Tests\Unit\Services\Cancel;
 use PhpCfdi\Finkok\Services\Cancel\CancelledDocument;
 use PhpCfdi\Finkok\Tests\TestCase;
 
-class CancelledDocumentTest extends TestCase
+final class CancelledDocumentTest extends TestCase
 {
     public function testCreateEmpty(): void
     {

@@ -9,7 +9,7 @@ use PhpCfdi\Finkok\Services\Utilities\ReportTotalService;
 use PhpCfdi\Finkok\Tests\Fakes\FakeSoapFactory;
 use PhpCfdi\Finkok\Tests\TestCase;
 
-class ReportTotalServiceTest extends TestCase
+final class ReportTotalServiceTest extends TestCase
 {
     public function testServiceUsingPreparedResult(): void
     {

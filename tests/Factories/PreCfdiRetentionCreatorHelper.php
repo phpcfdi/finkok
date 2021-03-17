@@ -12,7 +12,7 @@ use CfdiUtils\Retenciones\RetencionesCreator10;
 use DateTimeImmutable;
 use DateTimeZone;
 
-class PreCfdiRetentionCreatorHelper
+final class PreCfdiRetentionCreatorHelper
 {
     /** @var Certificado */
     private $certificate;

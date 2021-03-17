@@ -9,7 +9,7 @@ use PhpCfdi\Finkok\Services\Utilities\ReportTotalCommand;
 use PhpCfdi\Finkok\Services\Utilities\ReportTotalService;
 use PhpCfdi\Finkok\Tests\Integration\IntegrationTestCase;
 
-class ReportTotalServiceTest extends IntegrationTestCase
+final class ReportTotalServiceTest extends IntegrationTestCase
 {
     public function testReportTotalServiceInPast(): void
     {

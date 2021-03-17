@@ -10,7 +10,7 @@ use PhpCfdi\Finkok\Services\Cancel\GetReceiptCommand;
 use PhpCfdi\Finkok\Services\Cancel\GetReceiptService;
 use PhpCfdi\Finkok\Tests\Integration\IntegrationTestCase;
 
-class CancelServicesTest extends IntegrationTestCase
+final class CancelServicesTest extends IntegrationTestCase
 {
     public function testCreateCfdiThenGetSatStatusThenCancelSignatureThenGetReceipt(): void
     {

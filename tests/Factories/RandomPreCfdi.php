@@ -8,7 +8,7 @@ use DateTimeImmutable;
 use DateTimeZone;
 use PhpCfdi\Finkok\Tests\TestCase;
 
-class RandomPreCfdi
+final class RandomPreCfdi
 {
     public function createDateFromString(string $dateExpression): DateTimeImmutable
     {

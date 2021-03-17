@@ -7,7 +7,7 @@ namespace PhpCfdi\Finkok\Tests\Unit\Definitions;
 use PhpCfdi\Finkok\Definitions\Environment;
 use PhpCfdi\Finkok\Tests\TestCase;
 
-class EnvironmentTest extends TestCase
+final class EnvironmentTest extends TestCase
 {
     public function testContainsDevelopmentValue(): void
     {

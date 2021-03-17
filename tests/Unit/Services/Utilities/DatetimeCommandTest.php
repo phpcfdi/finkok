@@ -7,7 +7,7 @@ namespace PhpCfdi\Finkok\Tests\Unit\Services\Utilities;
 use PhpCfdi\Finkok\Services\Utilities\DatetimeCommand;
 use PhpCfdi\Finkok\Tests\TestCase;
 
-class DatetimeCommandTest extends TestCase
+final class DatetimeCommandTest extends TestCase
 {
     public function testDatetimeCommandWithValidPostalCode(): void
     {

@@ -9,7 +9,7 @@ use PhpCfdi\Finkok\Definitions\CancelAnswer;
 use PhpCfdi\Finkok\Services\Cancel\AcceptRejectUuidList;
 use PhpCfdi\Finkok\Tests\TestCase;
 
-class AcceptRejectUuidListTest extends TestCase
+final class AcceptRejectUuidListTest extends TestCase
 {
     /** @var AcceptRejectUuidList */
     private $list;

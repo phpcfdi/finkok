@@ -19,7 +19,7 @@ use PhpCfdi\Finkok\Services\Utilities\DatetimeService;
 use PhpCfdi\Finkok\Tests\TestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 
-class FinkokTest extends TestCase
+final class FinkokTest extends TestCase
 {
     public function testConstructor(): void
     {
@@ -109,8 +109,15 @@ class FinkokTest extends TestCase
     {
         /** @var FinkokSettings&MockObject $settings */
         $settings = $this->createMock(FinkokSettings::class);
-        // extend just to access protected method
         $finkok = new class($settings) extends Finkok {
+            /**
+             * created just to access protected method
+             *
+             * @param string $method
+             * @param object $service
+             * @param object|null $command
+             * @return mixed
+             */
             public function exposedExecuteService(string $method, object $service, ?object $command)
             {
                 return parent::executeService($method, $service, $command);

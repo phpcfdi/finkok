@@ -24,18 +24,18 @@ final class RetentionsUsingExistentRetentionTest extends RetentionsTestCase
 
     protected function currentRetentionsPreCfdi(): string
     {
-        if (null === static::$staticCurrentStampPrecfdi) {
-            static::$staticCurrentStampPrecfdi = $this->newRetentionsPreCfdi();
+        if (null === self::$staticCurrentStampPrecfdi) {
+            self::$staticCurrentStampPrecfdi = $this->newRetentionsPreCfdi();
         }
-        return static::$staticCurrentStampPrecfdi;
+        return self::$staticCurrentStampPrecfdi;
     }
 
     protected function currentRetentionsStampResult(): StampResult
     {
-        if (null === static::$staticCurrentStampResult) {
-            static::$staticCurrentStampResult = $this->stampRetentionPreCfdi($this->currentRetentionsPreCfdi());
+        if (null === self::$staticCurrentStampResult) {
+            self::$staticCurrentStampResult = $this->stampRetentionPreCfdi($this->currentRetentionsPreCfdi());
         }
-        return static::$staticCurrentStampResult;
+        return self::$staticCurrentStampResult;
     }
 
     protected function setUp(): void

@@ -7,7 +7,7 @@ namespace PhpCfdi\Finkok\Tests;
 use Psr\Log\AbstractLogger;
 use Psr\Log\LoggerInterface;
 
-class LoggerPrinter extends AbstractLogger implements LoggerInterface
+final class LoggerPrinter extends AbstractLogger implements LoggerInterface
 {
     /** @var string */
     public $outputFile;

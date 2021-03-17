@@ -7,7 +7,7 @@ namespace PhpCfdi\Finkok\Tests\Unit\Services\Retentions;
 use PhpCfdi\Finkok\Services\Retentions\CancelSignatureResult;
 use PhpCfdi\Finkok\Tests\TestCase;
 
-class CancelSignatureResultTest extends TestCase
+final class CancelSignatureResultTest extends TestCase
 {
     public function testResultUsingPredefinedResponses(): void
     {

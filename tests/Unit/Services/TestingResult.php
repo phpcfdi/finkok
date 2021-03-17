@@ -6,7 +6,7 @@ namespace PhpCfdi\Finkok\Tests\Unit\Services;
 
 use PhpCfdi\Finkok\Services\AbstractResult;
 
-class TestingResult extends AbstractResult
+final class TestingResult extends AbstractResult
 {
     /**
      * @param string ...$search

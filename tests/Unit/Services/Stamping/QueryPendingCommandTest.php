@@ -7,7 +7,7 @@ namespace PhpCfdi\Finkok\Tests\Unit\Services\Stamping;
 use PhpCfdi\Finkok\Services\Stamping\QueryPendingCommand;
 use PhpCfdi\Finkok\Tests\TestCase;
 
-class QueryPendingCommandTest extends TestCase
+final class QueryPendingCommandTest extends TestCase
 {
     public function testCreateCommand(): void
     {

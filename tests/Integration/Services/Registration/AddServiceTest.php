@@ -9,7 +9,7 @@ use PhpCfdi\Finkok\Services\Registration\AddCommand;
 use PhpCfdi\Finkok\Services\Registration\AddService;
 use PhpCfdi\Finkok\Services\Registration\CustomerType;
 
-class AddServiceTest extends RegistrationIntegrationTestCase
+final class AddServiceTest extends RegistrationIntegrationTestCase
 {
     protected function createService(): AddService
     {

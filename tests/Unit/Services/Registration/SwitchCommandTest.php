@@ -8,7 +8,7 @@ use PhpCfdi\Finkok\Services\Registration\CustomerType;
 use PhpCfdi\Finkok\Services\Registration\SwitchCommand;
 use PhpCfdi\Finkok\Tests\TestCase;
 
-class SwitchCommandTest extends TestCase
+final class SwitchCommandTest extends TestCase
 {
     public function testSwitchCommandCreation(): void
     {

@@ -12,7 +12,7 @@ use PhpCfdi\Finkok\Services\Stamping\StampingCommand;
 use PhpCfdi\Finkok\Tests\Factories\RandomPreCfdi;
 use PhpCfdi\Finkok\Tests\Integration\IntegrationTestCase;
 
-class GetRelatedSignatureServiceTest extends IntegrationTestCase
+final class GetRelatedSignatureServiceTest extends IntegrationTestCase
 {
     protected function createService(): GetRelatedSignatureService
     {

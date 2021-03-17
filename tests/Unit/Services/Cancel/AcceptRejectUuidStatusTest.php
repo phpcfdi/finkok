@@ -7,7 +7,7 @@ namespace PhpCfdi\Finkok\Tests\Unit\Services\Cancel;
 use PhpCfdi\Finkok\Services\Cancel\AcceptRejectUuidStatus;
 use PhpCfdi\Finkok\Tests\TestCase;
 
-class AcceptRejectUuidStatusTest extends TestCase
+final class AcceptRejectUuidStatusTest extends TestCase
 {
     public function testCreateSuccessStatus(): void
     {

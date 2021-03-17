@@ -10,7 +10,7 @@ use PhpCfdi\Finkok\Services\Utilities\ReportUuidResult;
 use PhpCfdi\Finkok\Services\Utilities\ReportUuidService;
 use PhpCfdi\Finkok\Tests\Integration\IntegrationTestCase;
 
-class ReportUuidServiceTest extends IntegrationTestCase
+final class ReportUuidServiceTest extends IntegrationTestCase
 {
     public function testReportUuidService(): void
     {

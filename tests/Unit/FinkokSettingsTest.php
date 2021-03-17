@@ -11,7 +11,7 @@ use PhpCfdi\Finkok\FinkokSettings;
 use PhpCfdi\Finkok\Tests\Fakes\FakeSoapFactory;
 use PhpCfdi\Finkok\Tests\TestCase;
 
-class FinkokSettingsTest extends TestCase
+final class FinkokSettingsTest extends TestCase
 {
     public function testConstructWithUsernameAndPassword(): void
     {

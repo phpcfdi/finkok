@@ -7,7 +7,7 @@ namespace PhpCfdi\Finkok\Tests\Unit\Services\Cancel;
 use PhpCfdi\Finkok\Services\Cancel\GetReceiptResult;
 use PhpCfdi\Finkok\Tests\TestCase;
 
-class GetReceiptResultTest extends TestCase
+final class GetReceiptResultTest extends TestCase
 {
     public function testResultUsingPredefinedResponse(): void
     {

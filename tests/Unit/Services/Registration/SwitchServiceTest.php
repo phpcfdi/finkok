@@ -10,7 +10,7 @@ use PhpCfdi\Finkok\Services\Registration\SwitchService;
 use PhpCfdi\Finkok\Tests\Fakes\FakeSoapFactory;
 use PhpCfdi\Finkok\Tests\TestCase;
 
-class SwitchServiceTest extends TestCase
+final class SwitchServiceTest extends TestCase
 {
     public function testServiceUsingPreparedResult(): void
     {

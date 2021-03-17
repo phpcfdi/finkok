@@ -8,7 +8,7 @@ use PhpCfdi\Finkok\Services\Manifest\GetContractsCommand;
 use PhpCfdi\Finkok\Services\Manifest\GetContractsService;
 use PhpCfdi\Finkok\Tests\Integration\IntegrationTestCase;
 
-class GetContractsServiceTest extends IntegrationTestCase
+final class GetContractsServiceTest extends IntegrationTestCase
 {
     private function createService(): GetContractsService
     {

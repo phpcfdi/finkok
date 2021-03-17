@@ -6,7 +6,7 @@ namespace PhpCfdi\Finkok\Tests\Integration;
 
 use PhpCfdi\Finkok\Finkok;
 
-class FinkokTest extends IntegrationTestCase
+final class FinkokTest extends IntegrationTestCase
 {
     public function testCallingDateTime(): void
     {

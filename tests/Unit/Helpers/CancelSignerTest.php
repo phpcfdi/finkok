@@ -9,7 +9,7 @@ use PhpCfdi\Finkok\Helpers\CancelSigner;
 
 use PhpCfdi\Finkok\Tests\TestCase;
 
-class CancelSignerTest extends TestCase
+final class CancelSignerTest extends TestCase
 {
     public function testCreateAndSign(): void
     {

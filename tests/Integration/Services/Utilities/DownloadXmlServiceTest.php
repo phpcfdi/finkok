@@ -8,7 +8,7 @@ use PhpCfdi\Finkok\Services\Utilities\DownloadXmlCommand;
 use PhpCfdi\Finkok\Services\Utilities\DownloadXmlService;
 use PhpCfdi\Finkok\Tests\Integration\IntegrationTestCase;
 
-class DownloadXmlServiceTest extends IntegrationTestCase
+final class DownloadXmlServiceTest extends IntegrationTestCase
 {
     protected function createService(): DownloadXmlService
     {

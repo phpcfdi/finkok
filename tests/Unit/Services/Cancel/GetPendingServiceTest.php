@@ -9,7 +9,7 @@ use PhpCfdi\Finkok\Services\Cancel\GetPendingService;
 use PhpCfdi\Finkok\Tests\Fakes\FakeSoapFactory;
 use PhpCfdi\Finkok\Tests\TestCase;
 
-class GetPendingServiceTest extends TestCase
+final class GetPendingServiceTest extends TestCase
 {
     public function testServiceUsingPreparedResult(): void
     {

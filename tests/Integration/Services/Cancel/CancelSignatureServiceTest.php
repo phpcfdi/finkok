@@ -7,7 +7,7 @@ namespace PhpCfdi\Finkok\Tests\Integration\Services\Cancel;
 use PhpCfdi\Finkok\Services\Cancel\CancelSignatureService;
 use PhpCfdi\Finkok\Tests\Integration\IntegrationTestCase;
 
-class CancelSignatureServiceTest extends IntegrationTestCase
+final class CancelSignatureServiceTest extends IntegrationTestCase
 {
     protected function createService(): CancelSignatureService
     {

@@ -9,7 +9,7 @@ use PhpCfdi\Finkok\Services\Utilities\ReportCreditService;
 use PhpCfdi\Finkok\Tests\Fakes\FakeSoapFactory;
 use PhpCfdi\Finkok\Tests\TestCase;
 
-class ReportCreditServiceTest extends TestCase
+final class ReportCreditServiceTest extends TestCase
 {
     public function testServiceUsingPreparedResult(): void
     {

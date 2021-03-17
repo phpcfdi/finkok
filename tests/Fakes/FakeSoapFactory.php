@@ -9,7 +9,7 @@ use PhpCfdi\Finkok\SoapFactory;
 use SoapClient;
 use stdClass;
 
-class FakeSoapFactory extends SoapFactory
+final class FakeSoapFactory extends SoapFactory
 {
     /** @var FakeSoapCaller */
     public $latestSoapCaller;
@@ -20,6 +20,7 @@ class FakeSoapFactory extends SoapFactory
     /** @var stdClass */
     public $preparedResult;
 
+    /** @noinspection PhpMissingParentCallCommonInspection */
     public function createSoapClient(string $wsdlLocation): SoapClient
     {
         return new SoapClient(null, [
@@ -28,6 +29,10 @@ class FakeSoapFactory extends SoapFactory
         ]);
     }
 
+    /**
+     * @inheritdoc
+     * @noinspection PhpMissingParentCallCommonInspection
+     */
     public function createSoapCaller(string $wsdlLocation, array $defaultOptions): SoapCaller
     {
         $soapCaller = new FakeSoapCaller($this->createSoapClient($wsdlLocation), $defaultOptions);

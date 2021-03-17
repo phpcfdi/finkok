@@ -8,7 +8,7 @@ use PhpCfdi\Finkok\Services\Retentions\StampCommand;
 use PhpCfdi\Finkok\Tests\Factories\RandomPreCfdiRetention;
 use PhpCfdi\Finkok\Tests\TestCase;
 
-class StampCommandTest extends TestCase
+final class StampCommandTest extends TestCase
 {
     public function testSignStampCommandCanReceiveAPrecfdi(): void
     {

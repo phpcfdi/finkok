@@ -9,7 +9,7 @@ use PhpCfdi\Finkok\Services\Cancel\AcceptRejectUuidItem;
 use PhpCfdi\Finkok\Services\Cancel\AcceptRejectUuidStatus;
 use PhpCfdi\Finkok\Tests\TestCase;
 
-class AcceptRejectUuidItemTest extends TestCase
+final class AcceptRejectUuidItemTest extends TestCase
 {
     public function testCreateAndGetProperties(): void
     {

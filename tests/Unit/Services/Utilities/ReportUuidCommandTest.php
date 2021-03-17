@@ -9,7 +9,7 @@ use LogicException;
 use PhpCfdi\Finkok\Services\Utilities\ReportUuidCommand;
 use PhpCfdi\Finkok\Tests\TestCase;
 
-class ReportUuidCommandTest extends TestCase
+final class ReportUuidCommandTest extends TestCase
 {
     public function testReportUuidCommandCreation(): void
     {

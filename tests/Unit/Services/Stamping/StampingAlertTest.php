@@ -7,7 +7,7 @@ namespace PhpCfdi\Finkok\Tests\Unit\Services\Stamping;
 use PhpCfdi\Finkok\Services\Stamping\StampingAlert;
 use PhpCfdi\Finkok\Tests\TestCase;
 
-class StampingAlertTest extends TestCase
+final class StampingAlertTest extends TestCase
 {
     public function testCreateEmpty(): void
     {

@@ -8,7 +8,7 @@ use PhpCfdi\Finkok\Services\Registration\SwitchResult;
 
 use PhpCfdi\Finkok\Tests\TestCase;
 
-class SwitchResultTest extends TestCase
+final class SwitchResultTest extends TestCase
 {
     public function testResultUsingPredefinedResponses(): void
     {

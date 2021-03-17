@@ -9,7 +9,7 @@ use PhpCfdi\Finkok\Services\Utilities\DatetimeService;
 use PhpCfdi\Finkok\Tests\Fakes\FakeSoapFactory;
 use PhpCfdi\Finkok\Tests\TestCase;
 
-class DatetimeServiceTest extends TestCase
+final class DatetimeServiceTest extends TestCase
 {
     public function testDatetimeServiceUsingPreparedResultWithoutPostalCode(): void
     {

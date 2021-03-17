@@ -10,7 +10,7 @@ use PhpCfdi\Finkok\QuickFinkok;
 use PhpCfdi\Finkok\Services\Utilities\DatetimeService;
 use PhpCfdi\Finkok\Tests\Integration\IntegrationTestCase;
 
-class DatetimeServiceTest extends IntegrationTestCase
+final class DatetimeServiceTest extends IntegrationTestCase
 {
     public function testTwoWellKnownDifferentPostalCodes(): void
     {

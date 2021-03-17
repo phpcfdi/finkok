@@ -10,7 +10,7 @@ use PhpCfdi\Finkok\Services\Cancel\AcceptRejectSignatureCommand;
 use PhpCfdi\Finkok\Services\Cancel\AcceptRejectSignatureService;
 use PhpCfdi\Finkok\Tests\Integration\IntegrationTestCase;
 
-class AcceptRejectSignatureServiceTest extends IntegrationTestCase
+final class AcceptRejectSignatureServiceTest extends IntegrationTestCase
 {
     protected function createService(): AcceptRejectSignatureService
     {

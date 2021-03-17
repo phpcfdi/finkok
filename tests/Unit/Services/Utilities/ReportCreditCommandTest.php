@@ -7,7 +7,7 @@ namespace PhpCfdi\Finkok\Tests\Unit\Services\Utilities;
 use PhpCfdi\Finkok\Services\Utilities\ReportCreditCommand;
 use PhpCfdi\Finkok\Tests\TestCase;
 
-class ReportCreditCommandTest extends TestCase
+final class ReportCreditCommandTest extends TestCase
 {
     public function testReportCreditCommandCreation(): void
     {
