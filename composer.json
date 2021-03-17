@@ -23,7 +23,7 @@
         }
     },
     "require": {
-        "php": ">=7.2",
+        "php": ">=7.3",
         "ext-json": "*",
         "ext-soap": "*",
         "ext-dom": "*",
@@ -40,7 +40,7 @@
         "ext-fileinfo": "*",
         "symfony/dotenv": "^5.1",
         "eclipxe/cfdiutils": "^2.10",
-        "phpunit/phpunit": "^8.5",
+        "phpunit/phpunit": "^9.5",
         "squizlabs/php_codesniffer": "^3.0",
         "friendsofphp/php-cs-fixer": "^2.4",
         "phpstan/phpstan": "^0.12.54"

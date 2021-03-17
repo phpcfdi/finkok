@@ -33,7 +33,7 @@ final class DatetimeServiceTest extends IntegrationTestCase
         $service = new DatetimeService($settings);
         $result = $service->datetime();
 
-        $this->assertRegExp('/^[\d:T\-]{19}$/', $result->datetime());
+        $this->assertMatchesRegularExpression('/^[\d:T\-]{19}$/', $result->datetime());
         /** @var int|false $converted */
         $converted = strtotime($result->datetime());
         if (false === $converted) {
