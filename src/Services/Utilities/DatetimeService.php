@@ -31,7 +31,6 @@ class DatetimeService
         $rawResponse = $soapCaller->call('datetime', array_filter([
             'zipcode' => $command->postalCode(),
         ]));
-        $result = new DatetimeResult($rawResponse);
-        return $result;
+        return new DatetimeResult($rawResponse);
     }
 }

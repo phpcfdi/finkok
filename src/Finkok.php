@@ -110,8 +110,7 @@ class Finkok
         if (array_key_exists($name, static::SERVICES_MAP)) {
             $command = $this->checkCommand($name, $arguments[0] ?? null);
             $service = $this->createService($name);
-            $result = $this->executeService($name, $service, $command);
-            return $result;
+            return $this->executeService($name, $service, $command);
         }
         throw new BadMethodCallException(sprintf('Helper %s is not registered', $name));
     }
@@ -143,8 +142,7 @@ class Finkok
     protected function createService(string $method): object
     {
         $serviceClass = static::SERVICES_MAP[$method][0];
-        $service = new $serviceClass($this->settings);
-        return $service;
+        return new $serviceClass($this->settings);
     }
 
     /**

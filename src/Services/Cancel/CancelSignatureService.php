@@ -29,7 +29,6 @@ class CancelSignatureService
             'xml' => $command->xml(),
             'store_pending' => $command->storePending()->asBool(),
         ]);
-        $result = new CancelSignatureResult($rawResponse);
-        return $result;
+        return new CancelSignatureResult($rawResponse);
     }
 }
