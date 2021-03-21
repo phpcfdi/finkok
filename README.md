@@ -84,11 +84,11 @@ Finkok tiene dos métodos de firmado: `stamp` y `quickstamp`.
 * `stamp(Stamping\StampingCommand $command): Stamping\StampingResult`
 * `quickstamp(Stamping\StampingCommand $command): Stamping\StampingResult`
 
-`stamped` para revisar si previamente se generó un cfdi
+El servicio `stamped` para revisar si previamente se generó un cfdi:
 
 * `stamped(Stamping\StampingCommand $command): Stamping\StampingResult`
 
-y `stampQueryPending` por si estás usando el `pending buffer` (que te recomiendo no hacerlo).
+El servicio `stampQueryPending` por si estás usando `pending buffer` (que te recomiendo no hacerlo):
 
 * `stampQueryPending(Stamping\QueryPendingCommand $command): Stamping\QueryPendingResult`
 
@@ -244,7 +244,7 @@ sin temor a romper tu aplicación.
 ## Contribuciones
 
 Las contribuciones con bienvenidas. Por favor lee [CONTRIBUTING][] para más detalles
-y recuerda revisar el archivo de tareas pendientes [TODO][] y el [CHANGELOG][].
+y recuerda revisar el archivo de tareas pendientes [TODO][] y el archivo [CHANGELOG][].
 
 ## Copyright and License
 
