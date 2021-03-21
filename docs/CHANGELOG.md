@@ -2,15 +2,30 @@
 
 Nos apegamos a [SEMVER](SEMVER.md), revisa la información para entender mejor el control de versiones.
 
-## Cambios para la siguiente versión que rompa compatibilidad
+## Versión 0.3.0 2021-03-21
 
+- Se elimina el soporte y dependencia de PHP 7.2.
+- Se agrega el soporte de PHP 7.3.
+- Se actualiza PHPUnit de 8.5 a 9.5.
 - `PhpCfdi\Finkok\Services\Utilities\DatetimeService::datetime(DatetimeCommand $command = null)`
-  no debe usar la opción de nulo, fue puesta para compatibilidad con versiones previas a `0.2.2`.
-  No así el las fachadas `Finkok` y `QuickFinkok`.
+  no debe usar la opción de nulo, fue puesta para compatibilidad con versiones previas a `0.2.2`,
+  no es así en las fachadas `Finkok` y `QuickFinkok`.
+- Limpieza de código:
+  - Remover variables locales innecesarias.
+  - Remover código innecesario (inicializaciones a null, variables privadas sin uso).
+  - Múltiples anotaciones para evitar alertas de PHPStorm.
 
-## Version UNRELEASED 2020-10-14
+Cambios en entorno de desarrollo:
 
-Cambios en el entorno de pruebas. Solo se afecta la rama principal, no se libera una nueva versión.
+- Se corrigen las pruebas de integración porque el sistema de pruebas del SAT reporta errores de sincronización.
+- En desarrollo se depende ahora de `eclipxe/cfdiutils` compatible con PHP 8.0.
+- Se corrigieron los scripts de `composer.json`.
+- Los casos de pruebas son clases finales.
+- Corrección de Travis-CI, estaba usando `phpcbf` en lugar de `phpcs`.
+- Se agrega PHP 8.0 a la matriz de pruebas de Travis-CI.
+- Se elimina la actualización de composer en Scrutinizer, el sistema es de solo lectura.
+
+Cambios en el entorno de pruebas (2020-10-14). Solo se afecta la rama principal, no se libera una nueva versión.
 
 - El build estaba roto por un problema de tipos detectado por PHPStan debido a que a partir de la versión `0.12.54`
   ya detecta las estructuras de control de flujo de PHPUnit.
@@ -18,9 +33,7 @@ Cambios en el entorno de pruebas. Solo se afecta la rama principal, no se libera
   certificados intermedios, lo solucionaron de inmediato: <https://support.finkok.com/support/tickets/46648>.
 - Cambios menores en las pruebas.
 
-## Version UNRELEASED 2020-09-18
-
-Cambios en el entorno de pruebas. Solo se afecta la rama principal, no se libera una nueva versión.
+Cambios en el entorno de pruebas (2020-09-18). Solo se afecta la rama principal, no se libera una nueva versión.
 
 - El build estaba roto por un problema de tipos detectado por `phpstan` debido a un "soft breaking compatibility change"
   introducido por `symfony/dotenv:5.1`, se corrige el problema en `tests/bootstrap.php`.
