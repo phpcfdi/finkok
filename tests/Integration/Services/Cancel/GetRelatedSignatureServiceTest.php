@@ -60,20 +60,26 @@ final class GetRelatedSignatureServiceTest extends IntegrationTestCase
 
         $command = $this->createGetRelatedSignatureCommand($second->uuid());
         $service = $this->createService();
-        $maxtime = strtotime('+5 minutes');
+        $maxtime = strtotime('+10 minutes');
         while (true) {
             $result = $service->getRelatedSignature($command);
-            // Break the loop if SAT return an error, but the error is not:
-            // 2001 - No Existen cfdi relacionados al folio fiscal.
-            // Testing only: in the wild it is expected to ask for related several seconds after the CFDI were created
-            if ('' !== $result->error() && '2001' !== substr($result->error(), 0, 4)) {
-                break;
-            }
             if (1 === $result->parents()->count() && 1 === $result->children()->count()) {
+                break; // exit, result contains parent and children as expected
+            }
+
+            // Break the loop if SAT return an error, but the error is not one of these:
+            // 2001 - No Existen cfdi relacionados al folio fiscal.
+            // 305 - No se cuenta con un certificado válido.
+            // Testing only: in the wild it is expected to ask for related several seconds after the CFDI were created
+            if ('' !== $result->error()
+                && '2001' !== substr($result->error(), 0, 4)
+                && false === strpos($result->error(), '305')) {
                 break;
             }
+
+            // try  again
             if (time() > $maxtime) {
-                $this->fail('After 5 minutes consuming GetRelatedSignatureService didnt get related from SAT');
+                $this->fail("After 5 minutes consuming GetRelatedSignatureService didn't get related from SAT");
             }
             sleep(5);
         }
