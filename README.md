@@ -222,7 +222,8 @@ Durante el proceso de implementación he creado diversas notas y documentos:
 - [Registro de clientes](docs/RegistroDeClientes.md): Si vas a trabajar con la capacidad de Finkok de *sub-distribuidor*
   y así poder administrar los datos de clientes.
 
-- [Entorno de Pruebas](docs/EntornoDePruebas.md): Documentación de cómo funciona y como configurar el entorno de pruebas.
+- [Pruebas de integración](docs/PruebasDeIntegracion.md): Documentación de cómo funciona y como configurar
+  el entorno de pruebas de integración.
 
 - Problemas encontrados:
     - [X] [Cancelación de un CFDI recién creado](docs/issues/CancelSignatureServiceCancelarRecienCreado.md)

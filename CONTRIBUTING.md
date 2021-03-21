@@ -81,7 +81,7 @@ composer dev:build
 
 ## Pruebas de integración
 
-Lee y configura tu proyecto de acuerdo a la guía de configuración del [entorno de pruebas](docs/EntornoDePruebas.md).
+Lee y configura tu proyecto de acuerdo a la guía de configuración del [entorno de pruebas](docs/PruebasDeIntegracion.md).
 
 Una vez correctamente configurado, ejecuta las pruebas de integración:
 
