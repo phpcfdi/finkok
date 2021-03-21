@@ -13,7 +13,7 @@ before_script:
 
 script:
   - vendor/bin/php-cs-fixer fix --verbose
-  - vendor/bin/phpcbf --colors -sp src/ tests/
+  - vendor/bin/phpcs --colors -sp src/ tests/
   - vendor/bin/phpunit --testdox --verbose tests/Unit/
   - vendor/bin/phpstan analyse --no-progress --verbose --level max src/ tests/
 
