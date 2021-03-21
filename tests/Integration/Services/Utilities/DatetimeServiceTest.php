@@ -7,6 +7,7 @@ namespace PhpCfdi\Finkok\Tests\Integration\Services\Utilities;
 use PhpCfdi\Finkok\FinkokEnvironment;
 use PhpCfdi\Finkok\FinkokSettings;
 use PhpCfdi\Finkok\QuickFinkok;
+use PhpCfdi\Finkok\Services\Utilities\DatetimeCommand;
 use PhpCfdi\Finkok\Services\Utilities\DatetimeService;
 use PhpCfdi\Finkok\Tests\Integration\IntegrationTestCase;
 
@@ -31,7 +32,7 @@ final class DatetimeServiceTest extends IntegrationTestCase
     {
         $settings = $this->createSettingsFromEnvironment();
         $service = new DatetimeService($settings);
-        $result = $service->datetime();
+        $result = $service->datetime(new DatetimeCommand(''));
 
         $this->assertMatchesRegularExpression('/^[\d:T\-]{19}$/', $result->datetime());
         /** @var int|false $converted */
@@ -56,7 +57,7 @@ final class DatetimeServiceTest extends IntegrationTestCase
             FinkokEnvironment::makeDevelopment()
         );
         $service = new DatetimeService($settings);
-        $result = $service->datetime();
+        $result = $service->datetime(new DatetimeCommand(''));
         $this->assertSame('Invalid username or password', $result->error());
     }
 }
