@@ -7,7 +7,7 @@ namespace PhpCfdi\Finkok\Tests\Integration\Services\Stamping;
 use PhpCfdi\Finkok\Services\Stamping\StampedService;
 use PhpCfdi\Finkok\Tests\Integration\IntegrationTestCase;
 
-class StampedServiceTest extends IntegrationTestCase
+final class StampedServiceTest extends IntegrationTestCase
 {
     protected function createService(): StampedService
     {

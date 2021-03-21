@@ -8,7 +8,7 @@ use LogicException;
 use PhpCfdi\Finkok\Services\Registration\Customers;
 use PhpCfdi\Finkok\Tests\TestCase;
 
-class CustomersTest extends TestCase
+final class CustomersTest extends TestCase
 {
     public function testCreateUsingNoItems(): void
     {

@@ -9,7 +9,7 @@ use PhpCfdi\Finkok\Services\Cancel\GetSatStatusService;
 use PhpCfdi\Finkok\Tests\Fakes\FakeSoapFactory;
 use PhpCfdi\Finkok\Tests\TestCase;
 
-class GetSatStatusServiceTest extends TestCase
+final class GetSatStatusServiceTest extends TestCase
 {
     public function testServiceUsingPreparedResult(): void
     {

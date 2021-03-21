@@ -8,7 +8,7 @@ use InvalidArgumentException;
 use PhpCfdi\Finkok\Tests\TestCase;
 use stdClass;
 
-class AbstractResultTest extends TestCase
+final class AbstractResultTest extends TestCase
 {
     /** @var stdClass */
     private $data;
@@ -50,6 +50,7 @@ class AbstractResultTest extends TestCase
     {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Unable to find mean object at /other');
+        /** @noinspection PhpExpressionResultUnusedInspection */
         new TestingResult($this->data, 'other');
     }
 

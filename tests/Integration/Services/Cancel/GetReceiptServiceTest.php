@@ -9,7 +9,7 @@ use PhpCfdi\Finkok\Services\Cancel\GetReceiptCommand;
 use PhpCfdi\Finkok\Services\Cancel\GetReceiptService;
 use PhpCfdi\Finkok\Tests\Integration\IntegrationTestCase;
 
-class GetReceiptServiceTest extends IntegrationTestCase
+final class GetReceiptServiceTest extends IntegrationTestCase
 {
     protected function createService(): GetReceiptService
     {

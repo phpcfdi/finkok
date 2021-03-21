@@ -8,7 +8,7 @@ use PhpCfdi\Credentials\Credential;
 use PhpCfdi\Finkok\QuickFinkok;
 use PhpCfdi\Finkok\Tests\Integration\IntegrationTestCase;
 
-class GetDocumentsSignSendAndGetSignedTest extends IntegrationTestCase
+final class GetDocumentsSignSendAndGetSignedTest extends IntegrationTestCase
 {
     private function createFielCredential(): Credential
     {

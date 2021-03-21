@@ -8,7 +8,7 @@ use PhpCfdi\Finkok\Services\Cancel\GetSatStatusCommand;
 use PhpCfdi\Finkok\Services\Cancel\GetSatStatusService;
 use PhpCfdi\Finkok\Tests\Integration\IntegrationTestCase;
 
-class GetSatStatusServiceTest extends IntegrationTestCase
+final class GetSatStatusServiceTest extends IntegrationTestCase
 {
     protected function createService(): GetSatStatusService
     {

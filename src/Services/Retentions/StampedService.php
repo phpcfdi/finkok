@@ -28,7 +28,6 @@ class StampedService
         $rawResponse = $soapCaller->call('stamped', [
             'xml' => $command->xml(),
         ]);
-        $result = new StampedResult($rawResponse);
-        return $result;
+        return new StampedResult($rawResponse);
     }
 }

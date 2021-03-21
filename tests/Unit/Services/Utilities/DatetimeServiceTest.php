@@ -9,9 +9,9 @@ use PhpCfdi\Finkok\Services\Utilities\DatetimeService;
 use PhpCfdi\Finkok\Tests\Fakes\FakeSoapFactory;
 use PhpCfdi\Finkok\Tests\TestCase;
 
-class DatetimeServiceTest extends TestCase
+final class DatetimeServiceTest extends TestCase
 {
-    public function testDatetimeServiceUsingPreparedResultWithoutPostalCode(): void
+    public function testDatetimeServiceUsingPreparedResultWithEmptyPostalCode(): void
     {
         $preparedResult = json_decode(TestCase::fileContentPath('utilities-datetime-response.json'));
 
@@ -21,7 +21,7 @@ class DatetimeServiceTest extends TestCase
         $settings = $this->createSettingsFromEnvironment($soapFactory);
         $service = new DatetimeService($settings);
 
-        $result = $service->datetime();
+        $result = $service->datetime(new DatetimeCommand(''));
         $this->assertSame('2019-01-13T14:15:16', $result->datetime());
 
         $caller = $soapFactory->latestSoapCaller;

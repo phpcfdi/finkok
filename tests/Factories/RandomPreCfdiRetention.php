@@ -7,7 +7,7 @@ namespace PhpCfdi\Finkok\Tests\Factories;
 use DateTimeImmutable;
 use PhpCfdi\Finkok\Tests\TestCase;
 
-class RandomPreCfdiRetention
+final class RandomPreCfdiRetention
 {
     public function createValid(): string
     {

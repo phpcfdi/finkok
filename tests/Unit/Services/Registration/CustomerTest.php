@@ -7,7 +7,7 @@ namespace PhpCfdi\Finkok\Tests\Unit\Services\Registration;
 use PhpCfdi\Finkok\Services\Registration\Customer;
 use PhpCfdi\Finkok\Tests\TestCase;
 
-class CustomerTest extends TestCase
+final class CustomerTest extends TestCase
 {
     public function testCreateEmpty(): void
     {

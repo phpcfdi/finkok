@@ -8,7 +8,7 @@ use PhpCfdi\Finkok\Services\Registration\CustomerStatus;
 use PhpCfdi\Finkok\Services\Registration\EditCommand;
 use PhpCfdi\Finkok\Tests\TestCase;
 
-class EditCommandTest extends TestCase
+final class EditCommandTest extends TestCase
 {
     public function testEditCommandCreation(): void
     {

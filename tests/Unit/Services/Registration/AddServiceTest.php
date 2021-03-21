@@ -10,7 +10,7 @@ use PhpCfdi\Finkok\Services\Registration\CustomerType;
 use PhpCfdi\Finkok\Tests\Fakes\FakeSoapFactory;
 use PhpCfdi\Finkok\Tests\TestCase;
 
-class AddServiceTest extends TestCase
+final class AddServiceTest extends TestCase
 {
     public function testServiceUsingPreparedResult(): void
     {

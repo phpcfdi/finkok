@@ -7,7 +7,7 @@ namespace PhpCfdi\Finkok\Tests\Integration\Services\Stamping;
 use PhpCfdi\Finkok\Services\Stamping\QuickStampService;
 use PhpCfdi\Finkok\Tests\Integration\IntegrationTestCase;
 
-class QuickStampServiceTest extends IntegrationTestCase
+final class QuickStampServiceTest extends IntegrationTestCase
 {
     protected function createService(): QuickStampService
     {

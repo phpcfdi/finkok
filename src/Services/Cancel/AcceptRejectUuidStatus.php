@@ -21,7 +21,7 @@ final class AcceptRejectUuidStatus extends MicroCatalog
         ];
     }
 
-    public function getEntryValueOnUndefined()
+    public function getEntryValueOnUndefined(): string
     {
         return 'Respuesta del SAT desconocida';
     }

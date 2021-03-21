@@ -7,7 +7,7 @@ namespace PhpCfdi\Finkok\Tests\Unit\Services\Manifest;
 use PhpCfdi\Finkok\Services\Manifest\GetContractsCommand;
 use PhpCfdi\Finkok\Tests\TestCase;
 
-class GetContractsCommandTest extends TestCase
+final class GetContractsCommandTest extends TestCase
 {
     public function testCreateCommand(): void
     {

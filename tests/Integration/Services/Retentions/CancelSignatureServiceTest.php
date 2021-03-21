@@ -55,9 +55,6 @@ final class CancelSignatureServiceTest extends RetentionsTestCase
         $uuid = 'AAB81A24-8CD8-4703-A2CE-88F4E98E8044';
         $result = $this->quickFinkok->retentionCancel($this->createCsdCredential(), $uuid);
         echo json_encode($result->rawData(), JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
-        if ('1308' === $result->statusCode()) {
-            $this->markTestSkipped('Finkok ticket #41610, SAT error: Certificado revocado o caduco');
-        }
         $this->assertSame($uuid, $result->documents()->first()->uuid(), 'Cancelled UUID must match with requested');
     }
 }

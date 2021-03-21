@@ -13,7 +13,7 @@ use PhpCfdi\Finkok\Services\Manifest\SignContractsResult;
 use PhpCfdi\Finkok\Services\Manifest\SignContractsService;
 use PhpCfdi\Finkok\Tests\Integration\IntegrationTestCase;
 
-class SignContractsServiceTest extends IntegrationTestCase
+final class SignContractsServiceTest extends IntegrationTestCase
 {
     private function consumeSignContracts(
         string $rfc,

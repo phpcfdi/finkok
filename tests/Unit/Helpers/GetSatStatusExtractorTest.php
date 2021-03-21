@@ -6,8 +6,9 @@ namespace PhpCfdi\Finkok\Tests\Unit\Helpers;
 
 use PhpCfdi\Finkok\Helpers\GetSatStatusExtractor;
 use PhpCfdi\Finkok\Tests\TestCase;
+use RuntimeException;
 
-class GetSatStatusExtractorTest extends TestCase
+final class GetSatStatusExtractorTest extends TestCase
 {
     public function testConstructWithEmptyData(): void
     {
@@ -44,7 +45,7 @@ EOT;
     public function testConstructWithOtherXml(): void
     {
         $fakeCfdi = '<xml/>';
-        $this->expectException(\RuntimeException::class);
+        $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage('Unable to obtain the expression values');
         GetSatStatusExtractor::fromXmlString($fakeCfdi);
     }

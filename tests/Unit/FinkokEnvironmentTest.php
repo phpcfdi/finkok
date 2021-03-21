@@ -9,7 +9,7 @@ use PhpCfdi\Finkok\Definitions\Services;
 use PhpCfdi\Finkok\FinkokEnvironment;
 use PhpCfdi\Finkok\Tests\TestCase;
 
-class FinkokEnvironmentTest extends TestCase
+final class FinkokEnvironmentTest extends TestCase
 {
     public function testConstructDevelopment(): void
     {

@@ -10,7 +10,7 @@ use PhpCfdi\Finkok\Services\Cancel\GetReceiptService;
 use PhpCfdi\Finkok\Tests\Fakes\FakeSoapFactory;
 use PhpCfdi\Finkok\Tests\TestCase;
 
-class GetReceiptServiceTest extends TestCase
+final class GetReceiptServiceTest extends TestCase
 {
     public function testServiceUsingPreparedResult(): void
     {

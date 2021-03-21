@@ -7,7 +7,7 @@ namespace PhpCfdi\Finkok\Tests\Unit\Services\Cancel;
 use PhpCfdi\Finkok\Services\Cancel\GetRelatedSignatureCommand;
 use PhpCfdi\Finkok\Tests\TestCase;
 
-class GetRelatedSignatureCommandTest extends TestCase
+final class GetRelatedSignatureCommandTest extends TestCase
 {
     public function testCommandValues(): void
     {

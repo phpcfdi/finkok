@@ -8,7 +8,7 @@ use PhpCfdi\Finkok\Services\Stamping\QueryPendingCommand;
 use PhpCfdi\Finkok\Services\Stamping\QueryPendingService;
 use PhpCfdi\Finkok\Tests\Integration\IntegrationTestCase;
 
-class QueryPendingServiceTest extends IntegrationTestCase
+final class QueryPendingServiceTest extends IntegrationTestCase
 {
     protected function createService(): QueryPendingService
     {

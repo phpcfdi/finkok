@@ -7,7 +7,7 @@ namespace PhpCfdi\Finkok\Tests\Fakes;
 use PhpCfdi\Finkok\SoapCaller;
 use stdClass;
 
-class FakeSoapCaller extends SoapCaller
+final class FakeSoapCaller extends SoapCaller
 {
     /** @var stdClass */
     public $preparedResult;
@@ -18,6 +18,7 @@ class FakeSoapCaller extends SoapCaller
     /** @var array<mixed> */
     public $latestCallParameters = [];
 
+    /** @noinspection PhpMissingParentCallCommonInspection */
     public function call(string $methodName, array $parameters): stdClass
     {
         $this->latestCallMethodName = $methodName;

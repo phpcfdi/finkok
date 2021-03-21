@@ -7,7 +7,7 @@ namespace PhpCfdi\Finkok\Tests\Unit\Services\Cancel;
 use PhpCfdi\Finkok\Services\Cancel\GetSatStatusCommand;
 use PhpCfdi\Finkok\Tests\TestCase;
 
-class GetSatStatusCommandTest extends TestCase
+final class GetSatStatusCommandTest extends TestCase
 {
     public function testCommandValues(): void
     {

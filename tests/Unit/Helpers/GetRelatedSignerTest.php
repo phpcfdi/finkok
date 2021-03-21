@@ -9,7 +9,7 @@ use PhpCfdi\Finkok\Helpers\GetRelatedSigner;
 
 use PhpCfdi\Finkok\Tests\TestCase;
 
-class GetRelatedSignerTest extends TestCase
+final class GetRelatedSignerTest extends TestCase
 {
     public function testCreateAndSign(): void
     {

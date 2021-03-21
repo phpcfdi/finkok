@@ -28,7 +28,6 @@ class QuickStampService
         $rawResponse = $soapCaller->call('quick_stamp', [
             'xml' => $command->xml(),
         ]);
-        $result = new StampingResult('quick_stampResult', $rawResponse);
-        return $result;
+        return new StampingResult('quick_stampResult', $rawResponse);
     }
 }

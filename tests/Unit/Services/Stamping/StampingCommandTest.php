@@ -8,7 +8,7 @@ use PhpCfdi\Finkok\Services\Stamping\StampingCommand;
 use PhpCfdi\Finkok\Tests\Factories\RandomPreCfdi;
 use PhpCfdi\Finkok\Tests\TestCase;
 
-class StampingCommandTest extends TestCase
+final class StampingCommandTest extends TestCase
 {
     public function testStampingCommandCanReceiveAPrecfdi(): void
     {

@@ -8,7 +8,7 @@ use PhpCfdi\Finkok\Definitions\ReceiptType;
 use PhpCfdi\Finkok\Services\Cancel\GetReceiptCommand;
 use PhpCfdi\Finkok\Tests\TestCase;
 
-class GetReceiptCommandTest extends TestCase
+final class GetReceiptCommandTest extends TestCase
 {
     public function testCommandValues(): void
     {

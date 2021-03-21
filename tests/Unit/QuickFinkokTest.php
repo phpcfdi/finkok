@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PhpCfdi\Finkok\Tests\Unit;
 
+use DateTimeImmutable;
 use PhpCfdi\Finkok\Definitions\CancelAnswer;
 use PhpCfdi\Finkok\Definitions\RfcRole;
 use PhpCfdi\Finkok\QuickFinkok;
@@ -17,7 +18,7 @@ use PHPUnit\Framework\MockObject\MockObject;
 use stdClass;
 
 /** @covers \PhpCfdi\Finkok\QuickFinkok */
-class QuickFinkokTest extends TestCase
+final class QuickFinkokTest extends TestCase
 {
     /** @var FakeSoapFactory */
     private $soapFactory;
@@ -28,8 +29,7 @@ class QuickFinkokTest extends TestCase
         $fakeFactory->preparedResult = $rawData;
         $settings = $this->createSettingsFromEnvironment($fakeFactory);
         $this->soapFactory = $fakeFactory;
-        $finkok = new QuickFinkok($settings);
-        return $finkok;
+        return new QuickFinkok($settings);
     }
 
     /**
@@ -229,7 +229,7 @@ EOT;
         $rawData = json_decode($this->fileContentPath('utilities-report-uuid-response.json'));
         $finkok = $this->createdPreparedQuickFinkok($rawData);
 
-        $since = new \DateTimeImmutable('2019-01-13 00:00:00');
+        $since = new DateTimeImmutable('2019-01-13 00:00:00');
         $until = $since->modify('+1 day -1 second');
         $result = $finkok->reportUuids('x-rfc', $since, $until);
 
@@ -400,7 +400,7 @@ EOT;
                 $this->stringContains($getContractsResult->contract())
             );
 
-        $signedOn = new \DateTimeImmutable('2019-01-13 14:15:16');
+        $signedOn = new DateTimeImmutable('2019-01-13 14:15:16');
         $finkok->customerSignAndSendContracts($fiel, 'x-snid', 'x-address', 'x-email', $signedOn);
     }
 

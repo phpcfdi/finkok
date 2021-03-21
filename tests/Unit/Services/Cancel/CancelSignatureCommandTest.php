@@ -8,7 +8,7 @@ use PhpCfdi\Finkok\Definitions\CancelStorePending;
 use PhpCfdi\Finkok\Services\Cancel\CancelSignatureCommand;
 use PhpCfdi\Finkok\Tests\TestCase;
 
-class CancelSignatureCommandTest extends TestCase
+final class CancelSignatureCommandTest extends TestCase
 {
     public function testCommandDefaultValue(): void
     {

@@ -8,12 +8,11 @@ use PhpCfdi\Finkok\Services\Registration\CustomerStatus;
 use PhpCfdi\Finkok\Services\Registration\EditCommand;
 use PhpCfdi\Finkok\Services\Registration\EditService;
 
-class EditServiceTest extends RegistrationIntegrationTestCase
+final class EditServiceTest extends RegistrationIntegrationTestCase
 {
     protected function createService(): EditService
     {
-        $editService = new EditService($this->createSettingsFromEnvironment());
-        return $editService;
+        return new EditService($this->createSettingsFromEnvironment());
     }
 
     public function testConsumeEditServiceUsingExistentRfc(): void

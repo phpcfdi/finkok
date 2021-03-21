@@ -7,7 +7,7 @@ namespace PhpCfdi\Finkok\Tests\Unit\Services\Stamping;
 use PhpCfdi\Finkok\Services\Stamping\QueryPendingResult;
 use PhpCfdi\Finkok\Tests\TestCase;
 
-class QueryPendingResultTest extends TestCase
+final class QueryPendingResultTest extends TestCase
 {
     public function testUsingKnownStampResponse(): void
     {

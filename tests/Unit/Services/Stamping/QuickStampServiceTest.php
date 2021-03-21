@@ -9,7 +9,7 @@ use PhpCfdi\Finkok\Services\Stamping\StampingCommand;
 use PhpCfdi\Finkok\Tests\Fakes\FakeSoapFactory;
 use PhpCfdi\Finkok\Tests\TestCase;
 
-class QuickStampServiceTest extends TestCase
+final class QuickStampServiceTest extends TestCase
 {
     public function testQuickStampSendXmlAndProcessPreparedResult(): void
     {

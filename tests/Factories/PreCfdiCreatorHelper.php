@@ -11,7 +11,7 @@ use CfdiUtils\Utils\Rfc;
 use DateTimeImmutable;
 use DateTimeZone;
 
-class PreCfdiCreatorHelper
+final class PreCfdiCreatorHelper
 {
     /** @var DateTimeImmutable */
     private $invoiceDate;

@@ -10,7 +10,7 @@ use PhpCfdi\Finkok\Services\Utilities\ReportUuidService;
 use PhpCfdi\Finkok\Tests\Fakes\FakeSoapFactory;
 use PhpCfdi\Finkok\Tests\TestCase;
 
-class ReportUuidServiceTest extends TestCase
+final class ReportUuidServiceTest extends TestCase
 {
     public function testServiceUsingPreparedResult(): void
     {

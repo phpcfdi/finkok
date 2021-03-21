@@ -7,7 +7,7 @@ namespace PhpCfdi\Finkok\Tests\Unit\Services\Utilities;
 use PhpCfdi\Finkok\Services\Utilities\ReportTotalResult;
 use PhpCfdi\Finkok\Tests\TestCase;
 
-class ReportTotalResultTest extends TestCase
+final class ReportTotalResultTest extends TestCase
 {
     public function testResultUsingPredefinedResponse(): void
     {

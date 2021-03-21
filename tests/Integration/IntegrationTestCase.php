@@ -22,10 +22,10 @@ use RuntimeException;
 abstract class IntegrationTestCase extends TestCase
 {
     /** @var StampingResult|null */
-    protected static $staticCurrentStampingResult = null;
+    protected static $staticCurrentStampingResult;
 
     /** @var StampingCommand|null */
-    protected static $staticCurrentStampingCommand = null;
+    protected static $staticCurrentStampingCommand;
 
     public function newStampingCommand(): StampingCommand
     {
@@ -83,8 +83,7 @@ abstract class IntegrationTestCase extends TestCase
     ): CancelSignatureCommand {
         $credential = $this->createCsdCredential();
         $signer = new CancelSigner([$uuid], $dateTime);
-        $command = new CancelSignatureCommand($signer->sign($credential));
-        return $command;
+        return new CancelSignatureCommand($signer->sign($credential));
     }
 
     protected function checkCanGetSatStatusOrFail(

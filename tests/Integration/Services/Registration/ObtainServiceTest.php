@@ -7,7 +7,7 @@ namespace PhpCfdi\Finkok\Tests\Integration\Services\Registration;
 use PhpCfdi\Finkok\Services\Registration\ObtainCommand;
 use PhpCfdi\Finkok\Services\Registration\ObtainService;
 
-class ObtainServiceTest extends RegistrationIntegrationTestCase
+final class ObtainServiceTest extends RegistrationIntegrationTestCase
 {
     protected function createService(): ObtainService
     {

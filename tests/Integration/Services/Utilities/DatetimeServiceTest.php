@@ -7,10 +7,11 @@ namespace PhpCfdi\Finkok\Tests\Integration\Services\Utilities;
 use PhpCfdi\Finkok\FinkokEnvironment;
 use PhpCfdi\Finkok\FinkokSettings;
 use PhpCfdi\Finkok\QuickFinkok;
+use PhpCfdi\Finkok\Services\Utilities\DatetimeCommand;
 use PhpCfdi\Finkok\Services\Utilities\DatetimeService;
 use PhpCfdi\Finkok\Tests\Integration\IntegrationTestCase;
 
-class DatetimeServiceTest extends IntegrationTestCase
+final class DatetimeServiceTest extends IntegrationTestCase
 {
     public function testTwoWellKnownDifferentPostalCodes(): void
     {
@@ -31,9 +32,9 @@ class DatetimeServiceTest extends IntegrationTestCase
     {
         $settings = $this->createSettingsFromEnvironment();
         $service = new DatetimeService($settings);
-        $result = $service->datetime();
+        $result = $service->datetime(new DatetimeCommand(''));
 
-        $this->assertRegExp('/^[\d:T\-]{19}$/', $result->datetime());
+        $this->assertMatchesRegularExpression('/^[\d:T\-]{19}$/', $result->datetime());
         /** @var int|false $converted */
         $converted = strtotime($result->datetime());
         if (false === $converted) {
@@ -56,7 +57,7 @@ class DatetimeServiceTest extends IntegrationTestCase
             FinkokEnvironment::makeDevelopment()
         );
         $service = new DatetimeService($settings);
-        $result = $service->datetime();
+        $result = $service->datetime(new DatetimeCommand(''));
         $this->assertSame('Invalid username or password', $result->error());
     }
 }

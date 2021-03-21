@@ -8,7 +8,7 @@ use PhpCfdi\Finkok\Exceptions\FinkokException;
 use PhpCfdi\Finkok\Exceptions\InvalidArgumentException;
 use PhpCfdi\Finkok\Tests\TestCase;
 
-class InvalidArgumentExceptionTest extends TestCase
+final class InvalidArgumentExceptionTest extends TestCase
 {
     public function testIsInstaceOfFinkokException(): void
     {

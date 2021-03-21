@@ -84,11 +84,11 @@ Finkok tiene dos métodos de firmado: `stamp` y `quickstamp`.
 * `stamp(Stamping\StampingCommand $command): Stamping\StampingResult`
 * `quickstamp(Stamping\StampingCommand $command): Stamping\StampingResult`
 
-`stamped` para revisar si previamente se generó un cfdi
+El servicio `stamped` para revisar si previamente se generó un cfdi:
 
 * `stamped(Stamping\StampingCommand $command): Stamping\StampingResult`
 
-y `stampQueryPending` por si estás usando el `pending buffer` (que te recomiendo no hacerlo).
+El servicio `stampQueryPending` por si estás usando `pending buffer` (que te recomiendo no hacerlo):
 
 * `stampQueryPending(Stamping\QueryPendingCommand $command): Stamping\QueryPendingResult`
 
@@ -231,7 +231,7 @@ Durante el proceso de implementación he creado diversas notas y documentos:
     - [X] Falta servicio que no requiera CSD/FIEL para aceptar o rechazar una solicitud de cancelación
     - [X] Falta servicio que no requiera CSD/FIEL para obtener los CFDI relacionados
     - [X] [El acuse de cancelación entregado al cancelar y al solicitar el acuse no coinciden](docs/issues/AcuseCancelacionNoCoincidente.md)
-    - [ ] [Error de cancelación de retenciones 1308 - Certificado revocado o caduco](docs/issues/CancelacionRetencionesError1308.md)
+    - [X] [Error de cancelación de retenciones 1308 - Certificado revocado o caduco](docs/issues/CancelacionRetencionesError1308.md)
 
 ## Compatilibilidad
 
@@ -241,10 +241,15 @@ Esta librería se mantendrá compatible con al menos la versión con
 También utilizamos [Versionado Semántico 2.0.0](docs/SEMVER.md) por lo que puedes usar esta librería
 sin temor a romper tu aplicación.
 
+| Versión de la librería | Versión de PHP | Fecha de lanzamiento |
+| ---                    | ---            | ---                  |
+| 0.1.0                  | 7.2, 7.3 y 7.4 | 2019-03-29           |
+| 0.3.0                  | 7.3, 7.4 y 8.0 | 2021-03-18           |
+
 ## Contribuciones
 
 Las contribuciones con bienvenidas. Por favor lee [CONTRIBUTING][] para más detalles
-y recuerda revisar el archivo de tareas pendientes [TODO][] y el [CHANGELOG][].
+y recuerda revisar el archivo de tareas pendientes [TODO][] y el archivo [CHANGELOG][].
 
 ## Copyright and License
 

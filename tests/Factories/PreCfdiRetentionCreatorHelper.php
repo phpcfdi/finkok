@@ -12,7 +12,7 @@ use CfdiUtils\Retenciones\RetencionesCreator10;
 use DateTimeImmutable;
 use DateTimeZone;
 
-class PreCfdiRetentionCreatorHelper
+final class PreCfdiRetentionCreatorHelper
 {
     /** @var Certificado */
     private $certificate;
@@ -30,9 +30,6 @@ class PreCfdiRetentionCreatorHelper
     private $emisorName;
 
     /** @var string */
-    private $cerFile;
-
-    /** @var string */
     private $keyPemFile;
 
     /** @var string */
@@ -46,7 +43,6 @@ class PreCfdiRetentionCreatorHelper
         $this->certificate = new Certificado($cerFile);
         $this->emisorRfc = $this->certificate->getRfc();
         $this->emisorName = $this->certificate->getName();
-        $this->cerFile = $cerFile;
         $this->keyPemFile = $keyPemFile;
         $this->passPhrase = $passPhrase;
         $this->invoiceDate = new DateTimeImmutable('now -5 minutes', new DateTimeZone('America/Mexico_City'));

@@ -10,7 +10,7 @@ use PhpCfdi\Finkok\Helpers\AcceptRejectSigner;
 
 use PhpCfdi\Finkok\Tests\TestCase;
 
-class AcceptRejectSignerTest extends TestCase
+final class AcceptRejectSignerTest extends TestCase
 {
     public function testCreateAndSign(): void
     {

@@ -8,7 +8,7 @@ use PhpCfdi\Finkok\Definitions\SignedDocumentFormat;
 use PhpCfdi\Finkok\Services\Manifest\GetSignedContractsCommand;
 use PhpCfdi\Finkok\Tests\TestCase;
 
-class GetSignedContractsCommandTest extends TestCase
+final class GetSignedContractsCommandTest extends TestCase
 {
     public function testCreateCommand(): void
     {

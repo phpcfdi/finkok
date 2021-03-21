@@ -7,7 +7,7 @@ namespace PhpCfdi\Finkok\Tests\Unit\Services\Utilities;
 use PhpCfdi\Finkok\Services\Utilities\DownloadXmlCommand;
 use PhpCfdi\Finkok\Tests\TestCase;
 
-class DownloadXmlCommandTest extends TestCase
+final class DownloadXmlCommandTest extends TestCase
 {
     public function testDownloadXmlCommandCanReceiveAPrecfdi(): void
     {

@@ -11,7 +11,7 @@ use PhpCfdi\Finkok\Services\Registration\CustomerType;
 use PhpCfdi\Finkok\Services\Registration\SwitchCommand;
 use PhpCfdi\Finkok\Services\Registration\SwitchService;
 
-class AssignServiceTest extends RegistrationIntegrationTestCase
+final class AssignServiceTest extends RegistrationIntegrationTestCase
 {
     protected function staticSettings(): FinkokSettings
     {

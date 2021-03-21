@@ -9,7 +9,7 @@ use PhpCfdi\Finkok\Services\Stamping\QueryPendingService;
 use PhpCfdi\Finkok\Tests\Fakes\FakeSoapFactory;
 use PhpCfdi\Finkok\Tests\TestCase;
 
-class QueryPendingServiceTest extends TestCase
+final class QueryPendingServiceTest extends TestCase
 {
     public function testCall(): void
     {

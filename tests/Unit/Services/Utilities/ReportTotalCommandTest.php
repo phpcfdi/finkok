@@ -10,7 +10,7 @@ use LogicException;
 use PhpCfdi\Finkok\Services\Utilities\ReportTotalCommand;
 use PhpCfdi\Finkok\Tests\TestCase;
 
-class ReportTotalCommandTest extends TestCase
+final class ReportTotalCommandTest extends TestCase
 {
     public function testReportTotalCommandPastPeriods(): void
     {
@@ -159,6 +159,7 @@ class ReportTotalCommandTest extends TestCase
                 parent::__construct($rfc, $type, $startYear, $startMonth, $endYear, $endMonth);
             }
 
+            /** @noinspection PhpMissingParentCallCommonInspection */
             protected function today(): DateTimeImmutable
             {
                 return $this->today;

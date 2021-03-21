@@ -7,7 +7,7 @@ namespace PhpCfdi\Finkok\Tests\Unit\Services\Cancel;
 use PhpCfdi\Finkok\Services\Cancel\GetPendingCommand;
 use PhpCfdi\Finkok\Tests\TestCase;
 
-class GetPendingCommandTest extends TestCase
+final class GetPendingCommandTest extends TestCase
 {
     public function testCommandValues(): void
     {

@@ -28,7 +28,6 @@ class AcceptRejectSignatureService
         $rawResponse = $soapCaller->call('accept_reject_signature', [
             'xml' => $command->xml(),
         ]);
-        $result = new AcceptRejectSignatureResult($rawResponse);
-        return $result;
+        return new AcceptRejectSignatureResult($rawResponse);
     }
 }

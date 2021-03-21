@@ -7,7 +7,7 @@ namespace PhpCfdi\Finkok\Tests\Unit\Services\Retentions;
 use PhpCfdi\Finkok\Services\Retentions\StampedResult;
 use PhpCfdi\Finkok\Tests\TestCase;
 
-class StampedResultTest extends TestCase
+final class StampedResultTest extends TestCase
 {
     public function testUsingKnownStampResponse(): void
     {

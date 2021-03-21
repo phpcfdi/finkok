@@ -8,7 +8,7 @@ use PhpCfdi\Finkok\Services\Registration\AddCommand;
 use PhpCfdi\Finkok\Services\Registration\CustomerType;
 use PhpCfdi\Finkok\Tests\TestCase;
 
-class AddCommandTest extends TestCase
+final class AddCommandTest extends TestCase
 {
     public function testAddCommandCreation(): void
     {

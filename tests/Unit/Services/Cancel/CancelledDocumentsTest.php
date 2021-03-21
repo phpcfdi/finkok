@@ -7,7 +7,7 @@ namespace PhpCfdi\Finkok\Tests\Unit\Services\Cancel;
 use PhpCfdi\Finkok\Services\Cancel\CancelledDocuments;
 use PhpCfdi\Finkok\Tests\TestCase;
 
-class CancelledDocumentsTest extends TestCase
+final class CancelledDocumentsTest extends TestCase
 {
     protected function createCancelledDocuments(): CancelledDocuments
     {
@@ -23,9 +23,7 @@ class CancelledDocumentsTest extends TestCase
                 'EstatusCancelacion' => 'Cancelado sin aceptación',
             ],
         ];
-
-        $documents = new CancelledDocuments($input);
-        return $documents;
+        return new CancelledDocuments($input);
     }
 
     protected function createTestingUuid(int $index): string

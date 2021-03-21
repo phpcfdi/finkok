@@ -9,7 +9,7 @@ use PhpCfdi\Finkok\Services\Cancel\GetRelatedSignatureService;
 use PhpCfdi\Finkok\Tests\Fakes\FakeSoapFactory;
 use PhpCfdi\Finkok\Tests\TestCase;
 
-class GetRelatedSignatureServiceTest extends TestCase
+final class GetRelatedSignatureServiceTest extends TestCase
 {
     public function testServiceUsingPreparedResult(): void
     {

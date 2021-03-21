@@ -9,7 +9,7 @@ use PhpCfdi\Finkok\Services\Utilities\ReportCreditResult;
 use PhpCfdi\Finkok\Services\Utilities\ReportCreditService;
 use PhpCfdi\Finkok\Tests\Integration\IntegrationTestCase;
 
-class ReportCreditServiceTest extends IntegrationTestCase
+final class ReportCreditServiceTest extends IntegrationTestCase
 {
     public function testReportCreditService(): void
     {

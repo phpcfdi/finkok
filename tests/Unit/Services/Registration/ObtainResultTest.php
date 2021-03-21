@@ -8,7 +8,7 @@ use PhpCfdi\Finkok\Services\Registration\ObtainResult;
 
 use PhpCfdi\Finkok\Tests\TestCase;
 
-class ObtainResultTest extends TestCase
+final class ObtainResultTest extends TestCase
 {
     public function testResultUsingPredefinedResponses(): void
     {

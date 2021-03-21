@@ -8,7 +8,7 @@ use PhpCfdi\Finkok\Services\Cancel\GetPendingCommand;
 use PhpCfdi\Finkok\Services\Cancel\GetPendingService;
 use PhpCfdi\Finkok\Tests\Integration\IntegrationTestCase;
 
-class GetPendingServiceTest extends IntegrationTestCase
+final class GetPendingServiceTest extends IntegrationTestCase
 {
     public function testConsumeService(): void
     {

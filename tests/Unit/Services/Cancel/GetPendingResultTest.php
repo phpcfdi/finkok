@@ -7,7 +7,7 @@ namespace PhpCfdi\Finkok\Tests\Unit\Services\Cancel;
 use PhpCfdi\Finkok\Services\Cancel\GetPendingResult;
 use PhpCfdi\Finkok\Tests\TestCase;
 
-class GetPendingResultTest extends TestCase
+final class GetPendingResultTest extends TestCase
 {
     public function testResultUsingPredefinedResponse(): void
     {

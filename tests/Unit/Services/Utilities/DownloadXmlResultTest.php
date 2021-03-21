@@ -8,7 +8,7 @@ use PhpCfdi\Finkok\Services\Utilities\DownloadXmlResult;
 
 use PhpCfdi\Finkok\Tests\TestCase;
 
-class DownloadXmlResultTest extends TestCase
+final class DownloadXmlResultTest extends TestCase
 {
     public function testResultUsingPredefinedResponses(): void
     {

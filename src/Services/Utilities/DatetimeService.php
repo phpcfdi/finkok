@@ -22,16 +22,12 @@ class DatetimeService
         return $this->settings;
     }
 
-    public function datetime(DatetimeCommand $command = null): DatetimeResult
+    public function datetime(DatetimeCommand $command): DatetimeResult
     {
-        if (null === $command) {
-            $command = new DatetimeCommand('');
-        }
         $soapCaller = $this->settings()->createCallerForService(Services::utilities());
         $rawResponse = $soapCaller->call('datetime', array_filter([
             'zipcode' => $command->postalCode(),
         ]));
-        $result = new DatetimeResult($rawResponse);
-        return $result;
+        return new DatetimeResult($rawResponse);
     }
 }

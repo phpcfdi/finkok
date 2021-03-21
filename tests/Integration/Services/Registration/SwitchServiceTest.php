@@ -8,7 +8,7 @@ use PhpCfdi\Finkok\Services\Registration\CustomerType;
 use PhpCfdi\Finkok\Services\Registration\SwitchCommand;
 use PhpCfdi\Finkok\Services\Registration\SwitchService;
 
-class SwitchServiceTest extends RegistrationIntegrationTestCase
+final class SwitchServiceTest extends RegistrationIntegrationTestCase
 {
     protected function createService(): SwitchService
     {

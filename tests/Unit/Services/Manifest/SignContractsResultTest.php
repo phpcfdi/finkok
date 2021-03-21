@@ -7,7 +7,7 @@ namespace PhpCfdi\Finkok\Tests\Unit\Services\Manifest;
 use PhpCfdi\Finkok\Services\Manifest\SignContractsResult;
 use PhpCfdi\Finkok\Tests\TestCase;
 
-class SignContractsResultTest extends TestCase
+final class SignContractsResultTest extends TestCase
 {
     public function testResultUsingPredefinedResponses(): void
     {
