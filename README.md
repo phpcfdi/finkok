@@ -231,7 +231,7 @@ Durante el proceso de implementación he creado diversas notas y documentos:
     - [X] Falta servicio que no requiera CSD/FIEL para aceptar o rechazar una solicitud de cancelación
     - [X] Falta servicio que no requiera CSD/FIEL para obtener los CFDI relacionados
     - [X] [El acuse de cancelación entregado al cancelar y al solicitar el acuse no coinciden](docs/issues/AcuseCancelacionNoCoincidente.md)
-    - [ ] [Error de cancelación de retenciones 1308 - Certificado revocado o caduco](docs/issues/CancelacionRetencionesError1308.md)
+    - [X] [Error de cancelación de retenciones 1308 - Certificado revocado o caduco](docs/issues/CancelacionRetencionesError1308.md)
 
 ## Compatilibilidad
 
