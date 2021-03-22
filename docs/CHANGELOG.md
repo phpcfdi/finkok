@@ -2,15 +2,19 @@
 
 Nos apegamos a [SEMVER](SEMVER.md), revisa la información para entender mejor el control de versiones.
 
-## UNRELEASED
+## Version 0.3.1 2021-03-21
 
-Cambios en integración contínua (2021-03-21):
+En la versión 0.3.0 se mencionó que la fachada `Finkok::datetime()` podía seguir existiendo, pero es incorrecto.
+Es necesario que se le entregue el comando `DatetimeCommand`.
+Con este cambio, se elimina el método `datetimePostalCode`.
+
+Cambios en integración contínua:
 
 - Se deja de usar Travis-CI en favor de GitHub Actions.
 - Se actualizan los archivos a su versión en español: Código de conducta, contribuciones.
 - Se documenta mejor el entorno de pruebas de integración.
   
-Cambios en archivos de proyecto (2021-03-21):
+Cambios en archivos de proyecto:
 
 - Se actualiza el año de licencia.
 
