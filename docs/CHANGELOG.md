@@ -2,6 +2,18 @@
 
 Nos apegamos a [SEMVER](SEMVER.md), revisa la información para entender mejor el control de versiones.
 
+## UNRELEASED
+
+Cambios en integración contínua (2021-03-21):
+
+- Se deja de usar Travis-CI en favor de GitHub Actions.
+- Se actualizan los archivos a su versión en español: Código de conducta, contribuciones.
+- Se documenta mejor el entorno de pruebas de integración.
+  
+Cambios en archivos de proyecto (2021-03-21):
+
+- Se actualiza el año de licencia.
+
 ## Versión 0.3.0 2021-03-21
 
 - Se elimina el soporte y dependencia de PHP 7.2.

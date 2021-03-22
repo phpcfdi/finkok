@@ -222,7 +222,8 @@ Durante el proceso de implementación he creado diversas notas y documentos:
 - [Registro de clientes](docs/RegistroDeClientes.md): Si vas a trabajar con la capacidad de Finkok de *sub-distribuidor*
   y así poder administrar los datos de clientes.
 
-- [Entorno de Pruebas](docs/EntornoDePruebas.md): Documentación de cómo funciona y como configurar el entorno de pruebas.
+- [Pruebas de integración](docs/PruebasDeIntegracion.md): Documentación de cómo funciona y como configurar
+  el entorno de pruebas de integración.
 
 - Problemas encontrados:
     - [X] [Cancelación de un CFDI recién creado](docs/issues/CancelSignatureServiceCancelarRecienCreado.md)
@@ -263,7 +264,7 @@ and licensed for use under the MIT License (MIT). Please see [LICENSE][] for mor
 [source]: https://github.com/phpcfdi/finkok
 [release]: https://github.com/phpcfdi/finkok/releases
 [license]: https://github.com/phpcfdi/finkok/blob/master/LICENSE
-[build]: https://travis-ci.com/phpcfdi/finkok?branch=master
+[build]: https://github.com/phpcfdi/finkok/actions/workflows/build.yml?query=branch:master
 [quality]: https://scrutinizer-ci.com/g/phpcfdi/finkok/
 [coverage]: https://scrutinizer-ci.com/g/phpcfdi/finkok/code-structure/master/code-coverage/src
 [downloads]: https://packagist.org/packages/phpcfdi/finkok
@@ -271,7 +272,7 @@ and licensed for use under the MIT License (MIT). Please see [LICENSE][] for mor
 [badge-source]: https://img.shields.io/badge/source-phpcfdi/finkok-blue?style=flat-square
 [badge-release]: https://img.shields.io/github/release/phpcfdi/finkok?style=flat-square
 [badge-license]: https://img.shields.io/github/license/phpcfdi/finkok?style=flat-square
-[badge-build]: https://img.shields.io/travis/com/phpcfdi/finkok/master?style=flat-square
+[badge-build]: hhttps://img.shields.io/github/workflow/status/phpcfdi/finkok/build/master?style=flat-square
 [badge-quality]: https://img.shields.io/scrutinizer/g/phpcfdi/finkok/master?style=flat-square
 [badge-coverage]: https://img.shields.io/scrutinizer/coverage/g/phpcfdi/finkok/master?style=flat-square
 [badge-downloads]: https://img.shields.io/packagist/dt/phpcfdi/finkok?style=flat-square
