@@ -35,26 +35,32 @@ final class CancelSignatureServiceTest extends RetentionsTestCase
         if ('' === $uuid) {
             throw new RuntimeException('Cannot create a CFDI RET to cancel');
         }
-        $result = $this->quickFinkok->retentionCancel($this->createCsdCredential(), $uuid);
-        if ('1308' === $result->statusCode()) { // 1308 - Certificado revocado o caduco
-            $this->markTestSkipped("SAT service error, finkok ticket #41610, RET UUID $uuid");
+
+        $maxtime = strtotime('+5 minutes');
+        while (true) {
+            $result = $this->quickFinkok->retentionCancel($this->createCsdCredential(), $uuid);
+            $document = $result->documents()->first();
+
+            // do not try again if a SAT issue is **not** found
+            // 1205 - UUID no existe (¿el SAT aun no lo tiene?)
+            // 1308 - Certificado revocado o caduco (¿el SAT tiene problemas de tiempo?)
+            if (! in_array($document->documentStatus(), ['1205', '1308'])) {
+                break;
+            }
+
+            // try again
+            if (time() > $maxtime) {
+                $this->fail('Cannot get a valid response to cancel a retention CFDI');
+            }
+            sleep(5);
         }
 
         $this->assertNotEmpty($result->voucher(), 'Expected to receive an Acuse, but it was empty');
-        $this->assertSame('1201', $result->statusCode());
-        $this->assertSame($uuid, $result->documents()->first()->uuid());
-    }
-
-    /**
-     * Use this method to test cancellation on one specific UUID, useful for debugging
-     *
-     * To enable this test you must add "@test" annotation
-     */
-    public function manualCancelSignatureRecentlyCreatedDocument(): void
-    {
-        $uuid = 'AAB81A24-8CD8-4703-A2CE-88F4E98E8044';
-        $result = $this->quickFinkok->retentionCancel($this->createCsdCredential(), $uuid);
-        echo json_encode($result->rawData(), JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
-        $this->assertSame($uuid, $result->documents()->first()->uuid(), 'Cancelled UUID must match with requested');
+        $this->assertEmpty(
+            $result->statusCode(),
+            'CodEstatus is not empty anymore, check https://support.finkok.com/support/tickets/49417'
+        );
+        $this->assertSame($uuid, $document->uuid());
+        $this->assertSame('1201', $document->documentStatus());
     }
 }
