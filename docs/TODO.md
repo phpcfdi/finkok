@@ -1,5 +1,8 @@
 # phpcfdi/finkok To Do List
 
+- Agregar la ejecución de test de integración al flujo de trabajo `.github/workflows/build.yml`;
+  es necesario entender cómo funcionan los secretos para poder crear un archivo de entorno seguro.
+
 - Investigar cómo validar firma en acuses y respuestas del SAT
 
 - Crear un namespace común porque hay clases que están interrelacionadas entre el estampado y cancelación
