@@ -5,11 +5,13 @@
 *.bin binary
 
 # Do not put this files on a distribution package (by .gitignore)
+.env                 export-ignore
 /vendor              export-ignore
 /composer.lock       export-ignore
 
 # Do not put this files on a distribution package
-/build               export-ignore
+/.github/            export-ignore
+/build/              export-ignore
 /docs/               export-ignore
 /tests/              export-ignore
 /.gitattributes      export-ignore
