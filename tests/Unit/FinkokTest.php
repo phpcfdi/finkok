@@ -14,6 +14,7 @@ use PhpCfdi\Finkok\Services\Manifest\GetContractsService;
 use PhpCfdi\Finkok\Services\Stamping\StampingCommand;
 use PhpCfdi\Finkok\Services\Stamping\StampingResult;
 use PhpCfdi\Finkok\Services\Stamping\StampService;
+use PhpCfdi\Finkok\Services\Utilities\DatetimeCommand;
 use PhpCfdi\Finkok\Services\Utilities\DatetimeResult;
 use PhpCfdi\Finkok\Services\Utilities\DatetimeService;
 use PhpCfdi\Finkok\Tests\TestCase;
@@ -53,30 +54,6 @@ final class FinkokTest extends TestCase
         )->willReturn($result);
 
         $this->assertSame($result, $finkok->stamp($command));
-    }
-
-    public function testCheckCommandWithoutParameter(): void
-    {
-        // the only registered helper is datetime
-        /** @var DatetimeResult $result */
-        $result = $this->createMock(DatetimeResult::class);
-
-        /** @var FinkokSettings&MockObject $settings */
-        $settings = $this->createMock(FinkokSettings::class);
-
-        /** @var Finkok&MockObject $finkok */
-        $finkok = $this->getMockBuilder(Finkok::class)
-            ->enableOriginalConstructor()
-            ->setConstructorArgs([$settings])
-            ->onlyMethods(['executeService'])
-            ->getMock();
-        $finkok->expects($this->once())->method('executeService')->with(
-            $this->equalTo('datetime'),
-            $this->isInstanceOf(DatetimeService::class),
-            $this->isNull()
-        )->willReturn($result);
-
-        $this->assertSame($result, $finkok->datetime());
     }
 
     public function testBadMethodCall(): void
