@@ -25,7 +25,7 @@ final class CancelledDocumentTest extends TestCase
         $folio = new CancelledDocument((object) $data);
         $this->assertSame('728147B1-D5B9-4FDD-AEA9-526AEA2E6698', $folio->uuid());
         $this->assertSame('708', $folio->documentStatus());
-        $this->assertSame('foo bar', $folio->cancellationSatatus());
+        $this->assertSame('foo bar', $folio->cancellationStatus());
         $this->assertSame($data, $folio->values());
     }
 }

@@ -31,7 +31,7 @@ class CancelledDocument
         return $this->get('EstatusUUID');
     }
 
-    public function cancellationSatatus(): string
+    public function cancellationStatus(): string
     {
         return $this->get('EstatusCancelacion');
     }
