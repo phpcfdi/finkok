@@ -6,7 +6,6 @@ namespace PhpCfdi\Finkok\Tests\Unit\Services\Cancel;
 
 use PhpCfdi\Finkok\Services\Cancel\CancelledDocument;
 use PhpCfdi\Finkok\Tests\TestCase;
-use PHPUnit\Framework\Error\Deprecated;
 
 final class CancelledDocumentTest extends TestCase
 {
