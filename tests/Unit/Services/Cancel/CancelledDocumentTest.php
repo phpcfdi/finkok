@@ -6,6 +6,7 @@ namespace PhpCfdi\Finkok\Tests\Unit\Services\Cancel;
 
 use PhpCfdi\Finkok\Services\Cancel\CancelledDocument;
 use PhpCfdi\Finkok\Tests\TestCase;
+use PHPUnit\Framework\Error\Deprecated;
 
 final class CancelledDocumentTest extends TestCase
 {
@@ -27,5 +28,30 @@ final class CancelledDocumentTest extends TestCase
         $this->assertSame('708', $folio->documentStatus());
         $this->assertSame('foo bar', $folio->cancellationStatus());
         $this->assertSame($data, $folio->values());
+    }
+
+    public function testMethodCancellationSatatusIsDeprecated(): void
+    {
+        $data = [
+            'UUID' => '728147B1-D5B9-4FDD-AEA9-526AEA2E6698',
+            'EstatusUUID' => '708',
+            'EstatusCancelacion' => 'foo bar',
+        ];
+        $document = new CancelledDocument((object) $data);
+        $this->expectDeprecation();
+        $document->cancellationSatatus();
+    }
+
+    public function testMethodCancellationSatatusReturnExpectedValue(): void
+    {
+        $data = [
+            'UUID' => '728147B1-D5B9-4FDD-AEA9-526AEA2E6698',
+            'EstatusUUID' => '708',
+            'EstatusCancelacion' => 'foo bar',
+        ];
+        $document = new CancelledDocument((object) $data);
+        /** @noinspection PhpUsageOfSilenceOperatorInspection */
+        $retrieved = @$document->cancellationSatatus();
+        $this->assertSame($document->cancellationStatus(), $retrieved);
     }
 }

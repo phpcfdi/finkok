@@ -31,6 +31,20 @@ class CancelledDocument
         return $this->get('EstatusUUID');
     }
 
+    /**
+     * @return string
+     * @deprecated 0.3.2
+     * @see self::cancellationStatus
+     */
+    public function cancellationSatatus(): string
+    {
+        trigger_error(
+            sprintf('%s is deprecated since 0.3.2 and will be removed on 0.4.0', __METHOD__),
+            E_USER_DEPRECATED
+        );
+        return $this->cancellationStatus();
+    }
+
     public function cancellationStatus(): string
     {
         return $this->get('EstatusCancelacion');
