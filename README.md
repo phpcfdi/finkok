@@ -273,7 +273,7 @@ and licensed for use under the MIT License (MIT). Please see [LICENSE][] for mor
 [badge-source]: https://img.shields.io/badge/source-phpcfdi/finkok-blue?style=flat-square
 [badge-release]: https://img.shields.io/github/release/phpcfdi/finkok?style=flat-square
 [badge-license]: https://img.shields.io/github/license/phpcfdi/finkok?style=flat-square
-[badge-build]: hhttps://img.shields.io/github/workflow/status/phpcfdi/finkok/build/master?style=flat-square
+[badge-build]: https://img.shields.io/github/workflow/status/phpcfdi/finkok/build/master?style=flat-square
 [badge-quality]: https://img.shields.io/scrutinizer/g/phpcfdi/finkok/master?style=flat-square
 [badge-coverage]: https://img.shields.io/scrutinizer/coverage/g/phpcfdi/finkok/master?style=flat-square
 [badge-downloads]: https://img.shields.io/packagist/dt/phpcfdi/finkok?style=flat-square
