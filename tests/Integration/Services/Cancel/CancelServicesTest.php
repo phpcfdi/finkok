@@ -12,6 +12,7 @@ use PhpCfdi\Finkok\Tests\Integration\IntegrationTestCase;
 
 final class CancelServicesTest extends IntegrationTestCase
 {
+    /** @group large */
     public function testCreateCfdiThenGetSatStatusThenCancelSignatureThenGetReceipt(): void
     {
         $settings = $this->createSettingsFromEnvironment();

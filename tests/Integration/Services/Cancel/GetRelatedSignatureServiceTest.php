@@ -45,6 +45,7 @@ final class GetRelatedSignatureServiceTest extends IntegrationTestCase
         return new StampingCommand($precfdi);
     }
 
+    /** @group large */
     public function testConsumeServiceWithRelated(): void
     {
         // first is child of second, second is parent of first
@@ -79,7 +80,7 @@ final class GetRelatedSignatureServiceTest extends IntegrationTestCase
 
             // try  again
             if (time() > $maxtime) {
-                $this->fail("After 5 minutes consuming GetRelatedSignatureService didn't get related from SAT");
+                $this->fail("After 10 minutes consuming GetRelatedSignatureService didn't get related from SAT");
             }
             sleep(5);
         }

@@ -3,6 +3,7 @@
 *.cer binary
 *.key binary
 *.bin binary
+*.enc binary
 
 # Do not put this files on a distribution package (by .gitignore)
 .env                        export-ignore

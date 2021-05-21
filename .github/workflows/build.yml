@@ -53,7 +53,7 @@ jobs:
       - name: Code style (php-cs-fixer)
         run: vendor/bin/php-cs-fixer fix --dry-run --format=checkstyle | cs2pr
 
-      - name: Tests (phpunit)
+      - name: Unit tests (phpunit)
         run: vendor/bin/phpunit tests/Unit/ --testdox --verbose
 
       - name: Code analysis (phpstan)
