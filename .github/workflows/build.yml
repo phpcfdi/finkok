@@ -15,15 +15,15 @@ jobs:
         php-versions: ['7.3', '7.4', '8.0']
 
     steps:
-      # see https://github.com/marketplace/actions/setup-php-action
       - name: Checkout
         uses: actions/checkout@v2
 
+      # see https://github.com/marketplace/actions/setup-php-action
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php-versions }}
-          extensions: mbstring, json
+          extensions: json, soap, dom, openssl
           coverage: none
           tools: composer:v2, cs2pr
         env:
