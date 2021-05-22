@@ -1,0 +1,62 @@
+name: functional-tests
+on:
+  # secrets are not passed to workflows that are triggered by a pull request from a fork.
+  # see https://docs.github.com/en/actions/reference/encrypted-secrets
+  pull_request:
+    branches:
+      - master
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    name: Run tests with coverage
+    runs-on: "ubuntu-latest"
+
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      # see https://github.com/marketplace/actions/setup-php-action
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.0"
+          extensions: json, soap, dom, openssl
+          coverage: xdebug
+          tools: composer:v2
+        env:
+          fail-fast: true
+
+      - name: Get composer cache directory
+        id: composer-cache
+        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.json') }}
+          restore-keys: ${{ runner.os }}-composer-
+
+      - name: Remove unused development dependencies
+        run: composer remove squizlabs/php_codesniffer friendsofphp/php-cs-fixer phpstan/phpstan --dev --no-interaction --no-progress --no-update
+
+      - name: Install project dependencies
+        run: composer upgrade --no-interaction --no-progress --prefer-dist
+
+      - name: Set up environment file
+        run: gpg --quiet --batch --yes --decrypt --passphrase="$ENV_GPG_SECRET" --output tests/.env tests/.env-testing.enc
+        env:
+          ENV_GPG_SECRET: ${{ secrets.ENV_GPG_SECRET }}
+
+      - name: Run integration tests with code coverage
+        run: vendor/bin/phpunit --testdox --verbose --exclude-group large --coverage-clover=build/coverage-clover.xml
+
+      # see https://github.com/marketplace/actions/action-scrutinizer
+      - name: Upload code coverage to scrutinizer
+        uses: sudo-bot/action-scrutinizer@latest
+        with:
+          cli-args: "--format=php-clover build/coverage-clover.xml"

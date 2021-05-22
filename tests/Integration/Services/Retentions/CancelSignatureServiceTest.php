@@ -28,6 +28,7 @@ final class CancelSignatureServiceTest extends RetentionsTestCase
         $this->assertSame('UUID Not Found', $result->statusCode());
     }
 
+    /** @group large */
     public function testCancelSignatureRecentlyCreatedDocument(): void
     {
         $stampedToCancel = $this->quickFinkok->retentionStamp($this->newRetentionsPreCfdi());

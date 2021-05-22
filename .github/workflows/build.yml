@@ -1,7 +1,11 @@
 name: build
 on:
   pull_request:
+    branches:
+      - master
   push:
+    branches:
+      - master
   schedule:
     - cron: '0 16 * * 0' # sunday 16:00
 
@@ -15,15 +19,15 @@ jobs:
         php-versions: ['7.3', '7.4', '8.0']
 
     steps:
-      # see https://github.com/marketplace/actions/setup-php-action
       - name: Checkout
         uses: actions/checkout@v2
 
+      # see https://github.com/marketplace/actions/setup-php-action
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php-versions }}
-          extensions: mbstring, json
+          extensions: json, soap, dom, openssl
           coverage: none
           tools: composer:v2, cs2pr
         env:
@@ -49,7 +53,7 @@ jobs:
       - name: Code style (php-cs-fixer)
         run: vendor/bin/php-cs-fixer fix --dry-run --format=checkstyle | cs2pr
 
-      - name: Tests (phpunit)
+      - name: Unit tests (phpunit)
         run: vendor/bin/phpunit tests/Unit/ --testdox --verbose
 
       - name: Code analysis (phpstan)

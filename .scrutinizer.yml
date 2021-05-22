@@ -7,14 +7,12 @@ filter:
 build:
   dependencies:
     override:
-      - composer remove squizlabs/php_codesniffer friendsofphp/php-cs-fixer phpstan/phpstan --dev --no-interaction --no-progress --no-update
-      - composer update --no-interaction
+      - composer update --no-interaction --no-dev
   nodes:
     php:
       tests:
         override:
           - php-scrutinizer-run --enable-security-analysis
-          - command: vendor/bin/phpunit tests/Unit/ --testdox --verbose --coverage-clover=coverage.clover
-            coverage:
-              file: coverage.clover
-              format: clover
+
+tools:
+  external_code_coverage: true

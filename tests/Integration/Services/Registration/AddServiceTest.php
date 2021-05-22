@@ -40,6 +40,7 @@ final class AddServiceTest extends RegistrationIntegrationTestCase
         $this->assertSame('Account Already exists', $result->message());
     }
 
+    /** @group large */
     public function testConsumeAddServiceWithRandomRfc(): void
     {
         // Finkok does not have a method (automated or manual) to remove customers.

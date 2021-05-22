@@ -25,7 +25,7 @@ $documentInfo = $result->documents()->first();
 echo 'Código de estado de la solicitud de cancelación: ', $result->statusCode();
 echo 'UUID: ', $documentInfo->uuid();
 echo 'Estado del CFDI: ', $documentInfo->documentStatus();
-echo 'Estado de cancelación: ', $documentInfo->cancellationSatatus();
+echo 'Estado de cancelación: ', $documentInfo->cancellationStatus();
 ```
 
 ## Ejemplo usando phpcfdi/xml-cancelacion (versión 0.2.0)

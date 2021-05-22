@@ -2,6 +2,23 @@
 
 Nos apegamos a [SEMVER](SEMVER.md), revisa la información para entender mejor el control de versiones.
 
+## Pendientes para siguiente versión mayor
+
+- Eliminar `CancelledDocument::cancellationSatatus()`.
+
+## Version 0.3.2 2021-05-21
+
+Se renombra la propiedad `CancelledDocument::cancellationSatatus()` en favor de `CancelledDocument::cancellationStatus()`
+que no tiene el error de ortografía. Será removida en la versión 0.4.0.
+
+Los siguientes son cambios en desarrollo y no tienen afectación en el código productivo:
+
+- Se actualiza `php-cs-fixer: ^3.0`.
+- Se corrigen las extensiones en la configuración de `shivammathur/setup-php` en la acción de construcción.
+- Se agrega la construcción de la rama principal en la acción de construcción.
+- Se actualiza la configuración de PHPUnit.
+- Se cambia la generación de la cobertura de código a la acción de pruebas funciones y se sube a Scrutinizer.
+
 ## Version 0.3.1 2021-03-21
 
 En la versión 0.3.0 se mencionó que la fachada `Finkok::datetime()` podía seguir existiendo, pero es incorrecto.
