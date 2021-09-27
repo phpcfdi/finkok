@@ -2,14 +2,12 @@ name: functional-tests
 on:
   # secrets are not passed to workflows that are triggered by a pull request from a fork.
   # see https://docs.github.com/en/actions/reference/encrypted-secrets
-  pull_request:
-    branches: [ 'main' ]
   push:
     branches: [ 'main' ]
 
 jobs:
-  build:
-    name: Run tests with coverage
+  functional-tests:
+    name: Functional tests
     runs-on: "ubuntu-latest"
 
     steps:
@@ -58,3 +56,4 @@ jobs:
         uses: sudo-bot/action-scrutinizer@latest
         with:
           cli-args: "--format=php-clover build/coverage-clover.xml"
+        continue-on-error: true
