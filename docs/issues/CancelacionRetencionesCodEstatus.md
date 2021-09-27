@@ -1,5 +1,8 @@
 # El valor `CodEstatus` está ausente en la cancelación de CFDI de Retenciones
 
+**2021-06-08**: `CodEstatus` solo está presente si se envía un valor incorrecto en la petición,
+o el código del SAT cuando presenta intermitencias. El problema se marca como finalizado.
+
 Según el WebService de cancelación de retenciones (demo[1]() y producción[2]())
 así como en la documentación[3]() debería retornar estructura con
 `CodEstatus - El código de respuesta del SAT`.
@@ -99,3 +102,11 @@ X-Content-Type-Options: nosniff
 [1] https://demo-facturacion.finkok.com/servicios/soap/retentions.wsdl
 [2] https://facturacion.finkok.com/servicios/soap/retentions.wsdl
 [3] https://wiki.finkok.com/doku.php?id=cancel_signature_method_retentions
+
+## Respuesta
+
+Se corrigió la documentación del servicio.
+
+- El campo de respuesta `CodEstatus` solo está presente si se envía un valor incorrecto en la petición,
+  o el código del SAT cuando presenta intermitencias.
+- El campo de respuesta `SeguimientoCancelacion` solo está presente si se envía más de un UUID a cancelar.
