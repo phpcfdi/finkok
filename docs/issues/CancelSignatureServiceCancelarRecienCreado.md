@@ -1,3 +1,4 @@
+# Cancelación de un CFDI recién creado
 
 ## Descripción
 
@@ -5,7 +6,7 @@ El servicio [`Cancel_Signature`](https://wiki.finkok.com/doku.php?id=cancelsigne
 *realiza la cancelación de un comprobante CFDI por medio de un XML desarrollado como la firma*.
 
 Al llamar a la cancelación con una firma válida para un CFDI recién creado,
-con el el parámetro `store_pending` en `false`,
+con el parámetro `store_pending` en `false`,
 se encuentra con una respuesta `205` en lugar de la esperada `201`.
 No importa si se creó el timbre usando `quick_stamp` o `stamp`.
 
@@ -197,7 +198,7 @@ El servicio de cancelación funciona como un puente con el SAT, entre otras cosa
 abierto el servicio al público en general, solo a los PAC.
 
 El error 205 no lo reporta Finkok, lo reporta el SAT (se puede ver en el acuse). Lo que lleva a preguntarnos:
-¿Porqué entonces el SAT responde con Vigente/Cancelable en el servicio de consulta, y luego response con 205?
+¿Por qué entonces el SAT responde con Vigente/Cancelable en el servicio de consulta, y luego response con 205?
 Porque es el SAT. Lo más probable es que por un lado almacene los CFDI y los ingrese en varios repositorios de
 información, y por otros lugares consume esos repositorios. Luego entonces, el servicio de estado podría
 retornar que sí existe y está vigente mientras que el servicio de cancelación podría decir que no existe.

@@ -6,6 +6,10 @@ Nos apegamos a [SEMVER](SEMVER.md), revisa la información para entender mejor e
 
 - Eliminar `CancelledDocument::cancellationSatatus()`.
 
+## Unreleased
+
+- 2021-09-26: Fix broken CI. PHPUnit 9.5.10 does not convert deprecations to exceptions by default.
+
 ## Version 0.3.2 2021-05-21
 
 Se renombra la propiedad `CancelledDocument::cancellationSatatus()` en favor de `CancelledDocument::cancellationStatus()`
@@ -78,7 +82,7 @@ Cambios en el entorno de pruebas (2020-09-18). Solo se afecta la rama principal,
 
 - En las pruebas de integración del servicio `get_related_signature` el SAT tarda en vincular los CFDI recientemente
   creados, lo que ocasiona que la prueba falle invariablemente al detectar el error
-  `2001 - No Existen cfdi relacionados al folio fiscal.`.
+  `2001 - No Existen cfdi relacionados al folio fiscal.`. 
   Se ha modificado la prueba para que, si encuentra dicho error no rompa el ciclo de testeo y lo vuelva a intentar.
 
 ## Version 0.2.6 2020-01-24
@@ -108,7 +112,7 @@ Cambios en el entorno de pruebas (2020-09-18). Solo se afecta la rama principal,
 ## Version 0.2.5 2020-01-14
 
 - Se actualiza el año de licencia 2020.
-- Finkok implementó en el registro de clientes el método `switch`, para cambiar a el cliente de `Prepago`
+- Finkok implementó en el registro de clientes el método `switch`, para cambiar al cliente de `Prepago`
   a `Ondemand` y viceversa. Se ha creado el método y se incluyó en los helpers `Finkok` y `QuickFinkok`.
 - Se documentó el ticket de Finkok `#41435`: El acuse recibido en el método `get_reciept` es diferente que el
   obtenido en la respuesta de cancelación.
@@ -145,7 +149,7 @@ Cambios en el entorno de pruebas (2020-09-18). Solo se afecta la rama principal,
 
 ## Version 0.2.2 2019-11-02
 
-- Se agrega el soporte del servicio que obtiene la hora de los servidores de Finkok usando un código postal.
+- Se agrega el soporte del servicio que obtiene la hora de los servidores de Finkok usando un código postal. 
   Si no se especifica un código postal entonces se usa el predeterminado que corresponde a la zona horaria
   de `America/Mexico_City`. La hora devuelta no tiene especificación de zona horaria, es decir, no especifica
   cuánto tiempo hay de diferencia entre la hora devuelta y GMT.
@@ -186,4 +190,4 @@ BC Changes:
 
 ## Version 0.1.0 2019-09-04
 
-- Primer versión
+- Primera versión.

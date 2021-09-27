@@ -59,7 +59,7 @@ final class CancelSignatureServiceTest extends RetentionsTestCase
         $this->assertNotEmpty($result->voucher(), 'Expected to receive an Acuse, but it was empty');
         $this->assertEmpty(
             $result->statusCode(),
-            'CodEstatus is not empty anymore, check https://support.finkok.com/support/tickets/49417'
+            'CodEstatus should have content only when command has incorrect values or SAT service is failing'
         );
         $this->assertSame($uuid, $document->uuid());
         $this->assertSame('1201', $document->documentStatus());

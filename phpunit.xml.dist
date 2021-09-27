@@ -6,6 +6,7 @@
     executionOrder="depends,defects"
     failOnRisky="true"
     failOnWarning="true"
+    convertDeprecationsToExceptions="true"
     verbose="true"
     colors="true">
 

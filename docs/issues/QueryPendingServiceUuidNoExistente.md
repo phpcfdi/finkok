@@ -1,8 +1,9 @@
+# Consumir `queryPending` con un CFDI recién creado
 
 ## Descripción
 
 El servicio [`Query_Pending`](https://wiki.finkok.com/doku.php?id=query_pending) *se usa para consultar el
-estatus de una factura que se quedo pendiente de enviar al SAT debido a una falla en el sistema del SAT
+estatus de una factura que se quedó pendiente de enviar al SAT debido a una falla en el sistema del SAT
 o bien que se envió a través del método `Quick_Stamp`*.
 
 Por lo tanto, se podría llegar a ocupar con cualquier método de estampado.
@@ -61,7 +62,7 @@ x-frame-options: DENY
 Set-Cookie: sessionid=2f06b59dbf811e2b68be49a930692fe7; httponly; Path=/; secure
 ```
 
-- Response body (se omiten namespaces que devuelve pero no se usan)
+- Response body (se omiten namespaces que devuelve, pero no se usan)
 
 ```xml
 <?xml version='1.0' encoding='UTF-8'?>

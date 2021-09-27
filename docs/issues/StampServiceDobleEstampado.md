@@ -1,3 +1,4 @@
+# Consumir `stamp` para generar un doble estampado no devuelve los datos
 
 ## Descripción
 
@@ -19,8 +20,8 @@ Y en <https://wiki.finkok.com/doku.php?id=stamp#ejemplo_de_una_respuesta_con_err
 
 La respuesta no contiene la información del UUID timbrado previamente.
 
-En su lugar contiene un `stampResult` con `Incidencia:CodigoError` `307`, el `xml` está vacío.
-Los demás valores no son reportados. Es un misterio para mí porqué retorna dos veces la incidencia.
+En su lugar contiene un `stampResult` con `Incidencia:CodigoError` `307`, el valor de `xml` está vacío.
+Los demás valores no son reportados. Es un misterio para mí por qué retorna dos veces la incidencia.
 
 ```json
 {
@@ -68,7 +69,7 @@ Esto parece dar más claridad al error:
     - `stamp`: Algunas veces lo encuentra y lo devuelve
 
 Por lo tanto, parece que en realidad el problema consiste en que internamente Finkok
-sí reporta que el CFDI fue creado pero no lo pone a disposición para poderlo recuperar.
+sí reporta que el CFDI fue creado, pero no lo pone a disposición para poderlo recuperar.
 
 Incluso he creado un test que encadena las pruebas, en resumen:
 llama a `stamp` por primera vez,
@@ -79,7 +80,7 @@ Y lo que sucede es que algunas veces el segundo estampado sigue sin contener los
 
 ### Servicios afectados
 
-- `stamp`: al menos reporta que el CFDI ya fue timbrado)
+- `stamp`: al menos reporta que el CFDI ya fue timbrado.
 - `stamped`: incluso dice que el CFDI no ha sido timbrado con anterioridad.
 
 El servicio `quick_stamp` se salva de esta cuestión porque establece que en caso de haber un estampado previo
@@ -95,9 +96,9 @@ entonces se devolverá un código `307` y ya. No se espera que devuelva el conte
 Han modificado su documentación -*¡zorro astuto!*- y este es el comportamiento esperado:
 
 > Al llamar a stamp dos veces con el mismo precfdi, la segunda vez puede regresar
-> *o puede no regresar* los datos del cfdi previamente firmado.
+> *o puede no regresar* los datos del cfdi firmado previamente.
 
-Por lo que, al menos para el método `stamp`, que no regrese el `xml` o `uuid` es considerado dentro de lo esperado.
+Por lo que, al menos para el método `stamp`, que no regrese el contenido `xml` o `uuid` es considerado dentro de lo esperado.
 
 Para el método `stamped` es otra historia, porque el error devuelto por este método es una incidencia
 `603: El CFDI no contiene un timbre previo`.

@@ -1,4 +1,4 @@
-# El acuse de cancelación no coincide
+# El acuse de cancelación entregado al cancelar y al solicitar el acuse no coinciden
 
 > *Este error de encuenta solucionado*
 
@@ -28,7 +28,7 @@ CFDI fuese cancelado, el acuse contiene solamente la respuesta a la petición pr
 y se publicará la actualización a pesar de este error, si Finkok decidiera no actualizar su servicio entonces
 se eliminará la comprobación en el test de integración.
 
-2019-01-15: Se confirmó que se sufría de un bug de carrera, cuando se solicita el acuse pero aun no ha sido almacenado
+2019-01-15: Se confirmó que se sufría de un bug de carrera, cuando se solicita el acuse, pero aún no ha sido almacenado
 entonces se devuelve un acuse "fabricado". El problema lo tenían al fabricarlo y esto ha sido corregido.
 Personalmente considero que, al tratarse de un documento "oficial" con firma XML, deberían evitar fabricarlo y mejor
 retornar un error de tipo "Acuse no disponible en este momento, intente más tarde".

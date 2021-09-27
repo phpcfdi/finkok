@@ -1,6 +1,6 @@
 # Ejemplo de consulta de estado de un CFDI
 
-Para estos ejemplo partiremos de que tenemos un CFDI en el archivo `cfdi.xml`.
+Para este ejemplo partiremos de que tenemos un CFDI en el archivo `cfdi.xml`.
 Y que los datos son: RFC emisor `EKU9003173C9`, RFC receptor `JES900109Q90`,
 total `12345.67` y UUID `11111111-2222-3333-4444-000000000001`.
 
