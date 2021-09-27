@@ -6,6 +6,10 @@ Nos apegamos a [SEMVER](SEMVER.md), revisa la información para entender mejor e
 
 - Eliminar `CancelledDocument::cancellationSatatus()`.
 
+## Unreleased
+
+- 2021-09-26: Fix broken CI. PHPUnit 9.5.10 does not convert deprecations to exceptions by default.
+
 ## Version 0.3.2 2021-05-21
 
 Se renombra la propiedad `CancelledDocument::cancellationSatatus()` en favor de `CancelledDocument::cancellationStatus()`
