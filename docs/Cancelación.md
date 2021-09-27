@@ -8,14 +8,14 @@ Los servicios de paso son:
 - `cancel_signature`: Manda cancelar usando una solicitud de cancelación firmada.
 - `get_sat_status`: Consulta el estado de un CFDI.
 - `get_pending`: consultar cuantas solicitudes de cancelación tiene pendientes un receptor.
-- `accept_reject`: permite al receptor de una factura Aceptar o Rechazar una determinada cancelación.
-    (*no recomendado*, requiere certificado, llave privada y contraseña compártida)
-- `get_related`: obtener una lista de los UUIDs relacionados del CFDI que se está intentando cancelar.
-    (*no recomendado*, requiere certificado, llave privada y contraseña compártida)
+- `accept_reject`: permite al receptor de una factura Aceptar o Rechazar una determinada cancelación. 
+   (*no recomendado*, requiere certificado, llave privada y contraseña compártida)
+- `get_related`: obtener una lista de los UUID relacionados del CFDI que se está intentando cancelar. 
+   (*no recomendado*, requiere certificado, llave privada y contraseña compártida)
 
 Los servicios de ayuda son:
 
-- `cancel`: (*no recomendado*) Manda cancelar pero requiere del certificado, llave privada y contraseña compartida.
+- `cancel`: (*no recomendado*) Manda cancelar, pero requiere del certificado, llave privada y contraseña compartida. 
   La cancelación firmada la elabora Finkok en tu nombre y realiza `cancel_signature`.
 - `get_receipt`: Devuelve el acuse de recibo asociado a un UUID.
 - `query_pending_cancellation`: Consulta el *pending buffer*.
@@ -68,7 +68,7 @@ Si deseas usar esta característica, al enviar la solicitud de cancelación debe
 
 Siempre que uses el *Pending buffer* deberás utilizar el servicio `query_pending_cancellation`,
 que precísamente consulta el *pending buffer* para obtener el estado de la cancelación de una
-solicitud que se quedo pendiente de cancelar debido a una falla en el sistema de SAT.
+solicitud que se quedó pendiente de cancelar debido a una falla en el sistema de SAT.
 
 ### Cancelación de múltiples folios
 
@@ -126,10 +126,10 @@ En una prueba, estableciendo el valor de total a un valor incorrecto, la respues
 `CodigoEstatus: N 601 - La expresión impresa proporcionada no es válida.`, `Estado: Vigente` y
 `EsCancelable: Cancelable sin aceptación`. El problema es que `Estado` debería decir `No encontrado`.
 
-Desconozco porqué en los parámetros de consulta no se solicitan los últimos 8 caracteres del sello digital
+Desconozco por qué en los parámetros de consulta no se solicitan los últimos 8 caracteres del sello digital
 del emisor del comprobante (parte de la expresión impresa en `fe`). Esto indicaría que al PAC no le exigen
 todos los datos o bien el PAC los completa con la información que tiene del CFDI, en ese caso, me queda la
-duda de ¿porqué entonces no completa toda la expresión y requiere únicamente el UUID?.
+duda de ¿por qué entonces no completa toda la expresión y requiere únicamente el UUID?.
 
 ### Servicio Finkok Cancel get_pending
 
@@ -151,8 +151,8 @@ Suponiendo que se presenta la solicitud de cancelación por dos folios (A y B),
 donde A es cancelable sin autorización y B es no cancelable.
 
 - ¿El SAT responderá con un acuse de cancelación cancelando A (201), pero rechazando B (no_cancelable)?
-    R: Se desconoce, se podría hacer una prueba al respecto.
-    R: En la primer prueba realizada regresó estado de 201 para ambos CFDI, se está investigando
+    R: Se desconoce, se podría hacer una prueba al respecto. 
+    R: En la primera prueba realizada regresó estado de 201 para ambos CFDI, se está investigando. 
     R: La respuesta 201 significa que la *solicitud* fue recibida, no que el CFDI fue cancelado.
 
 Acerca del servicio `Get_Receipt`:
@@ -161,17 +161,16 @@ Acerca del servicio `Get_Receipt`:
     R: Finkok solo almacena los acuses positivos (estados 201 y 202).
 
 - ¿Cuál es el acuse de tipo "R - Recepción" y "C - Cancelación"?
-    R es el acuse de recepción de un CFDI timbrado.
+    R es el acuse de recepción de un CFDI timbrado. 
     C es el acuse de recepción de un CFDI cancelado.
 
 - Si se hubiera presentado la cancelación múltiples veces, se generaría un acuse de cancelación
-  por cada solicitud con estados `201` y `202`.
-  ¿Se devuelve sólo el último acuse con respuesta 202 o el acuse con respuesta 201 donde se canceló por primera vez?
-    R: Se devuelve sólo el último
+  por cada solicitud con estados `201` y `202`. 
+  ¿Se devuelve solo el último acuse con respuesta 202 o el acuse con respuesta 201 donde se canceló por primera vez?
+    R: Se devuelve solo el último.
 
 Para los servicios de pasarela, si no se pudo contactar al SAT, se devuelve `708`?
-    R: No, existen varios mensajes de error e incluso excepciones.
-    Finkok está analizando el tema para unificarlas.
+    R: No, existen varios mensajes de error e incluso excepciones. Finkok está analizando el tema para unificarlas.
 
 ### Servicios que requieren certificado, llave y contraseña compartida
 

@@ -21,7 +21,7 @@ Servicios para trabajar con solicitudes de cancelación:
 
 - [X] `accept_reject_signature`: permite al receptor de una factura Aceptar o Rechazar una determinada cancelación.
 - [X] `get_pending`: consultar la lista de los UUID pendientes por cancelar que tiene el receptor.
-- [X] `get_related_signature`: obtener una lista de los UUIDs relacionados del CFDI que se está intentando cancelar.
+- [X] `get_related_signature`: obtener una lista de los UUID relacionados del CFDI que se está intentando cancelar.
 
 Servicios para trabajar cancelaciones con CFDI de otro PAC
 
@@ -44,7 +44,7 @@ Servicios para trabajar cancelaciones con CFDI de otro PAC
 - [X] `assign`: Asignar créditos a un cliente que va a timbrar bajo la cuenta de un socio de negocios de Finkok
 - [X] `add`: Agregar un cliente que va a timbrar bajo la cuenta de un socio de negocios de Finkok
 - [X] `edit`: Editar el estatus de un cliente, como lo es suspender o activar
-- [X] `get`: Listado o el status del RFC Emisor que este ingresando y tenga registrado en su cuenta
+- [X] `get`: Listado o el status del RFC Emisor que esté ingresando y tenga registrado en su cuenta
 - [X] `switch`: Cambia el tipo de cliente de prepago a ilimitado y viceversa
 
 ## Tokens
@@ -58,7 +58,7 @@ Servicios para trabajar cancelaciones con CFDI de otro PAC
 Estos servicios son de CFDI de retenciones e información de pagos (RET).
 
 - [X] `stamp`: Firma un CFDI RET, si fue firmado previamente retorna el timbrado previo.
-- [ ] `stamped`:  Regresa la información de un XML timbrado previamente.
+- [ ] `stamped`: Regresa la información de un XML timbrado previamente.
 - [ ] `cancel_signature`: Cancela un CFDI RET (el modelo de cancelación es el de CFDI 3.2).
 - [ ] `get_receipt`: Devuelve el acuse de recibo asociado a un UUID.
 

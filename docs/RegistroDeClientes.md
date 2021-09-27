@@ -40,8 +40,8 @@ No genera error si se intenta cambiar al estado actual (ilimitado a ilimitado, o
 
 ## Parámetros username/password
 
-Finkok considera una buena idea que para los métodos add, edit y get los parámetros de usuario y contraseña
-no son username/password como los demás. Los parámetros en estos casos son username_reseller/password_reseller.
+Finkok considera una buena idea que para los métodos `add`, `edit` y `get` los parámetros de usuario y contraseña
+no son username/password como los demás. Los parámetros en estos casos son `username_reseller/password_reseller`.
 
 Pero, para los métodos assign y switch, los parámetros sí son username/password.
 
@@ -51,7 +51,7 @@ No existe método para eliminar un cliente (Ticket #19372)
 
 No funciona la eliminación de un cliente en el portal de finkok (Ticket #19524)
 
-Por las respuestas en los tickets, no hay una explicación de porqué no se puede eliminar
+Por las respuestas en los tickets, no hay una explicación de por qué no se puede eliminar
 (la única razón es "nuestras políticas internas de diseño y desarrollo de Finkok")
 y confirman que no se puede (ni se podrá) eliminar un cliente, ni por webservice ni por el portal.
 

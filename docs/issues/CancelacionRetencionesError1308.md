@@ -5,7 +5,7 @@ de pagos, se encuentra que al enviar la solicitud el servidor de pruebas del SAT
 error `1308 - Certificado revocado o caduco`.
 
 Se ha reportado a Finkok con el [ticket #41610](https://support.finkok.com/support/tickets/41610) donde nos pudieron
-responder ciertos cuestionamientos pero el problema sigue sin resolverse:
+responder ciertos cuestionamientos, pero el problema sigue sin resolverse:
 
 - ¿Hay algún RFC en especial que deba utilizar para poder hacer pruebas de CFDI de retenciones y pagos?
 
@@ -15,7 +15,7 @@ al utilizar cualquiera de los RFC que se tienen publicados en el wiki y que ello
 
 - ¿Por qué está devolviendo el código 1308?
 
-Al parecer la incidencia se presenta por que el SAT no tiene habilitados los RFC de prueba.
+Al parecer la incidencia se presenta porque el SAT no tiene habilitados los RFC de prueba.
 
 - Si es un error del SAT, ¿se ha reportado?
 

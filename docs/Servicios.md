@@ -24,8 +24,8 @@ Nunca compartas tus certificados y llaves privadas, ni con tu PAC.
 
 ## Entornos de producción y pruebas
 
-Otra característica importante es que Finkok tiene dos entornos de trabajo y cada uno tiene sus
-réplica de los servicios que ofrece.
+Otra característica importante es que Finkok tiene dos entornos de trabajo
+y en cada uno tiene su réplica de los servicios que ofrece.
 
 - Producción: `https://facturacion.finkok.com`
 - Pruebas: `https://demo-facturacion.finkok.com`

@@ -1,4 +1,4 @@
-# `CodEstatus` ausente en la cancelación de CFDI de Retenciones
+# El valor `CodEstatus` está ausente en la cancelación de CFDI de Retenciones
 
 Según el WebService de cancelación de retenciones (demo[1]() y producción[2]())
 así como en la documentación[3]() debería retornar estructura con

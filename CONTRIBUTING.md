@@ -49,14 +49,14 @@ o la forma de desarrollarlas puede que no estén alineadas con el proyecto.
 
 Considera las siguientes directrices:
 
-* Usa una rama única que se desprenda de la rama principal.
+* Usa una rama única que se desprenda de la rama principal. 
   No mezcles dos diferentes funcionalidades en una misma rama o *Pull Request*.
 * Describe claramente y en detalle los cambios que hiciste.
 * **Escribe pruebas** para la funcionalidad que deseas agregar.
-* **Asegúrate que las pruebas pasan** antes de enviar tu contribución.
+* **Asegúrate que las pruebas pasan** antes de enviar tu contribución. 
   Usamos integración contínua donde se hace esta verificación, pero es mucho mejor si lo pruebas localmente.
 * Intenta enviar una historia coherente, entenderemos cómo cambia el código si los *commits* tienen significado.
-* La documentación es parte del proyecto.
+* La documentación es parte del proyecto. 
   Realiza los cambios en los archivos de ayuda para que reflejen los cambios en el código.
 
 ## Proceso de construcción
