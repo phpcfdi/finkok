@@ -1,4 +1,4 @@
-# El acuse de cancelación no coincide
+# El acuse de cancelación entregado al cancelar y al solicitar el acuse no coinciden
 
 > *Este error de encuenta solucionado*
 

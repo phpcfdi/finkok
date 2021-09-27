@@ -227,13 +227,13 @@ Durante el proceso de implementación he creado diversas notas y documentos:
 
 - Problemas encontrados:
     - [X] [Cancelación de un CFDI recién creado](docs/issues/CancelSignatureServiceCancelarRecienCreado.md)
-    - [X] [Consumir queryPending con un CFDI recién creado](docs/issues/QueryPendingServiceUuidNoExistente.md)
-    - [X] [Consumir stamp para generar un doble estampado no devuelve los datos](docs/issues/StampServiceDobleEstampado.md)
+    - [X] [Consumir `queryPending` con un CFDI recién creado](docs/issues/QueryPendingServiceUuidNoExistente.md)
+    - [X] [Consumir `stamp` para generar un doble estampado no devuelve los datos](docs/issues/StampServiceDobleEstampado.md)
     - [X] Falta servicio que no requiera CSD/FIEL para aceptar o rechazar una solicitud de cancelación
     - [X] Falta servicio que no requiera CSD/FIEL para obtener los CFDI relacionados
     - [X] [El acuse de cancelación entregado al cancelar y al solicitar el acuse no coinciden](docs/issues/AcuseCancelacionNoCoincidente.md)
     - [X] [Error de cancelación de retenciones 1308 - Certificado revocado o caduco](docs/issues/CancelacionRetencionesError1308.md)
-    - [X] [`CodEstatus` ausente en la cancelación de CFDI de Retenciones](docs/issues/CancelacionRetencionesCodEstatus.md)
+    - [X] [El valor `CodEstatus` está ausente en la cancelación de CFDI de Retenciones](docs/issues/CancelacionRetencionesCodEstatus.md)
 
 ## Compatibilidad
 

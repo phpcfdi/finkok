@@ -1,4 +1,4 @@
-# Cancelacion de Retenciones con error 1308
+# Error de cancelación de retenciones 1308 - Certificado revocado o caduco
 
 Al momento de hacer pruebas de integración sobre el servicio de cancelación de CFDI de tipo retenciones e información
 de pagos, se encuentra que al enviar la solicitud el servidor de pruebas del SAT responde en `CodEstatus` el

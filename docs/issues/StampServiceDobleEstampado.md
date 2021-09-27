@@ -1,3 +1,4 @@
+# Consumir `stamp` para generar un doble estampado no devuelve los datos
 
 ## Descripción
 

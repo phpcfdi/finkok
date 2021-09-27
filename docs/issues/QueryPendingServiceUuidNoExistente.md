@@ -1,4 +1,4 @@
-# Servicio `QueryPending` sin `UUID`
+# Consumir `queryPending` con un CFDI recién creado
 
 ## Descripción
 

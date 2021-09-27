@@ -1,4 +1,4 @@
-# Pruebas de integración.
+# Pruebas de integración
 
 Finkok requiere que tengas una cuenta con ellos. Por lo que es importante que tengas tus datos a la mano.
 
