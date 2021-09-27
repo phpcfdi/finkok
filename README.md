@@ -258,22 +258,22 @@ y recuerda revisar el archivo de tareas pendientes [TODO][] y el archivo [CHANGE
 The phpcfdi/finkok library is copyright © [PhpCfdi](https://www.phpcfdi.com)
 and licensed for use under the MIT License (MIT). Please see [LICENSE][] for more information.
 
-[contributing]: https://github.com/phpcfdi/finkok/blob/master/CONTRIBUTING.md
-[changelog]: https://github.com/phpcfdi/finkok/blob/master/docs/CHANGELOG.md
-[todo]: https://github.com/phpcfdi/finkok/blob/master/docs/TODO.md
+[contributing]: https://github.com/phpcfdi/finkok/blob/main/CONTRIBUTING.md
+[changelog]: https://github.com/phpcfdi/finkok/blob/main/docs/CHANGELOG.md
+[todo]: https://github.com/phpcfdi/finkok/blob/main/docs/TODO.md
 
 [source]: https://github.com/phpcfdi/finkok
 [release]: https://github.com/phpcfdi/finkok/releases
-[license]: https://github.com/phpcfdi/finkok/blob/master/LICENSE
-[build]: https://github.com/phpcfdi/finkok/actions/workflows/build.yml?query=branch:master
+[license]: https://github.com/phpcfdi/finkok/blob/main/LICENSE
+[build]: https://github.com/phpcfdi/finkok/actions/workflows/build.yml?query=branch:main
 [quality]: https://scrutinizer-ci.com/g/phpcfdi/finkok/
-[coverage]: https://scrutinizer-ci.com/g/phpcfdi/finkok/code-structure/master/code-coverage/src
+[coverage]: https://scrutinizer-ci.com/g/phpcfdi/finkok/code-structure/main/code-coverage/src
 [downloads]: https://packagist.org/packages/phpcfdi/finkok
 
 [badge-source]: https://img.shields.io/badge/source-phpcfdi/finkok-blue?style=flat-square
 [badge-release]: https://img.shields.io/github/release/phpcfdi/finkok?style=flat-square
 [badge-license]: https://img.shields.io/github/license/phpcfdi/finkok?style=flat-square
-[badge-build]: https://img.shields.io/github/workflow/status/phpcfdi/finkok/build/master?style=flat-square
-[badge-quality]: https://img.shields.io/scrutinizer/g/phpcfdi/finkok/master?style=flat-square
-[badge-coverage]: https://img.shields.io/scrutinizer/coverage/g/phpcfdi/finkok/master?style=flat-square
+[badge-build]: https://img.shields.io/github/workflow/status/phpcfdi/finkok/build/main?style=flat-square
+[badge-quality]: https://img.shields.io/scrutinizer/g/phpcfdi/finkok/main?style=flat-square
+[badge-coverage]: https://img.shields.io/scrutinizer/coverage/g/phpcfdi/finkok/main?style=flat-square
 [badge-downloads]: https://img.shields.io/packagist/dt/phpcfdi/finkok?style=flat-square

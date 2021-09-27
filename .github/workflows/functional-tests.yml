@@ -3,11 +3,9 @@ on:
   # secrets are not passed to workflows that are triggered by a pull request from a fork.
   # see https://docs.github.com/en/actions/reference/encrypted-secrets
   pull_request:
-    branches:
-      - master
+    branches: [ 'main' ]
   push:
-    branches:
-      - master
+    branches: [ 'main' ]
 
 jobs:
   build:

@@ -93,5 +93,5 @@ vendor/bin/phpunit tests/Integration --testdox --verbose
 [phpCfdi]:      https://github.com/phpcfdi/
 [project]:      https://github.com/phpcfdi/finkok
 [contributors]: https://github.com/phpcfdi/finkok/graphs/contributors
-[coc]:          https://github.com/phpcfdi/finkok/blob/master/CODE_OF_CONDUCT.md
+[coc]:          https://github.com/phpcfdi/finkok/blob/main/CODE_OF_CONDUCT.md
 [issues]:       https://github.com/phpcfdi/finkok/issues
