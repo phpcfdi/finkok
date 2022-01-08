@@ -45,7 +45,7 @@ final class AddServiceTest extends RegistrationIntegrationTestCase
     {
         // Finkok does not have a method (automated or manual) to remove customers.
         // This is why this test is always skipped.
-        // To remove any RFC send an email to soporte@finkok.com asking for it.
+        // To remove any RFC email soporte@finkok.com asking for it.
 
         // If you really need to test comment the following lines .
         if (! boolval(getenv('FINKOK_REGISTRATION_ADD_CREATE_RANDOM_RFC') ?: 0)) {
