@@ -14,6 +14,7 @@ use PhpCfdi\Finkok\Services\Registration\CustomerStatus;
 use PhpCfdi\Finkok\Services\Registration\CustomerType;
 use PhpCfdi\Finkok\Tests\Fakes\FakeSoapFactory;
 use PhpCfdi\Finkok\Tests\TestCase;
+use PhpCfdi\XmlCancelacion\Models\CancelDocument;
 use PHPUnit\Framework\MockObject\MockObject;
 use stdClass;
 
@@ -108,11 +109,12 @@ final class QuickFinkokTest extends TestCase
     {
         $rawData = json_decode($this->fileContentPath('cancel-cancelsignature-response-2-items.json'));
         $finkok = $this->createdPreparedQuickFinkok($rawData);
-        $result = $finkok->cancel($this->createCsdCredential(), 'x-uuid');
+        $uuid = '12345678-1234-aaaa-1234-1234567890ab';
+        $result = $finkok->cancel($this->createCsdCredential(), CancelDocument::newWithErrorsUnrelated($uuid));
         $this->performTestOnLatestCall('cancel_signature', [
             'store_pending' => false,
         ]);
-        $this->assertStringContainsString('X-UUID', strval($this->obtainParameterFromLatestCall('xml')));
+        $this->assertStringContainsString(strtoupper($uuid), strval($this->obtainParameterFromLatestCall('xml')));
         $this->assertEquals($rawData, $result->rawData());
     }
 

@@ -8,19 +8,20 @@ use DateTimeImmutable;
 use PhpCfdi\Finkok\Helpers\CancelSigner;
 
 use PhpCfdi\Finkok\Tests\TestCase;
+use PhpCfdi\XmlCancelacion\Models\CancelDocument;
+use PhpCfdi\XmlCancelacion\Models\CancelDocuments;
 
 final class CancelSignerTest extends TestCase
 {
     public function testCreateAndSign(): void
     {
-        $uuids = [
-            '4CE93193-9E57-4BB0-9E03-09BAB53D392E',
-            '4CE93193-9E57-4BB0-9E03-F896B148A146',
-        ];
-        $date = new DateTimeImmutable('2019-01-13 14:15:16');
+        $documents = new CancelDocuments(
+            CancelDocument::newWithErrorsUnrelated('62B00C5E-4187-4336-B569-44E0030DC729'),
+        );
+        $date = new DateTimeImmutable('2022-01-06 17:49:12');
 
-        $signer = new CancelSigner($uuids, $date);
-        $this->assertSame($uuids, $signer->uuids());
+        $signer = new CancelSigner($documents, $date);
+        $this->assertSame($documents, $signer->documents());
         $this->assertSame($date, $signer->dateTime());
 
         $signed = $signer->sign($this->createCsdCredential());

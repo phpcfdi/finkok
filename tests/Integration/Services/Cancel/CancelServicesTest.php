@@ -9,6 +9,7 @@ use PhpCfdi\Finkok\Services\Cancel\CancelSignatureService;
 use PhpCfdi\Finkok\Services\Cancel\GetReceiptCommand;
 use PhpCfdi\Finkok\Services\Cancel\GetReceiptService;
 use PhpCfdi\Finkok\Tests\Integration\IntegrationTestCase;
+use PhpCfdi\XmlCancelacion\Models\CancelDocument;
 
 final class CancelServicesTest extends IntegrationTestCase
 {
@@ -38,7 +39,9 @@ final class CancelServicesTest extends IntegrationTestCase
         $repeatUntil = strtotime('now +5 minutes');
         do {
             // build command on every request
-            $command = $this->createCancelSignatureCommandFromUuid($cfdi->uuid());
+            $command = $this->createCancelSignatureCommandFromDocument(
+                CancelDocument::newWithErrorsUnrelated($cfdi->uuid())
+            );
             // perform cancel
             $result = $service->cancelSignature($command);
             $document = $result->documents()->first();

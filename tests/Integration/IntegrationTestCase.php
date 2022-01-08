@@ -17,6 +17,8 @@ use PhpCfdi\Finkok\Services\Stamping\StampingResult;
 use PhpCfdi\Finkok\Services\Stamping\StampService;
 use PhpCfdi\Finkok\Tests\Factories\RandomPreCfdi;
 use PhpCfdi\Finkok\Tests\TestCase;
+use PhpCfdi\XmlCancelacion\Models\CancelDocument;
+use PhpCfdi\XmlCancelacion\Models\CancelDocuments;
 use RuntimeException;
 
 abstract class IntegrationTestCase extends TestCase
@@ -77,12 +79,12 @@ abstract class IntegrationTestCase extends TestCase
         return GetSatStatusExtractor::fromXmlString($xmlContents)->buildCommand();
     }
 
-    protected function createCancelSignatureCommandFromUuid(
-        string $uuid,
+    protected function createCancelSignatureCommandFromDocument(
+        CancelDocument $document,
         ?DateTimeImmutable $dateTime = null
     ): CancelSignatureCommand {
         $credential = $this->createCsdCredential();
-        $signer = new CancelSigner([$uuid], $dateTime);
+        $signer = new CancelSigner(new CancelDocuments($document), $dateTime);
         return new CancelSignatureCommand($signer->sign($credential));
     }
 

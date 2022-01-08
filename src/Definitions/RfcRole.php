@@ -12,6 +12,6 @@ namespace PhpCfdi\Finkok\Definitions;
  * @method bool isIssuer()
  * @method bool isReceiver()
  */
-class RfcRole extends \PhpCfdi\XmlCancelacion\Definitions\RfcRole
+class RfcRole extends \PhpCfdi\XmlCancelacion\Models\RfcRole
 {
 }
