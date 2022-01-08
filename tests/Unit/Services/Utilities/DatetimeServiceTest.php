@@ -8,11 +8,13 @@ use PhpCfdi\Finkok\Services\Utilities\DatetimeCommand;
 use PhpCfdi\Finkok\Services\Utilities\DatetimeService;
 use PhpCfdi\Finkok\Tests\Fakes\FakeSoapFactory;
 use PhpCfdi\Finkok\Tests\TestCase;
+use stdClass;
 
 final class DatetimeServiceTest extends TestCase
 {
     public function testDatetimeServiceUsingPreparedResultWithEmptyPostalCode(): void
     {
+        /** @var stdClass $preparedResult */
         $preparedResult = json_decode(TestCase::fileContentPath('utilities-datetime-response.json'));
 
         $soapFactory = new FakeSoapFactory();
@@ -31,6 +33,7 @@ final class DatetimeServiceTest extends TestCase
 
     public function testDatetimeServiceUsingPreparedResultWithPostalCode(): void
     {
+        /** @var stdClass $preparedResult */
         $preparedResult = json_decode(TestCase::fileContentPath('utilities-datetime-response.json'));
 
         $soapFactory = new FakeSoapFactory();

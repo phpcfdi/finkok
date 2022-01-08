@@ -8,11 +8,13 @@ use PhpCfdi\Finkok\Services\Stamping\QueryPendingCommand;
 use PhpCfdi\Finkok\Services\Stamping\QueryPendingService;
 use PhpCfdi\Finkok\Tests\Fakes\FakeSoapFactory;
 use PhpCfdi\Finkok\Tests\TestCase;
+use stdClass;
 
 final class QueryPendingServiceTest extends TestCase
 {
     public function testCall(): void
     {
+        /** @var stdClass $preparedResult */
         $preparedResult = json_decode(TestCase::fileContentPath('querypending-response.json'));
 
         $soapFactory = new FakeSoapFactory();

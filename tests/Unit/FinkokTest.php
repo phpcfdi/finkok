@@ -83,7 +83,7 @@ final class FinkokTest extends TestCase
     {
         /** @var FinkokSettings&MockObject $settings */
         $settings = $this->createMock(FinkokSettings::class);
-        $finkok = new class($settings) extends Finkok {
+        $finkok = new class ($settings) extends Finkok {
             /**
              * created just to access protected method
              *
@@ -136,7 +136,7 @@ final class FinkokTest extends TestCase
     {
         /** @var FinkokSettings&MockObject $settings */
         $settings = $this->createMock(FinkokSettings::class);
-        $exposer = new class($settings) extends Finkok {
+        $exposer = new class ($settings) extends Finkok {
             /** @return array<array<mixed>> */
             public function exposeServicesMap(): array
             {

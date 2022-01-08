@@ -8,11 +8,13 @@ use PhpCfdi\Finkok\Services\Utilities\ReportTotalCommand;
 use PhpCfdi\Finkok\Services\Utilities\ReportTotalService;
 use PhpCfdi\Finkok\Tests\Fakes\FakeSoapFactory;
 use PhpCfdi\Finkok\Tests\TestCase;
+use stdClass;
 
 final class ReportTotalServiceTest extends TestCase
 {
     public function testServiceUsingPreparedResult(): void
     {
+        /** @var stdClass $preparedResult */
         $preparedResult = json_decode(TestCase::fileContentPath('utilities-report-total-response.json'));
 
         $soapFactory = new FakeSoapFactory();

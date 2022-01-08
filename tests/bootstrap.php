@@ -11,7 +11,7 @@ date_default_timezone_set('America/Mexico_City');
 // require composer autoloader
 require_once __DIR__ . '/../vendor/autoload.php';
 
-call_user_func(new class() {
+call_user_func(new class () {
     public function __invoke(): void
     {
         $environmentFile = __DIR__ . '/.env';

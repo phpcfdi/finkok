@@ -8,11 +8,13 @@ use PhpCfdi\Finkok\Services\Stamping\StampedService;
 use PhpCfdi\Finkok\Services\Stamping\StampingCommand;
 use PhpCfdi\Finkok\Tests\Fakes\FakeSoapFactory;
 use PhpCfdi\Finkok\Tests\TestCase;
+use stdClass;
 
 final class StampedServiceTest extends TestCase
 {
     public function testStampedSendXmlAndProcessPreparedResult(): void
     {
+        /** @var stdClass $preparedResult */
         $preparedResult = json_decode(TestCase::fileContentPath('stamped-response-with-alerts.json'));
 
         $soapFactory = new FakeSoapFactory();

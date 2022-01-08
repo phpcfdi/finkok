@@ -59,6 +59,7 @@ class SoapCaller implements LoggerAwareInterface
             $this->logger->debug(strval(json_encode([
                 $methodName => $this->extractSoapClientTrace($soap),
             ], JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE)));
+            /** @var stdClass $result */
             return $result;
         } catch (Throwable $exception) {
             $this->logger->error(strval(json_encode(
@@ -77,10 +78,10 @@ class SoapCaller implements LoggerAwareInterface
     protected function extractSoapClientTrace(SoapClient $soapClient): array
     {
         return [
-            'request.headers' => @$soapClient->__getLastRequestHeaders(),
-            'request.body' => @$soapClient->__getLastRequest(),
-            'response.headers' => @$soapClient->__getLastResponseHeaders(),
-            'response.body' => @$soapClient->__getLastResponse(),
+            'request.headers' => (string) @$soapClient->__getLastRequestHeaders(),
+            'request.body' => (string) @$soapClient->__getLastRequest(),
+            'response.headers' => (string) @$soapClient->__getLastResponseHeaders(),
+            'response.body' => (string) @$soapClient->__getLastResponse(),
         ];
     }
 

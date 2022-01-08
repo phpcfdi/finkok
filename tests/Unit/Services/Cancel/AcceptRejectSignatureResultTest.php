@@ -6,11 +6,13 @@ namespace PhpCfdi\Finkok\Tests\Unit\Services\Cancel;
 
 use PhpCfdi\Finkok\Services\Cancel\AcceptRejectSignatureResult;
 use PhpCfdi\Finkok\Tests\TestCase;
+use stdClass;
 
 final class AcceptRejectSignatureResultTest extends TestCase
 {
     public function testResultUsingPredefinedResponse(): void
     {
+        /** @var stdClass $data */
         $data = json_decode($this->fileContentPath('cancel-accept-reject-signature-response.json'));
         $result = new AcceptRejectSignatureResult($data);
 

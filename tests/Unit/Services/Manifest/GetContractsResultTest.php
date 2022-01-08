@@ -6,11 +6,13 @@ namespace PhpCfdi\Finkok\Tests\Unit\Services\Manifest;
 
 use PhpCfdi\Finkok\Services\Manifest\GetContractsResult;
 use PhpCfdi\Finkok\Tests\TestCase;
+use stdClass;
 
 final class GetContractsResultTest extends TestCase
 {
     public function testResultUsingPredefinedResponses(): void
     {
+        /** @var stdClass $data */
         $data = json_decode($this->fileContentPath('manifest-getcontracts-response.json'));
         $result = new GetContractsResult($data);
         $this->assertTrue($result->success());

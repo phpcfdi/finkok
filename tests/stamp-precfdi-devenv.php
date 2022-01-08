@@ -13,7 +13,7 @@ use Throwable;
 
 require_once __DIR__ . '/bootstrap.php';
 
-exit(call_user_func(new class($argv[1] ?? '') {
+exit(call_user_func(new class ($argv[1] ?? '') {
     /** @var string */
     private $command;
 
@@ -66,7 +66,7 @@ exit(call_user_func(new class($argv[1] ?? '') {
                 sprintf("%s: %s\n", get_class($exception), $exception->getMessage()),
                 FILE_APPEND
             );
-            return $exception->getCode() ?: 1;
+            return (int) $exception->getCode() ?: 1;
         }
     }
 

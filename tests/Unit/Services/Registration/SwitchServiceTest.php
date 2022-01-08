@@ -9,11 +9,13 @@ use PhpCfdi\Finkok\Services\Registration\SwitchCommand;
 use PhpCfdi\Finkok\Services\Registration\SwitchService;
 use PhpCfdi\Finkok\Tests\Fakes\FakeSoapFactory;
 use PhpCfdi\Finkok\Tests\TestCase;
+use stdClass;
 
 final class SwitchServiceTest extends TestCase
 {
     public function testServiceUsingPreparedResult(): void
     {
+        /** @var stdClass $preparedResult */
         $preparedResult = json_decode(TestCase::fileContentPath('registration-switch-response.json'));
 
         $soapFactory = new FakeSoapFactory();

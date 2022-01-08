@@ -6,11 +6,13 @@ namespace PhpCfdi\Finkok\Tests\Unit\Services\Retentions;
 
 use PhpCfdi\Finkok\Services\Retentions\CancelSignatureResult;
 use PhpCfdi\Finkok\Tests\TestCase;
+use stdClass;
 
 final class CancelSignatureResultTest extends TestCase
 {
     public function testResultUsingPredefinedResponses(): void
     {
+        /** @var stdClass $data */
         $data = json_decode($this->fileContentPath('retentions-cancelsignature-response.json'));
         $result = new CancelSignatureResult($data);
         $this->assertCount(2, $result->documents());

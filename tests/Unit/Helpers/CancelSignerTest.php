@@ -6,7 +6,6 @@ namespace PhpCfdi\Finkok\Tests\Unit\Helpers;
 
 use DateTimeImmutable;
 use PhpCfdi\Finkok\Helpers\CancelSigner;
-
 use PhpCfdi\Finkok\Tests\TestCase;
 use PhpCfdi\XmlCancelacion\Models\CancelDocument;
 use PhpCfdi\XmlCancelacion\Models\CancelDocuments;

@@ -59,6 +59,7 @@ final class QuickFinkokTest extends TestCase
 
     public function testStamp(): void
     {
+        /** @var stdClass $rawData */
         $rawData = json_decode($this->fileContentPath('stamp-response-with-alerts.json'));
         $finkok = $this->createdPreparedQuickFinkok($rawData);
         $result = $finkok->stamp('precfdi');
@@ -68,6 +69,7 @@ final class QuickFinkokTest extends TestCase
 
     public function testQuickStamp(): void
     {
+        /** @var stdClass $rawData */
         $rawData = json_decode($this->fileContentPath('quickstamp-response-with-alerts.json'));
         $finkok = $this->createdPreparedQuickFinkok($rawData);
         $result = $finkok->quickStamp('precfdi');
@@ -77,6 +79,7 @@ final class QuickFinkokTest extends TestCase
 
     public function testStamped(): void
     {
+        /** @var stdClass $rawData */
         $rawData = json_decode($this->fileContentPath('stamped-response-with-alerts.json'));
         $finkok = $this->createdPreparedQuickFinkok($rawData);
         $result = $finkok->stamped('precfdi');
@@ -86,6 +89,7 @@ final class QuickFinkokTest extends TestCase
 
     public function testCfdiDownload(): void
     {
+        /** @var stdClass $rawData */
         $rawData = json_decode($this->fileContentPath('utilities-getxml-response.json'));
         $finkok = $this->createdPreparedQuickFinkok($rawData);
         $result = $finkok->cfdiDownload('x-uuid', 'x-rfc');
@@ -98,6 +102,7 @@ final class QuickFinkokTest extends TestCase
 
     public function testStampQueryPending(): void
     {
+        /** @var stdClass $rawData */
         $rawData = json_decode($this->fileContentPath('querypending-response.json'));
         $finkok = $this->createdPreparedQuickFinkok($rawData);
         $result = $finkok->stampQueryPending('x-uuid');
@@ -107,6 +112,7 @@ final class QuickFinkokTest extends TestCase
 
     public function testCancel(): void
     {
+        /** @var stdClass $rawData */
         $rawData = json_decode($this->fileContentPath('cancel-cancelsignature-response-2-items.json'));
         $finkok = $this->createdPreparedQuickFinkok($rawData);
         $uuid = '12345678-1234-aaaa-1234-1234567890ab';
@@ -120,6 +126,7 @@ final class QuickFinkokTest extends TestCase
 
     public function testSatStatus(): void
     {
+        /** @var stdClass $rawData */
         $rawData = json_decode($this->fileContentPath('cancel-get-sat-status-response.json'));
         $finkok = $this->createdPreparedQuickFinkok($rawData);
         $result = $finkok->satStatus('EKU9003173C9', 'COSC8001137NA', 'x-uuid', '123.45');
@@ -135,17 +142,18 @@ final class QuickFinkokTest extends TestCase
     public function testSatStatusXml(): void
     {
         $fakeCfdi = <<<EOT
-<cfdi:Comprobante xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                  xmlns:cfdi="http://www.sat.gob.mx/cfd/3"
-                  xmlns:tfd="http://www.sat.gob.mx/TimbreFiscalDigital"
-                  Version="3.3" Total="123.45" Sello="">
-    <cfdi:Emisor Rfc="EKU9003173C9"/>
-    <cfdi:Receptor Rfc="COSC8001137NA"/>
-    <cfdi:Complemento>
-        <tfd:TimbreFiscalDigital UUID="12345678-1234-1234-1234-000000000001"/>
-    </cfdi:Complemento>
-</cfdi:Comprobante>
-EOT;
+            <cfdi:Comprobante xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                              xmlns:cfdi="http://www.sat.gob.mx/cfd/3"
+                              xmlns:tfd="http://www.sat.gob.mx/TimbreFiscalDigital"
+                              Version="3.3" Total="123.45" Sello="">
+                <cfdi:Emisor Rfc="EKU9003173C9"/>
+                <cfdi:Receptor Rfc="COSC8001137NA"/>
+                <cfdi:Complemento>
+                    <tfd:TimbreFiscalDigital UUID="12345678-1234-1234-1234-000000000001"/>
+                </cfdi:Complemento>
+            </cfdi:Comprobante>
+            EOT;
+        /** @var stdClass $rawData */
         $rawData = json_decode($this->fileContentPath('cancel-get-sat-status-response.json'));
         $finkok = $this->createdPreparedQuickFinkok($rawData);
         $result = $finkok->satStatusXml($fakeCfdi);
@@ -160,6 +168,7 @@ EOT;
 
     public function testObtainRelated(): void
     {
+        /** @var stdClass $rawData */
         $rawData = json_decode($this->fileContentPath('cancel-get-related-signature-response.json'));
         $finkok = $this->createdPreparedQuickFinkok($rawData);
 
@@ -174,6 +183,7 @@ EOT;
 
     public function testObtainPendingToCancel(): void
     {
+        /** @var stdClass $rawData */
         $rawData = json_decode($this->fileContentPath('cancel-get-pending-response-2-items.json'));
         $finkok = $this->createdPreparedQuickFinkok($rawData);
         $result = $finkok->obtainPendingToCancel('EKU9003173C9');
@@ -183,6 +193,7 @@ EOT;
 
     public function testAnswerAcceptRejectCancellation(): void
     {
+        /** @var stdClass $rawData */
         $rawData = json_decode($this->fileContentPath('cancel-accept-reject-signature-response.json'));
         $finkok = $this->createdPreparedQuickFinkok($rawData);
 
@@ -202,6 +213,7 @@ EOT;
 
     public function testObtainCancelRequestReceipt(): void
     {
+        /** @var stdClass $rawData */
         $rawData = json_decode($this->fileContentPath('cancel-get-receipt-response.json'));
         $finkok = $this->createdPreparedQuickFinkok($rawData);
 
@@ -217,6 +229,7 @@ EOT;
 
     public function testServersDateTime(): void
     {
+        /** @var stdClass $rawData */
         $rawData = json_decode($this->fileContentPath('utilities-datetime-response.json'));
         $finkok = $this->createdPreparedQuickFinkok($rawData);
 
@@ -228,6 +241,7 @@ EOT;
 
     public function testReportUuids(): void
     {
+        /** @var stdClass $rawData */
         $rawData = json_decode($this->fileContentPath('utilities-report-uuid-response.json'));
         $finkok = $this->createdPreparedQuickFinkok($rawData);
 
@@ -246,6 +260,7 @@ EOT;
 
     public function testReportCredits(): void
     {
+        /** @var stdClass $rawData */
         $rawData = json_decode($this->fileContentPath('utilities-report-credit-response.json'));
         $finkok = $this->createdPreparedQuickFinkok($rawData);
 
@@ -257,6 +272,7 @@ EOT;
 
     public function testReportTotals(): void
     {
+        /** @var stdClass $rawData */
         $rawData = json_decode($this->fileContentPath('utilities-report-total-response.json'));
         $finkok = $this->createdPreparedQuickFinkok($rawData);
 
@@ -273,6 +289,7 @@ EOT;
 
     public function testCustomersAdd(): void
     {
+        /** @var stdClass $rawData */
         $rawData = json_decode($this->fileContentPath('registration-add-response.json'));
         $finkok = $this->createdPreparedQuickFinkok($rawData);
 
@@ -287,6 +304,7 @@ EOT;
 
     public function testCustomersEdit(): void
     {
+        /** @var stdClass $rawData */
         $rawData = json_decode($this->fileContentPath('registration-edit-response.json'));
         $finkok = $this->createdPreparedQuickFinkok($rawData);
 
@@ -301,6 +319,7 @@ EOT;
 
     public function testCustomersSwitch(): void
     {
+        /** @var stdClass $rawData */
         $rawData = json_decode($this->fileContentPath('registration-switch-response.json'));
         $finkok = $this->createdPreparedQuickFinkok($rawData);
 
@@ -316,6 +335,7 @@ EOT;
 
     public function testCustomersAssign(): void
     {
+        /** @var stdClass $rawData */
         $rawData = json_decode($this->fileContentPath('registration-assign-response.json'));
         $finkok = $this->createdPreparedQuickFinkok($rawData);
 
@@ -330,6 +350,7 @@ EOT;
 
     public function testCustomersObtain(): void
     {
+        /** @var stdClass $rawData */
         $rawData = json_decode($this->fileContentPath('registration-get-response-2-items.json'));
         $finkok = $this->createdPreparedQuickFinkok($rawData);
 
@@ -343,6 +364,7 @@ EOT;
 
     public function testCustomerGetContracts(): void
     {
+        /** @var stdClass $rawData */
         $rawData = json_decode($this->fileContentPath('manifest-getcontracts-response.json'));
         $finkok = $this->createdPreparedQuickFinkok($rawData);
 
@@ -359,6 +381,7 @@ EOT;
 
     public function testCustomerSendContracts(): void
     {
+        /** @var stdClass $rawData */
         $rawData = json_decode($this->fileContentPath('manifest-signcontracts-response.json'));
         $finkok = $this->createdPreparedQuickFinkok($rawData);
 
@@ -375,12 +398,12 @@ EOT;
     public function testCustomerSignAndSendContracts(): void
     {
         $fiel = $this->createCsdCredential();
-        $getContractsResult = new GetContractsResult(
-            json_decode($this->fileContentPath('manifest-getcontracts-response.json'))
-        );
-        $signContractsResult = new SignContractsResult(
-            json_decode($this->fileContentPath('manifest-signcontracts-response.json'))
-        );
+        /** @var stdClass $dataGetContracts */
+        $dataGetContracts = json_decode($this->fileContentPath('manifest-getcontracts-response.json'));
+        $getContractsResult = new GetContractsResult($dataGetContracts);
+        /** @var stdClass $dataSignContracts */
+        $dataSignContracts = json_decode($this->fileContentPath('manifest-signcontracts-response.json'));
+        $signContractsResult = new SignContractsResult($dataSignContracts);
         /** @var QuickFinkok&MockObject $finkok */
         $finkok = $this->getMockBuilder(QuickFinkok::class)
             ->disableOriginalConstructor()
@@ -423,6 +446,7 @@ EOT;
 
     public function testRetentionStamp(): void
     {
+        /** @var stdClass $rawData */
         $rawData = json_decode($this->fileContentPath('retentions-stamp-response.json'));
         $finkok = $this->createdPreparedQuickFinkok($rawData);
         $result = $finkok->retentionStamp('precfdi');
@@ -441,6 +465,7 @@ EOT;
 
     public function testRetentionStamped(): void
     {
+        /** @var stdClass $rawData */
         $rawData = json_decode($this->fileContentPath('retentions-stamped-response.json'));
         $finkok = $this->createdPreparedQuickFinkok($rawData);
         $result = $finkok->retentionStamped('x-xml');

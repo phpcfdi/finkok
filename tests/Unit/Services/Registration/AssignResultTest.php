@@ -5,13 +5,14 @@ declare(strict_types=1);
 namespace PhpCfdi\Finkok\Tests\Unit\Services\Registration;
 
 use PhpCfdi\Finkok\Services\Registration\AssignResult;
-
 use PhpCfdi\Finkok\Tests\TestCase;
+use stdClass;
 
 final class AssignResultTest extends TestCase
 {
     public function testResultUsingPredefinedResponses(): void
     {
+        /** @var stdClass $data */
         $data = json_decode($this->fileContentPath('registration-assign-response.json'));
         $result = new AssignResult($data);
         $this->assertSame(true, $result->success());

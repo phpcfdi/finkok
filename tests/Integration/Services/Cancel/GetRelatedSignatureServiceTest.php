@@ -72,9 +72,11 @@ final class GetRelatedSignatureServiceTest extends IntegrationTestCase
             // 2001 - No Existen cfdi relacionados al folio fiscal.
             // 305 - No se cuenta con un certificado válido.
             // Testing only: in the wild it is expected to ask for related several seconds after the CFDI were created
-            if ('' !== $result->error()
+            if (
+                '' !== $result->error()
                 && '2001' !== substr($result->error(), 0, 4)
-                && false === strpos($result->error(), '305')) {
+                && false === strpos($result->error(), '305')
+            ) {
                 break;
             }
 

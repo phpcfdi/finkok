@@ -6,11 +6,13 @@ namespace PhpCfdi\Finkok\Tests\Unit\Services\Retentions;
 
 use PhpCfdi\Finkok\Services\Retentions\StampedResult;
 use PhpCfdi\Finkok\Tests\TestCase;
+use stdClass;
 
 final class StampedResultTest extends TestCase
 {
     public function testUsingKnownStampResponse(): void
     {
+        /** @var stdClass $data */
         $data = json_decode($this->fileContentPath('retentions-stamped-response.json'));
         $response = new StampedResult($data);
         $this->assertSame('x-xml', $response->xml());

@@ -9,7 +9,7 @@ use stdClass;
 
 class ReportUuidResult extends AbstractResult
 {
-    /** @var array[] */
+    /** @var array<int, array{date: string, uuid:string}> */
     private $items;
 
     public function __construct(stdClass $data)
@@ -32,7 +32,7 @@ class ReportUuidResult extends AbstractResult
     /**
      * The returned array contains an array with keys date (string) and uuid (string)
      *
-     * @return array[]
+     * @return array<int, array{date: string, uuid:string}>
      */
     public function items(): array
     {

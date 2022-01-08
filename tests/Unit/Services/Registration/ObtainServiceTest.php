@@ -8,11 +8,13 @@ use PhpCfdi\Finkok\Services\Registration\ObtainCommand;
 use PhpCfdi\Finkok\Services\Registration\ObtainService;
 use PhpCfdi\Finkok\Tests\Fakes\FakeSoapFactory;
 use PhpCfdi\Finkok\Tests\TestCase;
+use stdClass;
 
 final class ObtainServiceTest extends TestCase
 {
     public function testServiceUsingPreparedResultWithRfc(): void
     {
+        /** @var stdClass $preparedResult */
         $preparedResult = json_decode(TestCase::fileContentPath('registration-get-response-2-items.json'));
 
         $soapFactory = new FakeSoapFactory();
@@ -35,6 +37,7 @@ final class ObtainServiceTest extends TestCase
 
     public function testServiceUsingPreparedResultWithoutRfc(): void
     {
+        /** @var stdClass $preparedResult */
         $preparedResult = json_decode(TestCase::fileContentPath('registration-get-response-2-items.json'));
 
         $soapFactory = new FakeSoapFactory();

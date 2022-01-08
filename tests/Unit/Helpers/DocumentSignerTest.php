@@ -9,7 +9,6 @@ use DOMDocument;
 use LogicException;
 use PhpCfdi\Credentials\Credential;
 use PhpCfdi\Finkok\Helpers\DocumentSigner;
-
 use PhpCfdi\Finkok\Tests\TestCase;
 
 final class DocumentSignerTest extends TestCase

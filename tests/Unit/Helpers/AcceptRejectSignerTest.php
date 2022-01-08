@@ -7,7 +7,6 @@ namespace PhpCfdi\Finkok\Tests\Unit\Helpers;
 use DateTimeImmutable;
 use PhpCfdi\Finkok\Definitions\CancelAnswer;
 use PhpCfdi\Finkok\Helpers\AcceptRejectSigner;
-
 use PhpCfdi\Finkok\Tests\TestCase;
 
 final class AcceptRejectSignerTest extends TestCase

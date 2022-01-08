@@ -9,7 +9,7 @@ use stdClass;
 
 class ReportCreditResult extends AbstractResult
 {
-    /** @var array[] */
+    /** @var array<array{credit: string, date: string}> */
     private $items;
 
     public function __construct(stdClass $data)
@@ -29,7 +29,7 @@ class ReportCreditResult extends AbstractResult
         }
     }
 
-    /** @return array[] */
+    /** @return array<array{credit: string, date: string}> */
     public function items(): array
     {
         return $this->items;

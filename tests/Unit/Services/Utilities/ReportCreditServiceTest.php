@@ -8,11 +8,13 @@ use PhpCfdi\Finkok\Services\Utilities\ReportCreditCommand;
 use PhpCfdi\Finkok\Services\Utilities\ReportCreditService;
 use PhpCfdi\Finkok\Tests\Fakes\FakeSoapFactory;
 use PhpCfdi\Finkok\Tests\TestCase;
+use stdClass;
 
 final class ReportCreditServiceTest extends TestCase
 {
     public function testServiceUsingPreparedResult(): void
     {
+        /** @var stdClass $preparedResult */
         $preparedResult = json_decode(TestCase::fileContentPath('utilities-report-credit-response.json'));
 
         $soapFactory = new FakeSoapFactory();
