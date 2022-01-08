@@ -25,7 +25,7 @@ final class DownloadXmlServiceTest extends IntegrationTestCase
         $this->assertSame('UUID Does not Exists', $result->error());
     }
 
-    public function testStampAndConsumeStampedImmediately(): void
+    public function testStampAndDownloadXmlImmediately(): void
     {
         $previousStamp = $this->currentCfdi();
         $this->assertNotEmpty($previousStamp->uuid(), 'Finkok did not create CFDI');
