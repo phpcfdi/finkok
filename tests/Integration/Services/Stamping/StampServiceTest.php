@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PhpCfdi\Finkok\Tests\Integration\Services\Stamping;
 
+use PhpCfdi\Finkok\Services\Stamping\StampingCommand;
 use PhpCfdi\Finkok\Services\Stamping\StampService;
 use PhpCfdi\Finkok\Tests\Integration\IntegrationTestCase;
 
@@ -27,7 +28,7 @@ final class StampServiceTest extends IntegrationTestCase
         $this->assertStringContainsString($result->uuid(), $result->xml());
     }
 
-    public function testStampPreviouslyCreatedCfdi(): void
+    public function testStampPreviouslyCreatedCfdiReturnsErrorCode307(): void
     {
         $firstResult = $this->currentCfdi();
 
@@ -41,6 +42,20 @@ final class StampServiceTest extends IntegrationTestCase
             $firstResult->uuid(),
             $secondResult->uuid(),
             'Finkok does not return the same UUID for duplicated stamp call'
+        );
+    }
+
+    public function testStampPreviouslyCreatedCfdiReturnsErrorCode707(): void
+    {
+        // call first to cachedStamped to use previous stamp or create a new one
+        $this->currentCfdi();
+
+        $service = $this->createService();
+        $currentCfdiStampCommand = new StampingCommand($this->currentCfdi()->xml());
+        $secondResult = $service->stamp($currentCfdiStampCommand);
+        $this->assertNotNull(
+            $secondResult->alerts()->findByErrorCode('707'),
+            'Finkok must alert that it contains and existing TFD'
         );
     }
 
