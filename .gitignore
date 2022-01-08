@@ -1,4 +1,5 @@
 # do not include this files on git
 .env
 /vendor/
+/tools/
 /composer.lock

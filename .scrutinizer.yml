@@ -2,6 +2,7 @@ filter:
   excluded_paths:
     - 'tests/'
     - 'vendor/'
+    - 'tools/'
 
 # see https://scrutinizer-ci.com/docs/tools/php/php-scrutinizer/
 build:
