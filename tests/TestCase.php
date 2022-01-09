@@ -15,15 +15,15 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
     public function createSettingsFromEnvironment(SoapFactory $soapFactory = null): FinkokSettings
     {
         $settings = new FinkokSettings(
-            strval(getenv('FINKOK_USERNAME')) ?: 'username-non-set',
-            strval(getenv('FINKOK_PASSWORD')) ?: 'password-non-set',
+            $this->getenv('FINKOK_USERNAME') ?: 'username-non-set',
+            $this->getenv('FINKOK_PASSWORD') ?: 'password-non-set',
             FinkokEnvironment::makeDevelopment()
         );
         if (null !== $soapFactory) {
             $settings->changeSoapFactory($soapFactory);
         }
 
-        if (boolval(getenv('FINKOK_LOG_CALLS'))) {
+        if ($this->getenv('FINKOK_LOG_CALLS')) {
             $loggerOutputFile = sprintf(
                 '%s/../build/tests/%s-%s-%s.txt',
                 __DIR__,
@@ -68,5 +68,10 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
             return '';
         }
         return strval(file_get_contents($path));
+    }
+
+    public static function getenv(string $key): string
+    {
+        return $_ENV[$key] ?? '';
     }
 }

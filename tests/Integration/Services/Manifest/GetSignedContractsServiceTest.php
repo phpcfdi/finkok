@@ -34,7 +34,7 @@ final class GetSignedContractsServiceTest extends IntegrationTestCase
     public function testGetSignedContracts(SignedDocumentFormat $format, string $expectedMimeType): void
     {
         $command = new GetSignedContractsCommand(
-            strval(getenv('FINKOK_SNID') ?: ''),
+            $this->getenv('FINKOK_SNID'),
             'EKU9003173C9',
             $format
         );

@@ -20,7 +20,6 @@ call_user_func(new class () {
             return;
         }
         $dotEnv = new Symfony\Component\Dotenv\Dotenv();
-        $dotEnv->usePutenv(true);
         $dotEnv->load($environmentFile);
     }
 

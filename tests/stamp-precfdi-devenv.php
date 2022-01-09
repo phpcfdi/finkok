@@ -28,7 +28,7 @@ exit(call_user_func(new class ($argv[1] ?? '') {
             $this->showHelp();
             return 0;
         }
-        $debug = boolval(getenv('FINKOK_LOG_CALLS'));
+        $debug = (bool) TestCase::getenv('FINKOK_LOG_CALLS');
         try {
             if (! file_exists($preCfdiPath)) {
                 throw new Exception("File $preCfdiPath does not exists");
@@ -39,8 +39,8 @@ exit(call_user_func(new class ($argv[1] ?? '') {
             }
 
             $settings = new FinkokSettings(
-                strval(getenv('FINKOK_USERNAME')) ?: 'username-non-set',
-                strval(getenv('FINKOK_PASSWORD')) ?: 'password-non-set',
+                TestCase::getenv('FINKOK_USERNAME') ?: 'username-non-set',
+                TestCase::getenv('FINKOK_PASSWORD') ?: 'password-non-set',
                 FinkokEnvironment::makeDevelopment()
             );
             if ($debug) {

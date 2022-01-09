@@ -48,7 +48,7 @@ final class AddServiceTest extends RegistrationIntegrationTestCase
         // To remove any RFC email soporte@finkok.com asking for it.
 
         // If you really need to test comment the following lines .
-        if (! boolval(getenv('FINKOK_REGISTRATION_ADD_CREATE_RANDOM_RFC') ?: 0)) {
+        if (! $this->getenv('FINKOK_REGISTRATION_ADD_CREATE_RANDOM_RFC')) {
             $this->markTestSkipped('This test is skipped as will create a lot of garbage customers');
         }
 
