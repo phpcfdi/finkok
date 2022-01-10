@@ -31,7 +31,7 @@
         "psr/log": "^1.1",
         "eclipxe/enum": "^0.2.0",
         "phpcfdi/credentials": "^1.0.1",
-        "phpcfdi/xml-cancelacion": "^2.0.0",
+        "phpcfdi/xml-cancelacion": "^2.0.1",
         "robrichards/xmlseclibs": "^3.0.4",
         "eclipxe/micro-catalog": "^0.1.0",
         "phpcfdi/cfdi-expresiones": "^3.0"
