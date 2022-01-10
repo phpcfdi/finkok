@@ -6,11 +6,13 @@ namespace PhpCfdi\Finkok\Tests\Unit\Services\Utilities;
 
 use PhpCfdi\Finkok\Services\Utilities\ReportCreditResult;
 use PhpCfdi\Finkok\Tests\TestCase;
+use stdClass;
 
 final class ReportCreditResultTest extends TestCase
 {
     public function testResultUsingPredefinedResponse(): void
     {
+        /** @var stdClass $data */
         $data = json_decode($this->fileContentPath('utilities-report-credit-response.json'));
         $result = new ReportCreditResult($data);
 
@@ -33,6 +35,7 @@ final class ReportCreditResultTest extends TestCase
 
     public function testResultUsingEmptyResponse(): void
     {
+        /** @var stdClass $data */
         $data = json_decode($this->fileContentPath('utilities-report-credit-zero-items-response.json'));
         $result = new ReportCreditResult($data);
         $this->assertCount(0, $result->items());

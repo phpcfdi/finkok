@@ -6,11 +6,13 @@ namespace PhpCfdi\Finkok\Tests\Unit\Services\Utilities;
 
 use PhpCfdi\Finkok\Services\Utilities\ReportUuidResult;
 use PhpCfdi\Finkok\Tests\TestCase;
+use stdClass;
 
 final class ReportUuidResultTest extends TestCase
 {
     public function testResultUsingPredefinedResponse(): void
     {
+        /** @var stdClass $data */
         $data = json_decode($this->fileContentPath('utilities-report-uuid-response.json'));
         $result = new ReportUuidResult($data);
 

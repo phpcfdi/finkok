@@ -25,7 +25,7 @@ final class GetDocumentsSignSendAndGetSignedTest extends IntegrationTestCase
         $fiel = $this->createFielCredential();
         $address = 'Cuauhtémoc #123, Colonia Centro, Villahermosa, Tabasco. CP 86000';
         $email = 'legal@empresa-conocida.mx';
-        $snid = strval(getenv('FINKOK_SNID') ?? '');
+        $snid = $this->getenv('FINKOK_SNID');
 
         $signedContracts = $finkok->customerSignAndSendContracts($fiel, $snid, $address, $email);
         $this->assertTrue($signedContracts->success());

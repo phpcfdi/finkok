@@ -9,11 +9,13 @@ use PhpCfdi\Finkok\Services\Utilities\ReportUuidCommand;
 use PhpCfdi\Finkok\Services\Utilities\ReportUuidService;
 use PhpCfdi\Finkok\Tests\Fakes\FakeSoapFactory;
 use PhpCfdi\Finkok\Tests\TestCase;
+use stdClass;
 
 final class ReportUuidServiceTest extends TestCase
 {
     public function testServiceUsingPreparedResult(): void
     {
+        /** @var stdClass $preparedResult */
         $preparedResult = json_decode(TestCase::fileContentPath('utilities-report-uuid-response.json'));
 
         $soapFactory = new FakeSoapFactory();

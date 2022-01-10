@@ -6,11 +6,13 @@ namespace PhpCfdi\Finkok\Tests\Unit\Services\Cancel;
 
 use PhpCfdi\Finkok\Services\Cancel\GetReceiptResult;
 use PhpCfdi\Finkok\Tests\TestCase;
+use stdClass;
 
 final class GetReceiptResultTest extends TestCase
 {
     public function testResultUsingPredefinedResponse(): void
     {
+        /** @var stdClass $data */
         $data = json_decode($this->fileContentPath('cancel-get-receipt-response.json'));
         $result = new GetReceiptResult($data);
         $this->assertTrue($result->isSuccess());

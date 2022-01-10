@@ -8,11 +8,13 @@ use PhpCfdi\Finkok\Services\Manifest\GetContractsCommand;
 use PhpCfdi\Finkok\Services\Manifest\GetContractsService;
 use PhpCfdi\Finkok\Tests\Fakes\FakeSoapFactory;
 use PhpCfdi\Finkok\Tests\TestCase;
+use stdClass;
 
 final class GetContractsServiceTest extends TestCase
 {
     public function testServiceUsingPreparedResult(): void
     {
+        /** @var stdClass $preparedResult */
         $preparedResult = json_decode(TestCase::fileContentPath('manifest-getcontracts-response.json'));
 
         $soapFactory = new FakeSoapFactory();

@@ -8,11 +8,13 @@ use PhpCfdi\Finkok\Services\Retentions\StampCommand;
 use PhpCfdi\Finkok\Services\Retentions\StampService;
 use PhpCfdi\Finkok\Tests\Fakes\FakeSoapFactory;
 use PhpCfdi\Finkok\Tests\TestCase;
+use stdClass;
 
 final class StampServiceTest extends TestCase
 {
     public function testSignStampSendXmlAndProcessPreparedResult(): void
     {
+        /** @var stdClass $preparedResult */
         $preparedResult = json_decode(TestCase::fileContentPath('retentions-stamp-response.json'));
 
         $soapFactory = new FakeSoapFactory();

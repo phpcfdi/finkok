@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PhpCfdi\Finkok\Tests\Integration\Services\Stamping;
 
 use PhpCfdi\Finkok\Services\Stamping\QuickStampService;
+use PhpCfdi\Finkok\Services\Stamping\StampingCommand;
 use PhpCfdi\Finkok\Tests\Integration\IntegrationTestCase;
 
 final class QuickStampServiceTest extends IntegrationTestCase
@@ -37,6 +38,20 @@ final class QuickStampServiceTest extends IntegrationTestCase
         $this->assertNotNull(
             $secondResult->alerts()->findByErrorCode('307'),
             'Finkok must alert that it was previously stamped'
+        );
+    }
+
+    public function testQuickStampPreviouslyCreatedCfdiReturnsErrorCode707(): void
+    {
+        // call first to cachedStamped to use previous stamp or create a new one
+        $this->currentCfdi();
+
+        $service = $this->createService();
+        $currentCfdiStampCommand = new StampingCommand($this->currentCfdi()->xml());
+        $secondResult = $service->quickstamp($currentCfdiStampCommand);
+        $this->assertNotNull(
+            $secondResult->alerts()->findByErrorCode('707'),
+            'Finkok must alert that it contains and existing TFD'
         );
     }
 

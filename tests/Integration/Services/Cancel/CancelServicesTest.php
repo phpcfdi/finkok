@@ -9,6 +9,7 @@ use PhpCfdi\Finkok\Services\Cancel\CancelSignatureService;
 use PhpCfdi\Finkok\Services\Cancel\GetReceiptCommand;
 use PhpCfdi\Finkok\Services\Cancel\GetReceiptService;
 use PhpCfdi\Finkok\Tests\Integration\IntegrationTestCase;
+use PhpCfdi\XmlCancelacion\Models\CancelDocument;
 
 final class CancelServicesTest extends IntegrationTestCase
 {
@@ -38,7 +39,9 @@ final class CancelServicesTest extends IntegrationTestCase
         $repeatUntil = strtotime('now +5 minutes');
         do {
             // build command on every request
-            $command = $this->createCancelSignatureCommandFromUuid($cfdi->uuid());
+            $command = $this->createCancelSignatureCommandFromDocument(
+                CancelDocument::newWithErrorsUnrelated($cfdi->uuid())
+            );
             // perform cancel
             $result = $service->cancelSignature($command);
             $document = $result->documents()->first();
@@ -54,8 +57,10 @@ final class CancelServicesTest extends IntegrationTestCase
             // 300: SAT authentication cancellation service fail
             // 305: SAT thinks "Certificado Inválido", it might be because incorrect time verification
             // 205: SAT does not have the uuid available for cancellation
-            if (! in_array($result->statusCode(), ['708', '300', '305'], true)
-                && '205' !== $document->documentStatus()) {
+            if (
+                ! in_array($result->statusCode(), ['708', '300', '305'], true)
+                && '205' !== $document->documentStatus()
+            ) {
                 break;
             }
             // do not try again if in the loop for more than allowed

@@ -2,11 +2,24 @@
 
 Nos apegamos a [SEMVER](SEMVER.md), revisa la información para entender mejor el control de versiones.
 
-## Pendientes para siguiente versión mayor
+## Version 0.4.0 2022-01-09
 
-- Eliminar `CancelledDocument::cancellationSatatus()`.
+Se actualiza a [`phpcfdi/xml-cancelacion`](https://github.com/phpcfdi/xml-cancelacion) que incluye los
+formatos a utilizar para la cancelación 2022 según la nueva especificación del SAT.
+Esto provoca cambios importantes en todos los métodos relacionados con la cancelación.
 
-## Unreleased
+Se elimina `CancelledDocument::cancellationSatatus()`. Se debe usar `CancelledDocument::cancellationStatus()`.
+
+Se actualiza la licencia a 2022. ¡Feliz año!
+
+Se hacen varios cambios al entorno de desarrollo:
+
+- Se agregan nuevos casos para el error de estampado `707`.
+- Se cambian las dependencias de desarrollo a `phive`.
+- Ya no se usa `\getenv`, en su lugar se pone una función segura en `TestCase::getenv`.
+- Se corrigen las incidencias encontradas por PHPStan 1.3.3.
+
+Se incluyen los cambios previos no liberados en una versión:
 
 - 2021-09-26: Fix broken CI. PHPUnit 9.5.10 does not convert deprecations to exceptions by default.
 

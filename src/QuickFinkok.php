@@ -16,6 +16,8 @@ use PhpCfdi\Finkok\Services\Registration;
 use PhpCfdi\Finkok\Services\Retentions;
 use PhpCfdi\Finkok\Services\Stamping;
 use PhpCfdi\Finkok\Services\Utilities;
+use PhpCfdi\XmlCancelacion\Models\CancelDocument;
+use PhpCfdi\XmlCancelacion\Models\CancelDocuments;
 
 class QuickFinkok
 {
@@ -120,14 +122,14 @@ class QuickFinkok
      * Durante el proceso no se envía ningún CSD a Finkok y la solicitud firmada es creada usando los datos del CSD
      *
      * @param Credential $credential
-     * @param string $uuid
+     * @param CancelDocument $document
      * @return Cancel\CancelSignatureResult
      * @see https://wiki.finkok.com/doku.php?id=cancelsigned_method
      * @see https://wiki.finkok.com/doku.php?id=cancel_method
      */
-    public function cancel(Credential $credential, string $uuid): Cancel\CancelSignatureResult
+    public function cancel(Credential $credential, CancelDocument $document): Cancel\CancelSignatureResult
     {
-        $signer = new Helpers\CancelSigner([$uuid]);
+        $signer = new Helpers\CancelSigner(new CancelDocuments($document));
         $signedRequest = $signer->sign($credential);
         $command = new Cancel\CancelSignatureCommand($signedRequest);
         $service = new Cancel\CancelSignatureService($this->settings());
@@ -531,14 +533,14 @@ class QuickFinkok
      * Durante el proceso no se envía ningún CSD a Finkok y la solicitud firmada es creada usando los datos del CSD
      *
      * @param Credential $credential
-     * @param string $uuid
+     * @param CancelDocument $document
      * @return Retentions\CancelSignatureResult
      * @see https://wiki.finkok.com/doku.php?id=cancel_signature_method_retentions
      * @see https://wiki.finkok.com/doku.php?id=cancel_method_retentions
      */
-    public function retentionCancel(Credential $credential, string $uuid): Retentions\CancelSignatureResult
+    public function retentionCancel(Credential $credential, CancelDocument $document): Retentions\CancelSignatureResult
     {
-        $signer = new Helpers\CancelSigner([$uuid]);
+        $signer = new Helpers\CancelSigner(new CancelDocuments($document));
         $signedRequest = $signer->signRetention($credential);
         $command = new Retentions\CancelSignatureCommand($signedRequest);
         $service = new Retentions\CancelSignatureService($this->settings());

@@ -21,6 +21,7 @@ class ReportTotalResult extends AbstractResult
     public function __construct(stdClass $data)
     {
         parent::__construct($data, 'report_totalResult');
+        /** @var array{stdClass|null} $items */
         $items = $this->findInDescendent($data, 'report_totalResult', 'result', 'ReportTotal') ?? [];
         $result = $items[0] ?? (object) [];
         $this->rfc = $result->taxpayer_id ?? '';

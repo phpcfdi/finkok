@@ -6,11 +6,13 @@ namespace PhpCfdi\Finkok\Tests\Unit\Services\Stamping;
 
 use PhpCfdi\Finkok\Services\Stamping\QueryPendingResult;
 use PhpCfdi\Finkok\Tests\TestCase;
+use stdClass;
 
 final class QueryPendingResultTest extends TestCase
 {
     public function testUsingKnownStampResponse(): void
     {
+        /** @var stdClass $data */
         $data = json_decode($this->fileContentPath('querypending-response.json'));
         $response = new QueryPendingResult($data);
         $this->assertSame('S', $response->status());

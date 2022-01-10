@@ -8,11 +8,13 @@ use PhpCfdi\Finkok\Services\Stamping\QuickStampService;
 use PhpCfdi\Finkok\Services\Stamping\StampingCommand;
 use PhpCfdi\Finkok\Tests\Fakes\FakeSoapFactory;
 use PhpCfdi\Finkok\Tests\TestCase;
+use stdClass;
 
 final class QuickStampServiceTest extends TestCase
 {
     public function testQuickStampSendXmlAndProcessPreparedResult(): void
     {
+        /** @var stdClass $preparedResult */
         $preparedResult = json_decode(TestCase::fileContentPath('quickstamp-response-with-alerts.json'));
 
         $soapFactory = new FakeSoapFactory();

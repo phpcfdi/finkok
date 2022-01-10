@@ -17,11 +17,11 @@ final class AcceptRejectUuidListTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $source = json_decode(json_encode([
-            ['Rechaza' => ['uuid' => '12345678-AAAA-1234-1234-000000000001', 'status' => '1000']],
-            ['Rechaza' => ['uuid' => '12345678-AAAA-1234-1234-000000000002', 'status' => '1001']],
-            ['Acepta' => ['uuid' => '12345678-AAAA-1234-1234-000000000003', 'status' => '1000']],
-        ]) ?: '');
+        $source = [
+            (object) ['Rechaza' => (object) ['uuid' => '12345678-AAAA-1234-1234-000000000001', 'status' => '1000']],
+            (object) ['Rechaza' => (object) ['uuid' => '12345678-AAAA-1234-1234-000000000002', 'status' => '1001']],
+            (object) ['Acepta' => (object) ['uuid' => '12345678-AAAA-1234-1234-000000000003', 'status' => '1000']],
+        ];
         $this->list = new AcceptRejectUuidList($source);
     }
 
@@ -75,11 +75,11 @@ final class AcceptRejectUuidListTest extends TestCase
 
     public function testConstructUsingInvalidSource(): void
     {
-        $source = json_decode(json_encode([
-            ['Foo' => ['uuid' => '12345678-AAAA-1234-1234-000000000000', 'status' => '1001']],
-            ['Rechaza' => ['status' => '1000']],
-            ['Acepta' => ['uuid' => '12345678-AAAA-1234-1234-000000000002']],
-        ]) ?: '');
+        $source = [
+            (object) ['Foo' => (object) ['uuid' => '12345678-AAAA-1234-1234-000000000000', 'status' => '1001']],
+            (object) ['Rechaza' => (object) ['status' => '1000']],
+            (object) ['Acepta' => (object) ['uuid' => '12345678-AAAA-1234-1234-000000000002']],
+        ];
         $list = new AcceptRejectUuidList($source);
 
         $this->assertCount(3, $list);

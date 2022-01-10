@@ -6,11 +6,13 @@ namespace PhpCfdi\Finkok\Tests\Unit\Services\Cancel;
 
 use PhpCfdi\Finkok\Services\Cancel\GetRelatedSignatureResult;
 use PhpCfdi\Finkok\Tests\TestCase;
+use stdClass;
 
 final class GetRelatedSignatureResultTest extends TestCase
 {
     public function testResultUsingPredefinedResponse(): void
     {
+        /** @var stdClass $data */
         $data = json_decode($this->fileContentPath('cancel-get-related-signature-response.json'));
         $result = new GetRelatedSignatureResult($data);
         $parents = $result->parents();

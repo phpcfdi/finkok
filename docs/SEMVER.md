@@ -23,7 +23,7 @@ Esto significa que:
 - no debe actualizar a versiones `3.x.x`
 - no debe utilizar ninguna versión menor a `2.5.0`
 
-## Versiones 0.x.y no rompe compatibilidad
+## Versiones 0.x.y no rompen compatibilidad
 
 Las versiones que inician con cero, por ejemplo `0.y.z`, no se ajustan a las reglas de versionado.
 Se considera que estas versiones son previas a la madurez del proyecto y por lo tanto

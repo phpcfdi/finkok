@@ -6,7 +6,6 @@ namespace PhpCfdi\Finkok\Tests\Unit\Helpers;
 
 use PhpCfdi\Finkok\Definitions\RfcRole;
 use PhpCfdi\Finkok\Helpers\GetRelatedSigner;
-
 use PhpCfdi\Finkok\Tests\TestCase;
 
 final class GetRelatedSignerTest extends TestCase

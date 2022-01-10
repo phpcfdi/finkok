@@ -9,11 +9,13 @@ use PhpCfdi\Finkok\Services\Cancel\CancelSignatureCommand;
 use PhpCfdi\Finkok\Services\Cancel\CancelSignatureService;
 use PhpCfdi\Finkok\Tests\Fakes\FakeSoapFactory;
 use PhpCfdi\Finkok\Tests\TestCase;
+use stdClass;
 
 final class CancelSignatureServiceTest extends TestCase
 {
     public function testServiceUsingPreparedResult(): void
     {
+        /** @var stdClass $preparedResult */
         $preparedResult = json_decode(TestCase::fileContentPath('cancel-cancelsignature-response-2-items.json'));
 
         $soapFactory = new FakeSoapFactory();

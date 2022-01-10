@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PhpCfdi\Finkok\Tests\Integration\Services\Retentions;
 
 use PhpCfdi\Finkok\QuickFinkok;
+use PhpCfdi\XmlCancelacion\Models\CancelDocument;
 use RuntimeException;
 
 /**
@@ -24,7 +25,10 @@ final class CancelSignatureServiceTest extends RetentionsTestCase
     public function testCancelSignatureWithNonExistentUUID(): void
     {
         $uuid = '11111111-2222-3333-4444-000000000001';
-        $result = $this->quickFinkok->retentionCancel($this->createCsdCredential(), $uuid);
+        $result = $this->quickFinkok->retentionCancel(
+            $this->createCsdCredential(),
+            CancelDocument::newWithErrorsUnrelated($uuid)
+        );
         $this->assertSame('UUID Not Found', $result->statusCode());
     }
 
@@ -39,7 +43,10 @@ final class CancelSignatureServiceTest extends RetentionsTestCase
 
         $maxtime = strtotime('+5 minutes');
         while (true) {
-            $result = $this->quickFinkok->retentionCancel($this->createCsdCredential(), $uuid);
+            $result = $this->quickFinkok->retentionCancel(
+                $this->createCsdCredential(),
+                CancelDocument::newWithErrorsUnrelated($uuid)
+            );
             $document = $result->documents()->first();
 
             // do not try again if a SAT issue is **not** found

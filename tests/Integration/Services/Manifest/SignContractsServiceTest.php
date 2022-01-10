@@ -41,7 +41,7 @@ final class SignContractsServiceTest extends IntegrationTestCase
         $contractDocument = new DocumentSigner($rfc, $signDate, $contract);
 
         $cmdSignContracts = new SignContractsCommand(
-            strval(getenv('FINKOK_SNID') ?? ''),
+            $this->getenv('FINKOK_SNID'),
             $privacyDocument->sign($certificateFile, $privateKeyFile, $passPhrase),
             $contractDocument->sign($certificateFile, $privateKeyFile, $passPhrase)
         );

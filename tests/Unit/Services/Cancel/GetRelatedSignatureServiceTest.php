@@ -8,11 +8,13 @@ use PhpCfdi\Finkok\Services\Cancel\GetRelatedSignatureCommand;
 use PhpCfdi\Finkok\Services\Cancel\GetRelatedSignatureService;
 use PhpCfdi\Finkok\Tests\Fakes\FakeSoapFactory;
 use PhpCfdi\Finkok\Tests\TestCase;
+use stdClass;
 
 final class GetRelatedSignatureServiceTest extends TestCase
 {
     public function testServiceUsingPreparedResult(): void
     {
+        /** @var stdClass $preparedResult */
         $preparedResult = json_decode(TestCase::fileContentPath('cancel-get-related-signature-response.json'));
 
         $soapFactory = new FakeSoapFactory();

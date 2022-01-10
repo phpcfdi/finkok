@@ -9,11 +9,13 @@ use PhpCfdi\Finkok\Services\Registration\EditCommand;
 use PhpCfdi\Finkok\Services\Registration\EditService;
 use PhpCfdi\Finkok\Tests\Fakes\FakeSoapFactory;
 use PhpCfdi\Finkok\Tests\TestCase;
+use stdClass;
 
 final class EditServiceTest extends TestCase
 {
     public function testServiceUsingPreparedResult(): void
     {
+        /** @var stdClass $preparedResult */
         $preparedResult = json_decode(TestCase::fileContentPath('registration-edit-response.json'));
 
         $soapFactory = new FakeSoapFactory();

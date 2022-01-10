@@ -6,11 +6,13 @@ namespace PhpCfdi\Finkok\Tests\Unit\Services\Cancel;
 
 use PhpCfdi\Finkok\Services\Cancel\GetSatStatusResult;
 use PhpCfdi\Finkok\Tests\TestCase;
+use stdClass;
 
 final class GetSatStatusResultTest extends TestCase
 {
     public function testResultUsingPredefinedResponse(): void
     {
+        /** @var stdClass $data */
         $data = json_decode($this->fileContentPath('cancel-get-sat-status-response.json'));
         $result = new GetSatStatusResult($data);
         $this->assertSame('S - Comprobante obtenido satisfactoriamente.', $result->query());

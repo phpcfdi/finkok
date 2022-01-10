@@ -8,11 +8,13 @@ use PhpCfdi\Finkok\Services\Cancel\AcceptRejectSignatureCommand;
 use PhpCfdi\Finkok\Services\Cancel\AcceptRejectSignatureService;
 use PhpCfdi\Finkok\Tests\Fakes\FakeSoapFactory;
 use PhpCfdi\Finkok\Tests\TestCase;
+use stdClass;
 
 final class AcceptRejectSignatureServiceTest extends TestCase
 {
     public function testServiceUsingPreparedResult(): void
     {
+        /** @var stdClass $preparedResult */
         $preparedResult = json_decode(TestCase::fileContentPath('cancel-accept-reject-signature-response.json'));
         $soapFactory = new FakeSoapFactory();
         $soapFactory->preparedResult = $preparedResult;

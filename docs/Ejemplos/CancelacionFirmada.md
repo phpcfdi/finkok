@@ -4,7 +4,7 @@ Para este ejemplo de cancelación partiremos del CSD `certificado.cer`,
 `llave-privada.key.pem` y la contraseña `12345678a` y enviaremos la solicitud
 de cancelación del CFDI `11111111-2222-3333-4444-000000000001` del RFC `EKU9003173C9`.
 
-## Ejemplo usando QuickFinkok (versión 0.2.1)
+## Ejemplo usando `QuickFinkok`
 
 ```php
 <?php
@@ -14,12 +14,15 @@ use PhpCfdi\Credentials\Credential;
 use PhpCfdi\Finkok\FinkokEnvironment;
 use PhpCfdi\Finkok\FinkokSettings;
 use PhpCfdi\Finkok\QuickFinkok;
+use PhpCfdi\XmlCancelacion\Models\CancelDocument;
+use PhpCfdi\XmlCancelacion\Models\CancelDocuments;
 
 $uuid = '12345678-1234-1234-1234-000000000001';
+$related = '12345678-1234-1234-1234-000000000AAA';
 $credential = Credential::openFiles('certificado.cer', 'llave-privada.key.pem', '12345678a');
 $finkok = new QuickFinkok(new FinkokSettings('finkok-usuario', 'finkok-password', FinkokEnvironment::makeProduction()));
 
-$result = $finkok->cancel($credential, $uuid);
+$result = $finkok->cancel($credential, new CancelDocuments(CancelDocument::newWithErrorsRelated($uuid, $related)));
 $documentInfo = $result->documents()->first();
 
 echo 'Código de estado de la solicitud de cancelación: ', $result->statusCode();
@@ -28,7 +31,7 @@ echo 'Estado del CFDI: ', $documentInfo->documentStatus();
 echo 'Estado de cancelación: ', $documentInfo->cancellationStatus();
 ```
 
-## Ejemplo usando phpcfdi/xml-cancelacion (versión 0.2.0)
+## Ejemplo usando `Finkok` y `CancelSigner`
 
 ```shell
 composer require phpcfdi/finkok
@@ -46,16 +49,18 @@ use PhpCfdi\Finkok\FinkokEnvironment;
 use PhpCfdi\Finkok\FinkokSettings;
 use PhpCfdi\Finkok\Helpers\CancelSigner;
 use PhpCfdi\Finkok\Services\Cancel\CancelSignatureCommand;
+use PhpCfdi\XmlCancelacion\Models\CancelDocument;
+use PhpCfdi\XmlCancelacion\Models\CancelDocuments;
 
-$cancelHelper = new CancelSigner(['11111111-2222-3333-4444-000000000001']);
+$cancelHelper = new CancelSigner(
+    new CancelDocuments(CancelDocument::newWithErrorsUnrelated('11111111-2222-3333-4444-000000000001'))
+);
 $credential = Credential::openFiles('certificado.cer', 'llave-privada.key.pem', '12345678a');
-$cancelCommand = new CancelSignatureCommand($cancelHelper->sign($credential));
+$cancelXml = $cancelHelper->sign($credential);
 
 $finkok = new Finkok(new FinkokSettings('finkok-usuario', 'finkok-password', FinkokEnvironment::makeProduction()));
-
-$result = $finkok->cancelSignature($cancelCommand);
-$result->statusCode(); // código de estado de la solucitud de cancelación
-
+$result = $finkok->cancelSignature(new CancelSignatureCommand($cancelXml));
+echo $result->statusCode(); // código de estado de la solucitud de cancelación
 ```
 
 ## Ejemplo usando phpcfdi/xml-cancelacion
@@ -76,11 +81,13 @@ use PhpCfdi\Finkok\FinkokEnvironment;
 use PhpCfdi\Finkok\FinkokSettings;
 use PhpCfdi\Finkok\Services\Cancel\CancelSignatureCommand;
 use PhpCfdi\XmlCancelacion\XmlCancelacionHelper;
+use PhpCfdi\XmlCancelacion\Models\CancelDocument;
 
 $cancelXml = (new XmlCancelacionHelper())
     ->setNewCredentials('certificado.cer', 'llave-privada.key.pem', '12345678a')
-    ->signCancellation('11111111-2222-3333-4444-000000000001', new DateTimeImmutable());
+    ->signCancellation(CancelDocument::newWithErrorsUnrelated('11111111-2222-3333-4444-000000000001'), new DateTimeImmutable());
 
 $finkok = new Finkok(new FinkokSettings('finkok-usuario', 'finkok-password', FinkokEnvironment::makeProduction()));
 $result = $finkok->cancelSignature(new CancelSignatureCommand($cancelXml));
+echo $result->statusCode(); // código de estado de la solucitud de cancelación
 ```
