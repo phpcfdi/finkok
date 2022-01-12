@@ -72,7 +72,6 @@ echo $result->statusCode(); // código de estado de la solucitud de cancelación
 ## Ejemplo usando phpcfdi/xml-cancelacion
 
 Para crear el XML de cancelación está usando [`phpcfdi/xml-cancelacion`](https://github.com/phpcfdi/xml-cancelacion).
-Puedes instalar vía composer tanto esta librería como la que genera xml firmados para cancelación.
 
 ```shell
 composer require phpcfdi/finkok
