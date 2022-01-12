@@ -15,16 +15,22 @@ use PhpCfdi\Finkok\FinkokEnvironment;
 use PhpCfdi\Finkok\FinkokSettings;
 use PhpCfdi\Finkok\QuickFinkok;
 use PhpCfdi\XmlCancelacion\Models\CancelDocument;
-use PhpCfdi\XmlCancelacion\Models\CancelDocuments;
 
-$uuid = '12345678-1234-1234-1234-000000000001';
-$related = '12345678-1234-1234-1234-000000000AAA';
+// Crear el objeto QuickFinkok
 $credential = Credential::openFiles('certificado.cer', 'llave-privada.key.pem', '12345678a');
-$finkok = new QuickFinkok(new FinkokSettings('finkok-usuario', 'finkok-password', FinkokEnvironment::makeProduction()));
+$quickFinkok = new QuickFinkok(new FinkokSettings('finkok-usuario', 'finkok-password', FinkokEnvironment::makeProduction()));
 
-$result = $finkok->cancel($credential, new CancelDocuments(CancelDocument::newWithErrorsRelated($uuid, $related)));
+// Crear el documento a cancelar (cancelado con relación)
+$documentToCancel = CancelDocument::newWithErrorsRelated(
+    '12345678-1234-1234-1234-000000000001',  // el UUID a cancelar
+    '12345678-1234-1234-1234-000000000AAA'   // el UUID que lo sustituye
+);
+
+// Presentar la solicitud de cancelación
+$result = $quickFinkok->cancel($credential, $documentToCancel);
 $documentInfo = $result->documents()->first();
 
+// Trabajar con la respuesta
 echo 'Código de estado de la solicitud de cancelación: ', $result->statusCode();
 echo 'UUID: ', $documentInfo->uuid();
 echo 'Estado del CFDI: ', $documentInfo->documentStatus();
