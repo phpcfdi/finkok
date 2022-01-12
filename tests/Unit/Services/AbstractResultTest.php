@@ -50,7 +50,6 @@ final class AbstractResultTest extends TestCase
     {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Unable to find mean object at /other');
-        /** @noinspection PhpExpressionResultUnusedInspection */
         new TestingResult($this->data, 'other');
     }
 

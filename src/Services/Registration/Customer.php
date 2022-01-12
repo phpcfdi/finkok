@@ -20,7 +20,7 @@ class Customer
     public function __construct(stdClass $raw)
     {
         $this->data = $raw;
-        $rawStatus = strval($this->get('status'));
+        $rawStatus = $this->get('status');
         if (in_array($rawStatus, CustomerStatus::toArray())) {
             $this->status = new CustomerStatus($rawStatus);
         } else {

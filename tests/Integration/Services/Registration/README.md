@@ -1,3 +1,4 @@
+# Pruebas de registro de clientes
 
 No existe un servicio de integración para eliminar clientes registrados.
 
@@ -37,4 +38,4 @@ Se espera que el RFC ABCD010101AAA (que es inválido) no esté registrado.
 Se espera que el RFC XDEL000101XX1 esté registrado.
 
 La prueba consiste en obtener el registro actual, marcarlo como activo si no lo está,
-cambiarlo a suspendido, cambiarlo a activo.
+cambiarlo a estado suspendido, cambiarlo a estado activo.

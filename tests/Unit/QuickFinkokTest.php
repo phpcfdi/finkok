@@ -407,7 +407,7 @@ final class QuickFinkokTest extends TestCase
         /** @var QuickFinkok&MockObject $finkok */
         $finkok = $this->getMockBuilder(QuickFinkok::class)
             ->disableOriginalConstructor()
-            ->setMethodsExcept(['customerSignAndSendContracts'])
+            ->onlyMethods(['customerGetContracts', 'customerSendContracts'])
             ->getMock();
         $finkok->expects($this->once())
             ->method('customerGetContracts')->willReturn($getContractsResult)
@@ -436,7 +436,7 @@ final class QuickFinkokTest extends TestCase
         /** @var QuickFinkok&MockObject $finkok */
         $finkok = $this->getMockBuilder(QuickFinkok::class)
             ->disableOriginalConstructor()
-            ->setMethodsExcept(['customerSignAndSendContracts'])
+            ->onlyMethods(['customerGetContracts'])
             ->getMock();
         $finkok->expects($this->once())->method('customerGetContracts')->willReturn($getContractsResult);
         $result = $finkok->customerSignAndSendContracts($fiel, 'x-snid', 'x-address', 'x-email');

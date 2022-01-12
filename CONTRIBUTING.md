@@ -96,8 +96,8 @@ muestra en [`actions/setup-php-action`](https://github.com/marketplace/actions/s
 puedes ejecutar el siguiente comando:
 
 ```shell
-act -P ubuntu-latest=shivammathur/node:latest -j build
-act -P ubuntu-latest=shivammathur/node:latest -j functional-tests -s ENV_GPG_SECRET=**********
+act -P ubuntu-latest=shivammathur/node:latest -W .github/workflows/build.yml
+act -P ubuntu-latest=shivammathur/node:latest -W .github/workflows/functional-tests.yml -s ENV_GPG_SECRET=**********
 ```
 
 

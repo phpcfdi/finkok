@@ -49,10 +49,11 @@ final class CancelSignatureServiceTest extends RetentionsTestCase
             );
             $document = $result->documents()->first();
 
-            // do not try again if a SAT issue is **not** found
-            // 1205 - UUID no existe (¿el SAT aun no lo tiene?)
-            // 1308 - Certificado revocado o caduco (¿el SAT tiene problemas de tiempo?)
-            if (! in_array($document->documentStatus(), ['1205', '1308'])) {
+            // do not try again if a SAT issue is **different** from:
+            // 708: Finkok cannot connect to SAT
+            // 1205: UUID no existe (¿el SAT aún no lo tiene?)
+            // 1308: Certificado revocado o caduco (¿el SAT tiene problemas de tiempo?)
+            if (! in_array($document->documentStatus(), ['708', '1205', '1308'], true)) {
                 break;
             }
 

@@ -25,9 +25,9 @@ class GetSignedContractsResult extends AbstractResult
     {
         parent::__construct($data, 'get_documentsResult');
         $this->success = boolval($this->get('success'));
-        $this->contract = strval($this->get('contract'));
-        $this->privacy = strval($this->get('privacy'));
-        $this->error = strval($this->get('error'));
+        $this->contract = $this->get('contract');
+        $this->privacy = $this->get('privacy');
+        $this->error = $this->get('error');
         if ($isBase64) {
             $this->contract = base64_decode($this->contract) ?: '';
             $this->privacy = base64_decode($this->privacy) ?: '';
