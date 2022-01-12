@@ -2,6 +2,15 @@
 
 Nos apegamos a [SEMVER](SEMVER.md), revisa la información para entender mejor el control de versiones.
 
+## Version 0.4.1 2022-01-11
+
+Se hacen cambios menores y de mantenimiento:
+
+- Se remueven conversiones de tipos innecesarios.
+- Se corrige el ejemplo de cancelación usando `QuickFinkok`.
+- Se actualizan los tests para un mejor entendimiento y ya no se usan métodos deprecados.
+- Se corrige el nombre del grupo mantenedor de PhpCfdi.
+
 ## Version 0.4.0 2022-01-09
 
 Se actualiza a [`phpcfdi/xml-cancelacion`](https://github.com/phpcfdi/xml-cancelacion) que incluye los
