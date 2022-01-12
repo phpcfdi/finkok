@@ -21,6 +21,6 @@ class AddResult extends AbstractResult
 
     public function message(): string
     {
-        return strval($this->get('message'));
+        return $this->get('message');
     }
 }

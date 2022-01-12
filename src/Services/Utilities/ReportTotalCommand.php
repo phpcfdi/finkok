@@ -76,7 +76,7 @@ class ReportTotalCommand
         }
 
         if ($this->startPeriod < $this->endPeriod && $this->endPeriod >= $currentPeriod) {
-            throw new LogicException(sprintf('Cannot combine multiple past months with current/future months'));
+            throw new LogicException('Cannot combine multiple past months with current/future months');
         }
     }
 
