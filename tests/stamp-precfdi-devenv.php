@@ -73,7 +73,7 @@ exit(call_user_func(new class ($argv[1] ?? '') {
     public function showHelp(): void
     {
         $commandName = basename($this->command);
-        echo "{$commandName}: Try to stamp a precfdi file in development environment", PHP_EOL,
+        echo "$commandName: Try to stamp a precfdi file in development environment", PHP_EOL,
             "Syntax: $commandName precfdi-path", PHP_EOL,
             '  precfdi-path: Precfdi Location', PHP_EOL,
             'Environment (See .env file):', PHP_EOL,
