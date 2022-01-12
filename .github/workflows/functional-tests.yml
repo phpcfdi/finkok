@@ -20,7 +20,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: "8.0"
-          extensions: json, soap, dom, openssl
+          extensions: soap
           coverage: xdebug
           tools: composer:v2
         env:

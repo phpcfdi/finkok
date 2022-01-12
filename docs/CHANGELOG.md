@@ -10,6 +10,7 @@ Se hacen cambios menores y de mantenimiento:
 - Se corrige el ejemplo de cancelación usando `QuickFinkok`.
 - Se actualizan los tests para un mejor entendimiento y ya no se usan métodos deprecados.
 - Se corrige el nombre del grupo mantenedor de PhpCfdi.
+- Se cambia el flujo de integración continua de pasos en el trabajo a trabajos separados.
 
 ## Version 0.4.0 2022-01-09
 
