@@ -2,6 +2,18 @@
 
 Nos apegamos a [SEMVER](SEMVER.md), revisa la información para entender mejor el control de versiones.
 
+## Version 0.4.2 2022-05-30
+
+Se hacen cambios menores y de mantenimiento:
+
+- Se corrige `Finkok::checkCommand` pues podría llamar a la función `is_a` con un parámetro que no es un objeto.
+- Se actualizan las versiones de herramientas de desarrollo `phpstan` y `php-cs-fixer`.
+- Correcciones al proceso de integración continua `build`:
+  - Los trabajos se ejecutan en PHP 8.1.
+  - Se agrega PHP 8.1 a la matriz de pruebas.
+  - `phpcs` usa los directorios configurados en `phpcs.xml.dist`.
+  - Las acciones de github se actualizan a la versión 3.
+
 ## Version 0.4.1 2022-01-11
 
 Se hacen cambios menores y de mantenimiento:

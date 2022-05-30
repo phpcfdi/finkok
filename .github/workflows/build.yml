@@ -14,28 +14,28 @@ jobs:
     runs-on: "ubuntu-latest"
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Setup PHP
         uses: shivammathur/setup-php@v2 # see https://github.com/marketplace/actions/setup-php-action
         with:
-          php-version: '8.0'
+          php-version: '8.1'
           coverage: none
           tools: composer:v2, cs2pr, phpcs
         env:
           fail-fast: true
       - name: Code style (phpcs)
-        run: phpcs -q --report=checkstyle src/ tests/ | cs2pr
+        run: phpcs -q --report=checkstyle | cs2pr
 
   php-cs-fixer:
     name: Code style (php-cs-fixer)
     runs-on: "ubuntu-latest"
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Setup PHP
         uses: shivammathur/setup-php@v2 # see https://github.com/marketplace/actions/setup-php-action
         with:
-          php-version: '8.0'
+          php-version: '8.1'
           coverage: none
           tools: composer:v2, cs2pr, php-cs-fixer
         env:
@@ -48,11 +48,11 @@ jobs:
     runs-on: "ubuntu-latest"
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Setup PHP
         uses: shivammathur/setup-php@v2 # see https://github.com/marketplace/actions/setup-php-action
         with:
-          php-version: '8.0'
+          php-version: '8.1'
           coverage: none
           tools: composer:v2, cs2pr, phpstan
           extensions: soap
@@ -62,7 +62,7 @@ jobs:
         id: composer-cache
         run: echo "::set-output name=dir::$(composer config cache-files-dir)"
       - name: Cache dependencies
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
           key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.json') }}
@@ -77,10 +77,10 @@ jobs:
     runs-on: "ubuntu-latest"
     strategy:
       matrix:
-        php-versions: ['7.3', '7.4', '8.0']
+        php-versions: ['7.3', '7.4', '8.0', '8.1']
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Setup PHP
         uses: shivammathur/setup-php@v2 # see https://github.com/marketplace/actions/setup-php-action
         with:
@@ -94,7 +94,7 @@ jobs:
         id: composer-cache
         run: echo "::set-output name=dir::$(composer config cache-files-dir)"
       - name: Cache dependencies
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
           key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.json') }}
