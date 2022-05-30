@@ -41,7 +41,7 @@ use PhpCfdi\Finkok\Services\Utilities;
  */
 class Finkok
 {
-    /** @var array<string, string[]> */
+    /** @var array<string, array{0: class-string, 1: class-string, 2?: string}> */
     protected const SERVICES_MAP = [
         'stamp' => [Stamping\StampService::class, Stamping\StampingCommand::class],
         'quickstamp' => [Stamping\QuickStampService::class, Stamping\StampingCommand::class],
@@ -125,8 +125,7 @@ class Finkok
         if ('' === $expected) {
             return null;
         }
-        /** @var object|string $command */
-        if (! is_a($command, $expected)) {
+        if (! is_object($command) || ! is_a($command, $expected)) {
             $type = (is_object($command)) ? get_class($command) : gettype($command);
             throw new InvalidArgumentException(
                 sprintf('Call %s::%s expect %s but received %s', static::class, $method, $expected, $type)

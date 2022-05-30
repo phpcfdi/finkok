@@ -2,6 +2,13 @@
 
 Nos apegamos a [SEMVER](SEMVER.md), revisa la información para entender mejor el control de versiones.
 
+## Version 0.4.2 2022-05-30
+
+Se hacen cambios menores y de mantenimiento:
+
+- Se corrige `Finkok::checkCommand` pues podría llamar a la función `is_a` con un parámetro que no es un objeto.
+- 
+
 ## Version 0.4.1 2022-01-11
 
 Se hacen cambios menores y de mantenimiento:
