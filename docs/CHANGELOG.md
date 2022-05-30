@@ -7,7 +7,7 @@ Nos apegamos a [SEMVER](SEMVER.md), revisa la información para entender mejor e
 Se hacen cambios menores y de mantenimiento:
 
 - Se corrige `Finkok::checkCommand` pues podría llamar a la función `is_a` con un parámetro que no es un objeto.
-- 
+- Se actualizan las versiones de herramientas de desarrollo `phpstan` y `php-cs-fixer`.
 
 ## Version 0.4.1 2022-01-11
 
