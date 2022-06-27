@@ -2,7 +2,14 @@
 
 Nos apegamos a [SEMVER](SEMVER.md), revisa la información para entender mejor el control de versiones.
 
-## Version 0.4.2 2022-05-30
+## Versión 0.4.3 2022-06-27
+
+Se agrega CFDI 4.0 al extractor de información `GetSatStatusExtractor`.
+Con este cambio el servicio `https://wiki.finkok.com/doku.php?id=get_sat_status` ya soporta CFDI 4.0.
+
+Se actualiza [`phpcfdi/cfdi-expresiones`](https://github.com/phpcfdi/cfdi-expresiones/) a la versión 3.2.0.
+
+## Versión 0.4.2 2022-05-30
 
 Se hacen cambios menores y de mantenimiento:
 
@@ -14,7 +21,7 @@ Se hacen cambios menores y de mantenimiento:
   - `phpcs` usa los directorios configurados en `phpcs.xml.dist`.
   - Las acciones de github se actualizan a la versión 3.
 
-## Version 0.4.1 2022-01-11
+## Versión 0.4.1 2022-01-11
 
 Se hacen cambios menores y de mantenimiento:
 
@@ -24,7 +31,7 @@ Se hacen cambios menores y de mantenimiento:
 - Se corrige el nombre del grupo mantenedor de PhpCfdi.
 - Se cambia el flujo de integración continua de pasos en el trabajo a trabajos separados.
 
-## Version 0.4.0 2022-01-09
+## Versión 0.4.0 2022-01-09
 
 Se actualiza a [`phpcfdi/xml-cancelacion`](https://github.com/phpcfdi/xml-cancelacion) que incluye los
 formatos a utilizar para la cancelación 2022 según la nueva especificación del SAT.
@@ -45,7 +52,7 @@ Se incluyen los cambios previos no liberados en una versión:
 
 - 2021-09-26: Fix broken CI. PHPUnit 9.5.10 does not convert deprecations to exceptions by default.
 
-## Version 0.3.2 2021-05-21
+## Versión 0.3.2 2021-05-21
 
 Se renombra la propiedad `CancelledDocument::cancellationSatatus()` en favor de `CancelledDocument::cancellationStatus()`
 que no tiene el error de ortografía. Será removida en la versión 0.4.0.
@@ -58,7 +65,7 @@ Los siguientes son cambios en desarrollo y no tienen afectación en el código p
 - Se actualiza la configuración de PHPUnit.
 - Se cambia la generación de la cobertura de código a la acción de pruebas funciones y se sube a Scrutinizer.
 
-## Version 0.3.1 2021-03-21
+## Versión 0.3.1 2021-03-21
 
 En la versión 0.3.0 se mencionó que la fachada `Finkok::datetime()` podía seguir existiendo, pero es incorrecto.
 Es necesario que se le entregue el comando `DatetimeCommand`.
@@ -113,14 +120,14 @@ Cambios en el entorno de pruebas (2020-09-18). Solo se afecta la rama principal,
 - Se agrega `tests/stamp-precfdi-devenv.php` para estampar un precfdi usando la configuración del entorno de desarrollo.
 - Cambios menores en las pruebas.
 
-## Version 0.2.7 2020-02-10
+## Versión 0.2.7 2020-02-10
 
 - En las pruebas de integración del servicio `get_related_signature` el SAT tarda en vincular los CFDI recientemente
   creados, lo que ocasiona que la prueba falle invariablemente al detectar el error
   `2001 - No Existen cfdi relacionados al folio fiscal.`. 
   Se ha modificado la prueba para que, si encuentra dicho error no rompa el ciclo de testeo y lo vuelva a intentar.
 
-## Version 0.2.6 2020-01-24
+## Versión 0.2.6 2020-01-24
 
 - Documentar la solución del problema de acuse recibido al cancelar y al solicitar. Finkok ticket: `#41435`. 
 - Se agrega el método `StampingAlert::extraInfo()` para obtener la respuesta de la incidencia en `ExtraInfo`.
@@ -132,7 +139,7 @@ Cambios en el entorno de pruebas (2020-09-18). Solo se afecta la rama principal,
     - Timbrado de retención: La respuesta tiene campos idénticos al timbrado de CFDI.
     - Cancelación de retención: La respuesta tiene campos idénticos y adicionales al timbrado de CFDI.
     - Para poder cancelar un RET, fue necesario actualizar a `phpcfdi/xml-cancelacion: ^1.1.0`.
-- El objeto `GetSatStatusExtractor` podía procesar CFDI 3.2, CFDI 3.3 y RET 1.0, sin embargo el método `get_sat_status`
+- El objeto `GetSatStatusExtractor` podía procesar CFDI 3.2, CFDI 3.3 y RET 1.0, sin embargo, el método `get_sat_status`
   solo puede trabajar con CFDI 3.2, CFDI 3.3, se hacen las adecuaciones correspondientes.
 - Desarrollo:
     - Se crearon pruebas unitarias para `QueryPendingCommand` y `QueryPendingResult`.
@@ -144,7 +151,7 @@ Cambios en el entorno de pruebas (2020-09-18). Solo se afecta la rama principal,
 - Issues: A pesar de haber impementado la Cancelación de retención, el test de integración está fallando por un
   error en el servicio de pruebas del SAT.
 
-## Version 0.2.5 2020-01-14
+## Versión 0.2.5 2020-01-14
 
 - Se actualiza el año de licencia 2020.
 - Finkok implementó en el registro de clientes el método `switch`, para cambiar al cliente de `Prepago`
@@ -158,7 +165,7 @@ Cambios en el entorno de pruebas (2020-09-18). Solo se afecta la rama principal,
     - Se cambió la versión de `phpstan` de `^0.11` a `^0.12`. Con esto se agregaron muchas definiciones de tipos
       de datos en los bloques de phpdoc.
 
-## Version 0.2.4 2019-12-05
+## Versión 0.2.4 2019-12-05
 
 - Se modifica el test porque en diciembre no se podía crear el escenario para validar la excepción en
   la creación del comando `ReportTotalCommand`. De todas formas se lanzaba una excepción, pero no la esperada.
@@ -169,7 +176,7 @@ Cambios en el entorno de pruebas (2020-09-18). Solo se afecta la rama principal,
 - Travis-CI: Se cambió la versión de PHP `7.4snapshot` a `7.4`.
 - Scrutinizer-CI: Se agregaron los comandos para actualizar composer e instalar paquetes en lugar de ser inferidos.
 
-## Version 0.2.3 2019-11-05
+## Versión 0.2.3 2019-11-05
 
 - El método `QuickFinkok::customerSignAndSendContracts` no estaba funcionando correctamente porque asumía
   que el contenido de obtener los contratos estaba en texto plano, pero estaba codificado en `base64`.
@@ -182,16 +189,16 @@ Cambios en el entorno de pruebas (2020-09-18). Solo se afecta la rama principal,
 - Se actualiza `robrichards/xmlseclibs` a la versión 3.0.4 por el problema de seguridad CVE-2019-3465,
   que aunque no se usa para este propósito se evita depender de esta versión.
 
-## Version 0.2.2 2019-11-02
+## Versión 0.2.2 2019-11-02
 
 - Se agrega el soporte del servicio que obtiene la hora de los servidores de Finkok usando un código postal. 
-  Si no se especifica un código postal entonces se usa el predeterminado que corresponde a la zona horaria
+  Si no se especifica un código postal entonces se utiliza el predeterminado que corresponde a la zona horaria
   de `America/Mexico_City`. La hora devuelta no tiene especificación de zona horaria, es decir, no especifica
   cuánto tiempo hay de diferencia entre la hora devuelta y GMT.
 - Se utiliza PHPUnit versión `8.4`, desde `8.4.2` las clases de testeo que se extienden sean abstractas.
 - Se elimina la dependencia de `overtrue/phplint`.
 
-## Version 0.2.1 2019-10-25
+## Versión 0.2.1 2019-10-25
 
 - Se mejora la experiencia de uso de la librería con la clase `QuickFinkok`, contiene una serie de métodos
   que crean el *comando*, el *servicio*, ejecutan el *servicio* y retornan el *resultado*.
@@ -199,7 +206,7 @@ Cambios en el entorno de pruebas (2020-09-18). Solo se afecta la rama principal,
 - Se agrega un objeto de ayuda `GetSatStatusExtractor` que utiliza `phpcfdi/cfdi-expresiones` para poder obtener
   los datos necesarios para consultar el estado SAT de un CFDI 3.3, CFDI 3.2 o RET 1.0.
 
-## Version 0.2.0 2019-10-02
+## Versión 0.2.0 2019-10-02
 
 - Implementación del servicio `get_related_signature` que obtiene los UUID relacionados (descendientes y ascendentes)
   de un determinado UUID sin compartir la llave privada.
@@ -216,13 +223,13 @@ BC Changes:
 - Default parameter value for parameter `$waitSeconds` of `GetSatStatusService#queryUntilFoundOrTime()`
   changed from `60` to `120`. 
 
-## Version 0.1.1 2019-09-04
+## Versión 0.1.1 2019-09-04
 
 - Los nombres de los métodos en `Finkok` algunas veces son los mismos que en los servicios, pero en otras cambia,
   en lugar de cambiar este helper, se le puso la definición correcta de nombres para que invoque el nombre
   correcto en el servicio. Se crearon las pruebas correspondientes para validar que genera un error si el nombre
   no existe y que todos los métodos de invocación existen en sus respectivos servicios. 
 
-## Version 0.1.0 2019-09-04
+## Versión 0.1.0 2019-09-04
 
 - Primera versión.
