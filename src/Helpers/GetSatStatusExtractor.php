@@ -9,6 +9,7 @@ use PhpCfdi\CfdiExpresiones\DiscoverExtractor;
 use PhpCfdi\CfdiExpresiones\Exceptions\UnmatchedDocumentException;
 use PhpCfdi\CfdiExpresiones\Extractors\Comprobante32;
 use PhpCfdi\CfdiExpresiones\Extractors\Comprobante33;
+use PhpCfdi\CfdiExpresiones\Extractors\Comprobante40;
 use PhpCfdi\Finkok\Services\Cancel\GetSatStatusCommand;
 use RuntimeException;
 
@@ -38,11 +39,15 @@ class GetSatStatusExtractor
 
     public static function fromXmlDocument(DOMDocument $document): self
     {
-        $discoverer = new DiscoverExtractor(new Comprobante33(), new Comprobante32());
+        $discoverer = new DiscoverExtractor(
+            new Comprobante40(),
+            new Comprobante33(),
+            new Comprobante32(),
+        );
         try {
             $values = $discoverer->obtain($document);
         } catch (UnmatchedDocumentException $exception) {
-            $message = 'Unable to obtain the expression values, document must be valid a CFDI 3.3 or CFDI 3.2';
+            $message = 'Unable to obtain the expression values, document must be valid a CFDI version 4.0, 3.3 or 3.2';
             throw new RuntimeException($message, 0, $exception);
         }
         return new self($values);

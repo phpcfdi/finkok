@@ -2,6 +2,13 @@
 
 Nos apegamos a [SEMVER](SEMVER.md), revisa la información para entender mejor el control de versiones.
 
+## Versión 0.4.3 2022-06-27
+
+Se agrega CFDI 4.0 al extractor de información `GetSatStatusExtractor`.
+Con este cambio el servicio `https://wiki.finkok.com/doku.php?id=get_sat_status` ya soporta CFDI 4.0.
+
+Se actualiza [`phpcfdi/cfdi-expresiones`](https://github.com/phpcfdi/cfdi-expresiones/) a la versión 3.2.0.
+
 ## Versión 0.4.2 2022-05-30
 
 Se hacen cambios menores y de mantenimiento:
