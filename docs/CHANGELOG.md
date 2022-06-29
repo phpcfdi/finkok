@@ -2,6 +2,12 @@
 
 Nos apegamos a [SEMVER](SEMVER.md), revisa la información para entender mejor el control de versiones.
 
+## Versión 0.4.4 2022-06-29
+
+El servidor de producción de Quadrum (para firmar manifiestos) es más estricto que el servidor de pruebas
+y no acepta la URL `https://manifiesto.cfdiquadrum.com.mx//servicios/soap/firmar.wsdl`.
+En esta versión se elimina la doble diagonal.
+
 ## Versión 0.4.3 2022-06-27
 
 Se agrega CFDI 4.0 al extractor de información `GetSatStatusExtractor`.

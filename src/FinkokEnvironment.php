@@ -46,6 +46,6 @@ class FinkokEnvironment
             $environment = (new Definitions\EnvironmentManifest($environment->index()));
         }
 
-        return $environment->value() . $service->value();
+        return rtrim($environment->value(), '/') . '/' . ltrim($service->value(), '/');
     }
 }

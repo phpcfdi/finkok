@@ -31,8 +31,10 @@ final class FinkokEnvironmentTest extends TestCase
 
         $cancel = $environment->endpoint(Services::cancel());
         $this->assertStringStartsWith($environment->server(), $cancel);
+        $this->assertStringNotContainsString('//', substr($cancel, 8));
 
         $manifest = $environment->endpoint(Services::manifest());
         $this->assertStringStartsWith(EnvironmentManifest::development()->value(), $manifest);
+        $this->assertStringNotContainsString('//', substr($manifest, 8));
     }
 }
