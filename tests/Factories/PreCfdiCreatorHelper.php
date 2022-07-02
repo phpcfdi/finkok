@@ -6,6 +6,7 @@ namespace PhpCfdi\Finkok\Tests\Factories;
 
 use CfdiUtils\Certificado\Certificado;
 use CfdiUtils\CfdiCreator33;
+use CfdiUtils\CfdiCreator40;
 use CfdiUtils\Utils\Format as CfdiFormat;
 use CfdiUtils\Utils\Rfc;
 use DateTimeImmutable;
@@ -130,9 +131,63 @@ final class PreCfdiCreatorHelper
         return $this->passPhrase;
     }
 
-    public function create(): string
+    public function create33(): string
     {
         $creator = new CfdiCreator33();
+
+        $comprobante = $creator->comprobante();
+        $comprobante->addAttributes([
+            'Fecha' => $this->getInvoiceDate()->format('Y-m-d\TH:i:s'),
+            'FormaPago' => '01', // efectivo
+            'Moneda' => 'MXN',
+            'TipoDeComprobante' => 'I', // ingreso
+            'MetodoPago' => 'PUE',
+            'LugarExpedicion' => '86000',
+        ]);
+        if ('' !== $this->relation && count($this->relatedUuids) > 0) {
+            $relacionados = $comprobante->getCfdiRelacionados();
+            foreach ($this->relatedUuids as $relatedUuid) {
+                $relacionados->addCfdiRelacionado(['UUID' => $relatedUuid]);
+            }
+            $relacionados['TipoRelacion'] = $this->relation;
+        }
+        $comprobante->addEmisor([
+            'Rfc' => $this->getEmisorRfc(),
+            'Nombre' => 'ACCEM SERVICIOS EMPRESARIALES SC',
+            'RegimenFiscal' => '601',
+        ]);
+        $comprobante->addReceptor([
+            'Rfc' => $this->getReceptorRfc(),
+            'UsoCFDI' => 'G03', // gastos en general
+        ]);
+        $comprobante->addConcepto([
+            'ClaveProdServ' => '52161557', // Consola portátil de juegos de computador
+            'NoIdentificacion' => 'GAMEPAD007',
+            'Cantidad' => '4',
+            'ClaveUnidad' => 'H87', // Pieza
+            'Unidad' => 'PIEZA',
+            'Descripcion' => 'Portable tetris gamepad pro++ ⏻',
+            'ValorUnitario' => CfdiFormat::number($this->getConceptoAmount() / 4, 2),
+            'Importe' => CfdiFormat::number($this->getConceptoAmount(), 2),
+            'Descuento' => CfdiFormat::number($this->getConceptoAmount() / 4, 2), // hot sale: take 4, pay 3
+        ])->addTraslado([
+            'Base' => CfdiFormat::number(3 * $this->getConceptoAmount() / 4, 2),
+            'Impuesto' => '002', // IVA
+            'TipoFactor' => 'Tasa',
+            'TasaOCuota' => '0.160000',
+            'Importe' => CfdiFormat::number(3 * 0.16 * $this->getConceptoAmount() / 4, 2),
+        ]);
+
+        $creator->addSumasConceptos();
+        $creator->putCertificado(new Certificado($this->getCerFile()), false);
+        $creator->addSello('file://' . $this->getKeyPemFile(), $this->getPassPhrase());
+
+        return $creator->asXml();
+    }
+
+    public function create40(): string
+    {
+        $creator = new CfdiCreator40();
 
         $comprobante = $creator->comprobante();
         $comprobante->addAttributes([
