@@ -10,17 +10,9 @@ use PhpCfdi\Finkok\Tests\TestCase;
 
 final class StampingCommandTest extends TestCase
 {
-    public function testStampingCommandCanReceiveAPrecfdi33(): void
+    public function testStampingCommandCanReceiveAPrecfdi(): void
     {
-        $xml = (new RandomPreCfdi())->createValid33();
-
-        $stamping = new StampingCommand($xml);
-        $this->assertSame($xml, $stamping->xml());
-    }
-
-    public function testStampingCommandCanReceiveAPrecfdi40(): void
-    {
-        $xml = (new RandomPreCfdi())->createValid40();
+        $xml = (new RandomPreCfdi())->createValid();
 
         $stamping = new StampingCommand($xml);
         $this->assertSame($xml, $stamping->xml());

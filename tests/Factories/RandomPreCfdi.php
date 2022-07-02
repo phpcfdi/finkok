@@ -24,14 +24,9 @@ final class RandomPreCfdi
         );
     }
 
-    public function createValid33(): string
+    public function createValid(): string
     {
-        return $this->createHelper()->create33();
-    }
-
-    public function createValid40(): string
-    {
-        return $this->createHelper()->create40();
+        return $this->createHelper()->create();
     }
 
     public function createInvalidByDate(): string
