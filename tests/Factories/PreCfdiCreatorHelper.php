@@ -145,11 +145,10 @@ final class PreCfdiCreatorHelper
             'LugarExpedicion' => '86000',
         ]);
         if ('' !== $this->relation && count($this->relatedUuids) > 0) {
-            $relacionados = $comprobante->getCfdiRelacionados();
+            $relacionados = $comprobante->addCfdiRelacionados(['TipoRelacion' => $this->relation]);
             foreach ($this->relatedUuids as $relatedUuid) {
                 $relacionados->addCfdiRelacionado(['UUID' => $relatedUuid]);
             }
-            $relacionados['TipoRelacion'] = $this->relation;
         }
         $comprobante->addEmisor([
             'Rfc' => $this->getEmisorRfc(),
