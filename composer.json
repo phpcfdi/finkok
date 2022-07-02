@@ -39,7 +39,7 @@
     "require-dev": {
         "ext-fileinfo": "*",
         "symfony/dotenv": "^5.1",
-        "eclipxe/cfdiutils": "^2.15",
+        "eclipxe/cfdiutils": "^2.23.2",
         "phpunit/phpunit": "^9.5.10"
     },
     "autoload": {
