@@ -2,9 +2,12 @@
 
 Nos apegamos a [SEMVER](SEMVER.md), revisa la información para entender mejor el control de versiones.
 
-## Versión 0.4.5 2022-07-02
+## Unreleased 2022-07-04
 
-Se agregan pruebas unitarias para CFDI 4.0.
+Estos cambios están presentes únicamente en desarrollo, no es necesaria una nueva versión:
+
+- Se agregan pruebas unitarias para CFDI 4.0.
+- Se corrigen las instrucciones de construcción en el archivo `CONTRIBUTING.md`.
 
 ## Versión 0.4.4 2022-06-29
 
