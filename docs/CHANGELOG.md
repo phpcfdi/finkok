@@ -2,6 +2,10 @@
 
 Nos apegamos a [SEMVER](SEMVER.md), revisa la información para entender mejor el control de versiones.
 
+## Versión 0.4.5 2022-07-02
+
+Se agregan pruebas unitarias para CFDI 4.0.
+
 ## Versión 0.4.4 2022-06-29
 
 El servidor de producción de Quadrum (para firmar manifiestos) es más estricto que el servidor de pruebas
@@ -82,7 +86,7 @@ Cambios en integración contínua:
 - Se deja de usar Travis-CI en favor de GitHub Actions.
 - Se actualizan los archivos a su versión en español: Código de conducta, contribuciones.
 - Se documenta mejor el entorno de pruebas de integración.
-  
+
 Cambios en archivos de proyecto:
 
 - Se actualiza el año de licencia.
@@ -130,12 +134,12 @@ Cambios en el entorno de pruebas (2020-09-18). Solo se afecta la rama principal,
 
 - En las pruebas de integración del servicio `get_related_signature` el SAT tarda en vincular los CFDI recientemente
   creados, lo que ocasiona que la prueba falle invariablemente al detectar el error
-  `2001 - No Existen cfdi relacionados al folio fiscal.`. 
+  `2001 - No Existen cfdi relacionados al folio fiscal.`.
   Se ha modificado la prueba para que, si encuentra dicho error no rompa el ciclo de testeo y lo vuelva a intentar.
 
 ## Versión 0.2.6 2020-01-24
 
-- Documentar la solución del problema de acuse recibido al cancelar y al solicitar. Finkok ticket: `#41435`. 
+- Documentar la solución del problema de acuse recibido al cancelar y al solicitar. Finkok ticket: `#41435`.
 - Se agrega el método `StampingAlert::extraInfo()` para obtener la respuesta de la incidencia en `ExtraInfo`.
 - Se agrega el método `StampingResult::faultCode()` para obtener la respuesta en `faultcode`.
 - Se renombra el método `StampingResult::faultstring()` a `StampingResult::faultString()`.
@@ -153,7 +157,7 @@ Cambios en el entorno de pruebas (2020-09-18). Solo se afecta la rama principal,
     - Se mejoran las acciones `resetCustomerAccountToOnDemand` y `resetCustomerAccountToPrepaidWithZeroCredits`.
     - Se actualiza de `phpstan/phpstan-shim: ^0.11` a `phpstan/phpstan: ^0.12`.
     - Se actualiza a `phpunit/phpunit: ^8.5` porque el XSD de la versión previa no está disponible.
-    - Se crean nuevas tareas de desarrollo y mejora. 
+    - Se crean nuevas tareas de desarrollo y mejora.
 - Issues: A pesar de haber impementado la Cancelación de retención, el test de integración está fallando por un
   error en el servicio de pruebas del SAT.
 
@@ -197,7 +201,7 @@ Cambios en el entorno de pruebas (2020-09-18). Solo se afecta la rama principal,
 
 ## Versión 0.2.2 2019-11-02
 
-- Se agrega el soporte del servicio que obtiene la hora de los servidores de Finkok usando un código postal. 
+- Se agrega el soporte del servicio que obtiene la hora de los servidores de Finkok usando un código postal.
   Si no se especifica un código postal entonces se utiliza el predeterminado que corresponde a la zona horaria
   de `America/Mexico_City`. La hora devuelta no tiene especificación de zona horaria, es decir, no especifica
   cuánto tiempo hay de diferencia entre la hora devuelta y GMT.
@@ -227,14 +231,14 @@ Cambios en el entorno de pruebas (2020-09-18). Solo se afecta la rama principal,
 BC Changes:
 
 - Default parameter value for parameter `$waitSeconds` of `GetSatStatusService#queryUntilFoundOrTime()`
-  changed from `60` to `120`. 
+  changed from `60` to `120`.
 
 ## Versión 0.1.1 2019-09-04
 
 - Los nombres de los métodos en `Finkok` algunas veces son los mismos que en los servicios, pero en otras cambia,
   en lugar de cambiar este helper, se le puso la definición correcta de nombres para que invoque el nombre
   correcto en el servicio. Se crearon las pruebas correspondientes para validar que genera un error si el nombre
-  no existe y que todos los métodos de invocación existen en sus respectivos servicios. 
+  no existe y que todos los métodos de invocación existen en sus respectivos servicios.
 
 ## Versión 0.1.0 2019-09-04
 

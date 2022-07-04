@@ -5,9 +5,8 @@ declare(strict_types=1);
 namespace PhpCfdi\Finkok\Tests\Factories;
 
 use CfdiUtils\Certificado\Certificado;
-use CfdiUtils\CfdiCreator33;
+use CfdiUtils\CfdiCreator40;
 use CfdiUtils\Utils\Format as CfdiFormat;
-use CfdiUtils\Utils\Rfc;
 use DateTimeImmutable;
 use DateTimeZone;
 
@@ -24,9 +23,6 @@ final class PreCfdiCreatorHelper
 
     /** @var string */
     private $emisorName;
-
-    /** @var string */
-    private $receptorRfc;
 
     /** @var string */
     private $cerFile;
@@ -51,7 +47,6 @@ final class PreCfdiCreatorHelper
         $certificate = new Certificado($cerFile);
         $this->emisorRfc = $certificate->getRfc();
         $this->emisorName = $certificate->getName();
-        $this->receptorRfc = Rfc::RFC_GENERIC;
         $this->cerFile = $cerFile;
         $this->keyPemFile = $keyPemFile;
         $this->passPhrase = $passPhrase;
@@ -105,16 +100,6 @@ final class PreCfdiCreatorHelper
         $this->emisorName = $emisorName;
     }
 
-    public function getReceptorRfc(): string
-    {
-        return $this->receptorRfc;
-    }
-
-    public function setReceptorRfc(string $receptorRfc): void
-    {
-        $this->receptorRfc = $receptorRfc;
-    }
-
     public function getCerFile(): string
     {
         return $this->cerFile;
@@ -132,7 +117,7 @@ final class PreCfdiCreatorHelper
 
     public function create(): string
     {
-        $creator = new CfdiCreator33();
+        $creator = new CfdiCreator40();
 
         $comprobante = $creator->comprobante();
         $comprobante->addAttributes([
@@ -142,25 +127,29 @@ final class PreCfdiCreatorHelper
             'TipoDeComprobante' => 'I', // ingreso
             'MetodoPago' => 'PUE',
             'LugarExpedicion' => '86000',
+            'Exportacion' => '01', // No aplica
         ]);
         if ('' !== $this->relation && count($this->relatedUuids) > 0) {
-            $relacionados = $comprobante->getCfdiRelacionados();
+            $relacionados = $comprobante->addCfdiRelacionados(['TipoRelacion' => $this->relation]);
             foreach ($this->relatedUuids as $relatedUuid) {
                 $relacionados->addCfdiRelacionado(['UUID' => $relatedUuid]);
             }
-            $relacionados['TipoRelacion'] = $this->relation;
         }
         $comprobante->addEmisor([
             'Rfc' => $this->getEmisorRfc(),
-            'Nombre' => 'ACCEM SERVICIOS EMPRESARIALES SC',
+            'Nombre' => 'ESCUELA KEMPER URGATE',
             'RegimenFiscal' => '601',
         ]);
         $comprobante->addReceptor([
-            'Rfc' => $this->getReceptorRfc(),
-            'UsoCFDI' => 'G03', // gastos en general
+            'Rfc' => 'MCI7306249Y1',
+            'Nombre' => 'MUNICIPIO DE CUAUTITLAN IZCALLI',
+            'DomicilioFiscalReceptor' => '54700',
+            'RegimenFiscalReceptor' => '603',
+            'UsoCFDI' => 'G03',
         ]);
         $comprobante->addConcepto([
             'ClaveProdServ' => '52161557', // Consola portátil de juegos de computador
+            'ObjetoImp' => '02', // Sí es objeto de impuesto
             'NoIdentificacion' => 'GAMEPAD007',
             'Cantidad' => '4',
             'ClaveUnidad' => 'H87', // Pieza

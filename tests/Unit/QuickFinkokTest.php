@@ -139,7 +139,7 @@ final class QuickFinkokTest extends TestCase
         $this->assertEquals($rawData, $result->rawData());
     }
 
-    public function testSatStatusXml(): void
+    public function testSatStatusXml33(): void
     {
         $fakeCfdi = <<<EOT
             <cfdi:Comprobante xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -153,6 +153,34 @@ final class QuickFinkokTest extends TestCase
                 </cfdi:Complemento>
             </cfdi:Comprobante>
             EOT;
+        /** @var stdClass $rawData */
+        $rawData = json_decode($this->fileContentPath('cancel-get-sat-status-response.json'));
+        $finkok = $this->createdPreparedQuickFinkok($rawData);
+        $result = $finkok->satStatusXml($fakeCfdi);
+        $this->performTestOnLatestCall('get_sat_status', [
+            'taxpayer_id' => 'EKU9003173C9',
+            'rtaxpayer_id' => 'COSC8001137NA',
+            'uuid' => '12345678-1234-1234-1234-000000000001',
+            'total' => '123.45',
+        ]);
+        $this->assertEquals($rawData, $result->rawData());
+    }
+
+    public function testSatStatusXml40(): void
+    {
+        $fakeCfdi = <<<EOT
+            <cfdi:Comprobante xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                            xmlns:cfdi="http://www.sat.gob.mx/cfd/4"
+                            xmlns:tfd="http://www.sat.gob.mx/TimbreFiscalDigital"
+                            Version="4.0" Total="123.45" Sello="">
+                <cfdi:Emisor Rfc="EKU9003173C9"/>
+                <cfdi:Receptor Rfc="COSC8001137NA"/>
+                <cfdi:Complemento>
+                    <tfd:TimbreFiscalDigital UUID="12345678-1234-1234-1234-000000000001"/>
+                </cfdi:Complemento>
+                </cfdi:Comprobante>
+            EOT;
+
         /** @var stdClass $rawData */
         $rawData = json_decode($this->fileContentPath('cancel-get-sat-status-response.json'));
         $finkok = $this->createdPreparedQuickFinkok($rawData);

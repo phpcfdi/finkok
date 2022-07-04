@@ -41,11 +41,13 @@ final class QueryPendingServiceTest extends IntegrationTestCase
     {
         $quickStamp = $this->currentCfdi();
 
-        $command = new QueryPendingCommand($quickStamp->uuid());
+        $uuidToQueryPending = $quickStamp->uuid();
+
+        $command = new QueryPendingCommand($uuidToQueryPending);
         $service = $this->createService();
         $result = $service->queryPending($command);
 
         $this->assertTrue(in_array($result->status(), ['S', 'F'], true), 'Finkok result is not S or F');
-        $this->assertSame($result->uuid(), $command->uuid(), 'Finkok response does not include the requested uuid');
+        $this->assertSame($uuidToQueryPending, $result->uuid(), 'Finkok response does not include the requested uuid');
     }
 }
