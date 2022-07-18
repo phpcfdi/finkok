@@ -13,7 +13,7 @@ use Throwable;
 
 require_once __DIR__ . '/bootstrap.php';
 
-exit(call_user_func(new class ($argv[1] ?? '') {
+exit(call_user_func(new class ($argv[0] ?? '') {
     /** @var string */
     private $command;
 
@@ -50,8 +50,7 @@ exit(call_user_func(new class ($argv[1] ?? '') {
 
             $stamp = $quickFinkok->stamp($preCfdiContents);
 
-            echo 'WS-Response: ',
-                json_encode($stamp->rawData(), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE), PHP_EOL;
+            echo 'WS-Response: ', json_encode($stamp->rawData(), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE), PHP_EOL;
 
             if ('' === $stamp->uuid()) {
                 throw new Exception("Stamp on $preCfdiPath did not return an UUID");
@@ -73,14 +72,15 @@ exit(call_user_func(new class ($argv[1] ?? '') {
     public function showHelp(): void
     {
         $commandName = basename($this->command);
-        echo "$commandName: Try to stamp a precfdi file in development environment", PHP_EOL,
-            "Syntax: $commandName precfdi-path", PHP_EOL,
-            '  precfdi-path: Precfdi Location', PHP_EOL,
-            'Environment (See .env file):', PHP_EOL,
-            '  FINKOK_USERNAME: Finkok username', PHP_EOL,
-            '  FINKOK_PASSWORD: Finkok password', PHP_EOL,
-            '  FINKOK_LOG_CALLS: Print on stdout the request/response dump and raw data response', PHP_EOL,
-            'Author: Carlos C Soto <eclipxe13@gmail.com>', PHP_EOL,
-            PHP_EOL;
+        echo <<<EOF
+            $commandName: Try to stamp a precfdi file in development environment
+            Syntax: $commandName precfdi-path
+              precfdi-path: Precfdi Location
+            Environment (See .env file):
+              FINKOK_USERNAME: Finkok username
+              FINKOK_PASSWORD: Finkok password
+              FINKOK_LOG_CALLS: Print on stdout the request/response dump and raw data response
+            Author: Carlos C Soto <eclipxe13@gmail.com>
+            EOF, PHP_EOL, PHP_EOL;
     }
 }, $argv[1] ?? ''));

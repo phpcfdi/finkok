@@ -2,6 +2,13 @@
 
 Nos apegamos a [SEMVER](SEMVER.md), revisa la información para entender mejor el control de versiones.
 
+## Unreleased 2022-07-18
+
+Corregir proceso de contrucción:
+
+- Corregir `tests/stamp-precfdi-devenv.php` en su inicialización y estilo de código.
+- Actualizar librerías de desarrollo.
+
 ## Unreleased 2022-07-04
 
 Estos cambios están presentes únicamente en desarrollo, no es necesaria una nueva versión:
