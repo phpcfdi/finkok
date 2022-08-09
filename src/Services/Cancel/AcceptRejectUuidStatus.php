@@ -6,6 +6,9 @@ namespace PhpCfdi\Finkok\Services\Cancel;
 
 use Eclipxe\MicroCatalog\MicroCatalog;
 
+/**
+ * @extends MicroCatalog<string>
+ */
 final class AcceptRejectUuidStatus extends MicroCatalog
 {
     public static function getEntriesArray(): array

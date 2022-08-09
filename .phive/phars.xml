@@ -2,6 +2,6 @@
 <phive xmlns="https://phar.io/phive">
   <phar name="phpcs" version="^3.7.1" installed="3.7.1" location="./tools/phpcs" copy="false"/>
   <phar name="phpcbf" version="^3.7.1" installed="3.7.1" location="./tools/phpcbf" copy="false"/>
-  <phar name="php-cs-fixer" version="^3.9.4" installed="3.9.4" location="./tools/php-cs-fixer" copy="false"/>
-  <phar name="phpstan" version="^1.8.1" installed="1.8.1" location="./tools/phpstan" copy="false"/>
+  <phar name="php-cs-fixer" version="^3.9.5" installed="3.9.5" location="./tools/php-cs-fixer" copy="false"/>
+  <phar name="phpstan" version="^1.8.2" installed="1.8.2" location="./tools/phpstan" copy="false"/>
 </phive>

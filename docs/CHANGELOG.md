@@ -2,9 +2,16 @@
 
 Nos apegamos a [SEMVER](SEMVER.md), revisa la información para entender mejor el control de versiones.
 
+## Unreleased 2022-08-08
+
+Corregir el proceso de construcción:
+
+- Se define el tipo de dato `TEntry` para `MicroCatalog<TEntry>` en `AcceptRejectUuidStatus`.
+- Actualizar librerías de desarrollo.
+
 ## Unreleased 2022-07-18
 
-Corregir proceso de contrucción:
+Corregir el proceso de construcción:
 
 - Corregir `tests/stamp-precfdi-devenv.php` en su inicialización y estilo de código.
 - Actualizar librerías de desarrollo.
