@@ -45,7 +45,7 @@ Para desencriptar el archivo de configuración `tests/.env-testing.enc -> tests/
 comando. Esta operación es la que se ejecuta en `functional-test.yml` usando el secreto `secrets.ENV_GPG_SECRET`.
 
 ```shell
-gpg --quiet --batch --yes --decrypt --output decoded tests/.env-testing.enc
+gpg --quiet --batch --yes --decrypt --output - tests/.env-testing.enc
 ```
 
 ### Cobertura de código
