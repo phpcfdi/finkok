@@ -17,12 +17,16 @@ final class LoggerPrinter extends AbstractLogger implements LoggerInterface
         $this->outputFile = $outputFile;
     }
 
-    /** @inheritDoc */
+    /**
+     * @inheritDoc
+     * @param string|\Stringable $message
+     * @param mixed[] $context
+     */
     public function log($level, $message, array $context = []): void
     {
         file_put_contents(
             $this->outputFile,
-            PHP_EOL . print_r(json_decode($message), true),
+            PHP_EOL . print_r(json_decode(strval($message)), true),
             FILE_APPEND
         );
     }
