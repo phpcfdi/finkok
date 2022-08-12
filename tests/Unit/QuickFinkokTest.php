@@ -396,13 +396,14 @@ final class QuickFinkokTest extends TestCase
         $rawData = json_decode($this->fileContentPath('manifest-getcontracts-response.json'));
         $finkok = $this->createdPreparedQuickFinkok($rawData);
 
-        $result = $finkok->customerGetContracts('x-rfc', 'x-name', 'x-address', 'x-email');
+        $result = $finkok->customerGetContracts('x-rfc', 'x-name', 'x-address', 'x-email', 'x-snid');
 
-        $this->performTestOnLatestCall('get_contracts', [
+        $this->performTestOnLatestCall('get_contracts_snid', [
             'taxpayer_id' => 'x-rfc',
             'name' => 'x-name',
             'address' => 'x-address',
             'email' => 'x-email',
+            'snid' => 'x-snid',
         ]);
         $this->assertEquals($rawData, $result->rawData());
     }

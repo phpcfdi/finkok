@@ -18,12 +18,16 @@ class GetContractsCommand
     /** @var string */
     private $email;
 
-    public function __construct(string $rfc, string $name, string $address, string $email)
+    /** @var string */
+    private $snid;
+
+    public function __construct(string $rfc, string $name, string $address, string $email, string $snid)
     {
         $this->rfc = $rfc;
         $this->name = $name;
         $this->address = $address;
         $this->email = $email;
+        $this->snid = $snid;
     }
 
     public function rfc(): string
@@ -44,5 +48,10 @@ class GetContractsCommand
     public function email(): string
     {
         return $this->email;
+    }
+
+    public function snid(): string
+    {
+        return $this->snid;
     }
 }

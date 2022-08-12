@@ -64,7 +64,7 @@ Estos servicios son de CFDI de retenciones e información de pagos (RET).
 
 ## Manifiesto de Finkok
 
-- [X] `get_contracts`: Obtiene los textos para ser firmados
+- [X] `get_contracts_snid`: Obtiene los textos para ser firmados
 - [X] `sign_contract`: Envía los textos firmados con la FIEL
 
 ## Servicios que no se implementarán
