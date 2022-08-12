@@ -72,7 +72,10 @@ final class CancelServicesTest extends IntegrationTestCase
         } while (true);
 
         if ('205' === $document->documentStatus()) {
-            $this->fail('SAT return 205 EstatusUUID: The CFDI was not received by SAT yet.');
+            $this->markTestSkipped(<<<MESSAGE
+                Unable to test CancelSignatureService::cancelSignature():
+                SAT return 205 EstatusUUID: The CFDI was not received by SAT yet.
+                MESSAGE);
         }
 
         // check result related document
