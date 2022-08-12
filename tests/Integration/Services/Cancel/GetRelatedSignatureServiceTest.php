@@ -61,7 +61,7 @@ final class GetRelatedSignatureServiceTest extends IntegrationTestCase
 
         $command = $this->createGetRelatedSignatureCommand($second->uuid());
         $service = $this->createService();
-        $maxtime = strtotime('+5 minutes');
+        $maxtime = $this->timePlusLongTestTimeOut();
         while (true) {
             $result = $service->getRelatedSignature($command);
             if (1 === $result->parents()->count() && 1 === $result->children()->count()) {

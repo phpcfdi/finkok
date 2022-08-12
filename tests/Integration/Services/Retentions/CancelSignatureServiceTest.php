@@ -41,7 +41,7 @@ final class CancelSignatureServiceTest extends RetentionsTestCase
             throw new RuntimeException('Cannot create a CFDI RET to cancel');
         }
 
-        $maxtime = strtotime('+5 minutes');
+        $maxtime = $this->timePlusLongTestTimeOut();
         while (true) {
             $result = $this->quickFinkok->retentionCancel(
                 $this->createCsdCredential(),
@@ -61,7 +61,7 @@ final class CancelSignatureServiceTest extends RetentionsTestCase
             if (time() > $maxtime) {
                 $this->markTestSkipped(<<<MESSAGE
                     Unable to test QuickFinkok::retentionCancel():
-                    StatusCode: {$result->statusCode()}, DocumentStatus {$document->documentStatus()}
+                    StatusCode: [{$result->statusCode()}], DocumentStatus [{$document->documentStatus()}]
                     MESSAGE);
             }
             sleep(5);
