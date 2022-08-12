@@ -11,10 +11,11 @@ final class GetContractsCommandTest extends TestCase
 {
     public function testCreateCommand(): void
     {
-        $command = new GetContractsCommand('x-rfc', 'x-name', 'x-address', 'x-email');
+        $command = new GetContractsCommand('x-rfc', 'x-name', 'x-address', 'x-email', 'x-snid');
         $this->assertSame('x-rfc', $command->rfc());
         $this->assertSame('x-name', $command->name());
         $this->assertSame('x-address', $command->address());
         $this->assertSame('x-email', $command->email());
+        $this->assertSame('x-snid', $command->snid());
     }
 }

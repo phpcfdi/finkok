@@ -56,7 +56,7 @@ class QuickFinkok
     /**
      * Este método se encarga de realizar el timbrado de XML, una vez que se timbra el XML se guarda en una cola de
      * espera para ser enviado en el mejor momento a los servicios del SAT, por lo que el servicio de timbrado es
-     * mucho mas rápido, y es de uso recomendado en timbrado de alto numero de timbres por segundo.
+     * mucho más rápido, y es de uso recomendado en timbrado de alto número de timbres por segundo.
      *
      * Nota: El CFDI generado puede no estar disponible en los servidores del SAT hasta varios minutos después
      *
@@ -103,7 +103,7 @@ class QuickFinkok
     }
 
     /**
-     * Este método se usa para consultar el estatus de una factura que se quedo pendiente de enviar al SAT debido a una
+     * Este método se usa para consultar el estatus de una factura que se quedó pendiente de enviar al SAT debido a una
      * falla en el sistema del SAT o bien que se envió a través del método Quick_Stamp
      *
      * @param string $uuid
@@ -118,7 +118,7 @@ class QuickFinkok
     }
 
     /**
-     * Este método es el encargado de cancelar uno o varios CFDIs emitidos por medio de los web services de Finkok
+     * Este método es el encargado de cancelar uno o varios CFDI emitidos por medio de los web services de Finkok
      * Durante el proceso no se envía ningún CSD a Finkok y la solicitud firmada es creada usando los datos del CSD
      *
      * @param Credential $credential
@@ -175,11 +175,11 @@ class QuickFinkok
     }
 
     /**
-     * Obtiene una lista de los UUIDs relacionados de un UUID
+     * Obtiene una lista de los UUID relacionados de un UUID
      *
      * @param Credential $credential
      * @param string $uuid
-     * @param RfcRole|null $role si es NULL entonces se usa el rol de emisor
+     * @param RfcRole|null $role Si es NULL entonces se usa el rol de emisor
      * @return Cancel\GetRelatedSignatureResult
      * @see https://wiki.finkok.com/doku.php?id=get_related_signature
      * @see https://wiki.finkok.com/doku.php?id=get_related
@@ -403,16 +403,18 @@ class QuickFinkok
      * @param string $name
      * @param string $address
      * @param string $email
+     * @param string $snid
      * @return Manifest\GetContractsResult
-     * @see https://wiki.finkok.com/doku.php?id=get_contracts
+     * @see https://wiki.finkok.com/doku.php?id=get_contracts_snid
      */
     public function customerGetContracts(
         string $rfc,
         string $name,
         string $address,
-        string $email
+        string $email,
+        string $snid
     ): Manifest\GetContractsResult {
-        $command = new Manifest\GetContractsCommand($rfc, $name, $address, $email);
+        $command = new Manifest\GetContractsCommand($rfc, $name, $address, $email, $snid);
         $service = new Manifest\GetContractsService($this->settings());
         return $service->obtainContracts($command);
     }
@@ -456,7 +458,7 @@ class QuickFinkok
         $rfc = $fiel->rfc();
         $name = $fiel->legalName();
         $signedOn = $signedOn ?? new DateTimeImmutable();
-        $documents = $this->customerGetContracts($rfc, $name, $address, $email);
+        $documents = $this->customerGetContracts($rfc, $name, $address, $email, $snid);
         if (! $documents->success()) {
             return Manifest\SignContractsResult::createFromData(
                 false,
@@ -529,7 +531,7 @@ class QuickFinkok
     }
 
     /**
-     * Este método es el encargado de cancelar un CFDIs de retenciones emitido por medio de los web services de Finkok
+     * Este método es el encargado de cancelar un CFDI de retenciones emitido por medio de los web services de Finkok
      * Durante el proceso no se envía ningún CSD a Finkok y la solicitud firmada es creada usando los datos del CSD
      *
      * @param Credential $credential

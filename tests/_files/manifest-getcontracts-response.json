@@ -1,5 +1,5 @@
 {
-  "get_contractsResult": {
+  "get_contracts_snidResult": {
     "success": true,
     "contract": "cHJlZGVmaW5lZC1jb250cmFjdA==",
     "privacy": "cHJlZGVmaW5lZC1wcml2YWN5",

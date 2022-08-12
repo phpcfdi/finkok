@@ -27,7 +27,8 @@ final class SignContractsServiceTest extends IntegrationTestCase
             $rfc,
             'Empresa Conocida SA de CV',
             'Cuauhtémoc #123, Colonia Centro, Villahermosa, Tabasco. CP 86000',
-            'legal@empresa-conocida.mx'
+            'legal@empresa-conocida.mx',
+            $this->getenv('FINKOK_SNID')
         );
 
         $srvGetContracts = new GetContractsService($settings);

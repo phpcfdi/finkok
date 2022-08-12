@@ -22,7 +22,8 @@ final class GetContractsServiceTest extends IntegrationTestCase
             'EKU9003173C9',
             'Empresa Conocida SA de CV',
             'Cuauhtémoc #123, Colonia Centro, Villahermosa, Tabasco. CP 86000',
-            'legal@empresa-conocida.mx'
+            'legal@empresa-conocida.mx',
+            $this->getenv('FINKOK_SNID')
         );
 
         $service = $this->createService();
@@ -43,5 +44,6 @@ final class GetContractsServiceTest extends IntegrationTestCase
         // on the new manifest with Quadrum it does not include email or address
         // $this->assertStringContainsString($command->email(), $contract);
         // $this->assertStringContainsString($command->address(), $contract);
+        // $this->assertStringContainsString($command->snid(), $contract);
     }
 }
