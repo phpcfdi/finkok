@@ -28,7 +28,7 @@
         "ext-soap": "*",
         "ext-dom": "*",
         "ext-openssl": "*",
-        "psr/log": "^1.1",
+        "psr/log": "^1.1|^2.0|^3.0",
         "eclipxe/enum": "^0.2.0",
         "phpcfdi/credentials": "^1.0.1",
         "phpcfdi/xml-cancelacion": "^2.0.1",
