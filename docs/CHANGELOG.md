@@ -4,9 +4,9 @@ Nos apegamos a [SEMVER](SEMVER.md), revisa la información para entender mejor e
 
 ## Versión 0.5.0 2022-08-12
 
-### Implementación del método `get_contracts_sndi`
+### Implementación del método `get_contracts_snid`
 
-Se utiliza el nuevo método `get_contracts_sndi` en lugar del obsoleto `get_contracts`.
+Se utiliza el nuevo método `get_contracts_snid` en lugar del obsoleto `get_contracts`.
 Esto lleva a que la clase `PhpCfdi\Finkok\Services\Manifest\GetContractsCommand` ahora requiere de `$snid`.
 Igualmente, `PhpCfdi\Finkok\QuickFinkok#customerGetContracts()` requiere de `$snid`.
 
