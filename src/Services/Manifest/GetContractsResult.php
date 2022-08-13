@@ -11,13 +11,13 @@ class GetContractsResult extends AbstractResult
 {
     public function __construct(stdClass $data)
     {
-        parent::__construct($data, 'get_contractsResult');
+        parent::__construct($data, 'get_contracts_snidResult');
     }
 
     public static function createFromData(bool $success, string $contract, string $privacy, string $error): self
     {
         return new self((object) [
-            'get_contractsResult' => (object) [
+            'get_contracts_snidResult' => (object) [
                 'success' => $success,
                 'contract' => base64_encode($contract),
                 'privacy' => base64_encode($privacy),

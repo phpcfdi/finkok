@@ -23,12 +23,12 @@ final class GetContractsServiceTest extends TestCase
         $settings = $this->createSettingsFromEnvironment($soapFactory);
         $service = new GetContractsService($settings);
 
-        $command = new GetContractsCommand('x-rfc', 'x-name', 'x-address', 'x-email');
+        $command = new GetContractsCommand('x-rfc', 'x-name', 'x-address', 'x-email', 'x-snid');
         $result = $service->obtainContracts($command);
         $this->assertSame('predefined-contract', $result->contract());
 
         $caller = $soapFactory->latestSoapCaller;
-        $this->assertSame('get_contracts', $caller->latestCallMethodName);
+        $this->assertSame('get_contracts_snid', $caller->latestCallMethodName);
         $this->assertArrayHasKey('taxpayer_id', $caller->latestCallParameters);
         $this->assertSame($command->rfc(), $caller->latestCallParameters['taxpayer_id']);
         $this->assertArrayHasKey('name', $caller->latestCallParameters);
@@ -37,5 +37,7 @@ final class GetContractsServiceTest extends TestCase
         $this->assertSame($command->address(), $caller->latestCallParameters['address']);
         $this->assertArrayHasKey('email', $caller->latestCallParameters);
         $this->assertSame($command->email(), $caller->latestCallParameters['email']);
+        $this->assertArrayHasKey('snid', $caller->latestCallParameters);
+        $this->assertSame($command->snid(), $caller->latestCallParameters['snid']);
     }
 }

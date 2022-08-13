@@ -104,4 +104,11 @@ abstract class IntegrationTestCase extends TestCase
         }
         return $result;
     }
+
+    /** @phpstan-impure */
+    public function timePlusLongTestTimeOut(): int
+    {
+        $seconds = max(30, min(600, intval($this->getenv('FINKOK_LONGTEST_TIMEOUT') ?: 30)));
+        return time() + $seconds;
+    }
 }

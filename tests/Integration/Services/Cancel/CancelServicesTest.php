@@ -36,7 +36,7 @@ final class CancelServicesTest extends IntegrationTestCase
         // evaluate if known response was 205 or 708
         // this is common to happen on testing but not in production since the time
         // elapsed from stamping and cancelling is often more than 2 minutes
-        $repeatUntil = strtotime('now +5 minutes');
+        $repeatUntil = $this->timePlusLongTestTimeOut();
         do {
             // build command on every request
             $command = $this->createCancelSignatureCommandFromDocument(
@@ -72,7 +72,10 @@ final class CancelServicesTest extends IntegrationTestCase
         } while (true);
 
         if ('205' === $document->documentStatus()) {
-            $this->fail('SAT return 205 EstatusUUID: The CFDI was not received by SAT yet.');
+            $this->markTestSkipped(<<<MESSAGE
+                Unable to test CancelSignatureService::cancelSignature():
+                SAT return 205 EstatusUUID: The CFDI was not received by SAT yet.
+                MESSAGE);
         }
 
         // check result related document

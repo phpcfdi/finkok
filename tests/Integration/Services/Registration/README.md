@@ -11,7 +11,8 @@ creará un nuevo registro que no hay forma de limpiar.
 Por este motivo, el test de creación es siempre omitido. Lo puede reactivar estableciendo la
 variable de entorno FINKOK_REGISTRATION_ADD_CREATE_RANDOM_RFC a "1".
 
-El test implementado busca uno a uno un RFC con la forma XDEL000101XX1.
+El test implementado busca un RFC el prefijo `XDEL`.
+Además, se usa el RFC `XDEL000101XX1` para diferentes pruebas y se espera que exista.
 Este RFC está definido en `RegistrationIntegrationTestCase::CUSTOMER_RFC`.
 
 Después puedes solicitar a Finkok que se eliminen estos RFC vía correo electrónico, porque sí.

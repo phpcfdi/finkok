@@ -2,21 +2,65 @@
 
 Nos apegamos a [SEMVER](SEMVER.md), revisa la información para entender mejor el control de versiones.
 
-## Unreleased 2022-08-08
+## Versión 0.5.0 2022-08-12
+
+### Implementación del método `get_contracts_sndi`
+
+Se utiliza el nuevo método `get_contracts_sndi` en lugar del obsoleto `get_contracts`.
+Esto lleva a que la clase `PhpCfdi\Finkok\Services\Manifest\GetContractsCommand` ahora requiere de `$snid`.
+Igualmente, `PhpCfdi\Finkok\QuickFinkok#customerGetContracts()` requiere de `$snid`.
+
+### Mejorar la dependencia de `PSR-3`
+
+Ahora se permite compatibilidad del paquete `psr/log` con las versiones `^1.1`, `^2.0` o `^3.0`.
+
+### Mejorar la dependencia de `symfony/dotenv`
+
+Se permite la compatibilidad de desarrollo de la librería `symfony/dotenv` con `^5.0` o `^6.0`.
+
+### Saltar las pruebas de integración de cancelación que fallen
+
+A menudo el servicio de pruebas del SAT relacionado con cancelaciones presenta fallas.
+Por esto, las pruebas de integración relacionadas con tocar este servicio,
+en lugar de marcarlas como fallidas se marcarán como brincadas.
+
+- `PhpCfdi\Finkok\Tests\Integration\Services\Cancel\CancelServicesTest::testCreateCfdiThenGetSatStatusThenCancelSignatureThenGetReceipt()`.
+- `PhpCfdi\Finkok\Tests\Integration\Services\Cancel\GetRelatedSignatureServiceTest::testConsumeServiceWithRelated()`.
+- `PhpCfdi\Finkok\Tests\Integration\Services\Retentions\CancelSignatureServiceTest::testCancelSignatureRecentlyCreatedDocument()`.
+
+### Pruebas largas tienen duración definida
+
+Las pruebas largas que reintentan varias veces una tarea ahora tienen un límite de tiempo definido en la variable
+de entorno `FINKOK_LONGTEST_TIMEOUT`. Debe ser un valor entero en segundos, el valor si no existe es 30, mínimo 30 y máximo 600.
+
+### Búsqueda de RFC libre en pruebas
+
+Se implementa una búsqueda binaria en un espacio consecutivo de RFC para hacer únicamente 16 búsquedas.
+Anteriormente, se usaba un espacio que podía conducir a muchas más búsquedas y la prueba
+`PhpCfdi\Finkok\Tests\Integration\Services\Registration\AddServiceTest::testConsumeAddServiceWithRandomRfc`
+no era ejecutada a menos que se permitieran pruebas de larga duración.
+
+### Normalización de `composer.json`
+
+Se incluye la herramienta `composer-normalize` para revisar y normalizar el archivo `composer.json`.
+
+### Se integran los cambios previos no liberados
+
+#### 2022-08-08
 
 Corregir el proceso de construcción:
 
 - Se define el tipo de dato `TEntry` para `MicroCatalog<TEntry>` en `AcceptRejectUuidStatus`.
 - Actualizar librerías de desarrollo.
 
-## Unreleased 2022-07-18
+#### 2022-07-18
 
 Corregir el proceso de construcción:
 
 - Corregir `tests/stamp-precfdi-devenv.php` en su inicialización y estilo de código.
 - Actualizar librerías de desarrollo.
 
-## Unreleased 2022-07-04
+#### 2022-07-04
 
 Estos cambios están presentes únicamente en desarrollo, no es necesaria una nueva versión:
 
