@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace PhpCfdi\Finkok\Tests\Integration\Services\Registration;
 
-use DateTime;
 use PhpCfdi\Finkok\Services\Registration\AddCommand;
 use PhpCfdi\Finkok\Services\Registration\AddService;
 use PhpCfdi\Finkok\Services\Registration\CustomerType;
+use PhpCfdi\Rfc\Rfc;
 
 final class AddServiceTest extends RegistrationIntegrationTestCase
 {
@@ -16,17 +16,23 @@ final class AddServiceTest extends RegistrationIntegrationTestCase
         return new AddService($this->createSettingsFromEnvironment());
     }
 
-    protected function searchForFreeRfc(): string
+    protected function searchForFreeRfc(): ?Rfc
     {
-        $date = new DateTime('1900-01-01');
-        do {
-            $rfc = sprintf('XDEL%sXX1', $date->format('ymd'));
-            if (null === $this->findCustomer($rfc)) {
-                break;
+        // binary search: it will always make 16 queries, only 65536 records are allowed
+        $lowerSerial = Rfc::parse('XDEL990101000')->calculateSerial();
+        $upperSerial = $lowerSerial - 1 + (2 ** 16);
+        $selected = null;
+        while ($lowerSerial <= $upperSerial) {
+            $currentSerial = intval(round(floor(($lowerSerial + $upperSerial) / 2), 0));
+            $rfc = Rfc::fromSerial($currentSerial);
+            if (null === $this->findCustomer($rfc->getRfc())) { // not found, then the RFC is free
+                $selected = $rfc;
+                $upperSerial = $currentSerial - 1;
+            } else {
+                $lowerSerial = $currentSerial + 1;
             }
-            $date->modify('+1 day');
-        } while (true);
-        return $rfc;
+        }
+        return $selected;
     }
 
     public function testConsumeAddServiceUsingExistentRfc(): void
@@ -40,19 +46,25 @@ final class AddServiceTest extends RegistrationIntegrationTestCase
         $this->assertSame('Account Already exists', $result->message());
     }
 
-    /** @group large */
+    /**
+     * @see searchForFreeRfc
+     */
     public function testConsumeAddServiceWithRandomRfc(): void
     {
         // Finkok does not have a method (automated or manual) to remove customers.
-        // This is why this test is always skipped.
+        // This is why it takes so long to run.
         // To remove any RFC email soporte@finkok.com asking for it.
 
-        // If you really need to test comment the following lines .
         if (! $this->getenv('FINKOK_REGISTRATION_ADD_CREATE_RANDOM_RFC')) {
             $this->markTestSkipped('This test is skipped as will create a lot of garbage customers');
         }
 
-        $rfc = $this->searchForFreeRfc();
+        $freeRfc = $this->searchForFreeRfc();
+        if (null === $freeRfc) {
+            $this->fail('Looks like all RFC for testing are used, ask Finkok to remove them');
+        }
+        $rfc = $freeRfc->getRfc();
+
         $customer = new AddCommand($rfc, CustomerType::prepaid());
         $service = $this->createService();
         $result = $service->add($customer);
