@@ -41,7 +41,6 @@ use PhpCfdi\Finkok\Services\Utilities;
  */
 class Finkok
 {
-    /** @var array<string, array{0: class-string, 1: class-string, 2?: string}> */
     protected const SERVICES_MAP = [
         'stamp' => [Stamping\StampService::class, Stamping\StampingCommand::class],
         'quickstamp' => [Stamping\QuickStampService::class, Stamping\StampingCommand::class],
@@ -120,7 +119,6 @@ class Finkok
      */
     protected function checkCommand(string $method, $command): ?object
     {
-        /** @var class-string|string $expected */
         $expected = static::SERVICES_MAP[$method][1];
         if ('' === $expected) {
             return null;
