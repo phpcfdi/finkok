@@ -2,11 +2,26 @@
 
 Nos apegamos a [SEMVER](SEMVER.md), revisa la información para entender mejor el control de versiones.
 
+## Cambios no liberados
+
+Estos cambios se aplican y se publican, pero aún no son parte de una versión liberada.
+
+### 2022-09-05 
+
+El proceso de integración contínua con las herramientas de desarrollo actualizadas falló,
+por lo que se aplicaron los siguientes cambios:
+
+- Se eliminan las anotaciones de definición de tipos de datos para la constante `Finkok::SERVICES_MAP`.
+- En la configuración de la herramienta `php-cs-fixer` se sustituye la regla `no_trailing_comma_in_singleline_array` 
+  por la regla `no_trailing_comma_in_singleline`.
+- Se corrige el texto `get_contracts_sndi` a `get_contracts_snid`.
+- Se actualizan las herramientas de desarrollo.
+
 ## Versión 0.5.0 2022-08-12
 
-### Implementación del método `get_contracts_sndi`
+### Implementación del método `get_contracts_snid`
 
-Se utiliza el nuevo método `get_contracts_sndi` en lugar del obsoleto `get_contracts`.
+Se utiliza el nuevo método `get_contracts_snid` en lugar del obsoleto `get_contracts`.
 Esto lleva a que la clase `PhpCfdi\Finkok\Services\Manifest\GetContractsCommand` ahora requiere de `$snid`.
 Igualmente, `PhpCfdi\Finkok\QuickFinkok#customerGetContracts()` requiere de `$snid`.
 
