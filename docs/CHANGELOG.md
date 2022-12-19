@@ -15,6 +15,7 @@ Se aplican los cambios necesarios en los tests.
 ### Cambios de entorno de desarrollo
 
 - Se actualizan las herramientas de desarrollo.
+- Se actualiza la herramienta configuración de `php-cs-fixer` a la última usada por los otros proyectos de PhpCfdi.
 
 ### Se integran los cambios previos no liberados
 
