@@ -16,6 +16,11 @@ Se aplican los cambios necesarios en los tests.
 
 - Se actualizan las herramientas de desarrollo.
 - Se actualiza la herramienta configuración de `php-cs-fixer` a la última usada por los otros proyectos de PhpCfdi.
+- Se actualizan los flujos de trabajo de GitHub:
+  - Se agrega PHP 8.2 a la matriz de pruebas.
+  - Se cambia el uso de `::set-output` por `$GITHUB_OUTPUT`.
+  - Los trabajos corren en PHP 8.2, excepto por `php-cs-fixer`.
+  - Se agrega `fetch-depth: 0` cuando se sube la cobertura de código a Scrutinizer-CI.
 
 ### Se integran los cambios previos no liberados
 

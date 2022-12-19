@@ -5,6 +5,10 @@ on:
   push:
     branches: [ 'main' ]
 
+# Actions
+# shivammathur/setup-php@v2 https://github.com/marketplace/actions/setup-php-action
+# sudo-bot/action-scrutinizer@latest https://github.com/marketplace/actions/action-scrutinizer
+
 jobs:
   functional-tests:
     name: Functional tests
@@ -14,12 +18,13 @@ jobs:
 
       - name: Checkout
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0 # required for sudo-bot/action-scrutinizer
 
-      # see https://github.com/marketplace/actions/setup-php-action
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.1'
+          php-version: '8.2'
           extensions: soap
           coverage: xdebug
           tools: composer:v2
@@ -28,7 +33,7 @@ jobs:
 
       - name: Get composer cache directory
         id: composer-cache
-        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+        run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
 
       - name: Cache dependencies
         uses: actions/cache@v3
@@ -51,7 +56,6 @@ jobs:
       - name: Run integration tests with code coverage
         run: vendor/bin/phpunit --testdox --verbose --exclude-group large --coverage-clover=build/coverage-clover.xml
 
-      # see https://github.com/marketplace/actions/action-scrutinizer
       - name: Upload code coverage to scrutinizer
         uses: sudo-bot/action-scrutinizer@latest
         with:
