@@ -12,6 +12,10 @@ Se actualiza `phpcfdi/xml-cancelacion` a la versión `^2.0.2`.
 Esta actualización remueve el atributo vacío `FolioSustitucion` en la solicitud de cancelación firmada.
 Se aplican los cambios necesarios en los tests.
 
+### Cambios de entorno de desarrollo
+
+- Se actualizan las herramientas de desarrollo.
+
 ### Se integran los cambios previos no liberados
 
 #### 2022-09-05
