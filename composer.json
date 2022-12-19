@@ -30,7 +30,7 @@
         "eclipxe/micro-catalog": "^0.1.0",
         "phpcfdi/cfdi-expresiones": "^3.2",
         "phpcfdi/credentials": "^1.0.1",
-        "phpcfdi/xml-cancelacion": "^2.0.1",
+        "phpcfdi/xml-cancelacion": "^2.0.2",
         "psr/log": "^1.1 || ^2.0 || ^3.0",
         "robrichards/xmlseclibs": "^3.0.4"
     },

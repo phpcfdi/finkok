@@ -6,7 +6,15 @@ Nos apegamos a [SEMVER](SEMVER.md), revisa la información para entender mejor e
 
 Estos cambios se aplican y se publican, pero aún no son parte de una versión liberada.
 
-### 2022-09-05 
+## Versión 0.5.1 2022-12-19
+
+Se actualiza `phpcfdi/xml-cancelacion` a la versión `^2.0.2`.
+Esta actualización remueve el atributo vacío `FolioSustitucion` en la solicitud de cancelación firmada.
+Se aplican los cambios necesarios en los tests.
+
+### Se integran los cambios previos no liberados
+
+#### 2022-09-05
 
 El proceso de integración contínua con las herramientas de desarrollo actualizadas falló,
 por lo que se aplicaron los siguientes cambios:
