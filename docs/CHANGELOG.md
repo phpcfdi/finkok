@@ -10,7 +10,9 @@ Estos cambios se aplican y se publican, pero aún no son parte de una versión l
 
 Se actualiza `phpcfdi/xml-cancelacion` a la versión `^2.0.2`.
 Esta actualización remueve el atributo vacío `FolioSustitucion` en la solicitud de cancelación firmada.
-Se aplican los cambios necesarios en los tests.
+Se aplican los cambios necesarios en las pruebas.
+
+Se documenta el error de funcionamiento en Finkok en el método `Registration#Get`.
 
 ### Cambios de entorno de desarrollo
 
