@@ -6,7 +6,27 @@ Nos apegamos a [SEMVER](SEMVER.md), revisa la información para entender mejor e
 
 Estos cambios se aplican y se publican, pero aún no son parte de una versión liberada.
 
-### 2022-09-05 
+## Versión 0.5.1 2022-12-19
+
+Se actualiza `phpcfdi/xml-cancelacion` a la versión `^2.0.2`.
+Esta actualización remueve el atributo vacío `FolioSustitucion` en la solicitud de cancelación firmada.
+Se aplican los cambios necesarios en las pruebas.
+
+Se documenta el error de funcionamiento en Finkok en el método `Registration#Get`.
+
+### Cambios de entorno de desarrollo
+
+- Se actualizan las herramientas de desarrollo.
+- Se actualiza la herramienta configuración de `php-cs-fixer` a la última usada por los otros proyectos de PhpCfdi.
+- Se actualizan los flujos de trabajo de GitHub:
+  - Se agrega PHP 8.2 a la matriz de pruebas.
+  - Se cambia el uso de `::set-output` por `$GITHUB_OUTPUT`.
+  - Los trabajos corren en PHP 8.2, excepto por `php-cs-fixer`.
+  - Se agrega `fetch-depth: 0` cuando se sube la cobertura de código a Scrutinizer-CI.
+
+### Se integran los cambios previos no liberados
+
+#### 2022-09-05
 
 El proceso de integración contínua con las herramientas de desarrollo actualizadas falló,
 por lo que se aplicaron los siguientes cambios:

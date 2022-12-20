@@ -234,6 +234,7 @@ Durante el proceso de implementación he creado diversas notas y documentos:
     - [X] [El acuse de cancelación entregado al cancelar y al solicitar el acuse no coinciden](docs/issues/AcuseCancelacionNoCoincidente.md)
     - [X] [Error de cancelación de retenciones 1308 - Certificado revocado o caduco](docs/issues/CancelacionRetencionesError1308.md)
     - [X] [El valor `CodEstatus` está ausente en la cancelación de CFDI de Retenciones](docs/issues/CancelacionRetencionesCodEstatus.md)
+    - [ ] [El método `Registration#Get` con `taxpayer_id` vacío no devuelve el listado de clientes](docs/issues/RegistrationGetNoList.md)
 
 ## Compatibilidad
 
@@ -273,7 +274,7 @@ and licensed for use under the MIT License (MIT). Please see [LICENSE][] for mor
 [badge-source]: https://img.shields.io/badge/source-phpcfdi/finkok-blue?style=flat-square
 [badge-release]: https://img.shields.io/github/release/phpcfdi/finkok?style=flat-square
 [badge-license]: https://img.shields.io/github/license/phpcfdi/finkok?style=flat-square
-[badge-build]: https://img.shields.io/github/workflow/status/phpcfdi/finkok/build/main?style=flat-square
+[badge-build]: https://img.shields.io/github/actions/workflow/status/phpcfdi/finkok/build.yml?branch=main&style=flat-square
 [badge-quality]: https://img.shields.io/scrutinizer/g/phpcfdi/finkok/main?style=flat-square
 [badge-coverage]: https://img.shields.io/scrutinizer/coverage/g/phpcfdi/finkok/main?style=flat-square
 [badge-downloads]: https://img.shields.io/packagist/dt/phpcfdi/finkok?style=flat-square

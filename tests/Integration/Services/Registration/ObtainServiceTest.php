@@ -44,6 +44,12 @@ final class ObtainServiceTest extends RegistrationIntegrationTestCase
     {
         $service = $this->createService();
         $result = $service->obtain(new ObtainCommand());
+        if ('RFC Invalido' === $result->message()) {
+            $this->markTestSkipped(<<< MESSAGE
+                Finkok does not have implemented the list of customers.
+                See https://support.finkok.com/support/tickets/66516
+                MESSAGE);
+        }
 
         $this->assertSame('', $result->message());
         $this->assertGreaterThanOrEqual(1, count($result->customers()));
