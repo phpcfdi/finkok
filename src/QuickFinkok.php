@@ -379,6 +379,19 @@ class QuickFinkok
     }
 
     /**
+     * Obtiene el listado completo de clientes, consultando todas las páginas necesarias.
+     * El resultado es solo la lista de clientes, sin acceso a los resultados de cada una de las consultas.
+     *
+     * @return Registration\Customers
+     * @see https://wiki.finkok.com/doku.php?id=customers
+     */
+    public function customersObtainAll(): Registration\Customers
+    {
+        $service = new Registration\ObtainCustomersService($this->settings());
+        return $service->obtainAll();
+    }
+
+    /**
      * Asignar créditos un cliente que va a timbrar
      * Si el crédito es un valor positivo y el cliente está como OnDemand se cambiará a PrePaid con los créditos
      * Si el crédito es un valor positivo y el cliente está como PrePaid sumarán los créditos a los actuales

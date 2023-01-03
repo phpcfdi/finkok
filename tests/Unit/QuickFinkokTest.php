@@ -390,6 +390,24 @@ final class QuickFinkokTest extends TestCase
         $this->assertEquals($rawData, $result->rawData());
     }
 
+    public function testCustomersObtainAll(): void
+    {
+        /** @var stdClass $rawData */
+        $rawData = json_decode($this->fileContentPath('registration-customers-response-2-items.json'));
+        $finkok = $this->createdPreparedQuickFinkok($rawData);
+
+        $result = $finkok->customersObtainAll();
+
+        $this->performTestOnLatestCall('customers', [
+            'page' => 1,
+        ]);
+
+        $this->assertCount(2, $result);
+        $this->assertNotNull($result->findByRfc('MAG041126GT8'));
+        $this->assertNotNull($result->findByRfc('LAN7008173R5'));
+        $this->assertNull($result->findByRfc('AAA010101AAA'));
+    }
+
     public function testCustomerGetContracts(): void
     {
         /** @var stdClass $rawData */
