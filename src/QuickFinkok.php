@@ -365,13 +365,13 @@ class QuickFinkok
     }
 
     /**
-     * Obtiene un listado de clientes registrados, o solo uno si se especifica el RFC
+     * Obtiene los datos del RFC especificado
      *
      * @param string $filterByRfc
      * @return Registration\ObtainResult
      * @see https://wiki.finkok.com/doku.php?id=get
      */
-    public function customersObtain(string $filterByRfc = ''): Registration\ObtainResult
+    public function customersObtain(string $filterByRfc): Registration\ObtainResult
     {
         $command = new Registration\ObtainCommand($filterByRfc);
         $service = new Registration\ObtainService($this->settings());

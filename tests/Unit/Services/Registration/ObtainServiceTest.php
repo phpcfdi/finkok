@@ -34,23 +34,4 @@ final class ObtainServiceTest extends TestCase
         $this->assertArrayHasKey('taxpayer_id', $caller->latestCallParameters);
         $this->assertSame($command->rfc(), $caller->latestCallParameters['taxpayer_id']);
     }
-
-    public function testServiceUsingPreparedResultWithoutRfc(): void
-    {
-        /** @var stdClass $preparedResult */
-        $preparedResult = json_decode(TestCase::fileContentPath('registration-get-response-2-items.json'));
-
-        $soapFactory = new FakeSoapFactory();
-        $soapFactory->preparedResult = $preparedResult;
-
-        $settings = $this->createSettingsFromEnvironment($soapFactory);
-        $service = new ObtainService($settings);
-
-        $command = new ObtainCommand();
-        $service->obtain($command);
-
-        $caller = $soapFactory->latestSoapCaller;
-        $this->assertArrayHasKey('taxpayer_id', $caller->latestCallParameters);
-        $this->assertSame('', $caller->latestCallParameters['taxpayer_id']);
-    }
 }
