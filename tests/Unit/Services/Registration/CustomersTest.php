@@ -20,21 +20,21 @@ final class CustomersTest extends TestCase
     public function testFindByRfc(): void
     {
         /** @var stdClass $data */
-        $data = json_decode($this->fileContentPath('registration-get-response-2-items.json'));
+        $data = json_decode($this->fileContentPath('registration-get-response.json'));
         $customers = new Customers($data->getResult->users->ResellerUser);
-        $known = $customers->findByRfc('LAN7008173R5');
+        $known = $customers->findByRfc('MAG041126GT8');
         if (null === $known) {
             $this->fail('Could not find a predefined customer in customers');
         }
-        $this->assertSame('LAN7008173R5', $known->rfc(), 'known rfc finding must match');
+        $this->assertSame('MAG041126GT8', $known->rfc(), 'known rfc finding must match');
         $this->assertNull($customers->findByRfc('AAA010101AAA'));
     }
 
     public function testGetByRfcUsingExistentRfc(): void
     {
-        $expectedRfc = 'LAN7008173R5';
+        $expectedRfc = 'MAG041126GT8';
         /** @var stdClass $data */
-        $data = json_decode($this->fileContentPath('registration-get-response-2-items.json'));
+        $data = json_decode($this->fileContentPath('registration-get-response.json'));
         $customers = new Customers($data->getResult->users->ResellerUser);
         $this->assertSame($expectedRfc, $customers->getByRfc($expectedRfc)->rfc());
     }
@@ -42,7 +42,7 @@ final class CustomersTest extends TestCase
     public function testGetByRfcUsingNonExistentRfcThrowsException(): void
     {
         /** @var stdClass $data */
-        $data = json_decode($this->fileContentPath('registration-get-response-2-items.json'));
+        $data = json_decode($this->fileContentPath('registration-get-response.json'));
         $customers = new Customers($data->getResult->users->ResellerUser);
 
         $this->expectException(LogicException::class);

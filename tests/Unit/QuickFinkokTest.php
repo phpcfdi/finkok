@@ -379,7 +379,7 @@ final class QuickFinkokTest extends TestCase
     public function testCustomersObtain(): void
     {
         /** @var stdClass $rawData */
-        $rawData = json_decode($this->fileContentPath('registration-get-response-2-items.json'));
+        $rawData = json_decode($this->fileContentPath('registration-get-response.json'));
         $finkok = $this->createdPreparedQuickFinkok($rawData);
 
         $result = $finkok->customersObtain('x-rfc');
