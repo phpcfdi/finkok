@@ -49,4 +49,30 @@ final class CustomersTest extends TestCase
         $this->expectExceptionMessage('There is no customer with RFC AAA010101AAA');
         $customers->getByRfc('AAA010101AAA');
     }
+
+    public function testMerge(): void
+    {
+        $firstList = [
+            (object) ['taxpayer_id' => 'AAA010101AAA', 'status' => 'S', 'counter' => 0, 'credit' => 0],
+            (object) ['taxpayer_id' => 'BBB010101AAA', 'status' => 'S', 'counter' => 0, 'credit' => 0],
+        ];
+        $firstCustomers = new Customers($firstList);
+
+        $secondList = [
+            (object) ['taxpayer_id' => 'CCC010101AAA', 'status' => 'S', 'counter' => 0, 'credit' => 0],
+            (object) ['taxpayer_id' => 'DDD010101AAA', 'status' => 'S', 'counter' => 0, 'credit' => 0],
+            (object) ['taxpayer_id' => 'EEE010101AAA', 'status' => 'S', 'counter' => 0, 'credit' => 0],
+        ];
+        $secondCustomers = new Customers($secondList);
+
+        $merged = $firstCustomers->merge($secondCustomers);
+
+        $this->assertCount(5, $merged);
+        foreach ($firstCustomers as $customer) {
+            $this->assertSame($customer, $merged->findByRfc($customer->rfc()));
+        }
+        foreach ($secondCustomers as $customer) {
+            $this->assertSame($customer, $merged->findByRfc($customer->rfc()));
+        }
+    }
 }
