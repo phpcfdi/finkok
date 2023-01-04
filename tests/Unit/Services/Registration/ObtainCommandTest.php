@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PhpCfdi\Finkok\Tests\Unit\Services\Registration;
 
+use PhpCfdi\Finkok\Exceptions\InvalidArgumentException;
 use PhpCfdi\Finkok\Services\Registration\ObtainCommand;
 use PhpCfdi\Finkok\Tests\TestCase;
 
@@ -15,9 +16,10 @@ final class ObtainCommandTest extends TestCase
         $this->assertSame('x-rfc', $command->rfc());
     }
 
-    public function testObtainCommandCreationWithoutRfc(): void
+    public function testObtainCommandCreationWithEmptyRfc(): void
     {
-        $command = new ObtainCommand();
-        $this->assertSame('', $command->rfc());
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Invalid RFC, cannot be empty');
+        new ObtainCommand('');
     }
 }

@@ -38,6 +38,7 @@ use PhpCfdi\Finkok\Services\Utilities;
  * @method Registration\SwitchResult registrationSwitch(Registration\SwitchCommand $command)
  * @method Registration\EditResult registrationEdit(Registration\EditCommand $command)
  * @method Registration\ObtainResult registrationObtain(Registration\ObtainCommand $command)
+ * @method Registration\ObtainCustomersResult registrationCustomers(Registration\ObtainCustomersCommand $command)
  */
 class Finkok
 {
@@ -82,6 +83,11 @@ class Finkok
         'registrationSwitch' => [Registration\SwitchService::class, Registration\SwitchCommand::class, 'switch'],
         'registrationEdit' => [Registration\EditService::class, Registration\EditCommand::class, 'edit'],
         'registrationObtain' => [Registration\ObtainService::class, Registration\ObtainCommand::class, 'obtain'],
+        'registrationCustomers' => [
+            Registration\ObtainCustomersService::class,
+            Registration\ObtainCustomersCommand::class,
+            'obtainPage',
+        ],
     ];
 
     /** @var FinkokSettings */

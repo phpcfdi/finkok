@@ -6,14 +6,14 @@
 - Investigar cómo validar firma en acuses y respuestas del SAT
 
 - Crear un namespace común porque hay clases que están interrelacionadas entre el estampado y cancelación
-  de cfdi y de retenciones. Así como las clases abstractas de colecciones y resultados. 
-  Esto creará una incompatilidad con versiones previas.
+  de CFDI y de retenciones. Así como las clases abstractas de colecciones y resultados. 
+  Esto creará una incompatibilidad con versiones previas.
 
-- Agregar la integración de CFDI de retenciones y pagos
+- Agregar la integración de CFDI de retenciones y pagos.
 
 - Poder transformar un objeto de tipo `GetSatStatusResult` a `PhpCfdi\SatEstadoCfdi\CfdiStatus`.
 
-- Los reportes que devuelven una cuenta deberían retornar un entero
+- Los reportes que devuelven una cuenta deberían retornar un entero.
 
 - La forma en que están hechos los objetos result es mezclada, algunas propiedades las obtiene cuando se solicitan
   y otras propiedades las obtiene en la creación del objeto. El problema es que se guarda la referencia al objeto
@@ -24,11 +24,11 @@
   La segunda opción genera mutabilidad al poderse manipular el input. 
   La tercera opción es no permitir manipular en input una vez que está dentro del resultado.
 
-- Fortalecer los comandos como DownloadXml (get_xml) que el tipo solo puede ser I - CFDI o R - Retenciones
+- Fortalecer los comandos como DownloadXml (get_xml) que el tipo solo puede ser I - CFDI o R - Retenciones.
 
-- Poder configurar en Travis CI la ejecución de tests de integración
+- Poder configurar en Travis CI la ejecución de tests de integración.
 
-- AcceptRejectSigner debería permitir aceptar y/o rechazar más de 1 solo UUID a la vez
+- AcceptRejectSigner debería permitir aceptar y/o rechazar más de 1 solo UUID a la vez.
 
 - Agregar un caso para hacer una prueba positiva de AcceptRejectSignatureService. 
   Para hacer esta prueba se requieren 2 RFC (A y B), en este momento solo tenemos 1. 
@@ -43,6 +43,9 @@
   error al crear el endpoint, el error saldría a la luz en pruebas de integración pero no en pruebas unitarias. 
   Se puede agregar un código como el siguiente (en `...\Tests\Unit\Services\Retentions\CancelSignatureServiceTest`):
   `$this->assertStringEndsWith(Services::retentions()->value(), $soapFactory->latestWsdlLocation);`
+
+- En el entorno de pruebas, en el objeto `FakeSoapFactory` permitir una cola de respuestas para simular el consumo
+  de varias páginas del servicio `Registration#Customers`.
 
 ## Documentación
 

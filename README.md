@@ -146,6 +146,7 @@ Obtener reportes de consumo de crédito y manejo de clientes:
 * `registrationEdit(Registration\EditCommand $command): Registration\EditResult`
 * `registrationSwitch(Registration\SwitchCommand $command): Registration\SwitchResult`
 * `registrationObtain(Registration\ObtainCommand $command): Registration\ObtainResult`
+* `registrationCustomers(Registration\ObtainCustomersCommand $command): Registration\ObtainCustomersResult`
 
 ### Manifiestos y contrato
 

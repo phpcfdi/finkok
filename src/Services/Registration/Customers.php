@@ -40,4 +40,13 @@ class Customers extends AbstractCollection
         }
         return null;
     }
+
+    public function merge(self $customers): self
+    {
+        $clone = clone $this;
+        foreach ($customers as $customer) {
+            $clone->collection->append($customer);
+        }
+        return $clone;
+    }
 }

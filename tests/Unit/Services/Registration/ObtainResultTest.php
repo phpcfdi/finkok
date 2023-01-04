@@ -13,9 +13,9 @@ final class ObtainResultTest extends TestCase
     public function testResultUsingPredefinedResponses(): void
     {
         /** @var stdClass $data */
-        $data = json_decode($this->fileContentPath('registration-get-response-2-items.json'));
+        $data = json_decode($this->fileContentPath('registration-get-response.json'));
         $result = new ObtainResult($data);
         $this->assertSame('predefined-message', $result->message());
-        $this->assertCount(2, $result->customers());
+        $this->assertCount(1, $result->customers());
     }
 }

@@ -6,6 +6,23 @@ Nos apegamos a [SEMVER](SEMVER.md), revisa la información para entender mejor e
 
 Estos cambios se aplican y se publican, pero aún no son parte de una versión liberada.
 
+## Versión 0.5.2 2023-01-03
+
+Se reportó que el webservice `Registration#Get` no estaba aceptando un RFC vacío para devolver el listado
+de clientes. La respuesta de Finkok fue implementar un nuevo método `Registration#Customers` que devuelve
+el listado de clientes paginado. El método `Registration#Get` ya no permitirá devolver un listado de clientes. 
+
+Se agregan los métodos `Finkok::registrationCustomers` y `QuickFinkok::customersObtainAll`
+para consumir `Registration#Customers`.
+
+El método `Finkok::registrationCustomers(ObtainCustomersCommand $command): ObtainCustomersResult` devuelve
+el resultado de una sola página, con toda la información: mensaje e información de paginado.
+
+El método `QuickFinkok::customersObtainAll` devuelve solamente el listado de clientes consumiendo
+todas las páginas necesarias.
+
+Se cambió el año en el archivo de licencia, ¡Feliz 2023!.
+
 ## Versión 0.5.1 2022-12-19
 
 Se actualiza `phpcfdi/xml-cancelacion` a la versión `^2.0.2`.

@@ -39,20 +39,4 @@ final class ObtainServiceTest extends RegistrationIntegrationTestCase
         $this->assertTrue($customer->status()->isActive());
         $this->assertTrue($customer->customerType()->isOndemand());
     }
-
-    public function testConsumeObtainServiceGettingAllRecords(): void
-    {
-        $service = $this->createService();
-        $result = $service->obtain(new ObtainCommand());
-        if ('RFC Invalido' === $result->message()) {
-            $this->markTestSkipped(<<< MESSAGE
-                Finkok does not have implemented the list of customers.
-                See https://support.finkok.com/support/tickets/66516
-                MESSAGE);
-        }
-
-        $this->assertSame('', $result->message());
-        $this->assertGreaterThanOrEqual(1, count($result->customers()));
-        $this->assertSame('EKU9003173C9', $result->customers()->getByRfc('EKU9003173C9')->rfc());
-    }
 }
