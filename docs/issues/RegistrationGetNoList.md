@@ -51,8 +51,6 @@ A pesar de la implementación del método `Registration#Customers`, el método `
 un conjunto de `ResellerUser`, cuando debería de regresar cero o uno. Asimismo, se cambió la documentación
 para que ni diga que devuelve un listado de clientes.
 
-Se desconoce la fecha de pase a producción de la solución.
-
 ## Solución
 
 Finkok implementó el método `Registration#Customers` con el que se puede obtener el listado de clientes.
@@ -79,6 +77,6 @@ Solo devuelve los datos de la consulta especificada.
 
 2022-12-20: Se reportó y documentó el problema.
 
-2022-12-31: Se agregó el método `Registration#Customers`.
+2022-12-27: Se agregó el método `Registration#Customers` en entorno de desarrollo y producción.
 
 2022-01-03: Se implementó el consumo del método `Registration#Customers`.
