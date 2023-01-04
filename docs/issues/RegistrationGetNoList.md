@@ -45,13 +45,40 @@ todavía no tienen fecha estimada para la implementación.
 Finkok debería considerar esto como un fallo en su aplicación, no como una nueva funcionalidad a agregar.
 Y, consecuentemente, darle prioridad alta para repararlo.
 
+### Reporte 2022-01-03
+
+A pesar de la implementación del método `Registration#Customers`, el método `Registration#Get` sigue retornando
+un conjunto de `ResellerUser`, cuando debería de regresar cero o uno. Asimismo, se cambió la documentación
+para que ni diga que devuelve un listado de clientes.
+
+Se desconoce la fecha de pase a producción de la solución.
+
 ## Solución
 
-No existe solución. La recomendación que te hacemos desde esta librería es:
+Finkok implementó el método `Registration#Customers` con el que se puede obtener el listado de clientes.
 
-1. Levanta un ticket comentando que necesitas este método funcionando.
-2. Lleva un control de tus clientes y usa la interfaz web para corroborar que estás en sincronía.
+Al 2022-01-03 se hizo la implementación del método `Registration#Customers`.
+
+### Implementación
+
+Este método devuelve un **listado paginado** —cosa que no habían hecho en ningún otro método—
+y se implementa de dos formas diferentes:
+
+#### `QuickFinkok::customersObtainAll(): Customers`
+
+Al llamarlo consume tantas páginas sea necesario y retorna el listado completo de clientes en el objeto `Customers`.
+No contiene los datos originales de las consultas, a diferencia de la mayoría de los valores retornados.
+
+#### `Finkok::registrationCustomers(ObtainCustomersCommand $command): ObtainCustomersResult`
+
+Al llamarlo consume el servicio y obtiene la página especificada.
+Este método sí contiene un objeto `ObtainCustomersResult` con toda la respuesta de la consulta.
+Solo devuelve los datos de la consulta especificada.
 
 ## Actualizaciones
 
 2022-12-20: Se reportó y documentó el problema.
+
+2022-12-31: Se agregó el método `Registration#Customers`.
+
+2022-01-03: Se implementó el consumo del método `Registration#Customers`.
