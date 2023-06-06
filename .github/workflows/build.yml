@@ -1,11 +1,15 @@
 name: build
 on:
+  workflow_dispatch:
   pull_request:
     branches: [ "main" ]
   push:
     branches: [ "main" ]
   schedule:
     - cron: '0 16 * * 0' # sunday 16:00
+
+# Actions
+# shivammathur/setup-php@v2 https://github.com/marketplace/actions/setup-php-action
 
 jobs:
 
@@ -33,7 +37,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Setup PHP
-        uses: shivammathur/setup-php@v2 # see https://github.com/marketplace/actions/setup-php-action
+        uses: shivammathur/setup-php@v2
         with:
           php-version: '8.2'
           coverage: none
@@ -50,15 +54,17 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Setup PHP
-        uses: shivammathur/setup-php@v2 # see https://github.com/marketplace/actions/setup-php-action
+        uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.1'
+          php-version: '8.2'
           coverage: none
           tools: cs2pr, php-cs-fixer
         env:
           fail-fast: true
       - name: Code style (php-cs-fixer)
         run: php-cs-fixer fix --dry-run --format=checkstyle | cs2pr
+        env:
+          PHP_CS_FIXER_IGNORE_ENV: 1
 
   phpstan:
     name: Code analysis (phpstan)
@@ -99,7 +105,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Setup PHP
-        uses: shivammathur/setup-php@v2 # see https://github.com/marketplace/actions/setup-php-action
+        uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php-versions }}
           coverage: none

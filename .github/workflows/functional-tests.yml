@@ -2,6 +2,7 @@ name: functional-tests
 on:
   # secrets are not passed to workflows that are triggered by a pull request from a fork.
   # see https://docs.github.com/en/actions/reference/encrypted-secrets
+  workflow_dispatch:
   push:
     branches: [ 'main' ]
 

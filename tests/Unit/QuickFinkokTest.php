@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PhpCfdi\Finkok\Tests\Unit;
 
 use DateTimeImmutable;
+use LogicException;
 use PhpCfdi\Finkok\Definitions\CancelAnswer;
 use PhpCfdi\Finkok\Definitions\RfcRole;
 use PhpCfdi\Finkok\QuickFinkok;
@@ -17,6 +18,7 @@ use PhpCfdi\Finkok\Tests\TestCase;
 use PhpCfdi\XmlCancelacion\Models\CancelDocument;
 use PHPUnit\Framework\MockObject\MockObject;
 use stdClass;
+use Stringable;
 
 /** @covers \PhpCfdi\Finkok\QuickFinkok */
 final class QuickFinkokTest extends TestCase
@@ -48,13 +50,15 @@ final class QuickFinkokTest extends TestCase
         );
     }
 
-    /**
-     * @param string $key
-     * @return mixed
-     */
-    private function obtainParameterFromLatestCall(string $key)
+    private function obtainParameterFromLatestCall(string $key): string
     {
-        return $this->soapFactory->latestSoapCaller->latestCallParameters[$key] ?? null;
+        $value = $this->soapFactory->latestSoapCaller->latestCallParameters[$key] ?? null;
+        if (null === $value || is_scalar($value) || (is_object($value) && is_callable([$value, '__toString']))) {
+            /** @phpstan-var scalar|null|Stringable $value PHPStan false positive */
+            return strval($value);
+        }
+
+        throw new LogicException('Cannot return an parameter that is not stringable');
     }
 
     public function testStamp(): void
@@ -120,7 +124,7 @@ final class QuickFinkokTest extends TestCase
         $this->performTestOnLatestCall('cancel_signature', [
             'store_pending' => false,
         ]);
-        $this->assertStringContainsString(strtoupper($uuid), strval($this->obtainParameterFromLatestCall('xml')));
+        $this->assertStringContainsString(strtoupper($uuid), $this->obtainParameterFromLatestCall('xml'));
         $this->assertEquals($rawData, $result->rawData());
     }
 
@@ -203,7 +207,7 @@ final class QuickFinkokTest extends TestCase
         $result = $finkok->obtainRelated($this->createCsdCredential(), 'x-uuid', RfcRole::receiver());
 
         $this->performTestOnLatestCall('get_related_signature');
-        $signedXml = strval($this->obtainParameterFromLatestCall('xml'));
+        $signedXml = $this->obtainParameterFromLatestCall('xml');
         $this->assertStringContainsString('RfcReceptor="EKU9003173C9"', $signedXml);
         $this->assertStringContainsString('Uuid="x-uuid"', $signedXml);
         $this->assertEquals($rawData, $result->rawData());
@@ -232,7 +236,7 @@ final class QuickFinkokTest extends TestCase
         );
 
         $this->performTestOnLatestCall('accept_reject_signature');
-        $signedXml = strval($this->obtainParameterFromLatestCall('xml'));
+        $signedXml = $this->obtainParameterFromLatestCall('xml');
         $this->assertStringContainsString('RfcReceptor="EKU9003173C9"', $signedXml);
         $this->assertStringContainsString('<Respuesta>Rechazo</Respuesta>', $signedXml);
         $this->assertStringContainsString('<UUID>x-uuid</UUID>', $signedXml);
