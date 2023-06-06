@@ -55,13 +55,15 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.1'
+          php-version: '8.2'
           coverage: none
           tools: cs2pr, php-cs-fixer
         env:
           fail-fast: true
       - name: Code style (php-cs-fixer)
         run: php-cs-fixer fix --dry-run --format=checkstyle | cs2pr
+        env:
+          PHP_CS_FIXER_IGNORE_ENV: 1
 
   phpstan:
     name: Code analysis (phpstan)
