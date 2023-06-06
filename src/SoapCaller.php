@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PhpCfdi\Finkok;
 
+use JsonSerializable;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
@@ -63,7 +64,11 @@ class SoapCaller implements LoggerAwareInterface
             return $result;
         } catch (Throwable $exception) {
             $this->logger->error(strval(json_encode(
-                ['method' => $methodName, 'parameters' => $finalParameters] + $this->extractSoapClientTrace($soap),
+                array_merge(
+                    ['method' => $methodName, 'parameters' => $finalParameters],
+                    $this->extractSoapClientTrace($soap),
+                    ['exception' => ($exception instanceof JsonSerializable) ? $exception : print_r($exception, true)]
+                ),
                 JSON_PRETTY_PRINT
             )));
             throw new RuntimeException(sprintf('Fail soap call to %s', $methodName), 0, $exception);
