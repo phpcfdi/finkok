@@ -7,6 +7,9 @@ on:
   schedule:
     - cron: '0 16 * * 0' # sunday 16:00
 
+# Actions
+# shivammathur/setup-php@v2 https://github.com/marketplace/actions/setup-php-action
+
 jobs:
 
   composer-normalize:
@@ -33,7 +36,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Setup PHP
-        uses: shivammathur/setup-php@v2 # see https://github.com/marketplace/actions/setup-php-action
+        uses: shivammathur/setup-php@v2
         with:
           php-version: '8.2'
           coverage: none
@@ -50,7 +53,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Setup PHP
-        uses: shivammathur/setup-php@v2 # see https://github.com/marketplace/actions/setup-php-action
+        uses: shivammathur/setup-php@v2
         with:
           php-version: '8.1'
           coverage: none
@@ -99,7 +102,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Setup PHP
-        uses: shivammathur/setup-php@v2 # see https://github.com/marketplace/actions/setup-php-action
+        uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php-versions }}
           coverage: none
