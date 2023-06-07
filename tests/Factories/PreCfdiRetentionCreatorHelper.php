@@ -8,7 +8,7 @@ use CfdiUtils\Certificado\Certificado;
 use CfdiUtils\Elements\Dividendos10\Dividendos;
 use CfdiUtils\Elements\PagosAExtranjeros10\Pagosaextranjeros;
 use CfdiUtils\Nodes\NodeInterface;
-use CfdiUtils\Retenciones\RetencionesCreator10;
+use CfdiUtils\Retenciones\RetencionesCreator20;
 use DateTimeImmutable;
 use DateTimeZone;
 
@@ -35,17 +35,29 @@ final class PreCfdiRetentionCreatorHelper
     /** @var string */
     private $passPhrase;
 
+    /** @var string */
+    private $emisorLocation;
+
+    /** @var string */
+    private $emisorRegimen;
+
     public function __construct(
         string $cerFile,
         string $keyPemFile,
-        string $passPhrase
+        string $passPhrase,
+        string $emisorRfc,
+        string $emisorName,
+        string $emisorLocation,
+        string $emisorRegimen,
     ) {
         $this->certificate = new Certificado($cerFile);
-        $this->emisorRfc = $this->certificate->getRfc();
-        $this->emisorName = $this->certificate->getName();
+        $this->emisorRfc = $emisorRfc;
+        $this->emisorName = $emisorName;
         $this->keyPemFile = $keyPemFile;
         $this->passPhrase = $passPhrase;
         $this->invoiceDate = new DateTimeImmutable('now -5 minutes', new DateTimeZone('America/Mexico_City'));
+        $this->emisorLocation = $emisorLocation;
+        $this->emisorRegimen = $emisorRegimen;
     }
 
     public function getInvoiceDate(): DateTimeImmutable
@@ -78,6 +90,26 @@ final class PreCfdiRetentionCreatorHelper
         $this->emisorName = $emisorName;
     }
 
+    public function getEmisorLocation(): string
+    {
+        return $this->emisorLocation;
+    }
+
+    public function setEmisorLocation(string $emisorLocation): void
+    {
+        $this->emisorLocation = $emisorLocation;
+    }
+
+    public function getEmisorRegimen(): string
+    {
+        return $this->emisorRegimen;
+    }
+
+    public function setEmisorRegimen(string $emisorRegimen): void
+    {
+        $this->emisorRegimen = $emisorRegimen;
+    }
+
     public function getKeyPemFile(): string
     {
         return $this->keyPemFile;
@@ -103,41 +135,43 @@ final class PreCfdiRetentionCreatorHelper
         $this->cveReten = $cveReten;
     }
 
-    public function createRetencionesCreator10(): RetencionesCreator10
+    public function createRetencionesCreator20(): RetencionesCreator20
     {
-        $creator = new RetencionesCreator10();
+        $creator = new RetencionesCreator20();
         $retenciones = $creator->retenciones();
 
         $retenciones->addAttributes([
-            'FechaExp' => $this->getInvoiceDate()->format('c'),
+            'FechaExp' => $this->getInvoiceDate()->format('Y-m-d\TH:i:s'),
             'CveRetenc' => $this->getCveReten(),
+            'LugarExpRetenc' => $this->getEmisorLocation(),
         ]);
         $retenciones->addEmisor([
-            'RFCEmisor' => $this->getEmisorRfc(),
+            'RfcE' => $this->getEmisorRfc(),
             'NomDenRazSocE' => $this->getEmisorName(),
+            'RegimenFiscalE' => $this->getEmisorRegimen(),
         ]);
         $retenciones->getReceptor()->addExtranjero([
-            'NumRegIdTrib' => '34100005800',
+            'NumRegIdTribR' => '34100005800',
             'NomDenRazSocR' => 'THE USA COMPANY, INC.',
         ]);
 
         $periodoEjercicio = intval($this->getInvoiceDate()->format('Y')) - 1;
         $retenciones->addPeriodo([
-            'MesIni' => '1',
+            'MesIni' => '01',
             'MesFin' => '12',
-            'Ejerc' => $periodoEjercicio,
+            'Ejercicio' => $periodoEjercicio,
         ]);
 
         $retenciones->addTotales([
-            'montoTotOperacion' => '0',
-            'montoTotGrav' => '0',
-            'montoTotExent' => '0',
-            'montoTotRet' => '0',
+            'MontoTotOperacion' => '0',
+            'MontoTotGrav' => '0',
+            'MontoTotExent' => '0',
+            'MontoTotRet' => '0',
         ]);
         return $creator;
     }
 
-    public function signPrecfdi(RetencionesCreator10 $creator): string
+    public function signPreCfdi(RetencionesCreator20 $creator): string
     {
         $creator->putCertificado($this->getCertificate());
         $creator->addSello('file://' . $this->getKeyPemFile(), $this->getPassPhrase());
