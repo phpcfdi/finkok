@@ -61,7 +61,7 @@ Se documenta el error de funcionamiento en Finkok en el método `Registration#Ge
 
 #### 2022-09-05
 
-El proceso de integración contínua con las herramientas de desarrollo actualizadas falló,
+El proceso de integración continua con las herramientas de desarrollo actualizadas falló,
 por lo que se aplicaron los siguientes cambios:
 
 - Se eliminan las anotaciones de definición de tipos de datos para la constante `Finkok::SERVICES_MAP`.
@@ -210,7 +210,7 @@ En la versión 0.3.0 se mencionó que la fachada `Finkok::datetime()` podía seg
 Es necesario que se le entregue el comando `DatetimeCommand`.
 Con este cambio, se elimina el método `datetimePostalCode`.
 
-Cambios en integración contínua:
+Cambios en integración continua:
 
 - Se deja de usar Travis-CI en favor de GitHub Actions.
 - Se actualizan los archivos a su versión en español: Código de conducta, contribuciones.
@@ -256,7 +256,7 @@ Cambios en el entorno de pruebas (2020-09-18). Solo se afecta la rama principal,
 - El build estaba roto por un problema de tipos detectado por `phpstan` debido a un "soft breaking compatibility change"
   introducido por `symfony/dotenv:5.1`, se corrige el problema en `tests/bootstrap.php`.
 - Se crea `Finkok\Tests\LoggerPrinter` para facilitar la escritura de los volcados de comunicación.
-- Se agrega `tests/stamp-precfdi-devenv.php` para estampar un precfdi usando la configuración del entorno de desarrollo.
+- Se agrega `tests/stamp-precfdi-devenv.php` para estampar un PreCfdi usando la configuración del entorno de desarrollo.
 - Cambios menores en las pruebas.
 
 ## Versión 0.2.7 2020-02-10
@@ -287,7 +287,7 @@ Cambios en el entorno de pruebas (2020-09-18). Solo se afecta la rama principal,
     - Se actualiza de `phpstan/phpstan-shim: ^0.11` a `phpstan/phpstan: ^0.12`.
     - Se actualiza a `phpunit/phpunit: ^8.5` porque el XSD de la versión previa no está disponible.
     - Se crean nuevas tareas de desarrollo y mejora.
-- Issues: A pesar de haber impementado la Cancelación de retención, el test de integración está fallando por un
+- Issues: A pesar de haber implementado la Cancelación de retención, el test de integración está fallando por un
   error en el servicio de pruebas del SAT.
 
 ## Versión 0.2.5 2020-01-14
