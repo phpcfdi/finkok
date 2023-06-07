@@ -47,7 +47,7 @@ final class PreCfdiRetentionCreatorHelper
         string $emisorRfc,
         string $emisorName,
         string $emisorLocation,
-        string $emisorRegimen,
+        string $emisorRegimen
     ) {
         $this->certificate = new Certificado($cerFile);
         $this->emisorRfc = $emisorRfc;
