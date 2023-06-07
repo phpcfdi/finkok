@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace PhpCfdi\Finkok\Tests\Factories;
 
+use CfdiUtils\Utils\Format;
+use CfdiUtils\Validate\Assert;
 use DateTimeImmutable;
+use LogicException;
 use PhpCfdi\Finkok\Tests\TestCase;
 
 final class RandomPreCfdiRetention
@@ -15,18 +18,35 @@ final class RandomPreCfdiRetention
         $helper = new PreCfdiRetentionCreatorHelper(
             TestCase::filePath('certs/EKU9003173C9.cer'),
             TestCase::filePath('certs/EKU9003173C9.key.pem'),
-            trim(TestCase::fileContentPath('certs/EKU9003173C9.password.bin'))
+            trim(TestCase::fileContentPath('certs/EKU9003173C9.password.bin')),
+            'EKU9003173C9',
+            'ESCUELA KEMPER URGATE',
+            '52000',
+            '601'
         );
         $helper->setCveReten('14');
         $helper->setInvoiceDate(new DateTimeImmutable());
 
-        $creator = $helper->createRetencionesCreator10();
+        $creator = $helper->createRetencionesCreator20();
         $retenciones = $creator->retenciones();
-        $retenciones->addPeriodo(['MesIni' => '5', 'MesFin' => '5']);
-        $retenciones->addTotales(['montoTotExent' => $amount, 'montoTotOperacion' => $amount]);
-        $retenciones->addImpRetenidos(
-            ['BaseRet' => '0', 'Impuesto' => '01', 'TipoPagoRet' => 'Pago provisional', 'montoRet' => '0']
-        );
+        $retenciones->addPeriodo([
+            'MesIni' => '05',
+            'MesFin' => '05',
+            'Ejercicio' => intval($helper->getInvoiceDate()->format('Y')) - 1,
+        ]);
+        $amountRet = Format::number(0.45 * (float)$amount, 2);
+        $retenciones->addTotales([
+            'MontoTotExent' => $amount,
+            'MontoTotOperacion' => $amount,
+            'MontoTotGrav' => '0',
+            'MontoTotRet' => $amountRet,
+        ]);
+        $retenciones->addImpRetenidos([
+            'BaseRet' => $amount,
+            'ImpuestoRet' => '001',
+            'TipoPagoRet' => '04',
+            'MontoRet' => $amountRet,
+        ]);
         $retenciones->addComplemento(
             $helper->createDividendosDividOUtil([
                 'CveTipDivOUtil' => '06', // 06 - Proviene de CUFIN al 31 de diciembre 2013
@@ -40,6 +60,23 @@ final class RandomPreCfdiRetention
             ])
         );
 
-        return $helper->signPrecfdi($creator);
+        $preCfdi = $helper->signPreCfdi($creator);
+
+        $assets = $creator->validate();
+        if ($assets->hasErrors()) {
+            throw new LogicException(sprintf(
+                'You must fix your RET since its is not valid (%d errors):%s%s',
+                count($assets->errors()),
+                PHP_EOL,
+                implode(PHP_EOL, array_map(function (Assert $assert): string {
+                    return rtrim(
+                        sprintf('%s - %s: %s', $assert->getCode(), $assert->getTitle(), $assert->getExplanation()),
+                        ' :'
+                    );
+                }, $assets->errors()))
+            ));
+        }
+
+        return $preCfdi;
     }
 }

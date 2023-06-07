@@ -91,8 +91,6 @@ final class GetRelatedSignatureServiceTest extends IntegrationTestCase
             sleep(5);
         }
 
-        print_r($result);
-
         $this->assertSame($third->uuid(), $result->parents()->first()->uuid());
         $this->assertSame($first->uuid(), $result->children()->first()->uuid());
         $this->assertEmpty($result->error());
