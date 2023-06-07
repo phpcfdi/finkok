@@ -6,19 +6,21 @@ Nos apegamos a [SEMVER](SEMVER.md), revisa la información para entender mejor e
 
 Estos cambios se aplican y se publican, pero aún no son parte de una versión liberada.
 
-## Versión 0.5.3 2023-06-06
+## Versión 0.5.3 2023-06-07
 
 Se agrega la información de la excepción al momento de hacer la llamada SOAP.
-Si la excepción no implementa `\JsonSerializable` se exporta como texto resultado de `print_r`.
+Si la excepción no implementa `JsonSerializable` se exporta como texto resultado de `print_r`.
 
 Se realizan los siguientes cambios en desarrollo:
 
+- Se cambian las pruebas de CFDI de Retenciones y pagos a versión 2.0.
 - Se corrige el método `QuickFinkokTest#obtainParameterFromLatestCall` para que devuelva una cadena de texto.
   Con este cambio se corrige el problema detectado por PHPStan.
 - En el proceso de integración continua, en el trabajo `php-cs-fixer` se usa PHP 8.2.
 - Se cambian los comentarios de ubicación de la imagen `shivammathur/setup-php@v2` al inicio.
 - Se corrige la acción de composer `dev:coverage`, faltaba `-dxdebug.mode=coverage`.
 - Se permite ejecutar los trabajos a voluntad, agregando `workflow_dispatch`.
+- Se quita el paso para remover dependencias de desarrollo que ya no existen.
 
 ## Versión 0.5.2 2023-01-03
 
