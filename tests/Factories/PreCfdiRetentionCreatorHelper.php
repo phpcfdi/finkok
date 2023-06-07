@@ -6,7 +6,6 @@ namespace PhpCfdi\Finkok\Tests\Factories;
 
 use CfdiUtils\Certificado\Certificado;
 use CfdiUtils\Elements\Dividendos10\Dividendos;
-use CfdiUtils\Elements\PagosAExtranjeros10\Pagosaextranjeros;
 use CfdiUtils\Nodes\NodeInterface;
 use CfdiUtils\Retenciones\RetencionesCreator20;
 use DateTimeImmutable;
@@ -197,26 +196,5 @@ final class PreCfdiRetentionCreatorHelper
         ], $dividOUtil));
 
         return $dividendos;
-    }
-
-    /**
-     * @param array<string, string> $pagosAExtranjeros
-     * @param array<string, string> $noBeneficiario
-     * @return Pagosaextranjeros<NodeInterface>
-     */
-    public function createPagosAExtranjerosNoBeneficiario(
-        array $pagosAExtranjeros = [],
-        array $noBeneficiario = []
-    ): Pagosaextranjeros {
-        $pagosAExtranjeros = new Pagosaextranjeros(array_merge([
-            'EsBenefEfectDelCobro' => 'NO',
-        ], $pagosAExtranjeros));
-        $pagosAExtranjeros->addNoBeneficiario(array_merge([
-            'PaisDeResidParaEfecFisc' => 'US',
-            'ConceptoPago' => '3', // 3 - Persona moral
-            'DescripcionConcepto' => 'Dividendos provenientes de CUFIN al 31 de Dic 2013',
-        ], $noBeneficiario));
-
-        return $pagosAExtranjeros;
     }
 }
