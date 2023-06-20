@@ -50,8 +50,9 @@ final class CancelServicesTest extends IntegrationTestCase
                 $this->markTestSkipped('StatusCode 300: SAT authentication service fail. See tickets #17743 & #41594');
             }
             if ('304' === $result->statusCode()) {
-                $this->fail('StatusCode 304: Certificado revocado o caduco. Do you must change the CSD?');
+                $this->fail('StatusCode 304: Certificado revocado o caduco. Do you have to change the CSD?');
             }
+
             // do not try again if a SAT issue is **different** from:
             // 708: Finkok cannot connect to SAT
             // 300: SAT authentication cancellation service fail
@@ -63,10 +64,15 @@ final class CancelServicesTest extends IntegrationTestCase
             ) {
                 break;
             }
+
             // do not try again if in the loop for more than allowed
             if (time() > $repeatUntil) {
-                break;
+                $this->markTestSkipped(<<<MESSAGE
+                    Unable to test cancellation of a Regular CFDI (timeout):
+                    StatusCode: [{$result->statusCode()}], DocumentStatus [{$document->documentStatus()}]
+                    MESSAGE);
             }
+
             // wait and repeat
             sleep(5);
         } while (true);
