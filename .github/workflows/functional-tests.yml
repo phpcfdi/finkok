@@ -46,6 +46,13 @@ jobs:
       - name: Install project dependencies
         run: composer upgrade --no-interaction --no-progress --prefer-dist
 
+      - name: Install SAT XML resources
+        shell: bash
+        run: |
+          git clone --depth 1 https://github.com/phpcfdi/resources-sat-xml resources-sat-xml-cloned
+          mv resources-sat-xml-cloned/resources vendor/eclipxe/cfdiutils/build/resources
+          rm -r -f resources-sat-xml-cloned
+
       - name: Set up environment file
         run: gpg --quiet --batch --yes --decrypt --passphrase="$ENV_GPG_SECRET" --output tests/.env tests/.env-testing.enc
         env:

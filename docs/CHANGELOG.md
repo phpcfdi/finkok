@@ -10,6 +10,9 @@ Estos cambios se aplican y se publican, pero aún no son parte de una versión l
 
 Se actualiza la FIEL y el CSD del RFC `EKU9003173C9` a versiones recientes, las anteriores habían expirado.
 
+En el proceso de integración continua de pruebas funcionales, instalar los recursos XML para evitar la descarga 
+y múltiples fallas por parte del SAT.
+
 Se actualizan las herramientas de desarrollo.
 
 ## Versión 0.5.3 2023-06-07
