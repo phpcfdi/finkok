@@ -31,6 +31,7 @@ final class DocumentSignerTest extends TestCase
 
         // the comparison does not check white spacing,
         // lorem-ipsum-signed.xml is formatted for better reading
+        /** @see tests/_files/lorem-ipsum-signed.xml */
         $this->assertXmlStringEqualsXmlFile($this->filePath('lorem-ipsum-signed.xml'), $signed);
     }
 

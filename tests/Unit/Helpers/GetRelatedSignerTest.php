@@ -22,6 +22,7 @@ final class GetRelatedSignerTest extends TestCase
 
         $signed = $signer->sign($this->createCsdCredential());
 
+        /** @see tests/_files/cancel-get-related-signature-format.xml */
         $this->assertXmlStringEqualsXmlFile($this->filePath('cancel-get-related-signature-format.xml'), $signed);
     }
 }
