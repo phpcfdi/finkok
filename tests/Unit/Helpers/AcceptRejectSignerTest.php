@@ -25,6 +25,7 @@ final class AcceptRejectSignerTest extends TestCase
 
         $signed = $signer->sign($this->createCsdCredential());
 
+        /** @see tests/_files/cancel-accept-reject-format.xml */
         $this->assertXmlStringEqualsXmlFile($this->filePath('cancel-accept-reject-format.xml'), $signed);
     }
 }

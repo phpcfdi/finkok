@@ -25,6 +25,7 @@ final class CancelSignerTest extends TestCase
 
         $signed = $signer->sign($this->createCsdCredential());
 
+        /** @see tests/_files/cancel-cancelsignature-format.xml */
         $this->assertXmlStringEqualsXmlFile($this->filePath('cancel-cancelsignature-format.xml'), $signed);
     }
 }

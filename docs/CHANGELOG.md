@@ -6,6 +6,12 @@ Nos apegamos a [SEMVER](SEMVER.md), revisa la información para entender mejor e
 
 Estos cambios se aplican y se publican, pero aún no son parte de una versión liberada.
 
+### Mantenimiento 2023-06-20
+
+Se actualiza la FIEL y el CSD del RFC `EKU9003173C9` a versiones recientes, las anteriores habían expirado.
+
+Se actualizan las herramientas de desarrollo.
+
 ## Versión 0.5.3 2023-06-07
 
 Se agrega la información de la excepción al momento de hacer la llamada SOAP.

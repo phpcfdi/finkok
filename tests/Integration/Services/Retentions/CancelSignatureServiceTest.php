@@ -41,10 +41,11 @@ final class CancelSignatureServiceTest extends RetentionsTestCase
             throw new RuntimeException('Cannot create a CFDI RET to cancel');
         }
 
-        $maxtime = $this->timePlusLongTestTimeOut();
+        $maxTime = $this->timePlusLongTestTimeOut();
+        $cancelCredential = $this->createCsdCredential();
         while (true) {
             $result = $this->quickFinkok->retentionCancel(
-                $this->createCsdCredential(),
+                $cancelCredential,
                 CancelDocument::newWithErrorsUnrelated($uuid)
             );
             $document = $result->documents()->first();
@@ -53,24 +54,29 @@ final class CancelSignatureServiceTest extends RetentionsTestCase
             // 708: Finkok cannot connect to SAT
             // 1205: UUID no existe (¿el SAT aún no lo tiene?)
             // 1308: Certificado revocado o caduco (¿el SAT tiene problemas de tiempo?)
-            if (! in_array($document->documentStatus(), ['708', '1205', '1308'], true)) {
+            if (
+                ! in_array($result->statusCode(), ['1205', '1308'], true) &&
+                ! in_array($document->documentStatus(), ['708'], true)
+            ) {
                 break;
             }
 
-            // try again
-            if (time() > $maxtime) {
+            // do not try again if in the loop for more than allowed
+            if (time() > $maxTime) {
                 $this->markTestSkipped(<<<MESSAGE
-                    Unable to test QuickFinkok::retentionCancel():
+                    Unable to test cancellation of a Retentions CFDI (timeout):
                     StatusCode: [{$result->statusCode()}], DocumentStatus [{$document->documentStatus()}]
                     MESSAGE);
             }
+
+            // wait and repeat
             sleep(5);
         }
 
         $this->assertNotEmpty($result->voucher(), 'Expected to receive an Acuse, but it was empty');
         $this->assertEmpty(
             $result->statusCode(),
-            'CodEstatus should have content only when command has incorrect values or SAT service is failing'
+            "CodEstatus (value: {$result->statusCode()}) should have content only when failing"
         );
         $this->assertSame($uuid, $document->uuid());
         $this->assertSame('1201', $document->documentStatus());

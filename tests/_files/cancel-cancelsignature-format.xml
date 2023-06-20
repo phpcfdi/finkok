@@ -1,36 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Cancelacion xmlns="http://cancelacfd.sat.gob.mx" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" RfcEmisor="EKU9003173C9" Fecha="2022-01-06T17:49:12">
-    <Folios>
-        <Folio UUID="62B00C5E-4187-4336-B569-44E0030DC729" Motivo="02"></Folio>
-    </Folios>
-    <Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
-        <SignedInfo>
-            <CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/>
-            <SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/>
-            <Reference URI="">
-                <Transforms>
-                    <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/>
-                </Transforms>
-                <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/>
-                <DigestValue>28wlg0suJ57t4P4P+LshbcH5PYE=</DigestValue>
-            </Reference>
-        </SignedInfo>
-        <SignatureValue>h1USGSs4ziIxiWowgp4KItvI/4HlneSyAP+4wSK59NK2ym4Qlyxmtj9O7YCb6Sr6iNhPWBX4pYcNEOpS2rSmpADdhUlxHxxed5XUdfxGViBtSF8y8hahuTiImdE+d41BiXdu2ml/GUbXhDjbWImDYgAevg5tQILJ02PuMNZYWE2WNUGbvwiT9239+vmKmxYtrZYTBaNfI5ESd3Bf6mOeu8qEGCfV0V8O8iBzrkxCuKbfkowe6a/CROcybPJ/WiwXNHP2pPS7FCvQScdObtC89UOCvafgIDEziWREU4SFMydApyhG9Hk/hB9MbsrDdAS/3OjZTNjfRCPV5bo2zAngHg==</SignatureValue>
-        <KeyInfo>
-            <X509Data>
-                <X509IssuerSerial>
-                    <X509IssuerName>CN=AC UAT,O=SERVICIO DE ADMINISTRACION TRIBUTARIA,OU=SAT-IES Authority,emailAddress=oscar.martinez@sat.gob.mx,street=3ra cerrada de cadiz,postalCode=06370,C=MX,ST=CIUDAD DE MEXICO,L=COYOACAN,x500UniqueIdentifier=2.5.4.45,unstructuredName=responsable: ACDMA-SAT</X509IssuerName>
-                    <X509SerialNumber>30001000000400002434</X509SerialNumber>
-                </X509IssuerSerial>
-                <X509Certificate>MIIFuzCCA6OgAwIBAgIUMzAwMDEwMDAwMDA0MDAwMDI0MzQwDQYJKoZIhvcNAQELBQAwggErMQ8wDQYDVQQDDAZBQyBVQVQxLjAsBgNVBAoMJVNFUlZJQ0lPIERFIEFETUlOSVNUUkFDSU9OIFRSSUJVVEFSSUExGjAYBgNVBAsMEVNBVC1JRVMgQXV0aG9yaXR5MSgwJgYJKoZIhvcNAQkBFhlvc2Nhci5tYXJ0aW5lekBzYXQuZ29iLm14MR0wGwYDVQQJDBQzcmEgY2VycmFkYSBkZSBjYWRpejEOMAwGA1UEEQwFMDYzNzAxCzAJBgNVBAYTAk1YMRkwFwYDVQQIDBBDSVVEQUQgREUgTUVYSUNPMREwDwYDVQQHDAhDT1lPQUNBTjERMA8GA1UELRMIMi41LjQuNDUxJTAjBgkqhkiG9w0BCQITFnJlc3BvbnNhYmxlOiBBQ0RNQS1TQVQwHhcNMTkwNjE3MTk0NDE0WhcNMjMwNjE3MTk0NDE0WjCB4jEnMCUGA1UEAxMeRVNDVUVMQSBLRU1QRVIgVVJHQVRFIFNBIERFIENWMScwJQYDVQQpEx5FU0NVRUxBIEtFTVBFUiBVUkdBVEUgU0EgREUgQ1YxJzAlBgNVBAoTHkVTQ1VFTEEgS0VNUEVSIFVSR0FURSBTQSBERSBDVjElMCMGA1UELRMcRUtVOTAwMzE3M0M5IC8gWElRQjg5MTExNlFFNDEeMBwGA1UEBRMVIC8gWElRQjg5MTExNk1HUk1aUjA1MR4wHAYDVQQLExVFc2N1ZWxhIEtlbXBlciBVcmdhdGUwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCN0peKpgfOL75iYRv1fqq+oVYsLPVUR/GibYmGKc9InHFy5lYF6OTYjnIIvmkOdRobbGlCUxORX/tLsl8Ya9gm6Yo7hHnODRBIDup3GISFzB/96R9K/MzYQOcscMIoBDARaycnLvy7FlMvO7/rlVnsSARxZRO8Kz8Zkksj2zpeYpjZIya/369+oGqQk1cTRkHo59JvJ4Tfbk/3iIyf4H/Ini9nBe9cYWo0MnKob7DDt/vsdi5tA8mMtA953LapNyCZIDCRQQlUGNgDqY9/8F5mUvVgkcczsIgGdvf9vMQPSf3jjCiKj7j6ucxl1+FwJWmbvgNmiaUR/0q4m2rm78lFAgMBAAGjHTAbMAwGA1UdEwEB/wQCMAAwCwYDVR0PBAQDAgbAMA0GCSqGSIb3DQEBCwUAA4ICAQBcpj1TjT4jiinIujIdAlFzE6kRwYJCnDG08zSp4kSnShjxADGEXH2chehKMV0FY7c4njA5eDGdA/G2OCTPvF5rpeCZP5Dw504RZkYDl2suRz+wa1sNBVpbnBJEK0fQcN3IftBwsgNFdFhUtCyw3lus1SSJbPxjLHS6FcZZ51YSeIfcNXOAuTqdimusaXq15GrSrCOkM6n2jfj2sMJYM2HXaXJ6rGTEgYmhYdwxWtil6RfZB+fGQ/H9I9WLnl4KTZUS6C9+NLHh4FPDhSk19fpS2S/56aqgFoGAkXAYt9Fy5ECaPcULIfJ1DEbsXKyRdCv3JY89+0MNkOdaDnsemS2o5Gl08zI4iYtt3L40gAZ60NPh31kVLnYNsmvfNxYyKp+AeJtDHyW9w7ftM0Hoi+BuRmcAQSKFV3pk8j51la+jrRBrAUv8blbRcQ5BiZUwJzHFEKIwTsRGoRyEx96sNnB03n6GTwjIGz92SmLdNl95r9rkvp+2m4S6q1lPuXaFg7DGBrXWC8iyqeWE2iobdwIIuXPTMVqQb12m1dAkJVRO5NdHnP/MpqOvOgLqoZBNHGyBg4Gqm4sCJHCxA1c8Elfa2RQTCk0tAzllL4vOnI1GHkGJn65xokGsaU4B4D36xh7eWrfj4/pgWHmtoDAYa8wzSwo2GVCZOs+mtEgOQB91/g==</X509Certificate>
-            </X509Data>
-            <KeyValue>
-                <RSAKeyValue>
-                    <Modulus>jdKXiqYHzi++YmEb9X6qvqFWLCz1VEfxom2JhinPSJxxcuZWBejk2I5yCL5pDnUaG2xpQlMTkV/7S7JfGGvYJumKO4R5zg0QSA7qdxiEhcwf/ekfSvzM2EDnLHDCKAQwEWsnJy78uxZTLzu/65VZ7EgEcWUTvCs/GZJLI9s6XmKY2SMmv9+vfqBqkJNXE0ZB6OfSbyeE325P94iMn+B/yJ4vZwXvXGFqNDJyqG+ww7f77HYubQPJjLQPedy2qTcgmSAwkUEJVBjYA6mPf/BeZlL1YJHHM7CIBnb3/bzED0n944woio+4+rnMZdfhcCVpm74DZomlEf9KuJtq5u/JRQ==</Modulus>
-                    <Exponent>AQAB</Exponent>
-                </RSAKeyValue>
-            </KeyValue>
-        </KeyInfo>
-    </Signature>
+<Cancelacion xmlns="http://cancelacfd.sat.gob.mx" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" RfcEmisor="EKU9003173C9" Fecha="2022-01-06T17:49:12">
+  <Folios>
+    <Folio UUID="62B00C5E-4187-4336-B569-44E0030DC729" Motivo="02"/>
+  </Folios>
+  <Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+    <SignedInfo>
+      <CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/>
+      <SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/>
+      <Reference URI="">
+        <Transforms>
+          <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/>
+        </Transforms>
+        <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/>
+        <DigestValue>28wlg0suJ57t4P4P+LshbcH5PYE=</DigestValue>
+      </Reference>
+    </SignedInfo>
+    <SignatureValue>lCF6SBPlq4kiDnqnRd9DZIRh0pHXgpdCntghKu0niSAu31pOZJGxHweXM9FRDMaj00f5oE0CM5h2+Apoi+cAC854UnsoP2O0oXrXqisGnKpSDiRzrOSBGAAcGTDaxsPeM3WLlOtEHFF90g/rNaj6g33Dt2Wo14JlHlTe/3ZyhM5TVFsOtqW4tGJqaZNO84a64XmGExOFuOhYwQ4kxK9KQ4zFWWlU4Rc4DpYrvkfK0JP0sppK80ncfAEUqKsjB0iSBibyYMe4ddjcUKnxZVE/JuQq6XgBlCJxSO5LRg5l3Y7H9yUqK3bCc+nU02Rc1CNIpK0PQw5mbJSPPTIyop7c8Q==</SignatureValue>
+    <KeyInfo>
+      <X509Data>
+        <X509IssuerSerial>
+          <X509IssuerName>CN=AC UAT,O=SERVICIO DE ADMINISTRACION TRIBUTARIA,OU=SAT-IES Authority,emailAddress=oscar.martinez@sat.gob.mx,street=3ra cerrada de caliz,postalCode=06370,C=MX,ST=CIUDAD DE MEXICO,L=COYOACAN,x500UniqueIdentifier=2.5.4.45,unstructuredName=responsable: ACDMA-SAT</X509IssuerName>
+          <X509SerialNumber>30001000000500003416</X509SerialNumber>
+        </X509IssuerSerial>
+        <X509Certificate>MIIFsDCCA5igAwIBAgIUMzAwMDEwMDAwMDA1MDAwMDM0MTYwDQYJKoZIhvcNAQELBQAwggErMQ8wDQYDVQQDDAZBQyBVQVQxLjAsBgNVBAoMJVNFUlZJQ0lPIERFIEFETUlOSVNUUkFDSU9OIFRSSUJVVEFSSUExGjAYBgNVBAsMEVNBVC1JRVMgQXV0aG9yaXR5MSgwJgYJKoZIhvcNAQkBFhlvc2Nhci5tYXJ0aW5lekBzYXQuZ29iLm14MR0wGwYDVQQJDBQzcmEgY2VycmFkYSBkZSBjYWxpejEOMAwGA1UEEQwFMDYzNzAxCzAJBgNVBAYTAk1YMRkwFwYDVQQIDBBDSVVEQUQgREUgTUVYSUNPMREwDwYDVQQHDAhDT1lPQUNBTjERMA8GA1UELRMIMi41LjQuNDUxJTAjBgkqhkiG9w0BCQITFnJlc3BvbnNhYmxlOiBBQ0RNQS1TQVQwHhcNMjMwNTE4MTE0MzUxWhcNMjcwNTE4MTE0MzUxWjCB1zEnMCUGA1UEAxMeRVNDVUVMQSBLRU1QRVIgVVJHQVRFIFNBIERFIENWMScwJQYDVQQpEx5FU0NVRUxBIEtFTVBFUiBVUkdBVEUgU0EgREUgQ1YxJzAlBgNVBAoTHkVTQ1VFTEEgS0VNUEVSIFVSR0FURSBTQSBERSBDVjElMCMGA1UELRMcRUtVOTAwMzE3M0M5IC8gVkFEQTgwMDkyN0RKMzEeMBwGA1UEBRMVIC8gVkFEQTgwMDkyN0hTUlNSTDA1MRMwEQYDVQQLEwpTdWN1cnNhbCAxMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAtmecO6n2GS0zL025gbHGQVxznPDICoXzR2uUngz4DqxVUC/w9cE6FxSiXm2ap8Gcjg7wmcZfm85EBaxCx/0J2u5CqnhzIoGCdhBPuhWQnIh5TLgj/X6uNquwZkKChbNe9aeFirU/JbyN7Egia9oKH9KZUsodiM/pWAH00PCtoKJ9OBcSHMq8Rqa3KKoBcfkg1ZrgueffwRLws9yOcRWLb02sDOPzGIm/jEFicVYt2Hw1qdRE5xmTZ7AGG0UHs+unkGjpCVeJ+BEBn0JPLWVvDKHZAQMj6s5Bku35+d/MyATkpOPsGT/VTnsouxekDfikJD1f7A1ZpJbqDpkJnss3vQIDAQABox0wGzAMBgNVHRMBAf8EAjAAMAsGA1UdDwQEAwIGwDANBgkqhkiG9w0BAQsFAAOCAgEAFaUgj5PqgvJigNMgtrdXZnbPfVBbukAbW4OGnUhNrA7SRAAfv2BSGk16PI0nBOr7qF2mItmBnjgEwk+DTv8Zr7w5qp7vleC6dIsZFNJoa6ZndrE/f7KO1CYruLXr5gwEkIyGfJ9NwyIagvHHMszzyHiSZIA850fWtbqtythpAliJ2jF35M5pNS+YTkRB+T6L/c6m00ymN3q9lT1rB03YywxrLreRSFZOSrbwWfg34EJbHfbFXpCSVYdJRfiVdvHnewN0r5fUlPtR9stQHyuqewzdkyb5jTTw02D2cUfL57vlPStBj7SEi3uOWvLrsiDnnCIxRMYJ2UA2ktDKHk+zWnsDmaeleSzonv2CHW42yXYPCvWi88oE1DJNYLNkIjua7MxAnkNZbScNw01A6zbLsZ3y8G6eEYnxSTRfwjd8EP4kdiHNJftm7Z4iRU7HOVh79/lRWB+gd171s3d/mI9kte3MRy6V8MMEMCAnMboGpaooYwgAmwclI2XZCczNWXfhaWe0ZS5PmytD/GDpXzkX0oEgY9K/uYo5V77NdZbGAjmyi8cE2B2ogvyaN2XfIInrZPgEffJ4AB7kFA2mwesdLOCh0BLD9itmCve3A1FGR4+stO2ANUoiI3w3Tv2yQSg4bjeDlJ08lXaaFCLW2peEXMXjQUk7fmpb5MNuOUTW6BE=</X509Certificate>
+      </X509Data>
+      <KeyValue>
+        <RSAKeyValue>
+          <Modulus>tmecO6n2GS0zL025gbHGQVxznPDICoXzR2uUngz4DqxVUC/w9cE6FxSiXm2ap8Gcjg7wmcZfm85EBaxCx/0J2u5CqnhzIoGCdhBPuhWQnIh5TLgj/X6uNquwZkKChbNe9aeFirU/JbyN7Egia9oKH9KZUsodiM/pWAH00PCtoKJ9OBcSHMq8Rqa3KKoBcfkg1ZrgueffwRLws9yOcRWLb02sDOPzGIm/jEFicVYt2Hw1qdRE5xmTZ7AGG0UHs+unkGjpCVeJ+BEBn0JPLWVvDKHZAQMj6s5Bku35+d/MyATkpOPsGT/VTnsouxekDfikJD1f7A1ZpJbqDpkJnss3vQ==</Modulus>
+          <Exponent>AQAB</Exponent>
+        </RSAKeyValue>
+      </KeyValue>
+    </KeyInfo>
+  </Signature>
 </Cancelacion>
