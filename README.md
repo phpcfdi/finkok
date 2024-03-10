@@ -166,7 +166,7 @@ Su cancelación es inmediata (al contrario de la solicitud de cancelación actua
 * `cancelSignature(Retentions\CancelSignatureCommand $command): Retentions\StampedResult`
 
 Para descargar una retención debe usar el servicio `Utilerias`, método `get_xml` que está implementado previamente.
-Igualmente se ha creado el método `QuickFinkok::retentionDownload($uuid, $rfc)` para simplificar su implementación.
+Igualmente, se ha creado el método `QuickFinkok::retentionDownload($uuid, $rfc)` para simplificar su implementación.
 
 ### Ayuda para firmado XML para SAT y Finkok
 
@@ -246,7 +246,7 @@ También utilizamos [Versionado Semántico 2.0.0](docs/SEMVER.md) por lo que pue
 sin temor a romper tu aplicación.
 
 | Versión de la librería | Versión de PHP | Fecha de lanzamiento |
-| ---                    | ---            | ---                  |
+|------------------------|----------------|----------------------|
 | 0.1.0                  | 7.2, 7.3 y 7.4 | 2019-03-29           |
 | 0.3.0                  | 7.3, 7.4 y 8.0 | 2021-03-18           |
 
