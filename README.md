@@ -30,10 +30,6 @@ composer require phpcfdi/finkok
 ## Ejemplo básico de uso
 
 ```php
-<?php
-
-declare(strict_types=1);
-
 use PhpCfdi\Finkok\FinkokEnvironment;
 use PhpCfdi\Finkok\FinkokSettings;
 use PhpCfdi\Finkok\QuickFinkok;
@@ -191,9 +187,6 @@ La clase `QuickFinkok` ahorra el proceso de firmar peticiones y lo hace de forma
 se muestra el siguiente ejemplo de cancelación firmada de 1 UUID con certificado y llave privada en archivos.
 
 ```php
-<?php
-declare(strict_types=1);
-
 use PhpCfdi\Credentials\Credential;
 use PhpCfdi\Finkok\Helpers\CancelSigner;
 use PhpCfdi\Finkok\Services\Cancel\CancelSignatureCommand;

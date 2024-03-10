@@ -11,9 +11,6 @@ Nota: El servicio `get_sat_status` solo puede obtener datos de CFDI 3.3 y CFDI 3
 Los datos de RFC emisor, receptor, total y UUID se obtienen directamente del CFDI.
 
 ```php
-<?php
-declare(strict_types=1);
-
 use PhpCfdi\Finkok\FinkokEnvironment;
 use PhpCfdi\Finkok\FinkokSettings;
 use PhpCfdi\Finkok\QuickFinkok;
@@ -30,9 +27,6 @@ echo $satStatus->cancellation();    // (vacío)
 ## Usando QuickFinkok con los datos
 
 ```php
-<?php
-declare(strict_types=1);
-
 use PhpCfdi\Finkok\FinkokEnvironment;
 use PhpCfdi\Finkok\FinkokSettings;
 use PhpCfdi\Finkok\QuickFinkok;
@@ -57,9 +51,6 @@ La fachada `Finkok` es un poco más compleja de usar y funciona mejor si se est�
 Para cualquier otro caso se recomienda usar `QuickFinkok`.
 
 ```php
-<?php
-declare(strict_types=1);
-
 use PhpCfdi\Finkok\FinkokEnvironment;
 use PhpCfdi\Finkok\FinkokSettings;
 use PhpCfdi\Finkok\Finkok;

@@ -6,15 +6,13 @@ El resultado del firmado está en `$result` que es de tipo `PhpCfdi\Finkok\Servi
 y se pueden extraer diferentes propiedades de este firmado como el xml firmado o el listado de alertas.
 
 ```php
-<?php
-
-declare(strict_types=1);
-
 use PhpCfdi\Finkok\FinkokEnvironment;
 use PhpCfdi\Finkok\FinkokSettings;
 use PhpCfdi\Finkok\QuickFinkok;
 
-$precfdi = '...';
+/**
+ * @var string $precfdi Para este ejemplo esta variable contiene el CFDI sellado sin el Timbre Fiscal Digital 
+ */
 
 $finkok = new QuickFinkok(new FinkokSettings('finkok-usuario', 'finkok-password', FinkokEnvironment::makeProduction()));
 $result = $finkok->stamp($precfdi);
