@@ -230,6 +230,39 @@ Durante el proceso de implementación he creado diversas notas y documentos:
     - [X] [El valor `CodEstatus` está ausente en la cancelación de CFDI de Retenciones](docs/issues/CancelacionRetencionesCodEstatus.md)
     - [X] [El método `Registration#Get` con `taxpayer_id` vacío no devuelve el listado de clientes](docs/issues/RegistrationGetNoList.md)
 
+## Capturar conversación HTTP
+
+Algunas veces, al reportar a Finkok un problema, nos solicitan la conversación HTTP (*Request* y *Response*)
+para poder revisar el problema sobre la información enviada.
+
+Esta librería genera mensajes utilizando *PSR-3: Logger Interface*, y se utiliza dentro del objeto `SoapFactory`
+para crear un `SoapCaller`. Este objeto envía dos tipos de mensajes: `LogLevel::ERROR` cuando ocurre un error al
+momento de establecer comunicación con los servicios, y `LogLevel::DEBUG` cuando se ejecutó una llamada SOAP.
+Ambos mensajes están representados como una cadena en formato JSON, por lo que, para leerla correctamente
+es importante decodificarla.
+
+La clase [`PhpCfdi\Finkok\Tests\LoggerPrinter`](https://github.com/phpcfdi/finkok/blob/main/tests/LoggerPrinter.php)
+es un *ejemplo de implementación* de `LoggerInterface` que manda los mensajes recibidos a la salida estándar o
+a un archivo. Es importante notar que el objeto `LoggerPrinter` no está disponible en el paquete, sin embargo,
+lo puedes descargar y poner dentro de tu proyecto con tu espacio de nombres.
+
+De igual forma, se puede utilizar cualquier objeto que implemente `LoggerInterface`, por ejemplo, en Laravel se
+puede usar `$logger = app(Psr\Log\LoggerInterface::class)`. Pero recuerda que, una vez que tengas el mensaje,
+deberás decodificarlo de JSON a texto plano.
+
+Para establecer el objeto `Logger` es recomendable hacerlo de la siguiente forma:
+
+```php
+use PhpCfdi\Finkok\FinkokEnvironment;
+use PhpCfdi\Finkok\FinkokSettings;
+use PhpCfdi\Finkok\Tests\LoggerPrinter;
+
+$logger = new LoggerPrinter('/tmp/finkok.log');
+
+$settings = new FinkokSettings('user@host.com', 'secret', FinkokEnvironment::makeProduction());
+$settings->soapFactory()->setLogger($logger);
+```
+
 ## Compatibilidad
 
 Esta librería se mantendrá compatible con al menos la versión con
