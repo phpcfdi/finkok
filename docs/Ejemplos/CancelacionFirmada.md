@@ -7,9 +7,6 @@ de cancelación del CFDI `11111111-2222-3333-4444-000000000001` del RFC `EKU9003
 ## Ejemplo usando `QuickFinkok`
 
 ```php
-<?php
-declare(strict_types=1);
-
 use PhpCfdi\Credentials\Credential;
 use PhpCfdi\Finkok\FinkokEnvironment;
 use PhpCfdi\Finkok\FinkokSettings;
@@ -45,10 +42,6 @@ composer require phpcfdi/credentials
 ```
 
 ```php
-<?php
-
-declare(strict_types=1);
-
 use PhpCfdi\Credentials\Credential;
 use PhpCfdi\Finkok\Finkok;
 use PhpCfdi\Finkok\FinkokEnvironment;
@@ -79,15 +72,6 @@ composer require phpcfdi/xml-cancelacion
 ```
 
 ```php
-<?php declare(strict_types=1);
-
-use PhpCfdi\Finkok\Finkok;
-use PhpCfdi\Finkok\FinkokEnvironment;
-use PhpCfdi\Finkok\FinkokSettings;
-use PhpCfdi\Finkok\Services\Cancel\CancelSignatureCommand;
-use PhpCfdi\XmlCancelacion\XmlCancelacionHelper;
-use PhpCfdi\XmlCancelacion\Models\CancelDocument;
-
 $cancelXml = (new XmlCancelacionHelper())
     ->setNewCredentials('certificado.cer', 'llave-privada.key.pem', '12345678a')
     ->signCancellation(CancelDocument::newWithErrorsUnrelated('11111111-2222-3333-4444-000000000001'), new DateTimeImmutable());

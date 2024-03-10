@@ -6,6 +6,26 @@ Nos apegamos a [SEMVER](SEMVER.md), revisa la información para entender mejor e
 
 Estos cambios se aplican y se publican, pero aún no son parte de una versión liberada.
 
+## Versión 0.5.4 2023-06-07
+
+Se actualiza el año de la licencia a 2024.
+
+Se agrega una sección *Capturar conversación HTTP* al archivo `README.md`.
+
+Se actualizan las reglas del estándar de código.
+
+Se permite usar `symfony/dotenv:^7.0` en desarrollo.
+
+Se omite la detección de lenguaje en el directorio `tests/_files`.
+
+Se actualizan los flujos de trabajo de GitHub:
+
+- Se agrega PHP 8.3 a la matriz de pruebas.
+- Se ejecutan los procesos en PHP 8.3.
+- Se usan las acciones de GitHub versión 4.
+
+Se actualizan las herramientas de desarrollo.
+
 ### Mantenimiento 2023-06-20
 
 Se actualiza la FIEL y el CSD del RFC `EKU9003173C9` a versiones recientes, las anteriores habían expirado.

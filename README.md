@@ -30,10 +30,6 @@ composer require phpcfdi/finkok
 ## Ejemplo básico de uso
 
 ```php
-<?php
-
-declare(strict_types=1);
-
 use PhpCfdi\Finkok\FinkokEnvironment;
 use PhpCfdi\Finkok\FinkokSettings;
 use PhpCfdi\Finkok\QuickFinkok;
@@ -166,7 +162,7 @@ Su cancelación es inmediata (al contrario de la solicitud de cancelación actua
 * `cancelSignature(Retentions\CancelSignatureCommand $command): Retentions\StampedResult`
 
 Para descargar una retención debe usar el servicio `Utilerias`, método `get_xml` que está implementado previamente.
-Igualmente se ha creado el método `QuickFinkok::retentionDownload($uuid, $rfc)` para simplificar su implementación.
+Igualmente, se ha creado el método `QuickFinkok::retentionDownload($uuid, $rfc)` para simplificar su implementación.
 
 ### Ayuda para firmado XML para SAT y Finkok
 
@@ -191,9 +187,6 @@ La clase `QuickFinkok` ahorra el proceso de firmar peticiones y lo hace de forma
 se muestra el siguiente ejemplo de cancelación firmada de 1 UUID con certificado y llave privada en archivos.
 
 ```php
-<?php
-declare(strict_types=1);
-
 use PhpCfdi\Credentials\Credential;
 use PhpCfdi\Finkok\Helpers\CancelSigner;
 use PhpCfdi\Finkok\Services\Cancel\CancelSignatureCommand;
@@ -237,6 +230,39 @@ Durante el proceso de implementación he creado diversas notas y documentos:
     - [X] [El valor `CodEstatus` está ausente en la cancelación de CFDI de Retenciones](docs/issues/CancelacionRetencionesCodEstatus.md)
     - [X] [El método `Registration#Get` con `taxpayer_id` vacío no devuelve el listado de clientes](docs/issues/RegistrationGetNoList.md)
 
+## Capturar conversación HTTP
+
+Algunas veces, al reportar a Finkok un problema, nos solicitan la conversación HTTP (*Request* y *Response*)
+para poder revisar el problema sobre la información enviada.
+
+Esta librería genera mensajes utilizando *PSR-3: Logger Interface*, y se utiliza dentro del objeto `SoapFactory`
+para crear un `SoapCaller`. Este objeto envía dos tipos de mensajes: `LogLevel::ERROR` cuando ocurre un error al
+momento de establecer comunicación con los servicios, y `LogLevel::DEBUG` cuando se ejecutó una llamada SOAP.
+Ambos mensajes están representados como una cadena en formato JSON, por lo que, para leerla correctamente
+es importante decodificarla.
+
+La clase [`PhpCfdi\Finkok\Tests\LoggerPrinter`](https://github.com/phpcfdi/finkok/blob/main/tests/LoggerPrinter.php)
+es un *ejemplo de implementación* de `LoggerInterface` que manda los mensajes recibidos a la salida estándar o
+a un archivo. Es importante notar que el objeto `LoggerPrinter` no está disponible en el paquete, sin embargo,
+lo puedes descargar y poner dentro de tu proyecto con tu espacio de nombres.
+
+De igual forma, se puede utilizar cualquier objeto que implemente `LoggerInterface`, por ejemplo, en Laravel se
+puede usar `$logger = app(Psr\Log\LoggerInterface::class)`. Pero recuerda que, una vez que tengas el mensaje,
+deberás decodificarlo de JSON a texto plano.
+
+Para establecer el objeto `Logger` es recomendable hacerlo de la siguiente forma:
+
+```php
+use PhpCfdi\Finkok\FinkokEnvironment;
+use PhpCfdi\Finkok\FinkokSettings;
+use PhpCfdi\Finkok\Tests\LoggerPrinter;
+
+$logger = new LoggerPrinter('/tmp/finkok.log');
+
+$settings = new FinkokSettings('user@host.com', 'secret', FinkokEnvironment::makeProduction());
+$settings->soapFactory()->setLogger($logger);
+```
+
 ## Compatibilidad
 
 Esta librería se mantendrá compatible con al menos la versión con
@@ -245,10 +271,10 @@ Esta librería se mantendrá compatible con al menos la versión con
 También utilizamos [Versionado Semántico 2.0.0](docs/SEMVER.md) por lo que puedes usar esta librería
 sin temor a romper tu aplicación.
 
-| Versión de la librería | Versión de PHP | Fecha de lanzamiento |
-| ---                    | ---            | ---                  |
-| 0.1.0                  | 7.2, 7.3 y 7.4 | 2019-03-29           |
-| 0.3.0                  | 7.3, 7.4 y 8.0 | 2021-03-18           |
+| Versión de la librería | Versión de PHP                | Fecha de lanzamiento |
+|------------------------|-------------------------------|----------------------|
+| 0.1.0                  | 7.2, 7.3 y 7.4                | 2019-03-29           |
+| 0.3.0                  | 7.3, 7.4, 8.0, 8.1, 8.2 y 8.3 | 2021-03-18           |
 
 ## Contribuciones
 
