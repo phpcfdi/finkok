@@ -271,10 +271,10 @@ Esta librería se mantendrá compatible con al menos la versión con
 También utilizamos [Versionado Semántico 2.0.0](docs/SEMVER.md) por lo que puedes usar esta librería
 sin temor a romper tu aplicación.
 
-| Versión de la librería | Versión de PHP | Fecha de lanzamiento |
-|------------------------|----------------|----------------------|
-| 0.1.0                  | 7.2, 7.3 y 7.4 | 2019-03-29           |
-| 0.3.0                  | 7.3, 7.4 y 8.0 | 2021-03-18           |
+| Versión de la librería | Versión de PHP                | Fecha de lanzamiento |
+|------------------------|-------------------------------|----------------------|
+| 0.1.0                  | 7.2, 7.3 y 7.4                | 2019-03-29           |
+| 0.3.0                  | 7.3, 7.4, 8.0, 8.1, 8.2 y 8.3 | 2021-03-18           |
 
 ## Contribuciones
 
