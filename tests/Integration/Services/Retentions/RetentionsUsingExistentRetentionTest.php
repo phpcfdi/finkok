@@ -60,22 +60,22 @@ final class RetentionsUsingExistentRetentionTest extends RetentionsTestCase
         $this->assertSame('El CFDI contiene un timbre previo', $repeatedResult->alerts()->first()->message());
     }
 
-    public function testStamped(): void
+    public function testStampedRetentionRecentlyCreated(): void
     {
         $currentResult = $this->currentRetentionsStampResult();
         $preCfdi = $this->currentRetentionsPreCfdi(); // this is the same precfdi used on currentStampResult
 
         // consume quickfinkok to simplify the execution
-        $downloadResult = $this->quickFinkok->retentionStamped($preCfdi);
+        $stampedResult = $this->quickFinkok->retentionStamped($preCfdi);
 
         $this->assertXmlStringEqualsXmlString(
             $currentResult->xml(),
-            $downloadResult->xml(),
+            $stampedResult->xml(),
             'Created and downloaded RET must be XML equal'
         );
         $this->assertSame(
             $currentResult->xml(),
-            $downloadResult->xml(),
+            $stampedResult->xml(),
             'Created and downloaded RET must be identical'
         );
     }
