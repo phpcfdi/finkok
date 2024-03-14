@@ -6,6 +6,7 @@ namespace PhpCfdi\Finkok\Tests\Integration\Services\Stamping;
 
 use PhpCfdi\Finkok\Services\Stamping\StampingCommand;
 use PhpCfdi\Finkok\Services\Stamping\StampService;
+use PhpCfdi\Finkok\Tests\Factories\RandomPreCfdi;
 use PhpCfdi\Finkok\Tests\Integration\IntegrationTestCase;
 
 final class StampServiceTest extends IntegrationTestCase
@@ -68,5 +69,35 @@ final class StampServiceTest extends IntegrationTestCase
 
         $this->assertGreaterThan(0, $result->alerts()->count());
         $this->assertSame('Fecha y hora de generación fuera de rango', $result->alerts()->first()->message());
+    }
+
+    /**
+     * @testWith ["&"]
+     *           ["&amp;"]
+     *           ["&Aacute;"]
+     *           ["&copy;"]
+     *           ["P&G"]
+     */
+    public function testStampPrecfdiWithConceptoDescriptionCaracteresCodificados(string $descriptionPart): void
+    {
+        $description = sprintf(
+            'Mousepad con leyenda «%s es un texto XML válido»',
+            htmlentities($descriptionPart, ENT_XML1)
+        );
+        $expectedXmlEncodedText = htmlentities($description, ENT_XML1);
+
+        $randomPreCfdi = new RandomPreCfdi();
+        $helper = $randomPreCfdi->createHelper();
+        $helper->setConceptoDescription($description);
+        $preCfdi = $helper->create();
+        $command = new StampingCommand($preCfdi);
+
+        $service = $this->createService();
+        $result = $service->stamp($command);
+
+        $this->assertCount(0, $result->alerts());
+        $this->assertNotEmpty($result->uuid());
+
+        $this->assertStringContainsString($expectedXmlEncodedText, $result->xml());
     }
 }

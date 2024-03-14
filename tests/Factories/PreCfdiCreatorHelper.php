@@ -15,6 +15,9 @@ final class PreCfdiCreatorHelper
     /** @var DateTimeImmutable */
     private $invoiceDate;
 
+    /** @var string */
+    private $conceptoDescription;
+
     /** @var float */
     private $conceptoAmount;
 
@@ -51,6 +54,7 @@ final class PreCfdiCreatorHelper
         $this->keyPemFile = $keyPemFile;
         $this->passPhrase = $passPhrase;
         $this->invoiceDate = new DateTimeImmutable('now -5 minutes', new DateTimeZone('America/Mexico_City'));
+        $this->conceptoDescription = 'Portable tetris gamepad pro++ ⏻';
         $this->conceptoAmount = round(random_int(1000, 4000) + random_int(0, 99) / 100, 2);
     }
 
@@ -64,11 +68,20 @@ final class PreCfdiCreatorHelper
         $this->invoiceDate = $invoiceDate;
     }
 
+    public function getConceptoDescription(): string
+    {
+        return $this->conceptoDescription;
+    }
+
+    public function setConceptoDescription(string $conceptoDescription): void
+    {
+        $this->conceptoDescription = $conceptoDescription;
+    }
+
     public function getConceptoAmount(): float
     {
         return $this->conceptoAmount;
     }
-
     public function setConceptoAmount(float $conceptoAmount): void
     {
         $this->conceptoAmount = $conceptoAmount;
@@ -154,7 +167,7 @@ final class PreCfdiCreatorHelper
             'Cantidad' => '4',
             'ClaveUnidad' => 'H87', // Pieza
             'Unidad' => 'PIEZA',
-            'Descripcion' => 'Portable tetris gamepad pro++ ⏻',
+            'Descripcion' => $this->getConceptoDescription(),
             'ValorUnitario' => CfdiFormat::number($this->getConceptoAmount() / 4, 2),
             'Importe' => CfdiFormat::number($this->getConceptoAmount(), 2),
             'Descuento' => CfdiFormat::number($this->getConceptoAmount() / 4, 2), // hot sale: take 4, pay 3
