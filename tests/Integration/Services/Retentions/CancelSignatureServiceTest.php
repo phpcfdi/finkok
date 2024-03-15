@@ -54,8 +54,9 @@ final class CancelSignatureServiceTest extends RetentionsTestCase
             // 708: Finkok cannot connect to SAT
             // 1205: UUID no existe (¿el SAT aún no lo tiene?)
             // 1308: Certificado revocado o caduco (¿el SAT tiene problemas de tiempo?)
+            // UUID no existe: Mensaje de Finkok donde no encuentra el CFDI que acaba de timbrar
             if (
-                ! in_array($result->statusCode(), ['1205', '1308'], true) &&
+                ! in_array($result->statusCode(), ['1205', '1308', 'UUID Not Found'], true) &&
                 ! in_array($document->documentStatus(), ['708'], true)
             ) {
                 break;
@@ -70,7 +71,7 @@ final class CancelSignatureServiceTest extends RetentionsTestCase
             }
 
             // wait and repeat
-            sleep(5);
+            sleep(9);
         }
 
         $this->assertNotEmpty($result->voucher(), 'Expected to receive an Acuse, but it was empty');
