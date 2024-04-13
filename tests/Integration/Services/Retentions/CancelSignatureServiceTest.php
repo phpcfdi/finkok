@@ -25,11 +25,14 @@ final class CancelSignatureServiceTest extends RetentionsTestCase
     public function testCancelSignatureWithNonExistentUUID(): void
     {
         $uuid = '11111111-2222-3333-4444-000000000001';
+        $expectedStatusCode = sprintf('UUID: %s No Encontrado', $uuid);
+
         $result = $this->quickFinkok->retentionCancel(
             $this->createCsdCredential(),
             CancelDocument::newWithErrorsUnrelated($uuid)
         );
-        $this->assertSame('UUID Not Found', $result->statusCode());
+
+        $this->assertSame($expectedStatusCode, $result->statusCode());
     }
 
     /** @group large */
