@@ -82,6 +82,7 @@ final class PreCfdiCreatorHelper
     {
         return $this->conceptoAmount;
     }
+
     public function setConceptoAmount(float $conceptoAmount): void
     {
         $this->conceptoAmount = $conceptoAmount;
