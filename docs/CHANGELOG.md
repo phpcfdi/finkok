@@ -6,11 +6,13 @@ Nos apegamos a [SEMVER](SEMVER.md), revisa la información para entender mejor e
 
 Estos cambios se aplican y se publican, pero aún no son parte de una versión liberada.
 
-## Versión 0.5.4 2023-06-07
+## Versión 0.5.4 2024-04-12
 
 Se actualiza el año de la licencia a 2024.
 
 Se agrega una sección *Capturar conversación HTTP* al archivo `README.md`.
+
+Se agrega la documentación del problema: *Al timbrar con un texto `&amp;` devuelve `705 - XML Estructura inválida`*.
 
 Se actualizan las reglas del estándar de código.
 
