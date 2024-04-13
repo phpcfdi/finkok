@@ -18,11 +18,15 @@ final class CancelSignatureServiceTest extends IntegrationTestCase
 
     public function testCancelNonExistentUuid(): void
     {
+        $uuid = '12345678-1234-1234-1234-123456789012';
+        $expectedStatusCode = sprintf('UUID: %s No Encontrado', $uuid);
+
         $command = $this->createCancelSignatureCommandFromDocument(
-            CancelDocument::newWithErrorsUnrelated('12345678-1234-1234-1234-123456789012')
+            CancelDocument::newWithErrorsUnrelated($uuid)
         );
         $service = $this->createService();
         $result = $service->cancelSignature($command);
-        $this->assertSame('UUID Not Found', $result->statusCode());
+
+        $this->assertSame($expectedStatusCode, $result->statusCode());
     }
 }

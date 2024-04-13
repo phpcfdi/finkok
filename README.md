@@ -229,6 +229,7 @@ Durante el proceso de implementación he creado diversas notas y documentos:
     - [X] [Error de cancelación de retenciones 1308 - Certificado revocado o caduco](docs/issues/CancelacionRetencionesError1308.md)
     - [X] [El valor `CodEstatus` está ausente en la cancelación de CFDI de Retenciones](docs/issues/CancelacionRetencionesCodEstatus.md)
     - [X] [El método `Registration#Get` con `taxpayer_id` vacío no devuelve el listado de clientes](docs/issues/RegistrationGetNoList.md)
+    - [X] [Al timbrar con un texto `&amp;` devuelve `705 - XML Estructura inválida`](docs/issues/StampAmpersand.md)
 
 ## Capturar conversación HTTP
 
