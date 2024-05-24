@@ -24,10 +24,6 @@ final class FileLogger extends AbstractLogger implements LoggerInterface
      */
     public function log($level, $message, array $context = []): void
     {
-        file_put_contents(
-            $this->outputFile,
-            PHP_EOL . print_r(json_decode(strval($message)), true),
-            FILE_APPEND
-        );
+        file_put_contents($this->outputFile, $message . PHP_EOL, FILE_APPEND);
     }
 }

@@ -9,6 +9,7 @@ use Exception;
 use PhpCfdi\Finkok\FinkokEnvironment;
 use PhpCfdi\Finkok\FinkokSettings;
 use PhpCfdi\Finkok\Helpers\FileLogger;
+use PhpCfdi\Finkok\Helpers\JsonDecoderLogger;
 use PhpCfdi\Finkok\QuickFinkok;
 use Throwable;
 
@@ -45,13 +46,13 @@ exit(call_user_func(new class ($argv[0] ?? '') {
                 FinkokEnvironment::makeDevelopment()
             );
             if ($debug) {
-                $settings->soapFactory()->setLogger(new FileLogger());
+                $settings->soapFactory()->setLogger(new JsonDecoderLogger(new FileLogger()));
             }
             $quickFinkok = new QuickFinkok($settings);
 
             $stamp = $quickFinkok->stamp($preCfdiContents);
 
-            echo 'WS-Response: ', json_encode($stamp->rawData(), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE), PHP_EOL;
+            echo 'WS-Response: ', json_encode($stamp->rawData(), JSON_PRETTY_PRINT), PHP_EOL;
 
             if ('' === $stamp->uuid()) {
                 throw new Exception("Stamp on $preCfdiPath did not return an UUID");
