@@ -14,6 +14,8 @@ de la herramienta dentro de la librería.
 Se crea la utilería `PhpCfdi\Finkok\Helpers\JsonDecoderLogger` para transformar un mensaje JSON a texto simple
 generado por la función `print_r`. Se puede configurar para enviar también el mensaje JSON.
 
+Se normaliza el formato de los mensajes JSON para usar `JSON_PRETTY_PRINT` y `JSON_UNESCAPED_SLASHES`.
+
 Se actualiza la documentación en el `README`.
 
 ## Versión 0.5.4 2024-04-12
