@@ -1,5 +1,8 @@
 # phpcfdi/finkok To Do List
 
+- Modificar la clase `SoapCaller` para que no dependa de `LoggerInterface` y en su lugar introducir
+  una interfaz para capturar los eventos de llamada exitosa y llamada con error. 
+
 - Agregar la ejecución de test de integración al flujo de trabajo `.github/workflows/build.yml`;
   es necesario entender cómo funcionan los secretos para poder crear un archivo de entorno seguro.
 

@@ -59,7 +59,7 @@ class SoapCaller implements LoggerAwareInterface
             $result = $soap->__soapCall($methodName, [$finalParameters]);
             $this->logger->debug(strval(json_encode([
                 $methodName => $this->extractSoapClientTrace($soap),
-            ], JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE)));
+            ], JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES)));
             /** @var stdClass $result */
             return $result;
         } catch (Throwable $exception) {
@@ -69,7 +69,7 @@ class SoapCaller implements LoggerAwareInterface
                     $this->extractSoapClientTrace($soap),
                     ['exception' => ($exception instanceof JsonSerializable) ? $exception : print_r($exception, true)]
                 ),
-                JSON_PRETTY_PRINT
+                JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES
             )));
             throw new RuntimeException(sprintf('Fail soap call to %s', $methodName), 0, $exception);
         }
@@ -77,16 +77,20 @@ class SoapCaller implements LoggerAwareInterface
 
     /**
      * @param SoapClient $soapClient
-     * @return array<string, string>
+     * @return array<string, array<string, string>>
      * @noinspection PhpUsageOfSilenceOperatorInspection
      */
     protected function extractSoapClientTrace(SoapClient $soapClient): array
     {
         return [
-            'request.headers' => (string) @$soapClient->__getLastRequestHeaders(),
-            'request.body' => (string) @$soapClient->__getLastRequest(),
-            'response.headers' => (string) @$soapClient->__getLastResponseHeaders(),
-            'response.body' => (string) @$soapClient->__getLastResponse(),
+            'request' => [
+                'headers' => (string) @$soapClient->__getLastRequestHeaders(),
+                'body' => (string) @$soapClient->__getLastRequest(),
+            ],
+            'response' => [
+                'headers' => (string) @$soapClient->__getLastResponseHeaders(),
+                'body' => (string) @$soapClient->__getLastResponse(),
+            ],
         ];
     }
 

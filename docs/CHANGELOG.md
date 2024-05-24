@@ -6,6 +6,18 @@ Nos apegamos a [SEMVER](SEMVER.md), revisa la información para entender mejor e
 
 Estos cambios se aplican y se publican, pero aún no son parte de una versión liberada.
 
+## Versión 0.5.5 2024-05-24
+
+Se mueve `PhpCfdi\Finkok\Tests\LoggerPrinter` a `PhpCfdi\Finkok\Helpers\FileLogger` para permitir la distribución
+de la herramienta dentro de la librería.
+
+Se crea la utilería `PhpCfdi\Finkok\Helpers\JsonDecoderLogger` para transformar un mensaje JSON a texto simple
+generado por la función `print_r`. Se puede configurar para enviar también el mensaje JSON.
+
+Se normaliza el formato de los mensajes JSON para usar `JSON_PRETTY_PRINT` y `JSON_UNESCAPED_SLASHES`.
+
+Se actualiza la documentación en el `README`.
+
 ## Versión 0.5.4 2024-04-12
 
 Se actualiza el año de la licencia a 2024.

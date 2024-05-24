@@ -239,29 +239,48 @@ para poder revisar el problema sobre la información enviada.
 Esta librería genera mensajes utilizando *PSR-3: Logger Interface*, y se utiliza dentro del objeto `SoapFactory`
 para crear un `SoapCaller`. Este objeto envía dos tipos de mensajes: `LogLevel::ERROR` cuando ocurre un error al
 momento de establecer comunicación con los servicios, y `LogLevel::DEBUG` cuando se ejecutó una llamada SOAP.
-Ambos mensajes están representados como una cadena en formato JSON, por lo que, para leerla correctamente
+Ambos mensajes están representados como una cadena en formato JSON, por lo que, para leerla fácilmente
 es importante decodificarla.
 
-La clase [`PhpCfdi\Finkok\Tests\LoggerPrinter`](https://github.com/phpcfdi/finkok/blob/main/tests/LoggerPrinter.php)
-es un *ejemplo de implementación* de `LoggerInterface` que manda los mensajes recibidos a la salida estándar o
-a un archivo. Es importante notar que el objeto `LoggerPrinter` no está disponible en el paquete, sin embargo,
-lo puedes descargar y poner dentro de tu proyecto con tu espacio de nombres.
+El formato JSON es mejor dado que permite analizar el texto y encontrar caracteres especiales,
+mientras que, al convertirlo a un texto más entendible para el humano, estos caracteres especiales
+se pueden esconder o interpretar de forma errónea.
 
-De igual forma, se puede utilizar cualquier objeto que implemente `LoggerInterface`, por ejemplo, en Laravel se
-puede usar `$logger = app(Psr\Log\LoggerInterface::class)`. Pero recuerda que, una vez que tengas el mensaje,
-deberás decodificarlo de JSON a texto plano.
+Se ofrece la clase `PhpCfdi\Finkok\Helpers\FileLogger` como una utilería de `LoggerInterface`
+que manda los mensajes recibidos a la salida estándar o a un archivo.
 
-Para establecer el objeto `Logger` es recomendable hacerlo de la siguiente forma:
+También se ofrece la clase `PhpCfdi\Finkok\Helpers\JsonDecoderLogger` como una utilería de `LoggerInterface`
+que decodifica el mensaje JSON y luego lo convierte a cadena de caracteres usando la función `print_r()`,
+para después mandarlo a otro objeto `LoggerInterface`.
+
+En el siguiente ejemplo se muestra la forma recomendada para establecer el objeto `Logger`,
+también se muestra el uso de `JsonDecoderLogger` para realizar la conversión de JSON a texto plano y
+`FileLogger` para enviar el mensaje a un archivo específico.
+
+La clase `JsonDecoderLogger` puede generar pérdida de información, pero los mensajes son más entendibles,
+si deseas también incluir el mensaje JSON puedes usar `JsonDecoderLogger::setAlsoLogJsonMessage(true)`.
 
 ```php
 use PhpCfdi\Finkok\FinkokEnvironment;
 use PhpCfdi\Finkok\FinkokSettings;
-use PhpCfdi\Finkok\Tests\LoggerPrinter;
+use PhpCfdi\Finkok\Helpers\FileLogger;
+use PhpCfdi\Finkok\Helpers\JsonDecoderLogger;
 
-$logger = new LoggerPrinter('/tmp/finkok.log');
+$logger = new JsonDecoderLogger(new FileLogger('/tmp/finkok.log'));
+$logger->setAlsoLogJsonMessage(true); // enviar en texto simple y también en formato JSON
 
 $settings = new FinkokSettings('user@host.com', 'secret', FinkokEnvironment::makeProduction());
 $settings->soapFactory()->setLogger($logger);
+```
+
+Si estás usando Laravel, ya cuentas con una implementación de `LoggerInterface`, por lo que te recomiendo usar:
+
+```php
+/** @var \Psr\Log\LoggerInterface $logger */
+$logger = app(\Psr\Log\LoggerInterface::class);
+
+// Encapsular el logger en el decodificador JSON:
+$logger = new \PhpCfdi\Finkok\Helpers\JsonDecoderLogger($logger);
 ```
 
 ## Compatibilidad

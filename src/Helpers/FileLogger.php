@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PhpCfdi\Finkok\Tests;
+namespace PhpCfdi\Finkok\Helpers;
 
 use Psr\Log\AbstractLogger;
 use Psr\Log\LoggerInterface;
 
-final class LoggerPrinter extends AbstractLogger implements LoggerInterface
+final class FileLogger extends AbstractLogger implements LoggerInterface
 {
     /** @var string */
     public $outputFile;
@@ -24,10 +24,6 @@ final class LoggerPrinter extends AbstractLogger implements LoggerInterface
      */
     public function log($level, $message, array $context = []): void
     {
-        file_put_contents(
-            $this->outputFile,
-            PHP_EOL . print_r(json_decode(strval($message)), true),
-            FILE_APPEND
-        );
+        file_put_contents($this->outputFile, $message . PHP_EOL, FILE_APPEND);
     }
 }
