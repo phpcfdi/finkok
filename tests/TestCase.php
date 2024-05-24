@@ -8,6 +8,7 @@ use DateTimeImmutable;
 use PhpCfdi\Credentials\Credential;
 use PhpCfdi\Finkok\FinkokEnvironment;
 use PhpCfdi\Finkok\FinkokSettings;
+use PhpCfdi\Finkok\Helpers\FileLogger;
 use PhpCfdi\Finkok\SoapFactory;
 
 abstract class TestCase extends \PHPUnit\Framework\TestCase
@@ -31,7 +32,7 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
                 $this->getName(),
                 uniqid()
             );
-            $settings->soapFactory()->setLogger(new LoggerPrinter($loggerOutputFile));
+            $settings->soapFactory()->setLogger(new FileLogger($loggerOutputFile));
         }
         return $settings;
     }

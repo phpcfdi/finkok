@@ -242,9 +242,9 @@ momento de establecer comunicación con los servicios, y `LogLevel::DEBUG` cuand
 Ambos mensajes están representados como una cadena en formato JSON, por lo que, para leerla correctamente
 es importante decodificarla.
 
-La clase [`PhpCfdi\Finkok\Tests\LoggerPrinter`](https://github.com/phpcfdi/finkok/blob/main/tests/LoggerPrinter.php)
+La clase [`PhpCfdi\Finkok\Helpers\FileLogger`](https://github.com/phpcfdi/finkok/blob/main/src/Helpers/FileLogger.php)
 es un *ejemplo de implementación* de `LoggerInterface` que manda los mensajes recibidos a la salida estándar o
-a un archivo. Es importante notar que el objeto `LoggerPrinter` no está disponible en el paquete, sin embargo,
+a un archivo. Es importante notar que el objeto `FileLogger` no está disponible en el paquete, sin embargo,
 lo puedes descargar y poner dentro de tu proyecto con tu espacio de nombres.
 
 De igual forma, se puede utilizar cualquier objeto que implemente `LoggerInterface`, por ejemplo, en Laravel se
@@ -256,9 +256,9 @@ Para establecer el objeto `Logger` es recomendable hacerlo de la siguiente forma
 ```php
 use PhpCfdi\Finkok\FinkokEnvironment;
 use PhpCfdi\Finkok\FinkokSettings;
-use PhpCfdi\Finkok\Tests\LoggerPrinter;
+use PhpCfdi\Finkok\Helpers\FileLogger;
 
-$logger = new LoggerPrinter('/tmp/finkok.log');
+$logger = new FileLogger('/tmp/finkok.log');
 
 $settings = new FinkokSettings('user@host.com', 'secret', FinkokEnvironment::makeProduction());
 $settings->soapFactory()->setLogger($logger);

@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PhpCfdi\Finkok\Tests;
+namespace PhpCfdi\Finkok\Helpers;
 
 use Psr\Log\AbstractLogger;
 use Psr\Log\LoggerInterface;
 
-final class LoggerPrinter extends AbstractLogger implements LoggerInterface
+final class FileLogger extends AbstractLogger implements LoggerInterface
 {
     /** @var string */
     public $outputFile;

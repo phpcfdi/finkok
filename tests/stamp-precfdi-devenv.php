@@ -8,6 +8,7 @@ namespace PhpCfdi\Finkok\Tests;
 use Exception;
 use PhpCfdi\Finkok\FinkokEnvironment;
 use PhpCfdi\Finkok\FinkokSettings;
+use PhpCfdi\Finkok\Helpers\FileLogger;
 use PhpCfdi\Finkok\QuickFinkok;
 use Throwable;
 
@@ -44,7 +45,7 @@ exit(call_user_func(new class ($argv[0] ?? '') {
                 FinkokEnvironment::makeDevelopment()
             );
             if ($debug) {
-                $settings->soapFactory()->setLogger(new LoggerPrinter());
+                $settings->soapFactory()->setLogger(new FileLogger());
             }
             $quickFinkok = new QuickFinkok($settings);
 
