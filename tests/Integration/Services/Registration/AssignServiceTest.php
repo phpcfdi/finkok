@@ -15,6 +15,7 @@ final class AssignServiceTest extends RegistrationIntegrationTestCase
 {
     protected function staticSettings(): FinkokSettings
     {
+        /** @var FinkokSettings|null $settings */
         static $settings = null;
         if (null === $settings) {
             $settings = $this->createSettingsFromEnvironment();

@@ -5,10 +5,13 @@ declare(strict_types=1);
 namespace PhpCfdi\Finkok\Services;
 
 use InvalidArgumentException;
+use PhpCfdi\Finkok\Internal\MethodsFilterVariablesTrait;
 use stdClass;
 
 abstract class AbstractResult
 {
+    use MethodsFilterVariablesTrait;
+
     /** @var stdClass */
     protected $data;
 
@@ -54,6 +57,6 @@ abstract class AbstractResult
 
     protected function get(string $keyword): string
     {
-        return strval($this->root->{$keyword} ?? '');
+        return $this->filterString($this->root->{$keyword} ?? '');
     }
 }

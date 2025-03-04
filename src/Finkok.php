@@ -42,6 +42,7 @@ use PhpCfdi\Finkok\Services\Utilities;
  */
 class Finkok
 {
+    /** @var array<string, array{string, string}|array{string, string, string}> */
     protected const SERVICES_MAP = [
         'stamp' => [Stamping\StampService::class, Stamping\StampingCommand::class],
         'quickstamp' => [Stamping\QuickStampService::class, Stamping\StampingCommand::class],

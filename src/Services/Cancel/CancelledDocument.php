@@ -4,10 +4,13 @@ declare(strict_types=1);
 
 namespace PhpCfdi\Finkok\Services\Cancel;
 
+use PhpCfdi\Finkok\Internal\MethodsFilterVariablesTrait;
 use stdClass;
 
 class CancelledDocument
 {
+    use MethodsFilterVariablesTrait;
+
     /** @var stdClass */
     private $data;
 
@@ -18,7 +21,7 @@ class CancelledDocument
 
     private function get(string $keyword): string
     {
-        return strval($this->data->{$keyword} ?? '');
+        return $this->filterString($this->data->{$keyword} ?? '');
     }
 
     public function uuid(): string

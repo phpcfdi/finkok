@@ -29,10 +29,10 @@ final class FinkokTest extends TestCase
 
     public function testInvokingOneMappedMagicMethod(): void
     {
-        /** @var StampingResult $result */
+        /** @var StampingResult&MockObject $result */
         $result = $this->createMock(StampingResult::class);
 
-        /** @var StampingCommand $command */
+        /** @var StampingCommand&MockObject $command */
         $command = $this->createMock(StampingCommand::class);
 
         /** @var FinkokSettings&MockObject $settings */
@@ -110,9 +110,9 @@ final class FinkokTest extends TestCase
 
     public function testInvokingOneMappedMagicMethodWithDifferentName(): void
     {
-        /** @var GetContractsResult $result */
+        /** @var GetContractsResult&MockObject $result */
         $result = $this->createMock(GetContractsResult::class);
-        /** @var GetContractsCommand $command */
+        /** @var GetContractsCommand&MockObject $command */
         $command = $this->createMock(GetContractsCommand::class);
         /** @var GetContractsService&MockObject $service */
         $service = $this->createMock(GetContractsService::class);

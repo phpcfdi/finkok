@@ -4,11 +4,14 @@ declare(strict_types=1);
 
 namespace PhpCfdi\Finkok\Services\Cancel;
 
+use PhpCfdi\Finkok\Internal\MethodsFilterVariablesTrait;
 use PhpCfdi\Finkok\Services\AbstractResult;
 use stdClass;
 
 class GetPendingResult extends AbstractResult
 {
+    use MethodsFilterVariablesTrait;
+
     /** @var string[] */
     private $uuids;
 
@@ -16,10 +19,7 @@ class GetPendingResult extends AbstractResult
     {
         parent::__construct($data, 'get_pendingResult');
         $items = $this->findInDescendent($data, 'get_pendingResult', 'uuids', 'string') ?? [];
-        if (! is_array($items)) {
-            $items = [];
-        }
-        $this->uuids = $items;
+        $this->uuids = $this->filterArrayOfStrings($items);
     }
 
     /** @return string[] */

@@ -12,6 +12,7 @@ use PhpCfdi\XmlCancelacion\XmlCancelacionHelper;
 
 class AcceptRejectSigner
 {
+    /** @var string */
     public const DEFAULT_PACRFC = 'CVD110412TF6';
 
     /** @var string */
@@ -31,8 +32,8 @@ class AcceptRejectSigner
      *
      * @param string $uuid
      * @param CancelAnswer $answer
-     * @param DateTimeImmutable|null $dateTime If null or ommited then use current time and time zone
-     * @param string $pacRfc If empty or ommited then uses DEFAULT_PACRFC
+     * @param DateTimeImmutable|null $dateTime If null or omitted then use current time and time zone
+     * @param string $pacRfc If empty or omitted then uses DEFAULT_PACRFC
      */
     public function __construct(
         string $uuid,

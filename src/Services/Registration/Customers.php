@@ -4,15 +4,11 @@ declare(strict_types=1);
 
 namespace PhpCfdi\Finkok\Services\Registration;
 
-use ArrayIterator;
 use LogicException;
 use PhpCfdi\Finkok\Services\AbstractCollection;
 use stdClass;
 
 /**
- * @method Customer get(int $index)
- * @method Customer first()
- * @method ArrayIterator|Customer[] getIterator()
  * @extends AbstractCollection<Customer>
  */
 class Customers extends AbstractCollection

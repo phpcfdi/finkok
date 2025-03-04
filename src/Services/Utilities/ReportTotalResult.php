@@ -4,11 +4,14 @@ declare(strict_types=1);
 
 namespace PhpCfdi\Finkok\Services\Utilities;
 
+use PhpCfdi\Finkok\Internal\MethodsFilterVariablesTrait;
 use PhpCfdi\Finkok\Services\AbstractResult;
 use stdClass;
 
 class ReportTotalResult extends AbstractResult
 {
+    use MethodsFilterVariablesTrait;
+
     /** @var string */
     private $rfc;
 
@@ -24,8 +27,8 @@ class ReportTotalResult extends AbstractResult
         /** @var array{stdClass|null} $items */
         $items = $this->findInDescendent($data, 'report_totalResult', 'result', 'ReportTotal') ?? [];
         $result = $items[0] ?? (object) [];
-        $this->rfc = $result->taxpayer_id ?? '';
-        $this->total = strval($result->total ?? '');
+        $this->rfc = $this->filterString($result->taxpayer_id ?? '');
+        $this->total = $this->filterString($result->total ?? '');
         $this->error = $this->get('error');
     }
 

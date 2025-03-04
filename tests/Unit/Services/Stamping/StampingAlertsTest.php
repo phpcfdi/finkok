@@ -6,7 +6,6 @@ namespace PhpCfdi\Finkok\Tests\Unit\Services\Stamping;
 
 use PhpCfdi\Finkok\Services\Stamping\StampingAlerts;
 use PhpCfdi\Finkok\Tests\TestCase;
-use stdClass;
 
 final class StampingAlertsTest extends TestCase
 {
@@ -53,9 +52,9 @@ final class StampingAlertsTest extends TestCase
 
     public function testGettingAnAlertByIndex(): void
     {
-        /** @var stdClass $data */
         $data = json_decode($this->fileContentPath('stamp-response-with-alerts.json'));
-        $alerts = new StampingAlerts($data->{'stampResult'}->{'Incidencias'}->{'Incidencia'} ?? []);
+        /** @phpstan-ignore-next-line */
+        $alerts = new StampingAlerts($data->stampResult->Incidencias->Incidencia ?? []);
         $this->assertSame('FAKE2', $alerts->get(1)->errorCode());
     }
 

@@ -53,8 +53,7 @@ final class JsonDecoderLoggerTest extends TestCase
     /** @dataProvider providerUseJsonValidateIfAvailable */
     public function testLogSendValidJsonMessageToLogger(bool $useJsonValidateIfAvailable): void
     {
-        /** @var string $jsonMessage */
-        $jsonMessage = json_encode(['foo' => 'bar']);
+        $jsonMessage = (string) json_encode(['foo' => 'bar']);
         $textMessage = print_r(json_decode($jsonMessage), true);
         /** @var NullLogger&MockObject $logger */
         $logger = $this->createMock(NullLogger::class);
@@ -83,8 +82,7 @@ final class JsonDecoderLoggerTest extends TestCase
 
     public function testLogSendTextMessageToLoggerAndJson(): void
     {
-        /** @var string $jsonMessage */
-        $jsonMessage = json_encode(['foo' => 'bar']);
+        $jsonMessage = (string) json_encode(['foo' => 'bar']);
         $textMessage = print_r(json_decode($jsonMessage), true);
         /** @var NullLogger&MockObject $logger */
         $logger = $this->createMock(NullLogger::class);

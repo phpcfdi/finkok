@@ -4,20 +4,19 @@ declare(strict_types=1);
 
 namespace PhpCfdi\Finkok\Services\Cancel;
 
-use ArrayIterator;
 use OutOfRangeException;
 use PhpCfdi\Finkok\Definitions\CancelAnswer;
+use PhpCfdi\Finkok\Internal\MethodsFilterVariablesTrait;
 use PhpCfdi\Finkok\Services\AbstractCollection;
 use stdClass;
 
 /**
- * @method AcceptRejectUuidItem get(int $index)
- * @method AcceptRejectUuidItem first()
- * @method ArrayIterator|AcceptRejectUuidItem[] getIterator()
  * @extends AbstractCollection<AcceptRejectUuidItem>
  */
 class AcceptRejectUuidList extends AbstractCollection
 {
+    use MethodsFilterVariablesTrait;
+
     public function findByUuidOrFail(string $uuid): AcceptRejectUuidItem
     {
         $found = $this->findByUuid($uuid);
@@ -40,9 +39,11 @@ class AcceptRejectUuidList extends AbstractCollection
     protected function createItemFromStdClass(stdClass $content): object
     {
         if (isset($content->{'Acepta'})) {
+            /** @var stdClass $source */
             $source = $content->{'Acepta'};
             $answer = CancelAnswer::accept();
         } elseif (isset($content->{'Rechaza'})) {
+            /** @var stdClass $source */
             $source = $content->{'Rechaza'};
             $answer = CancelAnswer::reject();
         } else {
@@ -50,8 +51,8 @@ class AcceptRejectUuidList extends AbstractCollection
             $answer = CancelAnswer::accept();
         }
         return new AcceptRejectUuidItem(
-            strval($source->uuid ?? ''),
-            new AcceptRejectUuidStatus($source->status ?? '0'),
+            $this->filterString($source->uuid ?? ''),
+            new AcceptRejectUuidStatus($this->filterString($source->status ?? '0')),
             $answer
         );
     }

@@ -4,10 +4,13 @@ declare(strict_types=1);
 
 namespace PhpCfdi\Finkok\Services\Registration;
 
+use PhpCfdi\Finkok\Internal\MethodsFilterVariablesTrait;
 use stdClass;
 
 class Customer
 {
+    use MethodsFilterVariablesTrait;
+
     /** @var stdClass */
     private $data;
 
@@ -31,7 +34,7 @@ class Customer
 
     private function get(string $keyword): string
     {
-        return strval($this->data->{$keyword} ?? '');
+        return $this->filterString($this->data->{$keyword} ?? '');
     }
 
     public function status(): CustomerStatus

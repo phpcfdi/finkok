@@ -4,11 +4,14 @@ declare(strict_types=1);
 
 namespace PhpCfdi\Finkok\Services\Cancel;
 
+use PhpCfdi\Finkok\Internal\MethodsFilterVariablesTrait;
 use PhpCfdi\Finkok\Services\AbstractResult;
 use stdClass;
 
 class GetRelatedSignatureResult extends AbstractResult
 {
+    use MethodsFilterVariablesTrait;
+
     /** @var RelatedItems */
     private $parents;
 
@@ -23,9 +26,9 @@ class GetRelatedSignatureResult extends AbstractResult
         $container = 'get_related_signatureResult';
         parent::__construct($data, $container);
         $parents = $this->findInDescendent($data, $container, 'Padres', 'Padre');
-        $this->parents = new RelatedItems(is_array($parents) ? $parents : []);
+        $this->parents = new RelatedItems($this->filterArrayOfStdClass($parents));
         $children = $this->findInDescendent($data, $container, 'Hijos', 'Hijo');
-        $this->children = new RelatedItems(is_array($children) ? $children : []);
+        $this->children = new RelatedItems($this->filterArrayOfStdClass($children));
         $this->error = $this->get('error');
     }
 

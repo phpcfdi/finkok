@@ -4,11 +4,14 @@ declare(strict_types=1);
 
 namespace PhpCfdi\Finkok\Services\Utilities;
 
+use PhpCfdi\Finkok\Internal\MethodsFilterVariablesTrait;
 use PhpCfdi\Finkok\Services\AbstractResult;
 use stdClass;
 
 class ReportCreditResult extends AbstractResult
 {
+    use MethodsFilterVariablesTrait;
+
     /** @var array<array{credit: string, date: string}> */
     private $items;
 
@@ -17,14 +20,13 @@ class ReportCreditResult extends AbstractResult
         parent::__construct($data, 'report_creditResult');
         $this->items = [];
 
-        $items = $this->findInDescendent($data, 'report_creditResult', 'result', 'ReportTotalCredit');
-        if (! is_array($items)) {
-            $items = [];
-        }
+        $items = $this->filterArrayOfStdClass(
+            $this->findInDescendent($data, 'report_creditResult', 'result', 'ReportTotalCredit')
+        );
         foreach ($items as $item) {
             $this->items[] = [
-                'credit' => strval($item->credit),
-                'date' => strval($item->date),
+                'credit' => $this->filterString($item->credit),
+                'date' => $this->filterString($item->date),
             ];
         }
     }

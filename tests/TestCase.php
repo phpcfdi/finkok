@@ -75,6 +75,7 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
 
     public static function getenv(string $key): string
     {
-        return $_ENV[$key] ?? '';
+        $value = $_ENV[$key] ?? '';
+        return (is_scalar($value)) ? strval($value) : '';
     }
 }

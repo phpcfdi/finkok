@@ -15,13 +15,12 @@ final class GetPendingServiceTest extends IntegrationTestCase
         // Cannot check anything else than it did not return an error
         // It might be possible to create a test that ask for a cancellation that require authorization
         // but this is simply unpractical for *this* test suite because
-        // it takes around 16 minutes to have a CFDI with status "cancelable con autorizacion"
+        // it takes around 16 minutes to have a CFDI with status "cancelable con autorización"
         $settings = $this->createSettingsFromEnvironment();
         $command = new GetPendingCommand('EKU9003173C9');
         $service = new GetPendingService($settings);
         $result = $service->obtainPending($command);
 
-        $this->assertTrue(is_array($result->uuids()));
         $this->assertSame('', $result->error());
     }
 }
