@@ -42,7 +42,7 @@ abstract class AbstractResult
      */
     protected function findInDescendent($haystack, string ...$location)
     {
-        if (0 === count($location)) {
+        if ([] === $location) {
             return $haystack;
         }
         $search = array_shift($location);

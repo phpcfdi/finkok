@@ -13,12 +13,11 @@ class ReportCreditResult extends AbstractResult
     use MethodsFilterVariablesTrait;
 
     /** @var array<array{credit: string, date: string}> */
-    private $items;
+    private $items = [];
 
     public function __construct(stdClass $data)
     {
         parent::__construct($data, 'report_creditResult');
-        $this->items = [];
 
         $items = $this->filterArrayOfStdClass(
             $this->findInDescendent($data, 'report_creditResult', 'result', 'ReportTotalCredit')

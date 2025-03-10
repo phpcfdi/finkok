@@ -109,11 +109,7 @@ class ReportTotalCommand
     {
         $date = new DateTimeImmutable(sprintf('%04d-%02d-01', $this->endYear, $this->endMonth));
         $today = $this->today();
-        if ($this->endPeriod() === $today->format('Y-m')) {
-            $date = $today;
-        } else {
-            $date = $date->modify('+ 1 month');
-        }
+        $date = $this->endPeriod() === $today->format('Y-m') ? $today : $date->modify('+ 1 month');
         return sprintf('%sT00:00:00', $date->format('Y-m-d'));
     }
 

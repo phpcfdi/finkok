@@ -94,7 +94,7 @@ final class JsonDecoderLoggerTest extends TestCase
         $logger->expects($matcher)->method('log')->with(
             'debug',
             $this->callback(
-                function ($message) use ($matcher, $expectedParameters) {
+                function ($message) use ($matcher, $expectedParameters): bool {
                     $this->assertSame($expectedParameters[$matcher->getInvocationCount() - 1], $message);
                     return true;
                 }

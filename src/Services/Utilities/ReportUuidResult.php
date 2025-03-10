@@ -13,12 +13,11 @@ class ReportUuidResult extends AbstractResult
     use MethodsFilterVariablesTrait;
 
     /** @var array<int, array{date: string, uuid:string}> */
-    private $items;
+    private $items = [];
 
     public function __construct(stdClass $data)
     {
         parent::__construct($data, 'report_uuidResult');
-        $this->items = [];
 
         $items = $this->filterArrayOfStdClass(
             $this->findInDescendent($data, 'report_uuidResult', 'invoices', 'ReportUUID')
