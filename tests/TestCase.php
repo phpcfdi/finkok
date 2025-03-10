@@ -25,7 +25,7 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
             $settings->changeSoapFactory($soapFactory);
         }
 
-        if ($this->getenv('FINKOK_LOG_CALLS')) {
+        if ($this->getenvBool('FINKOK_LOG_CALLS')) {
             $loggerOutputFile = sprintf(
                 '%s/../build/tests/%s-%s-%s.txt',
                 __DIR__,
@@ -77,5 +77,11 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
     {
         $value = $_ENV[$key] ?? '';
         return (is_scalar($value)) ? strval($value) : '';
+    }
+
+    public static function getenvBool(string $key): bool
+    {
+        $value = static::getenv($key);
+        return ! in_array($value, ['', '0', 'no', 'false']);
     }
 }

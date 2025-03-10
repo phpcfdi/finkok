@@ -30,7 +30,7 @@ exit(call_user_func(new class ($argv[0] ?? '') {
             $this->showHelp();
             return 0;
         }
-        $debug = (bool) TestCase::getenv('FINKOK_LOG_CALLS');
+        $debug = TestCase::getenvBool('FINKOK_LOG_CALLS');
         try {
             if (! file_exists($preCfdiPath)) {
                 throw new Exception("File $preCfdiPath does not exists");
