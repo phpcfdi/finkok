@@ -54,7 +54,7 @@ final class PreCfdiCreatorHelper
         $this->keyPemFile = $keyPemFile;
         $this->passPhrase = $passPhrase;
         $this->invoiceDate = new DateTimeImmutable('now -5 minutes', new DateTimeZone('America/Mexico_City'));
-        $this->conceptoDescription = 'Portable tetris gamepad pro++ ⏻';
+        $this->conceptoDescription = sprintf('Portable tetris gamepad pro++ ⏻ v1.%s', random_int(10, 99));
         $this->conceptoAmount = round(random_int(1000, 4000) + random_int(0, 99) / 100, 2);
     }
 
