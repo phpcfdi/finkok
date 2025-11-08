@@ -15,7 +15,7 @@ final class SignContractsServiceTest extends TestCase
     public function testServiceUsingPreparedResult(): void
     {
         /** @var stdClass $preparedResult */
-        $preparedResult = json_decode(TestCase::fileContentPath('manifest-signcontracts-response.json'));
+        $preparedResult = json_decode($this->fileContentPath('manifest-signcontracts-response.json'));
 
         $soapFactory = new FakeSoapFactory();
         $soapFactory->preparedResult = $preparedResult;

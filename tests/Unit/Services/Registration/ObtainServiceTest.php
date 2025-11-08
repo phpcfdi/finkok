@@ -15,7 +15,7 @@ final class ObtainServiceTest extends TestCase
     public function testServiceUsingPreparedResultWithRfc(): void
     {
         /** @var stdClass $preparedResult */
-        $preparedResult = json_decode(TestCase::fileContentPath('registration-get-response.json'));
+        $preparedResult = json_decode($this->fileContentPath('registration-get-response.json'));
 
         $soapFactory = new FakeSoapFactory();
         $soapFactory->preparedResult = $preparedResult;

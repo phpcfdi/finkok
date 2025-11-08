@@ -15,7 +15,7 @@ final class StampedServiceTest extends TestCase
     public function testStampedSendXmlAndProcessPreparedResult(): void
     {
         /** @var stdClass $preparedResult */
-        $preparedResult = json_decode(TestCase::fileContentPath('stamped-response-with-alerts.json'));
+        $preparedResult = json_decode($this->fileContentPath('stamped-response-with-alerts.json'));
 
         $soapFactory = new FakeSoapFactory();
         $soapFactory->preparedResult = $preparedResult;

@@ -16,7 +16,7 @@ final class ReportUuidServiceTest extends TestCase
     public function testServiceUsingPreparedResult(): void
     {
         /** @var stdClass $preparedResult */
-        $preparedResult = json_decode(TestCase::fileContentPath('utilities-report-uuid-response.json'));
+        $preparedResult = json_decode($this->fileContentPath('utilities-report-uuid-response.json'));
 
         $soapFactory = new FakeSoapFactory();
         $soapFactory->preparedResult = $preparedResult;

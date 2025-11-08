@@ -16,7 +16,7 @@ final class EditServiceTest extends TestCase
     public function testServiceUsingPreparedResult(): void
     {
         /** @var stdClass $preparedResult */
-        $preparedResult = json_decode(TestCase::fileContentPath('registration-edit-response.json'));
+        $preparedResult = json_decode($this->fileContentPath('registration-edit-response.json'));
 
         $soapFactory = new FakeSoapFactory();
         $soapFactory->preparedResult = $preparedResult;

@@ -15,7 +15,7 @@ final class DatetimeServiceTest extends TestCase
     public function testDatetimeServiceUsingPreparedResultWithEmptyPostalCode(): void
     {
         /** @var stdClass $preparedResult */
-        $preparedResult = json_decode(TestCase::fileContentPath('utilities-datetime-response.json'));
+        $preparedResult = json_decode($this->fileContentPath('utilities-datetime-response.json'));
 
         $soapFactory = new FakeSoapFactory();
         $soapFactory->preparedResult = $preparedResult;
@@ -34,7 +34,7 @@ final class DatetimeServiceTest extends TestCase
     public function testDatetimeServiceUsingPreparedResultWithPostalCode(): void
     {
         /** @var stdClass $preparedResult */
-        $preparedResult = json_decode(TestCase::fileContentPath('utilities-datetime-response.json'));
+        $preparedResult = json_decode($this->fileContentPath('utilities-datetime-response.json'));
 
         $soapFactory = new FakeSoapFactory();
         $soapFactory->preparedResult = $preparedResult;

@@ -15,7 +15,7 @@ final class DownloadXmlServiceTest extends TestCase
     public function testServiceUsingPreparedResult(): void
     {
         /** @var stdClass $preparedResult */
-        $preparedResult = json_decode(TestCase::fileContentPath('utilities-getxml-response.json'));
+        $preparedResult = json_decode($this->fileContentPath('utilities-getxml-response.json'));
 
         $soapFactory = new FakeSoapFactory();
         $soapFactory->preparedResult = $preparedResult;
