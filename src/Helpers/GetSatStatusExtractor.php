@@ -48,7 +48,7 @@ class GetSatStatusExtractor
             $values = $discoverer->obtain($document);
         } catch (UnmatchedDocumentException $exception) {
             $message = 'Unable to obtain the expression values, document must be valid a CFDI version 4.0, 3.3 or 3.2';
-            throw new RuntimeException($message, 0, $exception);
+            throw new RuntimeException($message, previous: $exception);
         }
         return new self($values);
     }

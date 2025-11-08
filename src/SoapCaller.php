@@ -64,7 +64,7 @@ class SoapCaller implements LoggerAwareInterface
                 ),
                 JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES
             )));
-            throw new RuntimeException(sprintf('Fail soap call to %s', $methodName), 0, $exception);
+            throw new RuntimeException(sprintf('Fail soap call to %s', $methodName), previous: $exception);
         }
     }
 
