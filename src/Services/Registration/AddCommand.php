@@ -6,20 +6,15 @@ namespace PhpCfdi\Finkok\Services\Registration;
 
 class AddCommand
 {
-    /** @var string */
-    private $rfc;
+    private string $rfc;
 
-    /** @var CustomerType */
-    private $type;
+    private CustomerType $type;
 
-    /** @var string */
-    private $certificate;
+    private string $certificate;
 
-    /** @var string */
-    private $privateKey;
+    private string $privateKey;
 
-    /** @var string */
-    private $passPhrase;
+    private string $passPhrase;
 
     public function __construct(
         string $rfc,

@@ -6,8 +6,7 @@ namespace PhpCfdi\Finkok\Services\Stamping;
 
 class QueryPendingCommand
 {
-    /** @var string */
-    private $uuid;
+    private string $uuid;
 
     public function __construct(string $uuid)
     {

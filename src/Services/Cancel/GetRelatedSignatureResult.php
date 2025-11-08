@@ -12,14 +12,11 @@ class GetRelatedSignatureResult extends AbstractResult
 {
     use MethodsFilterVariablesTrait;
 
-    /** @var RelatedItems */
-    private $parents;
+    private RelatedItems $parents;
 
-    /** @var RelatedItems */
-    private $children;
+    private RelatedItems $children;
 
-    /** @var string */
-    private $error;
+    private string $error;
 
     public function __construct(stdClass $data)
     {

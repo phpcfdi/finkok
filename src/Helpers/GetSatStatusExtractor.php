@@ -20,7 +20,7 @@ use RuntimeException;
 class GetSatStatusExtractor
 {
     /** @var string[] */
-    private $expressionData;
+    private array $expressionData;
 
     /**
      * GetSatStatusExtractor constructor.

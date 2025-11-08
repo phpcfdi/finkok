@@ -23,8 +23,7 @@ use Stringable;
 /** @covers \PhpCfdi\Finkok\QuickFinkok */
 final class QuickFinkokTest extends TestCase
 {
-    /** @var FakeSoapFactory */
-    private $soapFactory;
+    private FakeSoapFactory $soapFactory;
 
     private function createdPreparedQuickFinkok(stdClass $rawData): QuickFinkok
     {

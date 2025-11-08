@@ -13,8 +13,7 @@ use RuntimeException;
  */
 final class CancelSignatureServiceTest extends RetentionsTestCase
 {
-    /** @var QuickFinkok */
-    private $quickFinkok;
+    private QuickFinkok $quickFinkok;
 
     protected function setUp(): void
     {

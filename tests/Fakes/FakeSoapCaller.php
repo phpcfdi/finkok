@@ -9,14 +9,12 @@ use stdClass;
 
 final class FakeSoapCaller extends SoapCaller
 {
-    /** @var stdClass */
-    public $preparedResult;
+    public stdClass $preparedResult;
 
-    /** @var string */
-    public $latestCallMethodName = '';
+    public string $latestCallMethodName = '';
 
     /** @var array<mixed> */
-    public $latestCallParameters = [];
+    public array $latestCallParameters = [];
 
     /** @noinspection PhpMissingParentCallCommonInspection */
     public function call(string $methodName, array $parameters): stdClass

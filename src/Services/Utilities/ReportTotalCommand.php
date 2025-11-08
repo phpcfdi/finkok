@@ -9,29 +9,21 @@ use LogicException;
 
 class ReportTotalCommand
 {
-    /** @var string */
-    private $rfc;
+    private string $rfc;
 
-    /** @var string */
-    private $type;
+    private string $type;
 
-    /** @var int */
-    private $startYear;
+    private int $startYear;
 
-    /** @var int */
-    private $startMonth;
+    private int $startMonth;
 
-    /** @var int */
-    private $endYear;
+    private int $endYear;
 
-    /** @var int */
-    private $endMonth;
+    private int $endMonth;
 
-    /** @var string */
-    private $startPeriod;
+    private string $startPeriod;
 
-    /** @var string */
-    private $endPeriod;
+    private string $endPeriod;
 
     public function __construct(
         string $rfc,

@@ -12,17 +12,13 @@ use PhpCfdi\Finkok\Exceptions\InvalidArgumentException;
  */
 class FinkokSettings
 {
-    /** @var string */
-    private $username;
+    private string $username;
 
-    /** @var string */
-    private $password;
+    private string $password;
 
-    /** @var FinkokEnvironment */
-    private $environment;
+    private FinkokEnvironment $environment;
 
-    /** @var SoapFactory */
-    private $soapFactory;
+    private SoapFactory $soapFactory;
 
     public function __construct(string $username, string $password, FinkokEnvironment $environment = null)
     {

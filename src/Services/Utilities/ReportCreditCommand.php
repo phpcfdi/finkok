@@ -6,8 +6,7 @@ namespace PhpCfdi\Finkok\Services\Utilities;
 
 class ReportCreditCommand
 {
-    /** @var string */
-    private $rfc;
+    private string $rfc;
 
     public function __construct(string $rfc)
     {

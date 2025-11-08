@@ -11,14 +11,11 @@ class Customer
 {
     use MethodsFilterVariablesTrait;
 
-    /** @var stdClass */
-    private $data;
+    private stdClass $data;
 
-    /** @var CustomerStatus */
-    private $status;
+    private CustomerStatus $status;
 
-    /** @var CustomerType */
-    private $type;
+    private CustomerType $type;
 
     public function __construct(stdClass $raw)
     {

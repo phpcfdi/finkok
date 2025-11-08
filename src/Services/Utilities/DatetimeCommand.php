@@ -6,8 +6,7 @@ namespace PhpCfdi\Finkok\Services\Utilities;
 
 class DatetimeCommand
 {
-    /** @var string */
-    private $postalCode;
+    private string $postalCode;
 
     public function __construct(string $postalCode)
     {

@@ -11,8 +11,7 @@ class StampingAlert
 {
     use MethodsFilterVariablesTrait;
 
-    /** @var stdClass */
-    private $data;
+    private stdClass $data;
 
     public function __construct(stdClass $raw)
     {

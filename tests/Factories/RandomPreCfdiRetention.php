@@ -68,12 +68,10 @@ final class RandomPreCfdiRetention
                 'You must fix your RET since its is not valid (%d errors):%s%s',
                 count($assets->errors()),
                 PHP_EOL,
-                implode(PHP_EOL, array_map(function (Assert $assert): string {
-                    return rtrim(
-                        sprintf('%s - %s: %s', $assert->getCode(), $assert->getTitle(), $assert->getExplanation()),
-                        ' :'
-                    );
-                }, $assets->errors()))
+                implode(PHP_EOL, array_map(fn (Assert $assert): string => rtrim(
+                    sprintf('%s - %s: %s', $assert->getCode(), $assert->getTitle(), $assert->getExplanation()),
+                    ' :'
+                ), $assets->errors()))
             ));
         }
 

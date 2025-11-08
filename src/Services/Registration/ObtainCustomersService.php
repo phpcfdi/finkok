@@ -9,8 +9,7 @@ use PhpCfdi\Finkok\FinkokSettings;
 
 class ObtainCustomersService
 {
-    /** @var FinkokSettings */
-    private $settings;
+    private FinkokSettings $settings;
 
     public function __construct(FinkokSettings $settings)
     {

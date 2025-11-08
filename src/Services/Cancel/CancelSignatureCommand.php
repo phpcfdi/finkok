@@ -8,11 +8,9 @@ use PhpCfdi\Finkok\Definitions\CancelStorePending;
 
 class CancelSignatureCommand
 {
-    /** @var string */
-    private $xml;
+    private string $xml;
 
-    /** @var CancelStorePending */
-    private $storePending;
+    private CancelStorePending $storePending;
 
     /**
      * CancelSignatureCommand constructor.

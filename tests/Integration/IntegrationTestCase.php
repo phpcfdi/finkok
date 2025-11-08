@@ -23,11 +23,9 @@ use RuntimeException;
 
 abstract class IntegrationTestCase extends TestCase
 {
-    /** @var StampingResult|null */
-    protected static $staticCurrentStampingResult;
+    protected static ?StampingResult $staticCurrentStampingResult = null;
 
-    /** @var StampingCommand|null */
-    protected static $staticCurrentStampingCommand;
+    protected static ?StampingCommand $staticCurrentStampingCommand = null;
 
     public function newStampingCommand(): StampingCommand
     {

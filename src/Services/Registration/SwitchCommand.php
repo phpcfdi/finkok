@@ -6,11 +6,9 @@ namespace PhpCfdi\Finkok\Services\Registration;
 
 class SwitchCommand
 {
-    /** @var string */
-    private $rfc;
+    private string $rfc;
 
-    /** @var CustomerType */
-    private $customerType;
+    private CustomerType $customerType;
 
     public function __construct(string $rfc, CustomerType $customerType)
     {

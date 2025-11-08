@@ -8,8 +8,7 @@ use PhpCfdi\Finkok\Exceptions\InvalidArgumentException;
 
 class ObtainCommand
 {
-    /** @var string */
-    private $rfc;
+    private string $rfc;
 
     public function __construct(string $rfc)
     {

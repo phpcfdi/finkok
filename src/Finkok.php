@@ -91,8 +91,7 @@ class Finkok
         ],
     ];
 
-    /** @var FinkokSettings */
-    private $settings;
+    private FinkokSettings $settings;
 
     public function __construct(FinkokSettings $factory)
     {

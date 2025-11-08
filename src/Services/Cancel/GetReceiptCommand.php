@@ -8,14 +8,11 @@ use PhpCfdi\Finkok\Definitions\ReceiptType;
 
 class GetReceiptCommand
 {
-    /** @var string */
-    private $rfc;
+    private string $rfc;
 
-    /** @var string */
-    private $uuid;
+    private string $uuid;
 
-    /** @var ReceiptType */
-    private $type;
+    private ReceiptType $type;
 
     public function __construct(string $rfc, string $uuid, ReceiptType $type)
     {

@@ -6,14 +6,11 @@ namespace PhpCfdi\Finkok\Services\Cancel;
 
 class RelatedItem
 {
-    /** @var string */
-    private $uuid;
+    private string $uuid;
 
-    /** @var string */
-    private $rfcEmitter;
+    private string $rfcEmitter;
 
-    /** @var string */
-    private $rfcReceiver;
+    private string $rfcReceiver;
 
     public function __construct(string $uuid, string $rfcEmitter, string $rfcReceiver)
     {

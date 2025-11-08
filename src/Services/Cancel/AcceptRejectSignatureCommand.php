@@ -6,8 +6,7 @@ namespace PhpCfdi\Finkok\Services\Cancel;
 
 class AcceptRejectSignatureCommand
 {
-    /** @var string */
-    private $xml;
+    private string $xml;
 
     public function __construct(string $xml)
     {

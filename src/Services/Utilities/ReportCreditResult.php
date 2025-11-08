@@ -13,7 +13,7 @@ class ReportCreditResult extends AbstractResult
     use MethodsFilterVariablesTrait;
 
     /** @var array<array{credit: string, date: string}> */
-    private $items = [];
+    private array $items = [];
 
     public function __construct(stdClass $data)
     {

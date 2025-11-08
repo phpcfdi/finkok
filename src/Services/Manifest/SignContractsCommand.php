@@ -6,14 +6,11 @@ namespace PhpCfdi\Finkok\Services\Manifest;
 
 class SignContractsCommand
 {
-    /** @var string */
-    private $snid;
+    private string $snid;
 
-    /** @var string */
-    private $privacy;
+    private string $privacy;
 
-    /** @var string */
-    private $contract;
+    private string $contract;
 
     public function __construct(string $snid, string $privacy, string $contract)
     {

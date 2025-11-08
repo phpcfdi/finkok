@@ -12,35 +12,26 @@ use DateTimeZone;
 
 final class PreCfdiCreatorHelper
 {
-    /** @var DateTimeImmutable */
-    private $invoiceDate;
+    private DateTimeImmutable $invoiceDate;
 
-    /** @var string */
-    private $conceptoDescription;
+    private string $conceptoDescription;
 
-    /** @var float */
-    private $conceptoAmount;
+    private float $conceptoAmount;
 
-    /** @var string */
-    private $emisorRfc;
+    private string $emisorRfc;
 
-    /** @var string */
-    private $emisorName;
+    private string $emisorName;
 
-    /** @var string */
-    private $cerFile;
+    private string $cerFile;
 
-    /** @var string */
-    private $keyPemFile;
+    private string $keyPemFile;
 
-    /** @var string */
-    private $passPhrase;
+    private string $passPhrase;
 
-    /** @var string */
-    private $relation = '';
+    private string $relation = '';
 
     /** @var string[] */
-    private $relatedUuids = [];
+    private array $relatedUuids = [];
 
     public function __construct(
         string $cerFile,
@@ -143,7 +134,7 @@ final class PreCfdiCreatorHelper
             'LugarExpedicion' => '86000',
             'Exportacion' => '01', // No aplica
         ]);
-        if ('' !== $this->relation && count($this->relatedUuids) > 0) {
+        if ('' !== $this->relation && [] !== $this->relatedUuids) {
             $relacionados = $comprobante->addCfdiRelacionados(['TipoRelacion' => $this->relation]);
             foreach ($this->relatedUuids as $relatedUuid) {
                 $relacionados->addCfdiRelacionado(['UUID' => $relatedUuid]);

@@ -6,14 +6,11 @@ namespace PhpCfdi\Finkok\Services\Utilities;
 
 class DownloadXmlCommand
 {
-    /** @var string */
-    private $uuid;
+    private string $uuid;
 
-    /** @var string */
-    private $rfc;
+    private string $rfc;
 
-    /** @var string */
-    private $type;
+    private string $type;
 
     public function __construct(string $uuid, string $rfc, string $type)
     {

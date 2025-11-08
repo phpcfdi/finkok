@@ -12,8 +12,7 @@ final class ObtainCustomersResult extends AbstractResult
 {
     use MethodsFilterVariablesTrait;
 
-    /** @var Customers */
-    private $customers;
+    private Customers $customers;
 
     public function __construct(stdClass $data)
     {

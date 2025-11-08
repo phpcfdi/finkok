@@ -13,7 +13,7 @@ class GetPendingResult extends AbstractResult
     use MethodsFilterVariablesTrait;
 
     /** @var string[] */
-    private $uuids;
+    private array $uuids;
 
     public function __construct(stdClass $data)
     {

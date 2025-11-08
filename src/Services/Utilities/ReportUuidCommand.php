@@ -9,17 +9,13 @@ use LogicException;
 
 class ReportUuidCommand
 {
-    /** @var string */
-    private $rfc;
+    private string $rfc;
 
-    /** @var string */
-    private $type;
+    private string $type;
 
-    /** @var DateTimeImmutable */
-    private $since;
+    private DateTimeImmutable $since;
 
-    /** @var DateTimeImmutable */
-    private $until;
+    private DateTimeImmutable $until;
 
     public function __construct(string $rfc, string $type, DateTimeImmutable $since, DateTimeImmutable $until)
     {

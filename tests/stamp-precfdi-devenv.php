@@ -16,8 +16,7 @@ use Throwable;
 require_once __DIR__ . '/bootstrap.php';
 
 exit(call_user_func(new class ($argv[0] ?? '') {
-    /** @var string */
-    private $command;
+    private string $command;
 
     public function __construct(string $command)
     {

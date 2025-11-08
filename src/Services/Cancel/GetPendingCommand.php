@@ -6,8 +6,7 @@ namespace PhpCfdi\Finkok\Services\Cancel;
 
 class GetPendingCommand
 {
-    /** @var string */
-    private $rfc;
+    private string $rfc;
 
     public function __construct(string $rfc)
     {

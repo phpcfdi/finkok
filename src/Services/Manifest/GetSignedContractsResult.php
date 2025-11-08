@@ -9,17 +9,13 @@ use stdClass;
 
 class GetSignedContractsResult extends AbstractResult
 {
-    /** @var bool */
-    private $success;
+    private bool $success;
 
-    /** @var string */
-    private $contract;
+    private string $contract;
 
-    /** @var string */
-    private $privacy;
+    private string $privacy;
 
-    /** @var string */
-    private $error;
+    private string $error;
 
     public function __construct(stdClass $data, bool $isBase64)
     {

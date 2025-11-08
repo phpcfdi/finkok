@@ -13,32 +13,23 @@ use DateTimeZone;
 
 final class PreCfdiRetentionCreatorHelper
 {
-    /** @var Certificado */
-    private $certificate;
+    private Certificado $certificate;
 
-    /** @var DateTimeImmutable */
-    private $invoiceDate;
+    private DateTimeImmutable $invoiceDate;
 
-    /** @var string */
-    private $cveReten;
+    private string $cveReten;
 
-    /** @var string */
-    private $emisorRfc;
+    private string $emisorRfc;
 
-    /** @var string */
-    private $emisorName;
+    private string $emisorName;
 
-    /** @var string */
-    private $keyPemFile;
+    private string $keyPemFile;
 
-    /** @var string */
-    private $passPhrase;
+    private string $passPhrase;
 
-    /** @var string */
-    private $emisorLocation;
+    private string $emisorLocation;
 
-    /** @var string */
-    private $emisorRegimen;
+    private string $emisorRegimen;
 
     public function __construct(
         string $cerFile,

@@ -13,14 +13,11 @@ use PhpCfdi\Finkok\Services\Retentions\StampResult;
  */
 final class RetentionsUsingExistentRetentionTest extends RetentionsTestCase
 {
-    /** @var QuickFinkok */
-    private $quickFinkok;
+    private QuickFinkok $quickFinkok;
 
-    /** @var string|null */
-    protected static $staticCurrentStampPrecfdi;
+    protected static ?string $staticCurrentStampPrecfdi = null;
 
-    /** @var StampResult|null */
-    protected static $staticCurrentStampResult;
+    protected static ?StampResult $staticCurrentStampResult = null;
 
     protected function currentRetentionsPreCfdi(): string
     {

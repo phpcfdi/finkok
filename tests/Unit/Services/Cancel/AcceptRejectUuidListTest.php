@@ -11,8 +11,7 @@ use PhpCfdi\Finkok\Tests\TestCase;
 
 final class AcceptRejectUuidListTest extends TestCase
 {
-    /** @var AcceptRejectUuidList */
-    private $list;
+    private AcceptRejectUuidList $list;
 
     protected function setUp(): void
     {

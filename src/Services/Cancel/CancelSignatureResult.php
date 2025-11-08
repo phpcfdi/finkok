@@ -12,8 +12,7 @@ class CancelSignatureResult extends AbstractResult
 {
     use MethodsFilterVariablesTrait;
 
-    /** @var CancelledDocuments */
-    private $documents;
+    private CancelledDocuments $documents;
 
     public function __construct(stdClass $data)
     {

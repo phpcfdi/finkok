@@ -6,23 +6,17 @@ namespace PhpCfdi\Finkok\Services\Registration;
 
 class PageInformation
 {
-    /** @var int */
-    private $firstRecord;
+    private int $firstRecord;
 
-    /** @var int */
-    private $lastRecord;
+    private int $lastRecord;
 
-    /** @var int */
-    private $totalRecords;
+    private int $totalRecords;
 
-    /** @var int */
-    private $currentPage;
+    private int $currentPage;
 
-    /** @var int */
-    private $totalPages;
+    private int $totalPages;
 
-    /** @var int */
-    private $pageLength;
+    private int $pageLength;
 
     public function __construct(
         int $firstRecord,

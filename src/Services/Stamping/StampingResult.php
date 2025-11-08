@@ -12,8 +12,7 @@ class StampingResult extends AbstractResult
 {
     use MethodsFilterVariablesTrait;
 
-    /** @var StampingAlerts */
-    private $alerts;
+    private StampingAlerts $alerts;
 
     public function __construct(string $container, stdClass $data)
     {

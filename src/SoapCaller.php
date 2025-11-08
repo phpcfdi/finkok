@@ -15,14 +15,12 @@ use Throwable;
 
 class SoapCaller implements LoggerAwareInterface
 {
-    /** @var SoapClient */
-    private $soapClient;
+    private SoapClient $soapClient;
 
     /** @var array<mixed> */
-    private $extraParameters;
+    private array $extraParameters;
 
-    /** @var LoggerInterface */
-    private $logger;
+    private LoggerInterface $logger;
 
     /**
      * @param SoapClient $soapClient

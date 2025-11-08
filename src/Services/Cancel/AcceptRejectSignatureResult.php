@@ -12,11 +12,9 @@ class AcceptRejectSignatureResult extends AbstractResult
 {
     use MethodsFilterVariablesTrait;
 
-    /** @var AcceptRejectUuidList */
-    private $uuids;
+    private AcceptRejectUuidList $uuids;
 
-    /** @var string */
-    private $error;
+    private string $error;
 
     public function __construct(stdClass $data)
     {

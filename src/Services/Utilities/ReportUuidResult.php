@@ -13,7 +13,7 @@ class ReportUuidResult extends AbstractResult
     use MethodsFilterVariablesTrait;
 
     /** @var array<int, array{date: string, uuid:string}> */
-    private $items = [];
+    private array $items = [];
 
     public function __construct(stdClass $data)
     {

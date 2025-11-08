@@ -15,17 +15,13 @@ class AcceptRejectSigner
     /** @var string */
     public const DEFAULT_PACRFC = 'CVD110412TF6';
 
-    /** @var string */
-    private $uuid;
+    private string $uuid;
 
-    /** @var CancelAnswer */
-    private $answer;
+    private CancelAnswer $answer;
 
-    /** @var string */
-    private $pacRfc;
+    private string $pacRfc;
 
-    /** @var DateTimeImmutable */
-    private $dateTime;
+    private DateTimeImmutable $dateTime;
 
     /**
      * GetRelatedSigner constructor.

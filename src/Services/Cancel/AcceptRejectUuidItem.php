@@ -8,14 +8,11 @@ use PhpCfdi\Finkok\Definitions\CancelAnswer;
 
 class AcceptRejectUuidItem
 {
-    /** @var string */
-    private $uuid;
+    private string $uuid;
 
-    /** @var AcceptRejectUuidStatus */
-    private $status;
+    private AcceptRejectUuidStatus $status;
 
-    /** @var CancelAnswer */
-    private $answer;
+    private CancelAnswer $answer;
 
     public function __construct(string $uuid, AcceptRejectUuidStatus $status, CancelAnswer $answer)
     {

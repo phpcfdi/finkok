@@ -12,11 +12,9 @@ abstract class AbstractResult
 {
     use MethodsFilterVariablesTrait;
 
-    /** @var stdClass */
-    protected $data;
+    protected stdClass $data;
 
-    /** @var stdClass */
-    protected $root;
+    protected stdClass $root;
 
     public function __construct(stdClass $data, string ...$meanLocation)
     {

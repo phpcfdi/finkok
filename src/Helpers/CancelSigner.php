@@ -12,11 +12,9 @@ use PhpCfdi\XmlCancelacion\XmlCancelacionHelper;
 
 class CancelSigner
 {
-    /** @var CancelDocuments*/
-    private $documents;
+    private CancelDocuments $documents;
 
-    /** @var DateTimeImmutable */
-    private $dateTime;
+    private DateTimeImmutable $dateTime;
 
     /**
      * CancelSigner constructor

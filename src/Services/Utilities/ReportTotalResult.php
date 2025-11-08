@@ -12,14 +12,11 @@ class ReportTotalResult extends AbstractResult
 {
     use MethodsFilterVariablesTrait;
 
-    /** @var string */
-    private $rfc;
+    private string $rfc;
 
-    /** @var string */
-    private $total;
+    private string $total;
 
-    /** @var string */
-    private $error;
+    private string $error;
 
     public function __construct(stdClass $data)
     {

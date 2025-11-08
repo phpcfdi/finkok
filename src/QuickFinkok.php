@@ -21,8 +21,7 @@ use PhpCfdi\XmlCancelacion\Models\CancelDocuments;
 
 class QuickFinkok
 {
-    /** @var FinkokSettings */
-    private $settings;
+    private FinkokSettings $settings;
 
     public function __construct(FinkokSettings $factory)
     {
@@ -470,7 +469,7 @@ class QuickFinkok
     ): Manifest\SignContractsResult {
         $rfc = $fiel->rfc();
         $name = $fiel->legalName();
-        $signedOn = $signedOn ?? new DateTimeImmutable();
+        $signedOn ??= new DateTimeImmutable();
         $documents = $this->customerGetContracts($rfc, $name, $address, $email, $snid);
         if (! $documents->success()) {
             return Manifest\SignContractsResult::createFromData(
@@ -496,7 +495,7 @@ class QuickFinkok
         string $rfc,
         SignedDocumentFormat $format = null
     ): Manifest\GetSignedContractsResult {
-        $format = $format ?? SignedDocumentFormat::xml();
+        $format ??= SignedDocumentFormat::xml();
         $command = new Manifest\GetSignedContractsCommand($snid, $rfc, $format);
         $service = new Manifest\GetSignedContractsService($this->settings());
         return $service->getSignedContracts($command);

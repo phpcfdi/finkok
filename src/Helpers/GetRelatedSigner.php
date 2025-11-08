@@ -14,14 +14,11 @@ class GetRelatedSigner
     /** @var string */
     public const DEFAULT_PACRFC = 'CVD110412TF6';
 
-    /** @var string */
-    private $uuid;
+    private string $uuid;
 
-    /** @var RfcRole */
-    private $role;
+    private RfcRole $role;
 
-    /** @var string */
-    private $pacRfc;
+    private string $pacRfc;
 
     /**
      * GetRelatedSigner constructor.

@@ -20,17 +20,13 @@ use Psr\Log\LoggerInterface;
  */
 final class JsonDecoderLogger extends AbstractLogger implements LoggerInterface
 {
-    /** @var LoggerInterface */
-    private $logger;
+    private LoggerInterface $logger;
 
-    /** @var bool */
-    private $useJsonValidateIfAvailable = true;
+    private bool $useJsonValidateIfAvailable = true;
 
-    /** @var bool */
-    private $alsoLogJsonMessage = false;
+    private bool $alsoLogJsonMessage = false;
 
-    /** @var bool */
-    private $lastMessageWasJsonValid = false;
+    private bool $lastMessageWasJsonValid = false;
 
     public function __construct(LoggerInterface $logger)
     {
