@@ -41,6 +41,6 @@ final class AcceptRejectUuidStatus extends MicroCatalog
 
     public function isSuccess(): bool
     {
-        return ('1000' === $this->getCode());
+        return '1000' === $this->getCode();
     }
 }
