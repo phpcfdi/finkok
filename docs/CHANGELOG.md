@@ -6,6 +6,36 @@ Nos apegamos a [SEMVER](SEMVER.md), revisa la información para entender mejor e
 
 Estos cambios se aplican y se publican, pero aún no son parte de una versión liberada.
 
+## Versión 0.6.0 2025-11-08
+
+Esta versión tiene cambios importantes dado que:
+- Elimina la compatibilidad con PHP 7.3, PHP 7.4 y PHP 8.0.
+- Agrega la compatibilidad con PHP 8.4.
+
+Al realizar esta actualización, también cambiaron algunos nombres de parámetros, específicamente:
+
+- `PhpCfdi\Finkok\Finkok#__construct` parámetro `factory` a `settings`.
+- `PhpCfdi\Finkok\QuickFinkok#__construct()` parámetro `factory` a `settings`.
+- `PhpCfdi\Finkok\Services\Registration\Customer#__construct()` parámetro `raw` a `data`.
+- `PhpCfdi\Finkok\Services\Stamping\StampingAlert#__construct()` parámetro `raw` a `data`.
+- `PhpCfdi\Finkok\Services\Cancel\CancelledDocument#__construct()` parámetro `raw` a `data`.
+
+Se hacen varios cambios menores:
+
+- Se actualiza el año de licencia a 2025.
+- Se actualizan las insignias a las comúnmente usadas en PhpCfdi.
+
+Se hacen varios cambios al entorno de desarrollo:
+
+- Se corrige la documentación de pruebas de integración contínua y pruebas funcionales.
+- Se elimina la integración con Scrutinizer CI. Gracias por todo.
+- Se agrega la integración con SonarQube Cloud.
+- Se actualizan los estándares de código a los comúnmente usados en PhpCfdi.
+- Se ejecutan los flujos de trabajo en PHP 8.4.
+- Se agrega PHP 8.4 a la matriz de pruebas.
+- Se elimina PHP 7.3, 7.4 y 8.0 de la matriz de pruebas.
+- Se actualizan las herramientas de desarrollo.
+
 ## Versión 0.5.5 2024-05-24
 
 Se mueve `PhpCfdi\Finkok\Tests\LoggerPrinter` a `PhpCfdi\Finkok\Helpers\FileLogger` para permitir la distribución
@@ -16,7 +46,7 @@ generado por la función `print_r`. Se puede configurar para enviar también el 
 
 Se normaliza el formato de los mensajes JSON para usar `JSON_PRETTY_PRINT` y `JSON_UNESCAPED_SLASHES`.
 
-Se actualiza la documentación en el `README`.
+Se actualiza la documentación en el archivo `README`.
 
 ## Versión 0.5.4 2024-04-12
 
