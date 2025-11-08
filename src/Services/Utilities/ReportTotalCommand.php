@@ -27,7 +27,7 @@ class ReportTotalCommand
         int $startYear,
         int $startMonth,
         int $endYear = 0,
-        int $endMonth = 0
+        int $endMonth = 0,
     ) {
         $endYear = $endYear ?: $startYear;
         $endMonth = $endMonth ?: $startMonth;

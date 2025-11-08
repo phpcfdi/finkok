@@ -150,7 +150,7 @@ final class ReportTotalCommandTest extends TestCase
                 int $startYear,
                 int $startMonth,
                 int $endYear = 0,
-                int $endMonth = 0
+                int $endMonth = 0,
             ) {
                 parent::__construct($rfc, $type, $startYear, $startMonth, $endYear, $endMonth);
             }

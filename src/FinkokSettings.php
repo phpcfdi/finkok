@@ -70,7 +70,7 @@ class FinkokSettings
     public function createCallerForService(
         Services $service,
         string $usernameKey = 'username',
-        string $passwordKey = 'password'
+        string $passwordKey = 'password',
     ): SoapCaller {
         $wsdlLocation = $this->environment()->endpoint($service);
         $credentials = array_merge(

@@ -11,7 +11,7 @@ class GetContractsCommand
         private string $name,
         private string $address,
         private string $email,
-        private string $snid
+        private string $snid,
     ) {
     }
 

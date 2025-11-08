@@ -31,7 +31,7 @@ class AcceptRejectSigner
         private string $uuid,
         private CancelAnswer $answer,
         ?DateTimeImmutable $dateTime = null,
-        string $pacRfc = self::DEFAULT_PACRFC
+        string $pacRfc = self::DEFAULT_PACRFC,
     ) {
         $this->dateTime = $dateTime ?? new DateTimeImmutable();
         $this->pacRfc = $pacRfc ?: static::DEFAULT_PACRFC;

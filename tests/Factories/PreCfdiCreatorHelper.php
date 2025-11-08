@@ -30,7 +30,7 @@ final class PreCfdiCreatorHelper
     public function __construct(
         private string $cerFile,
         private string $keyPemFile,
-        private string $passPhrase
+        private string $passPhrase,
     ) {
         $certificate = new Certificado($this->cerFile);
         $this->emisorRfc = $certificate->getRfc();

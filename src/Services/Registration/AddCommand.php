@@ -13,7 +13,7 @@ class AddCommand
         ?CustomerType $type = null,
         private string $certificate = '',
         private string $privateKey = '',
-        private string $passPhrase = ''
+        private string $passPhrase = '',
     ) {
         $this->type = $type ?? CustomerType::ondemand();
     }

@@ -23,7 +23,7 @@ class SoapCaller implements LoggerAwareInterface
     public function __construct(
         private SoapClient $soapClient,
         private array $extraParameters = [],
-        ?LoggerInterface $logger = null
+        ?LoggerInterface $logger = null,
     ) {
         $this->logger = $logger ?? new NullLogger();
     }

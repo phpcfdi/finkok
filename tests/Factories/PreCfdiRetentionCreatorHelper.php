@@ -26,7 +26,7 @@ final class PreCfdiRetentionCreatorHelper
         private string $emisorRfc,
         private string $emisorName,
         private string $emisorLocation,
-        private string $emisorRegimen
+        private string $emisorRegimen,
     ) {
         $this->certificate = new Certificado($cerFile);
         $this->invoiceDate = new DateTimeImmutable('now -5 minutes', new DateTimeZone('America/Mexico_City'));
