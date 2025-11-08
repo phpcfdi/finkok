@@ -60,7 +60,7 @@ final class FinkokTest extends TestCase
         $finkok = new Finkok($settings);
         $this->expectException(BadMethodCallException::class);
         $this->expectExceptionMessage('Helper invalid-method is not registered');
-        $finkok->{'invalid-method'}();
+        $finkok->{'invalid-method'}(); /** @phpstan-ignore-line method.notFound */
     }
 
     public function testMagicCallWithInvalidParameter(): void
@@ -74,9 +74,9 @@ final class FinkokTest extends TestCase
         $this->expectExceptionMessage(
             'Call PhpCfdi\Finkok\Finkok::getContracts'
             . ' expect PhpCfdi\Finkok\Services\Manifest\GetContractsCommand'
-            . ' but received ' . get_class($command)
+            . ' but received ' . $command::class
         );
-        $finkok->{'getContracts'}($command);
+        $finkok->{'getContracts'}($command);  /** @phpstan-ignore-line argument.type */
     }
 
     public function testExecuteServiceWithCallNameDifferentFromServiceMethodName(): void

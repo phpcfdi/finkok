@@ -12,14 +12,11 @@ abstract class AbstractResult
 {
     use MethodsFilterVariablesTrait;
 
-    protected stdClass $data;
-
     protected stdClass $root;
 
-    public function __construct(stdClass $data, string ...$meanLocation)
+    public function __construct(protected stdClass $data, string ...$meanLocation)
     {
-        $this->data = $data;
-        $root = $this->findInDescendent($data, ...$meanLocation);
+        $root = $this->findInDescendent($this->data, ...$meanLocation);
         if (! $root instanceof stdClass) {
             throw new InvalidArgumentException(
                 sprintf('Unable to find mean object at /%s', implode('/', $meanLocation))

@@ -6,20 +6,12 @@ namespace PhpCfdi\Finkok\Services\Cancel;
 
 class GetSatStatusCommand
 {
-    private string $rfcIssuer;
-
-    private string $rfcRecipient;
-
-    private string $uuid;
-
-    private string $total;
-
-    public function __construct(string $rfcIssuer, string $rfcRecipient, string $uuid, string $total)
-    {
-        $this->rfcIssuer = $rfcIssuer;
-        $this->rfcRecipient = $rfcRecipient;
-        $this->uuid = $uuid;
-        $this->total = $total;
+    public function __construct(
+        private string $rfcIssuer,
+        private string $rfcRecipient,
+        private string $uuid,
+        private string $total,
+    ) {
     }
 
     public function rfcIssuer(): string

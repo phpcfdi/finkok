@@ -11,15 +11,12 @@ class Customer
 {
     use MethodsFilterVariablesTrait;
 
-    private stdClass $data;
-
     private CustomerStatus $status;
 
     private CustomerType $type;
 
-    public function __construct(stdClass $raw)
+    public function __construct(private stdClass $data)
     {
-        $this->data = $raw;
         $rawStatus = $this->get('status');
         if (in_array($rawStatus, CustomerStatus::toArray())) {
             $this->status = new CustomerStatus($rawStatus);

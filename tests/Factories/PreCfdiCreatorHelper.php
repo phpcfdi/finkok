@@ -22,28 +22,19 @@ final class PreCfdiCreatorHelper
 
     private string $emisorName;
 
-    private string $cerFile;
-
-    private string $keyPemFile;
-
-    private string $passPhrase;
-
     private string $relation = '';
 
     /** @var string[] */
     private array $relatedUuids = [];
 
     public function __construct(
-        string $cerFile,
-        string $keyPemFile,
-        string $passPhrase
+        private string $cerFile,
+        private string $keyPemFile,
+        private string $passPhrase
     ) {
-        $certificate = new Certificado($cerFile);
+        $certificate = new Certificado($this->cerFile);
         $this->emisorRfc = $certificate->getRfc();
         $this->emisorName = $certificate->getName();
-        $this->cerFile = $cerFile;
-        $this->keyPemFile = $keyPemFile;
-        $this->passPhrase = $passPhrase;
         $this->invoiceDate = new DateTimeImmutable('now -5 minutes', new DateTimeZone('America/Mexico_City'));
         $this->conceptoDescription = sprintf('Portable tetris gamepad pro++ ⏻ v1.%s', random_int(10, 99));
         $this->conceptoAmount = round(random_int(1000, 4000) + random_int(0, 99) / 100, 2);

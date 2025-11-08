@@ -9,11 +9,8 @@ use PhpCfdi\Finkok\FinkokSettings;
 
 class GetRelatedSignatureService
 {
-    private FinkokSettings $settings;
-
-    public function __construct(FinkokSettings $settings)
+    public function __construct(private FinkokSettings $settings)
     {
-        $this->settings = $settings;
     }
 
     public function settings(): FinkokSettings

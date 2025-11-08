@@ -16,11 +16,8 @@ use Throwable;
 require_once __DIR__ . '/bootstrap.php';
 
 exit(call_user_func(new class ($argv[0] ?? '') {
-    private string $command;
-
-    public function __construct(string $command)
+    public function __construct(private string $command)
     {
-        $this->command = $command;
     }
 
     public function __invoke(string $preCfdiPath): int
@@ -63,7 +60,7 @@ exit(call_user_func(new class ($argv[0] ?? '') {
         } catch (Throwable $exception) {
             file_put_contents(
                 'php://stderr',
-                sprintf("%s: %s\n", get_class($exception), $exception->getMessage()),
+                sprintf("%s: %s\n", $exception::class, $exception->getMessage()),
                 FILE_APPEND
             );
             return (int) $exception->getCode() ?: 1;

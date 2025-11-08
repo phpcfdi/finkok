@@ -9,10 +9,6 @@ use LogicException;
 
 class ReportTotalCommand
 {
-    private string $rfc;
-
-    private string $type;
-
     private int $startYear;
 
     private int $startMonth;
@@ -26,8 +22,8 @@ class ReportTotalCommand
     private string $endPeriod;
 
     public function __construct(
-        string $rfc,
-        string $type,
+        private string $rfc,
+        private string $type,
         int $startYear,
         int $startMonth,
         int $endYear = 0,
@@ -38,9 +34,6 @@ class ReportTotalCommand
         $today = $this->today();
         $currentYear = intval($today->format('Y'));
         $currentPeriod = sprintf('%04d-%02d', $currentYear, intval($today->format('m')));
-
-        $this->rfc = $rfc;
-        $this->type = $type;
         $this->startYear = $startYear;
         $this->startMonth = $startMonth;
         $this->endYear = $endYear;

@@ -21,7 +21,7 @@ final class AcceptRejectSignerTest extends TestCase
         $this->assertSame($uuid, $signer->uuid());
         $this->assertSame($answer, $signer->answer());
         $this->assertSame($date, $signer->dateTime());
-        $this->assertSame($signer::DEFAULT_PACRFC, $signer->pacRfc());
+        $this->assertSame(AcceptRejectSigner::DEFAULT_PACRFC, $signer->pacRfc());
 
         $signed = $signer->sign($this->createCsdCredential());
 

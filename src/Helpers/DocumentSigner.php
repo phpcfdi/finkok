@@ -13,17 +13,8 @@ use RobRichards\XMLSecLibs\XMLSecurityKey;
 
 class DocumentSigner
 {
-    private string $rfc;
-
-    private DateTimeImmutable $date;
-
-    private string $content;
-
-    public function __construct(string $rfc, DateTimeImmutable $date, string $content)
+    public function __construct(private string $rfc, private DateTimeImmutable $date, private string $content)
     {
-        $this->rfc = $rfc;
-        $this->date = $date;
-        $this->content = $content;
     }
 
     public function rfc(): string

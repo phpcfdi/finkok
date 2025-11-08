@@ -6,32 +6,14 @@ namespace PhpCfdi\Finkok\Services\Registration;
 
 class PageInformation
 {
-    private int $firstRecord;
-
-    private int $lastRecord;
-
-    private int $totalRecords;
-
-    private int $currentPage;
-
-    private int $totalPages;
-
-    private int $pageLength;
-
     public function __construct(
-        int $firstRecord,
-        int $lastRecord,
-        int $totalRecords,
-        int $currentPage,
-        int $totalPages,
-        int $pageLength
+        private int $firstRecord,
+        private int $lastRecord,
+        private int $totalRecords,
+        private int $currentPage,
+        private int $totalPages,
+        private int $pageLength,
     ) {
-        $this->firstRecord = $firstRecord;
-        $this->lastRecord = $lastRecord;
-        $this->totalRecords = $totalRecords;
-        $this->currentPage = $currentPage;
-        $this->totalPages = $totalPages;
-        $this->pageLength = $pageLength;
     }
 
     public static function empty(): self

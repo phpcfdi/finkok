@@ -6,11 +6,8 @@ namespace PhpCfdi\Finkok;
 
 class FinkokEnvironment
 {
-    private Definitions\Environment $environment;
-
-    private function __construct(Definitions\Environment $environment)
+    private function __construct(private Definitions\Environment $environment)
     {
-        $this->environment = $environment;
     }
 
     public static function makeDevelopment(): self

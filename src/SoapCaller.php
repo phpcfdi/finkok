@@ -15,22 +15,17 @@ use Throwable;
 
 class SoapCaller implements LoggerAwareInterface
 {
-    private SoapClient $soapClient;
-
-    /** @var array<mixed> */
-    private array $extraParameters;
-
     private LoggerInterface $logger;
 
     /**
-     * @param SoapClient $soapClient
      * @param array<mixed> $extraParameters
      */
-    public function __construct(SoapClient $soapClient, array $extraParameters = [])
-    {
-        $this->soapClient = $soapClient;
-        $this->extraParameters = $extraParameters;
-        $this->logger = new NullLogger();
+    public function __construct(
+        private SoapClient $soapClient,
+        private array $extraParameters = [],
+        ?LoggerInterface $logger = null
+    ) {
+        $this->logger = $logger ?? new NullLogger();
     }
 
     private function soapClient(): SoapClient

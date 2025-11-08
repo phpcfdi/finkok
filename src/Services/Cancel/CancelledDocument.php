@@ -11,11 +11,8 @@ class CancelledDocument
 {
     use MethodsFilterVariablesTrait;
 
-    private stdClass $data;
-
-    public function __construct(stdClass $raw)
+    public function __construct(private stdClass $data)
     {
-        $this->data = $raw;
     }
 
     private function get(string $keyword): string

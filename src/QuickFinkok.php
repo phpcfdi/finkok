@@ -21,11 +21,8 @@ use PhpCfdi\XmlCancelacion\Models\CancelDocuments;
 
 class QuickFinkok
 {
-    private FinkokSettings $settings;
-
-    public function __construct(FinkokSettings $factory)
+    public function __construct(private FinkokSettings $settings)
     {
-        $this->settings = $factory;
     }
 
     /**
@@ -186,7 +183,7 @@ class QuickFinkok
     public function obtainRelated(
         Credential $credential,
         string $uuid,
-        RfcRole $role = null
+        ?RfcRole $role = null
     ): Cancel\GetRelatedSignatureResult {
         $signer = new Helpers\GetRelatedSigner($uuid, $role);
         $signedRequest = $signer->sign($credential);
@@ -493,7 +490,7 @@ class QuickFinkok
     public function customerGetSignedContracts(
         string $snid,
         string $rfc,
-        SignedDocumentFormat $format = null
+        ?SignedDocumentFormat $format = null
     ): Manifest\GetSignedContractsResult {
         $format ??= SignedDocumentFormat::xml();
         $command = new Manifest\GetSignedContractsCommand($snid, $rfc, $format);

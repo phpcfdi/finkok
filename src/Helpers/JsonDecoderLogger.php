@@ -20,17 +20,14 @@ use Psr\Log\LoggerInterface;
  */
 final class JsonDecoderLogger extends AbstractLogger implements LoggerInterface
 {
-    private LoggerInterface $logger;
-
     private bool $useJsonValidateIfAvailable = true;
 
     private bool $alsoLogJsonMessage = false;
 
     private bool $lastMessageWasJsonValid = false;
 
-    public function __construct(LoggerInterface $logger)
+    public function __construct(private LoggerInterface $logger)
     {
-        $this->logger = $logger;
     }
 
     /**
@@ -39,7 +36,7 @@ final class JsonDecoderLogger extends AbstractLogger implements LoggerInterface
      * @param bool|null $value El nuevo estado, si se establece NULL entonces solo devuelve el espado previo.
      * @return bool El estado previo
      */
-    public function setUseJsonValidateIfAvailable(bool $value = null): bool
+    public function setUseJsonValidateIfAvailable(?bool $value = null): bool
     {
         $previous = $this->useJsonValidateIfAvailable;
         if (null !== $value) {
@@ -54,7 +51,7 @@ final class JsonDecoderLogger extends AbstractLogger implements LoggerInterface
      * @param bool|null $value El nuevo estado, si se establece NULL entonces solo devuelve el espado previo.
      * @return bool El estado previo
      */
-    public function setAlsoLogJsonMessage(bool $value = null): bool
+    public function setAlsoLogJsonMessage(?bool $value = null): bool
     {
         $previous = $this->alsoLogJsonMessage;
         if (null !== $value) {

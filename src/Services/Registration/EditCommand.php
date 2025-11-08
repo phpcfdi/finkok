@@ -6,28 +6,13 @@ namespace PhpCfdi\Finkok\Services\Registration;
 
 class EditCommand
 {
-    private string $rfc;
-
-    private CustomerStatus $status;
-
-    private string $certificate;
-
-    private string $privateKey;
-
-    private string $passPhrase;
-
     public function __construct(
-        string $rfc,
-        CustomerStatus $status,
-        string $certificate = '',
-        string $privateKey = '',
-        string $passPhrase = ''
+        private string $rfc,
+        private CustomerStatus $status,
+        private string $certificate = '',
+        private string $privateKey = '',
+        private string $passPhrase = '',
     ) {
-        $this->rfc = $rfc;
-        $this->status = $status;
-        $this->certificate = $certificate;
-        $this->privateKey = $privateKey;
-        $this->passPhrase = $passPhrase;
     }
 
     public function rfc(): string

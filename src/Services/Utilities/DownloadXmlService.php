@@ -9,11 +9,8 @@ use PhpCfdi\Finkok\FinkokSettings;
 
 class DownloadXmlService
 {
-    private FinkokSettings $settings;
-
-    public function __construct(FinkokSettings $settings)
+    public function __construct(private FinkokSettings $settings)
     {
-        $this->settings = $settings;
     }
 
     public function settings(): FinkokSettings
@@ -32,7 +29,7 @@ class DownloadXmlService
             ]);
             $result = new DownloadXmlResult($rawResponse);
             // Finkok sometimes returns the path to the file instead of content (Ticket #18950)
-            if ('.xml' === substr($result->xml(), -4)) {
+            if (str_ends_with($result->xml(), '.xml')) {
                 usleep(200000); // 0.2 seconds
                 continue;
             }

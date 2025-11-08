@@ -19,35 +19,17 @@ final class PreCfdiRetentionCreatorHelper
 
     private string $cveReten;
 
-    private string $emisorRfc;
-
-    private string $emisorName;
-
-    private string $keyPemFile;
-
-    private string $passPhrase;
-
-    private string $emisorLocation;
-
-    private string $emisorRegimen;
-
     public function __construct(
         string $cerFile,
-        string $keyPemFile,
-        string $passPhrase,
-        string $emisorRfc,
-        string $emisorName,
-        string $emisorLocation,
-        string $emisorRegimen
+        private string $keyPemFile,
+        private string $passPhrase,
+        private string $emisorRfc,
+        private string $emisorName,
+        private string $emisorLocation,
+        private string $emisorRegimen
     ) {
         $this->certificate = new Certificado($cerFile);
-        $this->emisorRfc = $emisorRfc;
-        $this->emisorName = $emisorName;
-        $this->keyPemFile = $keyPemFile;
-        $this->passPhrase = $passPhrase;
         $this->invoiceDate = new DateTimeImmutable('now -5 minutes', new DateTimeZone('America/Mexico_City'));
-        $this->emisorLocation = $emisorLocation;
-        $this->emisorRegimen = $emisorRegimen;
     }
 
     public function getInvoiceDate(): DateTimeImmutable

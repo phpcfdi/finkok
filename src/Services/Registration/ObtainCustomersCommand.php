@@ -6,11 +6,8 @@ namespace PhpCfdi\Finkok\Services\Registration;
 
 class ObtainCustomersCommand
 {
-    private int $page;
-
-    public function __construct(int $page)
+    public function __construct(private int $page)
     {
-        $this->page = $page;
     }
 
     public function page(): int

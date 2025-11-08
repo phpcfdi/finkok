@@ -14,7 +14,7 @@ use PhpCfdi\Finkok\SoapFactory;
 
 abstract class TestCase extends \PHPUnit\Framework\TestCase
 {
-    public function createSettingsFromEnvironment(SoapFactory $soapFactory = null): FinkokSettings
+    public function createSettingsFromEnvironment(?SoapFactory $soapFactory = null): FinkokSettings
     {
         $settings = new FinkokSettings(
             $this->getenv('FINKOK_USERNAME') ?: 'username-non-set',

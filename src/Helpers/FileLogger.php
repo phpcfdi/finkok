@@ -9,11 +9,8 @@ use Psr\Log\LoggerInterface;
 
 final class FileLogger extends AbstractLogger implements LoggerInterface
 {
-    public string $outputFile;
-
-    public function __construct(string $outputFile = 'php://stdout')
+    public function __construct(public string $outputFile = 'php://stdout')
     {
-        $this->outputFile = $outputFile;
     }
 
     /**

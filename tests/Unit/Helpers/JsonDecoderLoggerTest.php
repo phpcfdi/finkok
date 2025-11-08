@@ -14,25 +14,25 @@ final class JsonDecoderLoggerTest extends TestCase
     public function testSetAlsoLogJsonMessage(): void
     {
         $decoder = new JsonDecoderLogger(new NullLogger());
-        $this->assertSame(false, $decoder->setAlsoLogJsonMessage(null));
+        $this->assertSame(false, $decoder->setAlsoLogJsonMessage());
         $this->assertSame(false, $decoder->setAlsoLogJsonMessage(true));
         $this->assertSame(true, $decoder->setAlsoLogJsonMessage(true));
-        $this->assertSame(true, $decoder->setAlsoLogJsonMessage(null));
+        $this->assertSame(true, $decoder->setAlsoLogJsonMessage());
         $this->assertSame(true, $decoder->setAlsoLogJsonMessage(false));
         $this->assertSame(false, $decoder->setAlsoLogJsonMessage(false));
-        $this->assertSame(false, $decoder->setAlsoLogJsonMessage(null));
+        $this->assertSame(false, $decoder->setAlsoLogJsonMessage());
     }
 
     public function testSetUseJsonValidateIfAvailable(): void
     {
         $decoder = new JsonDecoderLogger(new NullLogger());
-        $this->assertSame(true, $decoder->setUseJsonValidateIfAvailable(null));
+        $this->assertSame(true, $decoder->setUseJsonValidateIfAvailable());
         $this->assertSame(true, $decoder->setUseJsonValidateIfAvailable(false));
         $this->assertSame(false, $decoder->setUseJsonValidateIfAvailable(false));
-        $this->assertSame(false, $decoder->setUseJsonValidateIfAvailable(null));
+        $this->assertSame(false, $decoder->setUseJsonValidateIfAvailable());
         $this->assertSame(false, $decoder->setUseJsonValidateIfAvailable(true));
         $this->assertSame(true, $decoder->setUseJsonValidateIfAvailable(true));
-        $this->assertSame(true, $decoder->setUseJsonValidateIfAvailable(null));
+        $this->assertSame(true, $decoder->setUseJsonValidateIfAvailable());
     }
 
     public function testLastMessageWasJsonValidReturnFalseWithoutCall(): void

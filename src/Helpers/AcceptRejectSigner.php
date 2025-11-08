@@ -15,10 +15,6 @@ class AcceptRejectSigner
     /** @var string */
     public const DEFAULT_PACRFC = 'CVD110412TF6';
 
-    private string $uuid;
-
-    private CancelAnswer $answer;
-
     private string $pacRfc;
 
     private DateTimeImmutable $dateTime;
@@ -32,13 +28,11 @@ class AcceptRejectSigner
      * @param string $pacRfc If empty or omitted then uses DEFAULT_PACRFC
      */
     public function __construct(
-        string $uuid,
-        CancelAnswer $answer,
+        private string $uuid,
+        private CancelAnswer $answer,
         ?DateTimeImmutable $dateTime = null,
         string $pacRfc = self::DEFAULT_PACRFC
     ) {
-        $this->uuid = $uuid;
-        $this->answer = $answer;
         $this->dateTime = $dateTime ?? new DateTimeImmutable();
         $this->pacRfc = $pacRfc ?: static::DEFAULT_PACRFC;
     }

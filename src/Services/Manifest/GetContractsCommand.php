@@ -6,23 +6,13 @@ namespace PhpCfdi\Finkok\Services\Manifest;
 
 class GetContractsCommand
 {
-    private string $rfc;
-
-    private string $name;
-
-    private string $address;
-
-    private string $email;
-
-    private string $snid;
-
-    public function __construct(string $rfc, string $name, string $address, string $email, string $snid)
-    {
-        $this->rfc = $rfc;
-        $this->name = $name;
-        $this->address = $address;
-        $this->email = $email;
-        $this->snid = $snid;
+    public function __construct(
+        private string $rfc,
+        private string $name,
+        private string $address,
+        private string $email,
+        private string $snid
+    ) {
     }
 
     public function rfc(): string

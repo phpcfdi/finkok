@@ -6,17 +6,8 @@ namespace PhpCfdi\Finkok\Services\Utilities;
 
 class DownloadXmlCommand
 {
-    private string $uuid;
-
-    private string $rfc;
-
-    private string $type;
-
-    public function __construct(string $uuid, string $rfc, string $type)
+    public function __construct(private string $uuid, private string $rfc, private string $type)
     {
-        $this->uuid = $uuid;
-        $this->rfc = $rfc;
-        $this->type = $type;
     }
 
     public function uuid(): string

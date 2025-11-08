@@ -8,17 +8,8 @@ use PhpCfdi\Finkok\Definitions\SignedDocumentFormat;
 
 class GetSignedContractsCommand
 {
-    private string $snid;
-
-    private string $rfc;
-
-    private SignedDocumentFormat $format;
-
-    public function __construct(string $snid, string $rfc, SignedDocumentFormat $format)
+    public function __construct(private string $snid, private string $rfc, private SignedDocumentFormat $format)
     {
-        $this->snid = $snid;
-        $this->rfc = $rfc;
-        $this->format = $format;
     }
 
     public function snid(): string

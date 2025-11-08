@@ -143,10 +143,8 @@ final class ReportTotalCommandTest extends TestCase
         $this->expectException(LogicException::class);
         $this->expectExceptionMessage('Cannot combine multiple past months with current/future months');
         new class ($today, 'x-rfc', 'I', 2019, 1, $year, $month) extends ReportTotalCommand {
-            private DateTimeImmutable $today;
-
             public function __construct(
-                DateTimeImmutable $today,
+                private DateTimeImmutable $today,
                 string $rfc,
                 string $type,
                 int $startYear,
@@ -154,7 +152,6 @@ final class ReportTotalCommandTest extends TestCase
                 int $endYear = 0,
                 int $endMonth = 0
             ) {
-                $this->today = $today;
                 parent::__construct($rfc, $type, $startYear, $startMonth, $endYear, $endMonth);
             }
 

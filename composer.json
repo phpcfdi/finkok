@@ -21,7 +21,7 @@
         "source": "https://github.com/phpcfdi/finkok"
     },
     "require": {
-        "php": ">=7.4",
+        "php": ">=8.0",
         "ext-dom": "*",
         "ext-json": "*",
         "ext-openssl": "*",
@@ -36,7 +36,7 @@
     },
     "require-dev": {
         "ext-fileinfo": "*",
-        "eclipxe/cfdiutils": "^2.23.2",
+        "eclipxe/cfdiutils": "^3.0.1",
         "phpcfdi/rfc": "^1.1",
         "phpunit/phpunit": "^9.5.10",
         "symfony/dotenv": "^5.1 || ^6.0 || ^7.0"

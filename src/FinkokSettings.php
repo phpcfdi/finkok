@@ -20,7 +20,7 @@ class FinkokSettings
 
     private SoapFactory $soapFactory;
 
-    public function __construct(string $username, string $password, FinkokEnvironment $environment = null)
+    public function __construct(string $username, string $password, ?FinkokEnvironment $environment = null)
     {
         if ('' === $username) {
             throw new InvalidArgumentException('Invalid username');
