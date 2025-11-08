@@ -15,7 +15,7 @@ return (new PhpCsFixer\Config())
     ->setRules([
         '@PSR12' => true,
         '@PSR12:risky' => true,
-        '@PHP8x0Migration' => true,
+        '@PHP8x1Migration' => true,
         '@PHP8x0Migration:risky' => true,
         // symfony
         'array_indentation' => true,
