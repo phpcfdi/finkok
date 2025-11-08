@@ -4,22 +4,19 @@ declare(strict_types=1);
 
 namespace PhpCfdi\Finkok\Services\Registration;
 
+use PhpCfdi\Finkok\Internal\MethodsFilterVariablesTrait;
 use stdClass;
 
 class Customer
 {
-    /** @var stdClass */
-    private $data;
+    use MethodsFilterVariablesTrait;
 
-    /** @var CustomerStatus */
-    private $status;
+    private CustomerStatus $status;
 
-    /** @var CustomerType */
-    private $type;
+    private CustomerType $type;
 
-    public function __construct(stdClass $raw)
+    public function __construct(private stdClass $data)
     {
-        $this->data = $raw;
         $rawStatus = $this->get('status');
         if (in_array($rawStatus, CustomerStatus::toArray())) {
             $this->status = new CustomerStatus($rawStatus);
@@ -31,7 +28,7 @@ class Customer
 
     private function get(string $keyword): string
     {
-        return strval($this->data->{$keyword} ?? '');
+        return $this->filterString($this->data->{$keyword} ?? '');
     }
 
     public function status(): CustomerStatus

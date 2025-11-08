@@ -8,11 +8,7 @@ use PhpCfdi\Finkok\Definitions\CancelStorePending;
 
 class CancelSignatureCommand
 {
-    /** @var string */
-    private $xml;
-
-    /** @var CancelStorePending */
-    private $storePending;
+    private CancelStorePending $storePending;
 
     /**
      * CancelSignatureCommand constructor.
@@ -20,9 +16,8 @@ class CancelSignatureCommand
      * @param string $xml The signed xml
      * @param CancelStorePending|null $storePending Defaults to CancelStorePending::no()
      */
-    public function __construct(string $xml, CancelStorePending $storePending = null)
+    public function __construct(private string $xml, ?CancelStorePending $storePending = null)
     {
-        $this->xml = $xml;
         $this->storePending = $storePending ?? CancelStorePending::no();
     }
 

@@ -1,68 +1,72 @@
-name: functional-tests
+name: "SonarQube Cloud"
 on:
   # secrets are not passed to workflows that are triggered by a pull request from a fork.
   # see https://docs.github.com/en/actions/reference/encrypted-secrets
   workflow_dispatch:
   push:
-    branches: [ 'main' ]
+    branches: [ "main" ]
 
 # Actions
 # shivammathur/setup-php@v2 https://github.com/marketplace/actions/setup-php-action
-# sudo-bot/action-scrutinizer@latest https://github.com/marketplace/actions/action-scrutinizer
+# SonarSource/sonarqube-scan-action@v6 https://github.com/marketplace/actions/official-sonarqube-scan
 
 jobs:
-  functional-tests:
-    name: Functional tests
+
+  sonarqube-cloud:
+    name: SonarCloud Scan and Report
     runs-on: "ubuntu-latest"
-
     steps:
-
+      - name: Check SONAR_TOKEN secret
+        run: |
+          if [ -z "${{ secrets.SONAR_TOKEN }}" ]; then
+            echo "::warning ::SONAR_TOKEN non set"
+            exit 1
+          fi
+      - name: Check ENV_GPG_SECRET secret
+        run: |
+          if [ -z "${{ secrets.ENV_GPG_SECRET }}" ]; then
+            echo "::warning ::ENV_GPG_SECRET non set"
+            exit 1
+          fi
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0 # required for sudo-bot/action-scrutinizer
-
+      - name: Unshallow clone to provide blame information
+        run: git fetch --unshallow
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.3'
+          php-version: '8.4'
           extensions: soap
           coverage: xdebug
           tools: composer:v2
-        env:
-          fail-fast: true
-
       - name: Get composer cache directory
         id: composer-cache
         run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
-
       - name: Cache dependencies
         uses: actions/cache@v4
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
           key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.json') }}
           restore-keys: ${{ runner.os }}-composer-
-
       - name: Install project dependencies
         run: composer upgrade --no-interaction --no-progress --prefer-dist
-
       - name: Install SAT XML resources
         shell: bash
         run: |
           git clone --depth 1 https://github.com/phpcfdi/resources-sat-xml resources-sat-xml-cloned
           mv resources-sat-xml-cloned/resources vendor/eclipxe/cfdiutils/build/resources
           rm -r -f resources-sat-xml-cloned
-
       - name: Set up environment file
         run: gpg --quiet --batch --yes --decrypt --passphrase="$ENV_GPG_SECRET" --output tests/.env tests/.env-testing.enc
         env:
           ENV_GPG_SECRET: ${{ secrets.ENV_GPG_SECRET }}
-
-      - name: Run integration tests with code coverage
-        run: vendor/bin/phpunit --testdox --verbose --exclude-group large --coverage-clover=build/coverage-clover.xml
-
-      - name: Upload code coverage to scrutinizer
-        uses: sudo-bot/action-scrutinizer@latest
-        with:
-          cli-args: "--format=php-clover build/coverage-clover.xml"
-        continue-on-error: true
+      - name: Create code coverage
+        run: vendor/bin/phpunit --coverage-xml=build/coverage --coverage-clover=build/coverage/clover.xml --log-junit=build/coverage/junit.xml
+      - name: Prepare SonarCloud Code Coverage Files
+        run: |
+          sed 's#'$GITHUB_WORKSPACE'#/github/workspace#g' build/coverage/junit.xml > build/sonar-junit.xml
+          sed 's#'$GITHUB_WORKSPACE'#/github/workspace#g' build/coverage/clover.xml > build/sonar-coverage.xml
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarqube-scan-action@v6
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

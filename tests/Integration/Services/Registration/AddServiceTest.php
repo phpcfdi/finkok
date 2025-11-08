@@ -55,7 +55,7 @@ final class AddServiceTest extends RegistrationIntegrationTestCase
         // This is why it takes so long to run.
         // To remove any RFC email soporte@finkok.com asking for it.
 
-        if (! $this->getenv('FINKOK_REGISTRATION_ADD_CREATE_RANDOM_RFC')) {
+        if (! $this->getenvBool('FINKOK_REGISTRATION_ADD_CREATE_RANDOM_RFC')) {
             $this->markTestSkipped('This test is skipped as will create a lot of garbage customers');
         }
 

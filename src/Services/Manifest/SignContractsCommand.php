@@ -6,20 +6,8 @@ namespace PhpCfdi\Finkok\Services\Manifest;
 
 class SignContractsCommand
 {
-    /** @var string */
-    private $snid;
-
-    /** @var string */
-    private $privacy;
-
-    /** @var string */
-    private $contract;
-
-    public function __construct(string $snid, string $privacy, string $contract)
+    public function __construct(private string $snid, private string $privacy, private string $contract)
     {
-        $this->snid = $snid;
-        $this->privacy = $privacy;
-        $this->contract = $contract;
     }
 
     public function snid(): string

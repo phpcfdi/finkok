@@ -9,27 +9,15 @@ use LogicException;
 
 class ReportUuidCommand
 {
-    /** @var string */
-    private $rfc;
-
-    /** @var string */
-    private $type;
-
-    /** @var DateTimeImmutable */
-    private $since;
-
-    /** @var DateTimeImmutable */
-    private $until;
-
-    public function __construct(string $rfc, string $type, DateTimeImmutable $since, DateTimeImmutable $until)
-    {
-        if ($since > $until) {
+    public function __construct(
+        private string $rfc,
+        private string $type,
+        private DateTimeImmutable $since,
+        private DateTimeImmutable $until,
+    ) {
+        if ($this->since > $this->until) {
             throw new LogicException('Since date is greater than until date');
         }
-        $this->rfc = $rfc;
-        $this->type = $type;
-        $this->since = $since;
-        $this->until = $until;
     }
 
     public function rfc(): string

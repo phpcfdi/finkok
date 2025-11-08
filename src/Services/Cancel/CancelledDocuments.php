@@ -4,14 +4,10 @@ declare(strict_types=1);
 
 namespace PhpCfdi\Finkok\Services\Cancel;
 
-use ArrayIterator;
 use PhpCfdi\Finkok\Services\AbstractCollection;
 use stdClass;
 
 /**
- * @method CancelledDocument get(int $index)
- * @method CancelledDocument first()
- * @method ArrayIterator|CancelledDocument[] getIterator()
  * @extends AbstractCollection<CancelledDocument>
  */
 class CancelledDocuments extends AbstractCollection

@@ -6,33 +6,16 @@ namespace PhpCfdi\Finkok\Services\Registration;
 
 class AddCommand
 {
-    /** @var string */
-    private $rfc;
-
-    /** @var CustomerType */
-    private $type;
-
-    /** @var string */
-    private $certificate;
-
-    /** @var string */
-    private $privateKey;
-
-    /** @var string */
-    private $passPhrase;
+    private CustomerType $type;
 
     public function __construct(
-        string $rfc,
+        private string $rfc,
         ?CustomerType $type = null,
-        string $certificate = '',
-        string $privateKey = '',
-        string $passPhrase = ''
+        private string $certificate = '',
+        private string $privateKey = '',
+        private string $passPhrase = '',
     ) {
-        $this->rfc = $rfc;
         $this->type = $type ?? CustomerType::ondemand();
-        $this->certificate = $certificate;
-        $this->privateKey = $privateKey;
-        $this->passPhrase = $passPhrase;
     }
 
     public function rfc(): string

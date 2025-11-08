@@ -4,21 +4,20 @@ declare(strict_types=1);
 
 namespace PhpCfdi\Finkok\Services\Stamping;
 
+use PhpCfdi\Finkok\Internal\MethodsFilterVariablesTrait;
 use stdClass;
 
 class StampingAlert
 {
-    /** @var stdClass */
-    private $data;
+    use MethodsFilterVariablesTrait;
 
-    public function __construct(stdClass $raw)
+    public function __construct(private stdClass $data)
     {
-        $this->data = $raw;
     }
 
     private function get(string $keyword): string
     {
-        return strval($this->data->{$keyword} ?? '');
+        return $this->filterString($this->data->{$keyword} ?? '');
     }
 
     public function id(): string

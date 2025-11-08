@@ -6,6 +6,7 @@ namespace PhpCfdi\Finkok\Helpers;
 
 use Psr\Log\AbstractLogger;
 use Psr\Log\LoggerInterface;
+use Stringable;
 
 /**
  * Esta clase es un adaptador para convertir un mensaje de registro (log) que está
@@ -20,30 +21,23 @@ use Psr\Log\LoggerInterface;
  */
 final class JsonDecoderLogger extends AbstractLogger implements LoggerInterface
 {
-    /** @var LoggerInterface */
-    private $logger;
+    private bool $useJsonValidateIfAvailable = true;
 
-    /** @var bool */
-    private $useJsonValidateIfAvailable = true;
+    private bool $alsoLogJsonMessage = false;
 
-    /** @var bool */
-    private $alsoLogJsonMessage = false;
+    private bool $lastMessageWasJsonValid = false;
 
-    /** @var bool */
-    private $lastMessageWasJsonValid = false;
-
-    public function __construct(LoggerInterface $logger)
+    public function __construct(private LoggerInterface $logger)
     {
-        $this->logger = $logger;
     }
 
     /**
      * Define si se utilizará la función \json_validate en caso de estar disponible.
      *
-     * @param bool|null $value El nuevo estado, si se establece NULL entonces solo devuelve el espado previo.
+     * @param bool|null $value El nuevo estado, si se establece NULL entonces solo devuelve el estado previo.
      * @return bool El estado previo
      */
-    public function setUseJsonValidateIfAvailable(bool $value = null): bool
+    public function setUseJsonValidateIfAvailable(?bool $value = null): bool
     {
         $previous = $this->useJsonValidateIfAvailable;
         if (null !== $value) {
@@ -55,10 +49,10 @@ final class JsonDecoderLogger extends AbstractLogger implements LoggerInterface
     /**
      * Define si también se mandará el mensaje JSON al Logger.
      *
-     * @param bool|null $value El nuevo estado, si se establece NULL entonces solo devuelve el espado previo.
+     * @param bool|null $value El nuevo estado, si se establece NULL entonces solo devuelve el estado previo.
      * @return bool El estado previo
      */
-    public function setAlsoLogJsonMessage(bool $value = null): bool
+    public function setAlsoLogJsonMessage(?bool $value = null): bool
     {
         $previous = $this->alsoLogJsonMessage;
         if (null !== $value) {
@@ -74,10 +68,9 @@ final class JsonDecoderLogger extends AbstractLogger implements LoggerInterface
 
     /**
      * @inheritDoc
-     * @param string|\Stringable $message
      * @param mixed[] $context
      */
-    public function log($level, $message, array $context = []): void
+    public function log($level, string|Stringable $message, array $context = []): void
     {
         $this->logger->log($level, $this->jsonDecode($message), $context);
         if ($this->lastMessageWasJsonValid && $this->alsoLogJsonMessage) {
@@ -85,8 +78,7 @@ final class JsonDecoderLogger extends AbstractLogger implements LoggerInterface
         }
     }
 
-    /** @param string|\Stringable $string */
-    private function jsonDecode($string): string
+    private function jsonDecode(string|Stringable $string): string
     {
         $this->lastMessageWasJsonValid = false;
         $string = strval($string);
@@ -111,8 +103,7 @@ final class JsonDecoderLogger extends AbstractLogger implements LoggerInterface
         return $string;
     }
 
-    /** @param mixed $var */
-    private function varDump($var): string
+    private function varDump(mixed $var): string
     {
         return print_r($var, true);
     }

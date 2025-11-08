@@ -30,10 +30,12 @@ final class FinkokEnvironmentTest extends TestCase
         $environment = FinkokEnvironment::makeDevelopment();
 
         $cancel = $environment->endpoint(Services::cancel());
+        /** @phpstan-ignore argument.type (Parameter #1 expects non-empty-string) */
         $this->assertStringStartsWith($environment->server(), $cancel);
         $this->assertStringNotContainsString('//', substr($cancel, 8));
 
         $manifest = $environment->endpoint(Services::manifest());
+        /** @phpstan-ignore argument.type (Parameter #1 expects non-empty-string) */
         $this->assertStringStartsWith(EnvironmentManifest::development()->value(), $manifest);
         $this->assertStringNotContainsString('//', substr($manifest, 8));
     }

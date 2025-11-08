@@ -6,19 +6,23 @@ namespace PhpCfdi\Finkok\Tests\Fakes;
 
 use PhpCfdi\Finkok\SoapCaller;
 use PhpCfdi\Finkok\SoapFactory;
+use Psr\Log\LoggerInterface;
 use SoapClient;
 use stdClass;
 
 final class FakeSoapFactory extends SoapFactory
 {
-    /** @var FakeSoapCaller */
-    public $latestSoapCaller;
+    public FakeSoapCaller $latestSoapCaller;
 
-    /** @var string */
-    public $latestWsdlLocation;
+    public string $latestWsdlLocation;
 
-    /** @var stdClass */
-    public $preparedResult;
+    public stdClass $preparedResult;
+
+    public function __construct(?LoggerInterface $logger = null)
+    {
+        parent::__construct($logger);
+        $this->preparedResult = (object) [];
+    }
 
     /** @noinspection PhpMissingParentCallCommonInspection */
     public function createSoapClient(string $wsdlLocation): SoapClient

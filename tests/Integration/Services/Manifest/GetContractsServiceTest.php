@@ -37,8 +37,8 @@ final class GetContractsServiceTest extends IntegrationTestCase
         $privacy = $result->privacy();
         $contract = $result->contract();
 
-        $this->assertNotEmpty($privacy, 'Cannot decode privacy statement');
-        $this->assertNotEmpty($contract, 'Cannot decode contract statement');
+        $this->assertNotSame('', $privacy, 'Cannot decode privacy statement');
+        $this->assertNotSame('', $contract, 'Cannot decode contract statement');
         $this->assertStringContainsString($command->rfc(), $contract);
         $this->assertStringContainsString($command->name(), $contract);
         // on the new manifest with Quadrum it does not include email or address

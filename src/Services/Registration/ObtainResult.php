@@ -4,19 +4,21 @@ declare(strict_types=1);
 
 namespace PhpCfdi\Finkok\Services\Registration;
 
+use PhpCfdi\Finkok\Internal\MethodsFilterVariablesTrait;
 use PhpCfdi\Finkok\Services\AbstractResult;
 use stdClass;
 
 class ObtainResult extends AbstractResult
 {
-    /** @var Customers */
-    private $customers;
+    use MethodsFilterVariablesTrait;
+
+    private Customers $customers;
 
     public function __construct(stdClass $data)
     {
         parent::__construct($data, 'getResult');
         $customers = $this->findInDescendent($data, 'getResult', 'users', 'ResellerUser');
-        $this->customers = new Customers(is_array($customers) ? $customers : []);
+        $this->customers = new Customers($this->filterArrayOfStdClass($customers));
     }
 
     public function message(): string

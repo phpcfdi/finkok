@@ -4,19 +4,21 @@ declare(strict_types=1);
 
 namespace PhpCfdi\Finkok\Services\Stamping;
 
+use PhpCfdi\Finkok\Internal\MethodsFilterVariablesTrait;
 use PhpCfdi\Finkok\Services\AbstractResult;
 use stdClass;
 
 class StampingResult extends AbstractResult
 {
-    /** @var StampingAlerts */
-    private $alerts;
+    use MethodsFilterVariablesTrait;
+
+    private StampingAlerts $alerts;
 
     public function __construct(string $container, stdClass $data)
     {
         parent::__construct($data, $container);
         $alerts = $this->findInDescendent($data, $container, 'Incidencias', 'Incidencia');
-        $this->alerts = new StampingAlerts(is_array($alerts) ? $alerts : []);
+        $this->alerts = new StampingAlerts($this->filterArrayOfStdClass($alerts));
     }
 
     public function xml(): string

@@ -12,21 +12,16 @@ use PhpCfdi\XmlCancelacion\XmlCancelacionHelper;
 
 class CancelSigner
 {
-    /** @var CancelDocuments*/
-    private $documents;
-
-    /** @var DateTimeImmutable */
-    private $dateTime;
+    private DateTimeImmutable $dateTime;
 
     /**
      * CancelSigner constructor
      *
      * @param CancelDocuments $documents
-     * @param DateTimeImmutable|null $dateTime If null or ommited then use current time and time zone
+     * @param DateTimeImmutable|null $dateTime If null or omitted then use current time and time zone
      */
-    public function __construct(CancelDocuments $documents, ?DateTimeImmutable $dateTime = null)
+    public function __construct(private CancelDocuments $documents, ?DateTimeImmutable $dateTime = null)
     {
-        $this->documents = $documents;
         $this->dateTime = $dateTime ?? new DateTimeImmutable();
     }
 

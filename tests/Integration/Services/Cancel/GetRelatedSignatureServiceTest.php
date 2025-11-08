@@ -74,8 +74,8 @@ final class GetRelatedSignatureServiceTest extends IntegrationTestCase
             // Testing only: in the wild it is expected to ask for related several seconds after the CFDI were created
             if (
                 '' !== $result->error()
-                && '2001' !== substr($result->error(), 0, 4)
-                && false === strpos($result->error(), '305')
+                && ! str_starts_with($result->error(), '2001')
+                && ! str_contains($result->error(), '305')
                 && ! preg_match('/UUID: \S+ No Encontrado/', $result->error())
             ) {
                 break;

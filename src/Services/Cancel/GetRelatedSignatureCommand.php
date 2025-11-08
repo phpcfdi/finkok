@@ -6,12 +6,8 @@ namespace PhpCfdi\Finkok\Services\Cancel;
 
 class GetRelatedSignatureCommand
 {
-    /** @var string */
-    private $xml;
-
-    public function __construct(string $xml)
+    public function __construct(private string $xml)
     {
-        $this->xml = $xml;
     }
 
     public function xml(): string

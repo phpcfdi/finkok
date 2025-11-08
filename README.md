@@ -1,16 +1,20 @@
 # phpcfdi/finkok
 
 [![Source Code][badge-source]][source]
+[![Packagist PHP Version Support][badge-php-version]][php-version]
+[![Discord][badge-discord]][discord]
 [![Latest Version][badge-release]][release]
 [![Software License][badge-license]][license]
 [![Build Status][badge-build]][build]
-[![Scrutinizer][badge-quality]][quality]
-[![Coverage Status][badge-coverage]][coverage]
+[![Reliability][badge-reliability]][reliability]
+[![Maintainability][badge-maintainability]][maintainability]
+[![Code Coverage][badge-coverage]][coverage]
+[![Violations][badge-violations]][violations]
 [![Total Downloads][badge-downloads]][downloads]
 
 > Librería para conectar con la API de servicios de FINKOK (México)
 
-:us: The documentation of this project is in spanish as this is the natural language for intented audience.
+:us: The documentation of this project is in spanish as this is the natural language for intended audience.
 
 ## Acerca de phpcfdi/finkok
 
@@ -295,6 +299,7 @@ sin temor a romper tu aplicación.
 |------------------------|-------------------------------|----------------------|
 | 0.1.0                  | 7.2, 7.3 y 7.4                | 2019-03-29           |
 | 0.3.0                  | 7.3, 7.4, 8.0, 8.1, 8.2 y 8.3 | 2021-03-18           |
+| 0.6.0                  | 8.1, 8.2, 8.3 y 8.4           | 2025-11-08           |
 
 ## Contribuciones
 
@@ -311,17 +316,25 @@ and licensed for use under the MIT License (MIT). Please see [LICENSE][] for mor
 [todo]: https://github.com/phpcfdi/finkok/blob/main/docs/TODO.md
 
 [source]: https://github.com/phpcfdi/finkok
+[php-version]: https://packagist.org/packages/phpcfdi/finkok
+[discord]: https://discord.gg/aFGYXvX
 [release]: https://github.com/phpcfdi/finkok/releases
 [license]: https://github.com/phpcfdi/finkok/blob/main/LICENSE
 [build]: https://github.com/phpcfdi/finkok/actions/workflows/build.yml?query=branch:main
-[quality]: https://scrutinizer-ci.com/g/phpcfdi/finkok/
-[coverage]: https://scrutinizer-ci.com/g/phpcfdi/finkok/code-structure/main/code-coverage/src
+[reliability]:https://sonarcloud.io/component_measures?id=phpcfdi_finkok&metric=Reliability
+[maintainability]: https://sonarcloud.io/component_measures?id=phpcfdi_finkok&metric=Maintainability
+[coverage]: https://sonarcloud.io/component_measures?id=phpcfdi_finkok&metric=Coverage
+[violations]: https://sonarcloud.io/project/issues?id=phpcfdi_finkok&resolved=false
 [downloads]: https://packagist.org/packages/phpcfdi/finkok
 
-[badge-source]: https://img.shields.io/badge/source-phpcfdi/finkok-blue?style=flat-square
-[badge-release]: https://img.shields.io/github/release/phpcfdi/finkok?style=flat-square
-[badge-license]: https://img.shields.io/github/license/phpcfdi/finkok?style=flat-square
-[badge-build]: https://img.shields.io/github/actions/workflow/status/phpcfdi/finkok/build.yml?branch=main&style=flat-square
-[badge-quality]: https://img.shields.io/scrutinizer/g/phpcfdi/finkok/main?style=flat-square
-[badge-coverage]: https://img.shields.io/scrutinizer/coverage/g/phpcfdi/finkok/main?style=flat-square
-[badge-downloads]: https://img.shields.io/packagist/dt/phpcfdi/finkok?style=flat-square
+[badge-source]: https://img.shields.io/badge/source-phpcfdi/finkok-blue?logo=github
+[badge-discord]: https://img.shields.io/discord/459860554090283019?logo=discord
+[badge-php-version]: https://img.shields.io/packagist/php-v/phpcfdi/finkok?logo=php
+[badge-release]: https://img.shields.io/github/release/phpcfdi/finkok?logo=git
+[badge-license]: https://img.shields.io/github/license/phpcfdi/finkok?logo=open-source-initiative
+[badge-build]: https://img.shields.io/github/actions/workflow/status/phpcfdi/finkok/build.yml?branch=main&logo=github-actions
+[badge-reliability]: https://sonarcloud.io/api/project_badges/measure?project=phpcfdi_finkok&metric=reliability_rating
+[badge-maintainability]: https://sonarcloud.io/api/project_badges/measure?project=phpcfdi_finkok&metric=sqale_rating
+[badge-coverage]: https://img.shields.io/sonar/coverage/phpcfdi_finkok/main?logo=sonarqubecloud&server=https%3A%2F%2Fsonarcloud.io
+[badge-violations]: https://img.shields.io/sonar/violations/phpcfdi_finkok/main?format=long&logo=sonarqubecloud&server=https%3A%2F%2Fsonarcloud.io
+[badge-downloads]: https://img.shields.io/packagist/dt/phpcfdi/finkok?logo=packagist

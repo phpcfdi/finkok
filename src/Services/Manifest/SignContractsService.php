@@ -9,12 +9,8 @@ use PhpCfdi\Finkok\FinkokSettings;
 
 class SignContractsService
 {
-    /** @var FinkokSettings */
-    private $settings;
-
-    public function __construct(FinkokSettings $settings)
+    public function __construct(private FinkokSettings $settings)
     {
-        $this->settings = $settings;
     }
 
     public function settings(): FinkokSettings
@@ -24,7 +20,7 @@ class SignContractsService
 
     public function sendSignedContracts(SignContractsCommand $command): SignContractsResult
     {
-        // this empty string are for ommiting sending username and password
+        // this empty string are for omitting sending username and password
         $soapCaller = $this->settings()->createCallerForService(Services::manifest(), '', '');
         $rawResponse = $soapCaller->call('sign_contract', [
             'snid' => $command->snid(),

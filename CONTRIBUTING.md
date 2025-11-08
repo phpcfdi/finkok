@@ -86,7 +86,7 @@ Lee y configura tu proyecto de acuerdo a la guía de configuración del [entorno
 Una vez correctamente configurado, ejecuta las pruebas de integración:
 
 ```shell
-vendor/bin/phpunit tests/Integration --testdox --verbose
+vendor/bin/phpunit tests/Integration --testdox
 ```
 
 ## Ejecutar GitHub Actions localmente
@@ -97,7 +97,6 @@ puedes ejecutar el siguiente comando:
 
 ```shell
 act -P ubuntu-latest=shivammathur/node:latest -W .github/workflows/build.yml
-act -P ubuntu-latest=shivammathur/node:latest -W .github/workflows/functional-tests.yml -s ENV_GPG_SECRET=**********
 ```
 
 

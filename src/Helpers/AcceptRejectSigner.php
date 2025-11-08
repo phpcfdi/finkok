@@ -12,36 +12,27 @@ use PhpCfdi\XmlCancelacion\XmlCancelacionHelper;
 
 class AcceptRejectSigner
 {
+    /** @var string */
     public const DEFAULT_PACRFC = 'CVD110412TF6';
 
-    /** @var string */
-    private $uuid;
+    private string $pacRfc;
 
-    /** @var CancelAnswer */
-    private $answer;
-
-    /** @var string */
-    private $pacRfc;
-
-    /** @var DateTimeImmutable */
-    private $dateTime;
+    private DateTimeImmutable $dateTime;
 
     /**
      * GetRelatedSigner constructor.
      *
      * @param string $uuid
      * @param CancelAnswer $answer
-     * @param DateTimeImmutable|null $dateTime If null or ommited then use current time and time zone
-     * @param string $pacRfc If empty or ommited then uses DEFAULT_PACRFC
+     * @param DateTimeImmutable|null $dateTime If null or omitted then use current time and time zone
+     * @param string $pacRfc If empty or omitted then uses DEFAULT_PACRFC
      */
     public function __construct(
-        string $uuid,
-        CancelAnswer $answer,
+        private string $uuid,
+        private CancelAnswer $answer,
         ?DateTimeImmutable $dateTime = null,
-        string $pacRfc = self::DEFAULT_PACRFC
+        string $pacRfc = self::DEFAULT_PACRFC,
     ) {
-        $this->uuid = $uuid;
-        $this->answer = $answer;
         $this->dateTime = $dateTime ?? new DateTimeImmutable();
         $this->pacRfc = $pacRfc ?: static::DEFAULT_PACRFC;
     }

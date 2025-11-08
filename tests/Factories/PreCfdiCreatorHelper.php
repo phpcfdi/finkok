@@ -12,49 +12,31 @@ use DateTimeZone;
 
 final class PreCfdiCreatorHelper
 {
-    /** @var DateTimeImmutable */
-    private $invoiceDate;
+    private DateTimeImmutable $invoiceDate;
 
-    /** @var string */
-    private $conceptoDescription;
+    private string $conceptoDescription;
 
-    /** @var float */
-    private $conceptoAmount;
+    private float $conceptoAmount;
 
-    /** @var string */
-    private $emisorRfc;
+    private string $emisorRfc;
 
-    /** @var string */
-    private $emisorName;
+    private string $emisorName;
 
-    /** @var string */
-    private $cerFile;
-
-    /** @var string */
-    private $keyPemFile;
-
-    /** @var string */
-    private $passPhrase;
-
-    /** @var string */
-    private $relation = '';
+    private string $relation = '';
 
     /** @var string[] */
-    private $relatedUuids = [];
+    private array $relatedUuids = [];
 
     public function __construct(
-        string $cerFile,
-        string $keyPemFile,
-        string $passPhrase
+        private string $cerFile,
+        private string $keyPemFile,
+        private string $passPhrase,
     ) {
-        $certificate = new Certificado($cerFile);
+        $certificate = new Certificado($this->cerFile);
         $this->emisorRfc = $certificate->getRfc();
         $this->emisorName = $certificate->getName();
-        $this->cerFile = $cerFile;
-        $this->keyPemFile = $keyPemFile;
-        $this->passPhrase = $passPhrase;
         $this->invoiceDate = new DateTimeImmutable('now -5 minutes', new DateTimeZone('America/Mexico_City'));
-        $this->conceptoDescription = 'Portable tetris gamepad pro++ ⏻';
+        $this->conceptoDescription = sprintf('Portable tetris gamepad pro++ ⏻ v1.%s', random_int(10, 99));
         $this->conceptoAmount = round(random_int(1000, 4000) + random_int(0, 99) / 100, 2);
     }
 
@@ -143,7 +125,7 @@ final class PreCfdiCreatorHelper
             'LugarExpedicion' => '86000',
             'Exportacion' => '01', // No aplica
         ]);
-        if ('' !== $this->relation && count($this->relatedUuids) > 0) {
+        if ('' !== $this->relation && [] !== $this->relatedUuids) {
             $relacionados = $comprobante->addCfdiRelacionados(['TipoRelacion' => $this->relation]);
             foreach ($this->relatedUuids as $relatedUuid) {
                 $relacionados->addCfdiRelacionado(['UUID' => $relatedUuid]);

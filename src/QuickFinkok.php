@@ -21,12 +21,8 @@ use PhpCfdi\XmlCancelacion\Models\CancelDocuments;
 
 class QuickFinkok
 {
-    /** @var FinkokSettings */
-    private $settings;
-
-    public function __construct(FinkokSettings $factory)
+    public function __construct(private FinkokSettings $settings)
     {
-        $this->settings = $factory;
     }
 
     /**
@@ -118,7 +114,7 @@ class QuickFinkok
     }
 
     /**
-     * Este método es el encargado de cancelar uno o varios CFDI emitidos por medio de los web services de Finkok
+     * Este método es el encargado de cancelar uno o varios CFDI emitidos por medio de los webservices de Finkok
      * Durante el proceso no se envía ningún CSD a Finkok y la solicitud firmada es creada usando los datos del CSD
      *
      * @param Credential $credential
@@ -152,7 +148,7 @@ class QuickFinkok
         string $rfcIssuer,
         string $rfcRecipient,
         string $uuid,
-        string $total
+        string $total,
     ): Cancel\GetSatStatusResult {
         $command = new Cancel\GetSatStatusCommand($rfcIssuer, $rfcRecipient, $uuid, $total);
         $service = new Cancel\GetSatStatusService($this->settings());
@@ -187,7 +183,7 @@ class QuickFinkok
     public function obtainRelated(
         Credential $credential,
         string $uuid,
-        RfcRole $role = null
+        ?RfcRole $role = null,
     ): Cancel\GetRelatedSignatureResult {
         $signer = new Helpers\GetRelatedSigner($uuid, $role);
         $signedRequest = $signer->sign($credential);
@@ -225,7 +221,7 @@ class QuickFinkok
     public function answerAcceptRejectCancellation(
         Credential $credential,
         string $uuid,
-        CancelAnswer $answer
+        CancelAnswer $answer,
     ): Cancel\AcceptRejectSignatureResult {
         $signer = new Helpers\AcceptRejectSigner($uuid, $answer);
         $signedRequest = $signer->sign($credential);
@@ -275,7 +271,7 @@ class QuickFinkok
     public function reportUuids(
         string $rfc,
         DateTimeImmutable $since,
-        DateTimeImmutable $until
+        DateTimeImmutable $until,
     ): Utilities\ReportUuidResult {
         $command = new Utilities\ReportUuidCommand($rfc, 'I', $since, $until);
         $service = new Utilities\ReportUuidService($this->settings());
@@ -312,7 +308,7 @@ class QuickFinkok
         int $startYear,
         int $startMonth,
         int $endYear = 0,
-        int $endMonth = 0
+        int $endMonth = 0,
     ): Utilities\ReportTotalResult {
         $command = new Utilities\ReportTotalCommand($rfc, 'I', $startYear, $startMonth, $endYear, $endMonth);
         $service = new Utilities\ReportTotalService($this->settings());
@@ -425,7 +421,7 @@ class QuickFinkok
         string $name,
         string $address,
         string $email,
-        string $snid
+        string $snid,
     ): Manifest\GetContractsResult {
         $command = new Manifest\GetContractsCommand($rfc, $name, $address, $email, $snid);
         $service = new Manifest\GetContractsService($this->settings());
@@ -444,7 +440,7 @@ class QuickFinkok
     public function customerSendContracts(
         string $snid,
         string $signedPrivacy,
-        string $signedContract
+        string $signedContract,
     ): Manifest\SignContractsResult {
         $command = new Manifest\SignContractsCommand($snid, $signedPrivacy, $signedContract);
         $service = new Manifest\SignContractsService($this->settings());
@@ -466,11 +462,11 @@ class QuickFinkok
         string $snid,
         string $address,
         string $email,
-        ?DateTimeImmutable $signedOn = null
+        ?DateTimeImmutable $signedOn = null,
     ): Manifest\SignContractsResult {
         $rfc = $fiel->rfc();
         $name = $fiel->legalName();
-        $signedOn = $signedOn ?? new DateTimeImmutable();
+        $signedOn ??= new DateTimeImmutable();
         $documents = $this->customerGetContracts($rfc, $name, $address, $email, $snid);
         if (! $documents->success()) {
             return Manifest\SignContractsResult::createFromData(
@@ -494,9 +490,9 @@ class QuickFinkok
     public function customerGetSignedContracts(
         string $snid,
         string $rfc,
-        SignedDocumentFormat $format = null
+        ?SignedDocumentFormat $format = null,
     ): Manifest\GetSignedContractsResult {
-        $format = $format ?? SignedDocumentFormat::xml();
+        $format ??= SignedDocumentFormat::xml();
         $command = new Manifest\GetSignedContractsCommand($snid, $rfc, $format);
         $service = new Manifest\GetSignedContractsService($this->settings());
         return $service->getSignedContracts($command);
@@ -544,7 +540,7 @@ class QuickFinkok
     }
 
     /**
-     * Este método es el encargado de cancelar un CFDI de retenciones emitido por medio de los web services de Finkok
+     * Este método es el encargado de cancelar un CFDI de retenciones emitido por medio de los webservices de Finkok
      * Durante el proceso no se envía ningún CSD a Finkok y la solicitud firmada es creada usando los datos del CSD
      *
      * @param Credential $credential

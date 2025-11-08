@@ -35,6 +35,7 @@ final class CancelSignatureServiceTest extends TestCase
         $this->assertSame('x-seguimiento-cancelacion', $result->tracing());
 
         $caller = $soapFactory->latestSoapCaller;
+        /** @phpstan-ignore argument.type (Parameter #1 expects non-empty-string) */
         $this->assertStringEndsWith(Services::retentions()->value(), $soapFactory->latestWsdlLocation);
         $this->assertSame('cancel_signature', $caller->latestCallMethodName);
         $this->assertArrayHasKey('xml', $caller->latestCallParameters);

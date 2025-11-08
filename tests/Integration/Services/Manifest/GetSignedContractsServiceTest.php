@@ -17,8 +17,8 @@ final class GetSignedContractsServiceTest extends IntegrationTestCase
         return new GetSignedContractsService($settings);
     }
 
-    /** @return array<string, mixed> */
-    public function providerGetSignedContracts(): array
+    /** @return array<string, array{SignedDocumentFormat, string}> */
+    public static function providerGetSignedContracts(): array
     {
         return [
             'xml' => [SignedDocumentFormat::xml(), 'text/xml'],

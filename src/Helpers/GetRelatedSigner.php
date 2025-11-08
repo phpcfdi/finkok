@@ -11,27 +11,22 @@ use PhpCfdi\XmlCancelacion\XmlCancelacionHelper;
 
 class GetRelatedSigner
 {
+    /** @var string */
     public const DEFAULT_PACRFC = 'CVD110412TF6';
 
-    /** @var string */
-    private $uuid;
+    private RfcRole $role;
 
-    /** @var RfcRole */
-    private $role;
-
-    /** @var string */
-    private $pacRfc;
+    private string $pacRfc;
 
     /**
      * GetRelatedSigner constructor.
      *
      * @param string $uuid
-     * @param RfcRole|null $role If null or ommited then uses issuer role
-     * @param string $pacRfc If empty or ommited then uses DEFAULT_PACRFC
+     * @param RfcRole|null $role If null or omitted then uses issuer role
+     * @param string $pacRfc If empty or omitted then uses DEFAULT_PACRFC
      */
-    public function __construct(string $uuid, RfcRole $role = null, string $pacRfc = self::DEFAULT_PACRFC)
+    public function __construct(private string $uuid, ?RfcRole $role = null, string $pacRfc = self::DEFAULT_PACRFC)
     {
-        $this->uuid = $uuid;
         $this->role = $role ?? RfcRole::issuer();
         $this->pacRfc = $pacRfc ?: static::DEFAULT_PACRFC;
     }

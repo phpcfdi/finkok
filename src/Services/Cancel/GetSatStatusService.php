@@ -9,12 +9,8 @@ use PhpCfdi\Finkok\FinkokSettings;
 
 class GetSatStatusService
 {
-    /** @var FinkokSettings */
-    private $settings;
-
-    public function __construct(FinkokSettings $settings)
+    public function __construct(private FinkokSettings $settings)
     {
-        $this->settings = $settings;
     }
 
     public function settings(): FinkokSettings

@@ -10,11 +10,9 @@ use stdClass;
 
 final class AbstractResultTest extends TestCase
 {
-    /** @var stdClass */
-    private $data;
+    private stdClass $data;
 
-    /** @var TestingResult */
-    private $result;
+    private TestingResult $result;
 
     protected function setUp(): void
     {

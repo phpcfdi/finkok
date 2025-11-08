@@ -10,6 +10,7 @@ use LogicException;
 use PhpCfdi\Credentials\Credential;
 use PhpCfdi\Finkok\Helpers\DocumentSigner;
 use PhpCfdi\Finkok\Tests\TestCase;
+use PHPUnit\Framework\MockObject\MockObject;
 
 final class DocumentSignerTest extends TestCase
 {
@@ -42,7 +43,7 @@ final class DocumentSignerTest extends TestCase
         $content = 'Lorem Ipsum';
         $docSigner = new DocumentSigner($rfc, $date, $content);
 
-        /** @var Credential $credential */
+        /** @var Credential&MockObject $credential */
         $credential = $this->createMock(Credential::class);
         $documentWithoutRootElement = new DOMDocument();
         $this->expectException(LogicException::class);

@@ -20,7 +20,7 @@ final class AcceptRejectSignatureServiceTest extends IntegrationTestCase
 
     protected function createAcceptRejectSignatureCommand(
         string $uuid,
-        CancelAnswer $answer
+        CancelAnswer $answer,
     ): AcceptRejectSignatureCommand {
         $signer = new AcceptRejectSigner($uuid, $answer);
         $xml = $signer->sign($this->createCsdCredential());

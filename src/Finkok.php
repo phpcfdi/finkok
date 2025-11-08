@@ -42,6 +42,7 @@ use PhpCfdi\Finkok\Services\Utilities;
  */
 class Finkok
 {
+    /** @var array<string, array{string, string}|array{string, string, string}> */
     protected const SERVICES_MAP = [
         'stamp' => [Stamping\StampService::class, Stamping\StampingCommand::class],
         'quickstamp' => [Stamping\QuickStampService::class, Stamping\StampingCommand::class],
@@ -90,12 +91,8 @@ class Finkok
         ],
     ];
 
-    /** @var FinkokSettings */
-    private $settings;
-
-    public function __construct(FinkokSettings $factory)
+    public function __construct(private FinkokSettings $settings)
     {
-        $this->settings = $factory;
     }
 
     public function settings(): FinkokSettings
@@ -123,17 +120,21 @@ class Finkok
      * @param mixed $command
      * @return object|null
      */
-    protected function checkCommand(string $method, $command): ?object
+    protected function checkCommand(string $method, mixed $command): ?object
     {
         $expected = static::SERVICES_MAP[$method][1];
         if ('' === $expected) {
             return null;
         }
         if (! is_object($command) || ! is_a($command, $expected)) {
-            $type = (is_object($command)) ? get_class($command) : gettype($command);
-            throw new InvalidArgumentException(
-                sprintf('Call %s::%s expect %s but received %s', static::class, $method, $expected, $type)
+            $message = sprintf(
+                'Call %s::%s expect %s but received %s',
+                static::class,
+                $method,
+                $expected,
+                get_debug_type($command),
             );
+            throw new InvalidArgumentException($message);
         }
         return $command;
     }
@@ -154,12 +155,12 @@ class Finkok
      * @param object|null $command
      * @return mixed
      */
-    protected function executeService(string $method, object $service, ?object $command)
+    protected function executeService(string $method, object $service, ?object $command): mixed
     {
         $method = static::SERVICES_MAP[$method][2] ?? $method;
         if (! is_callable([$service, $method])) {
             throw new BadMethodCallException(
-                sprintf('The service %s does not have a method %s', get_class($service), $method)
+                sprintf('The service %s does not have a method %s', $service::class, $method)
             );
         }
         return $service->{$method}($command);

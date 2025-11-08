@@ -9,46 +9,31 @@ use LogicException;
 
 class ReportTotalCommand
 {
-    /** @var string */
-    private $rfc;
+    private int $startYear;
 
-    /** @var string */
-    private $type;
+    private int $startMonth;
 
-    /** @var int */
-    private $startYear;
+    private int $endYear;
 
-    /** @var int */
-    private $startMonth;
+    private int $endMonth;
 
-    /** @var int */
-    private $endYear;
+    private string $startPeriod;
 
-    /** @var int */
-    private $endMonth;
-
-    /** @var string */
-    private $startPeriod;
-
-    /** @var string */
-    private $endPeriod;
+    private string $endPeriod;
 
     public function __construct(
-        string $rfc,
-        string $type,
+        private string $rfc,
+        private string $type,
         int $startYear,
         int $startMonth,
         int $endYear = 0,
-        int $endMonth = 0
+        int $endMonth = 0,
     ) {
         $endYear = $endYear ?: $startYear;
         $endMonth = $endMonth ?: $startMonth;
         $today = $this->today();
         $currentYear = intval($today->format('Y'));
         $currentPeriod = sprintf('%04d-%02d', $currentYear, intval($today->format('m')));
-
-        $this->rfc = $rfc;
-        $this->type = $type;
         $this->startYear = $startYear;
         $this->startMonth = $startMonth;
         $this->endYear = $endYear;
@@ -109,11 +94,7 @@ class ReportTotalCommand
     {
         $date = new DateTimeImmutable(sprintf('%04d-%02d-01', $this->endYear, $this->endMonth));
         $today = $this->today();
-        if ($this->endPeriod() === $today->format('Y-m')) {
-            $date = $today;
-        } else {
-            $date = $date->modify('+ 1 month');
-        }
+        $date = $this->endPeriod() === $today->format('Y-m') ? $today : $date->modify('+ 1 month');
         return sprintf('%sT00:00:00', $date->format('Y-m-d'));
     }
 

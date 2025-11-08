@@ -18,7 +18,7 @@ final class GetRelatedSignerTest extends TestCase
         $signer = new GetRelatedSigner($uuid, $role);
         $this->assertSame($uuid, $signer->uuid());
         $this->assertSame($role, $signer->role());
-        $this->assertSame($signer::DEFAULT_PACRFC, $signer->pacRfc());
+        $this->assertSame(GetRelatedSigner::DEFAULT_PACRFC, $signer->pacRfc());
 
         $signed = $signer->sign($this->createCsdCredential());
 

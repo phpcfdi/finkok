@@ -14,7 +14,7 @@ use PhpCfdi\Finkok\SoapFactory;
 
 abstract class TestCase extends \PHPUnit\Framework\TestCase
 {
-    public function createSettingsFromEnvironment(SoapFactory $soapFactory = null): FinkokSettings
+    public function createSettingsFromEnvironment(?SoapFactory $soapFactory = null): FinkokSettings
     {
         $settings = new FinkokSettings(
             $this->getenv('FINKOK_USERNAME') ?: 'username-non-set',
@@ -25,12 +25,12 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
             $settings->changeSoapFactory($soapFactory);
         }
 
-        if ($this->getenv('FINKOK_LOG_CALLS')) {
+        if ($this->getenvBool('FINKOK_LOG_CALLS')) {
             $loggerOutputFile = sprintf(
                 '%s/../build/tests/%s-%s-%s.txt',
                 __DIR__,
                 (new DateTimeImmutable())->format('YmdHis.u'),
-                $this->getName(),
+                $this->name(),
                 uniqid()
             );
             $logger = new JsonDecoderLogger(new FileLogger($loggerOutputFile));
@@ -75,6 +75,13 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
 
     public static function getenv(string $key): string
     {
-        return $_ENV[$key] ?? '';
+        $value = $_ENV[$key] ?? '';
+        return (is_scalar($value)) ? strval($value) : '';
+    }
+
+    public static function getenvBool(string $key): bool
+    {
+        $value = static::getenv($key);
+        return ! in_array($value, ['', '0', 'no', 'false']);
     }
 }

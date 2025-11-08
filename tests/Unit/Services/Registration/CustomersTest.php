@@ -19,8 +19,8 @@ final class CustomersTest extends TestCase
 
     public function testFindByRfc(): void
     {
-        /** @var stdClass $data */
         $data = json_decode($this->fileContentPath('registration-get-response.json'));
+        /** @phpstan-ignore-next-line */
         $customers = new Customers($data->getResult->users->ResellerUser);
         $known = $customers->findByRfc('MAG041126GT8');
         if (null === $known) {
@@ -35,6 +35,7 @@ final class CustomersTest extends TestCase
         $expectedRfc = 'MAG041126GT8';
         /** @var stdClass $data */
         $data = json_decode($this->fileContentPath('registration-get-response.json'));
+        /** @phpstan-ignore-next-line */
         $customers = new Customers($data->getResult->users->ResellerUser);
         $this->assertSame($expectedRfc, $customers->getByRfc($expectedRfc)->rfc());
     }
@@ -43,6 +44,7 @@ final class CustomersTest extends TestCase
     {
         /** @var stdClass $data */
         $data = json_decode($this->fileContentPath('registration-get-response.json'));
+        /** @phpstan-ignore-next-line */
         $customers = new Customers($data->getResult->users->ResellerUser);
 
         $this->expectException(LogicException::class);

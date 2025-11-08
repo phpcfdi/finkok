@@ -33,12 +33,12 @@ class GetContractsResult extends AbstractResult
 
     public function contract(): string
     {
-        return base64_decode($this->get('contract'), true) ?: '';
+        return (string) base64_decode($this->get('contract'), true);
     }
 
     public function privacy(): string
     {
-        return base64_decode($this->get('privacy'), true) ?: '';
+        return (string) base64_decode($this->get('privacy'), true);
     }
 
     public function error(): string

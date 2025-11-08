@@ -6,16 +6,8 @@ namespace PhpCfdi\Finkok\Services\Registration;
 
 class AssignCommand
 {
-    /** @var string */
-    private $rfc;
-
-    /** @var int */
-    private $credit;
-
-    public function __construct(string $rfc, int $credit)
+    public function __construct(private string $rfc, private int $credit)
     {
-        $this->rfc = $rfc;
-        $this->credit = $credit;
     }
 
     public function rfc(): string

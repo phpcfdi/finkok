@@ -23,11 +23,9 @@ use RuntimeException;
 
 abstract class IntegrationTestCase extends TestCase
 {
-    /** @var StampingResult|null */
-    protected static $staticCurrentStampingResult;
+    protected static ?StampingResult $staticCurrentStampingResult = null;
 
-    /** @var StampingCommand|null */
-    protected static $staticCurrentStampingCommand;
+    protected static ?StampingCommand $staticCurrentStampingCommand = null;
 
     public function newStampingCommand(): StampingCommand
     {
@@ -81,7 +79,7 @@ abstract class IntegrationTestCase extends TestCase
 
     protected function createCancelSignatureCommandFromDocument(
         CancelDocument $document,
-        ?DateTimeImmutable $dateTime = null
+        ?DateTimeImmutable $dateTime = null,
     ): CancelSignatureCommand {
         $credential = $this->createCsdCredential();
         $signer = new CancelSigner(new CancelDocuments($document), $dateTime);
@@ -91,7 +89,7 @@ abstract class IntegrationTestCase extends TestCase
     protected function checkCanGetSatStatusOrFail(
         string $cfdiContents,
         string $exceptionMessage = '',
-        int $waitSeconds = 120
+        int $waitSeconds = 120,
     ): GetSatStatusResult {
         $service = new GetSatStatusService($this->createSettingsFromEnvironment());
         $command = $this->createGetSatStatusCommandFromCfdiContents($cfdiContents);

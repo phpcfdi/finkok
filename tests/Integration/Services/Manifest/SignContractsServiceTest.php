@@ -19,7 +19,7 @@ final class SignContractsServiceTest extends IntegrationTestCase
         string $rfc,
         string $certificateFile,
         string $privateKeyFile,
-        string $passPhrase
+        string $passPhrase,
     ): SignContractsResult {
         $settings = $this->createSettingsFromEnvironment();
 

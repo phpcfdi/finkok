@@ -23,7 +23,7 @@ abstract class AbstractCollection implements Countable, IteratorAggregate
     abstract protected function createItemFromStdClass(stdClass $content): object;
 
     /** @var ArrayObject<int, TItem> */
-    protected $collection;
+    protected ArrayObject $collection;
 
     /** @param array<stdClass> $collection */
     public function __construct(array $collection)

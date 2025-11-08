@@ -4,16 +4,17 @@ declare(strict_types=1);
 
 namespace PhpCfdi\Finkok\Services\Cancel;
 
+use PhpCfdi\Finkok\Internal\MethodsFilterVariablesTrait;
 use PhpCfdi\Finkok\Services\AbstractResult;
 use stdClass;
 
 class AcceptRejectSignatureResult extends AbstractResult
 {
-    /** @var AcceptRejectUuidList */
-    private $uuids;
+    use MethodsFilterVariablesTrait;
 
-    /** @var string */
-    private $error;
+    private AcceptRejectUuidList $uuids;
+
+    private string $error;
 
     public function __construct(stdClass $data)
     {
@@ -23,8 +24,8 @@ class AcceptRejectSignatureResult extends AbstractResult
         $rechazo = $this->findInDescendent($data, $container, 'rechazo');
         $this->uuids = new AcceptRejectUuidList(
             array_merge(
-                is_array($aceptacion) ? $aceptacion : [],
-                is_array($rechazo) ? $rechazo : []
+                $this->filterArrayOfStdClass($aceptacion),
+                $this->filterArrayOfStdClass($rechazo),
             )
         );
         $this->error = $this->get('error');

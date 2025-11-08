@@ -13,50 +13,23 @@ use DateTimeZone;
 
 final class PreCfdiRetentionCreatorHelper
 {
-    /** @var Certificado */
-    private $certificate;
+    private Certificado $certificate;
 
-    /** @var DateTimeImmutable */
-    private $invoiceDate;
+    private DateTimeImmutable $invoiceDate;
 
-    /** @var string */
-    private $cveReten;
-
-    /** @var string */
-    private $emisorRfc;
-
-    /** @var string */
-    private $emisorName;
-
-    /** @var string */
-    private $keyPemFile;
-
-    /** @var string */
-    private $passPhrase;
-
-    /** @var string */
-    private $emisorLocation;
-
-    /** @var string */
-    private $emisorRegimen;
+    private string $cveReten;
 
     public function __construct(
         string $cerFile,
-        string $keyPemFile,
-        string $passPhrase,
-        string $emisorRfc,
-        string $emisorName,
-        string $emisorLocation,
-        string $emisorRegimen
+        private string $keyPemFile,
+        private string $passPhrase,
+        private string $emisorRfc,
+        private string $emisorName,
+        private string $emisorLocation,
+        private string $emisorRegimen,
     ) {
         $this->certificate = new Certificado($cerFile);
-        $this->emisorRfc = $emisorRfc;
-        $this->emisorName = $emisorName;
-        $this->keyPemFile = $keyPemFile;
-        $this->passPhrase = $passPhrase;
         $this->invoiceDate = new DateTimeImmutable('now -5 minutes', new DateTimeZone('America/Mexico_City'));
-        $this->emisorLocation = $emisorLocation;
-        $this->emisorRegimen = $emisorRegimen;
     }
 
     public function getInvoiceDate(): DateTimeImmutable

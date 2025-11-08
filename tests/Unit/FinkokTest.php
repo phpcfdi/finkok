@@ -29,10 +29,10 @@ final class FinkokTest extends TestCase
 
     public function testInvokingOneMappedMagicMethod(): void
     {
-        /** @var StampingResult $result */
+        /** @var StampingResult&MockObject $result */
         $result = $this->createMock(StampingResult::class);
 
-        /** @var StampingCommand $command */
+        /** @var StampingCommand&MockObject $command */
         $command = $this->createMock(StampingCommand::class);
 
         /** @var FinkokSettings&MockObject $settings */
@@ -60,7 +60,7 @@ final class FinkokTest extends TestCase
         $finkok = new Finkok($settings);
         $this->expectException(BadMethodCallException::class);
         $this->expectExceptionMessage('Helper invalid-method is not registered');
-        $finkok->{'invalid-method'}();
+        $finkok->{'invalid-method'}(); /** @phpstan-ignore-line method.notFound */
     }
 
     public function testMagicCallWithInvalidParameter(): void
@@ -74,9 +74,9 @@ final class FinkokTest extends TestCase
         $this->expectExceptionMessage(
             'Call PhpCfdi\Finkok\Finkok::getContracts'
             . ' expect PhpCfdi\Finkok\Services\Manifest\GetContractsCommand'
-            . ' but received ' . get_class($command)
+            . ' but received ' . $command::class
         );
-        $finkok->{'getContracts'}($command);
+        $finkok->{'getContracts'}($command);  /** @phpstan-ignore-line argument.type */
     }
 
     public function testExecuteServiceWithCallNameDifferentFromServiceMethodName(): void
@@ -110,9 +110,9 @@ final class FinkokTest extends TestCase
 
     public function testInvokingOneMappedMagicMethodWithDifferentName(): void
     {
-        /** @var GetContractsResult $result */
+        /** @var GetContractsResult&MockObject $result */
         $result = $this->createMock(GetContractsResult::class);
-        /** @var GetContractsCommand $command */
+        /** @var GetContractsCommand&MockObject $command */
         $command = $this->createMock(GetContractsCommand::class);
         /** @var GetContractsService&MockObject $service */
         $service = $this->createMock(GetContractsService::class);

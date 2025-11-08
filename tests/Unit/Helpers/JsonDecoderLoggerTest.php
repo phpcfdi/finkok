@@ -14,25 +14,25 @@ final class JsonDecoderLoggerTest extends TestCase
     public function testSetAlsoLogJsonMessage(): void
     {
         $decoder = new JsonDecoderLogger(new NullLogger());
-        $this->assertSame(false, $decoder->setAlsoLogJsonMessage(null));
+        $this->assertSame(false, $decoder->setAlsoLogJsonMessage());
         $this->assertSame(false, $decoder->setAlsoLogJsonMessage(true));
         $this->assertSame(true, $decoder->setAlsoLogJsonMessage(true));
-        $this->assertSame(true, $decoder->setAlsoLogJsonMessage(null));
+        $this->assertSame(true, $decoder->setAlsoLogJsonMessage());
         $this->assertSame(true, $decoder->setAlsoLogJsonMessage(false));
         $this->assertSame(false, $decoder->setAlsoLogJsonMessage(false));
-        $this->assertSame(false, $decoder->setAlsoLogJsonMessage(null));
+        $this->assertSame(false, $decoder->setAlsoLogJsonMessage());
     }
 
     public function testSetUseJsonValidateIfAvailable(): void
     {
         $decoder = new JsonDecoderLogger(new NullLogger());
-        $this->assertSame(true, $decoder->setUseJsonValidateIfAvailable(null));
+        $this->assertSame(true, $decoder->setUseJsonValidateIfAvailable());
         $this->assertSame(true, $decoder->setUseJsonValidateIfAvailable(false));
         $this->assertSame(false, $decoder->setUseJsonValidateIfAvailable(false));
-        $this->assertSame(false, $decoder->setUseJsonValidateIfAvailable(null));
+        $this->assertSame(false, $decoder->setUseJsonValidateIfAvailable());
         $this->assertSame(false, $decoder->setUseJsonValidateIfAvailable(true));
         $this->assertSame(true, $decoder->setUseJsonValidateIfAvailable(true));
-        $this->assertSame(true, $decoder->setUseJsonValidateIfAvailable(null));
+        $this->assertSame(true, $decoder->setUseJsonValidateIfAvailable());
     }
 
     public function testLastMessageWasJsonValidReturnFalseWithoutCall(): void
@@ -42,7 +42,7 @@ final class JsonDecoderLoggerTest extends TestCase
     }
 
     /** @return array<string, array{bool}> */
-    public function providerUseJsonValidateIfAvailable(): array
+    public static function providerUseJsonValidateIfAvailable(): array
     {
         return [
             'use json_validate' => [true],
@@ -53,8 +53,7 @@ final class JsonDecoderLoggerTest extends TestCase
     /** @dataProvider providerUseJsonValidateIfAvailable */
     public function testLogSendValidJsonMessageToLogger(bool $useJsonValidateIfAvailable): void
     {
-        /** @var string $jsonMessage */
-        $jsonMessage = json_encode(['foo' => 'bar']);
+        $jsonMessage = (string) json_encode(['foo' => 'bar']);
         $textMessage = print_r(json_decode($jsonMessage), true);
         /** @var NullLogger&MockObject $logger */
         $logger = $this->createMock(NullLogger::class);
@@ -83,8 +82,7 @@ final class JsonDecoderLoggerTest extends TestCase
 
     public function testLogSendTextMessageToLoggerAndJson(): void
     {
-        /** @var string $jsonMessage */
-        $jsonMessage = json_encode(['foo' => 'bar']);
+        $jsonMessage = (string) json_encode(['foo' => 'bar']);
         $textMessage = print_r(json_decode($jsonMessage), true);
         /** @var NullLogger&MockObject $logger */
         $logger = $this->createMock(NullLogger::class);
@@ -96,8 +94,8 @@ final class JsonDecoderLoggerTest extends TestCase
         $logger->expects($matcher)->method('log')->with(
             'debug',
             $this->callback(
-                function ($message) use ($matcher, $expectedParameters) {
-                    $this->assertSame($expectedParameters[$matcher->getInvocationCount() - 1], $message);
+                function ($message) use ($matcher, $expectedParameters): bool {
+                    $this->assertSame($expectedParameters[$matcher->numberOfInvocations() - 1], $message);
                     return true;
                 }
             ),

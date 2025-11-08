@@ -12,19 +12,15 @@ use PhpCfdi\Finkok\Exceptions\InvalidArgumentException;
  */
 class FinkokSettings
 {
-    /** @var string */
-    private $username;
+    private string $username;
 
-    /** @var string */
-    private $password;
+    private string $password;
 
-    /** @var FinkokEnvironment */
-    private $environment;
+    private FinkokEnvironment $environment;
 
-    /** @var SoapFactory */
-    private $soapFactory;
+    private SoapFactory $soapFactory;
 
-    public function __construct(string $username, string $password, FinkokEnvironment $environment = null)
+    public function __construct(string $username, string $password, ?FinkokEnvironment $environment = null)
     {
         if ('' === $username) {
             throw new InvalidArgumentException('Invalid username');
@@ -67,14 +63,14 @@ class FinkokSettings
      * This method created a configured SoapCaller with wsdlLocation and default options
      *
      * @param Services $service
-     * @param string $usernameKey defaults to username, if empty then it will be ommited
-     * @param string $passwordKey defaults to password, if empty then it will be ommited
+     * @param string $usernameKey defaults to username, if empty then it will be omitted
+     * @param string $passwordKey defaults to password, if empty then it will be omitted
      * @return SoapCaller
      */
     public function createCallerForService(
         Services $service,
         string $usernameKey = 'username',
-        string $passwordKey = 'password'
+        string $passwordKey = 'password',
     ): SoapCaller {
         $wsdlLocation = $this->environment()->endpoint($service);
         $credentials = array_merge(

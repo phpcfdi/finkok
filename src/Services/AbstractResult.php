@@ -5,20 +5,18 @@ declare(strict_types=1);
 namespace PhpCfdi\Finkok\Services;
 
 use InvalidArgumentException;
+use PhpCfdi\Finkok\Internal\MethodsFilterVariablesTrait;
 use stdClass;
 
 abstract class AbstractResult
 {
-    /** @var stdClass */
-    protected $data;
+    use MethodsFilterVariablesTrait;
 
-    /** @var stdClass */
-    protected $root;
+    protected stdClass $root;
 
-    public function __construct(stdClass $data, string ...$meanLocation)
+    public function __construct(protected stdClass $data, string ...$meanLocation)
     {
-        $this->data = $data;
-        $root = $this->findInDescendent($data, ...$meanLocation);
+        $root = $this->findInDescendent($this->data, ...$meanLocation);
         if (! $root instanceof stdClass) {
             throw new InvalidArgumentException(
                 sprintf('Unable to find mean object at /%s', implode('/', $meanLocation))
@@ -33,13 +31,14 @@ abstract class AbstractResult
     }
 
     /**
-     * @param stdClass|array|mixed $haystack
+     * @template T
+     * @param T $haystack
      * @param string ...$location
-     * @return mixed
+     * @return T|null
      */
-    protected function findInDescendent($haystack, string ...$location)
+    protected function findInDescendent(mixed $haystack, string ...$location): mixed
     {
-        if (0 === count($location)) {
+        if ([] === $location) {
             return $haystack;
         }
         $search = array_shift($location);
@@ -54,6 +53,6 @@ abstract class AbstractResult
 
     protected function get(string $keyword): string
     {
-        return strval($this->root->{$keyword} ?? '');
+        return $this->filterString($this->root->{$keyword} ?? '');
     }
 }
