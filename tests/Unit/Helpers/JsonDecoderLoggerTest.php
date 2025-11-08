@@ -42,7 +42,7 @@ final class JsonDecoderLoggerTest extends TestCase
     }
 
     /** @return array<string, array{bool}> */
-    public function providerUseJsonValidateIfAvailable(): array
+    public static function providerUseJsonValidateIfAvailable(): array
     {
         return [
             'use json_validate' => [true],
@@ -95,7 +95,7 @@ final class JsonDecoderLoggerTest extends TestCase
             'debug',
             $this->callback(
                 function ($message) use ($matcher, $expectedParameters): bool {
-                    $this->assertSame($expectedParameters[$matcher->getInvocationCount() - 1], $message);
+                    $this->assertSame($expectedParameters[$matcher->numberOfInvocations() - 1], $message);
                     return true;
                 }
             ),

@@ -59,7 +59,7 @@ jobs:
           ENV_GPG_SECRET: ${{ secrets.ENV_GPG_SECRET }}
 
       - name: Run integration tests with code coverage
-        run: vendor/bin/phpunit --testdox --verbose --exclude-group large --coverage-clover=build/coverage-clover.xml
+        run: vendor/bin/phpunit --testdox --exclude-group large --coverage-clover=build/coverage-clover.xml
 
       - name: Upload code coverage to scrutinizer
         uses: sudo-bot/action-scrutinizer@latest

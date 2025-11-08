@@ -30,7 +30,7 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
                 '%s/../build/tests/%s-%s-%s.txt',
                 __DIR__,
                 (new DateTimeImmutable())->format('YmdHis.u'),
-                $this->getName(),
+                $this->name(),
                 uniqid()
             );
             $logger = new JsonDecoderLogger(new FileLogger($loggerOutputFile));

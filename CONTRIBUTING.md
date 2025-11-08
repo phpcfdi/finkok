@@ -86,7 +86,7 @@ Lee y configura tu proyecto de acuerdo a la guía de configuración del [entorno
 Una vez correctamente configurado, ejecuta las pruebas de integración:
 
 ```shell
-vendor/bin/phpunit tests/Integration --testdox --verbose
+vendor/bin/phpunit tests/Integration --testdox
 ```
 
 ## Ejecutar GitHub Actions localmente

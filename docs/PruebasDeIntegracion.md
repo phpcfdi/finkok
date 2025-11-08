@@ -30,7 +30,7 @@ entornos de ejecución. Puedes usar el archivo `test/.env-example` como base.
 Una vez que lo configures te recomiendo ejecutar el test inocuo de `datetime`.
 
 ```text
-php vendor/bin/phpunit --verbose --testdox tests/Integration/Services/Utilities/DatetimeServiceTest.php 
+php vendor/bin/phpunit --testdox tests/Integration/Services/Utilities/DatetimeServiceTest.php 
 Services/Utilities/DatetimeServiceTest.php
 PHPUnit 9.5.3 by Sebastian Bergmann and contributors.
 
@@ -50,7 +50,7 @@ Time: 00:01.843, Memory: 6.00 MB
 Las pruebas de integración no están incluidas en el comando `composer dev:test`. Hay que correrlas a mano ejecutando:
 
 ```shell
-vendor/bin/phpunit tests/Integration --testdox --verbose
+vendor/bin/phpunit tests/Integration --testdox
 ```
 
 Lee la [guía de contribuciones](../CONTRIBUTING.md) para más información.
