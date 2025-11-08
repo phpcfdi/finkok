@@ -22,6 +22,7 @@ Al realizar esta actualización, también cambiaron algunos nombres de parámetr
 
 Se hacen varios cambios menores:
 
+- Se mejora la documentación de los servicios de cancelación. Gracias `@aarongmx`.
 - Se actualiza el año de licencia a 2025.
 - Se actualizan las insignias a las comúnmente usadas en PhpCfdi.
 

@@ -5,53 +5,74 @@ A diferencia del timbrado que la puede hacer el PAC, la cancelación únicamente
 
 Los servicios de paso son:
 
-- `cancel_signature`: Manda cancelar usando una solicitud de cancelación firmada.
-- `get_sat_status`: Consulta el estado de un CFDI.
-- `get_pending`: consultar cuantas solicitudes de cancelación tiene pendientes un receptor.
-- `accept_reject`: permite al receptor de una factura Aceptar o Rechazar una determinada cancelación. 
-   (*no recomendado*, requiere certificado, llave privada y contraseña compártida)
-- `get_related`: obtener una lista de los UUID relacionados del CFDI que se está intentando cancelar. 
-   (*no recomendado*, requiere certificado, llave privada y contraseña compártida)
+- [`cancel_signature`](https://wiki.finkok.com/home/webservices/ws_cancelacion/cancel_signature):
+  Manda cancelar usando una solicitud de cancelación firmada.
+- [`get_sat_status`](https://wiki.finkok.com/home/webservices/ws_cancelacion/get_sat_status):
+  Consulta el estado de un CFDI.
+- [`get_pending`](https://wiki.finkok.com/home/webservices/ws_cancelacion/get_pending):
+  Consultar cuantas solicitudes de cancelación tiene pendientes un receptor.
+- [`accept_reject`](https://wiki.finkok.com/home/webservices/ws_cancelacion/accept_reject):
+  Permite al receptor de una factura Aceptar o Rechazar una determinada cancelación. 
+  (*no recomendado*, requiere certificado, llave privada y contraseña compártida)
+- [`get_related`](https://wiki.finkok.com/home/webservices/ws_cancelacion/get_related):
+  Obtener una lista de los UUID relacionados del CFDI que se está intentando cancelar. 
+  (*no recomendado*, requiere certificado, llave privada y contraseña compártida)
 
 Los servicios de ayuda son:
 
-- `cancel`: (*no recomendado*) Manda cancelar, pero requiere del certificado, llave privada y contraseña compartida. 
+- [`cancel`](https://wiki.finkok.com/home/webservices/ws_cancelacion/cancel):
+  (*no recomendado*) Manda cancelar, pero requiere del certificado, llave privada y contraseña compartida. 
   La cancelación firmada la elabora Finkok en tu nombre y realiza `cancel_signature`.
-- `get_receipt`: Devuelve el acuse de recibo asociado a un UUID.
-- `query_pending_cancellation`: Consulta el *pending buffer*.
+- [`get_receipt`](https://wiki.finkok.com/home/webservices/ws_cancelacion/get_receipt):
+  Devuelve el acuse de recibo asociado a un UUID.
+- [`query_pending_cancellation`](https://wiki.finkok.com/home/webservices/ws_cancelacion/query_pending_cancellation):
+  Consulta el *pending buffer*.
 
 Otros servicios:
 
-- `sign_cancel`: (*no recomendado*) cancelar uno o varios CFDI, las credenciales se cargaron en el panel de Finkok.
+- [`sign_cancel`](https://wiki.finkok.com/home/webservices/ws_cancelacion/sign_cancel):
+  (*no recomendado*) cancelar uno o varios CFDI, las credenciales se cargaron en el panel de Finkok.
 
 Métodos especiales para trabajar con cancelaciones hechas por terceros:
 
-- `get_out_pending`
-- `get_out_related`
-- `get_out_sat_status`
-- `out_accept_reject`
-- `out_cancel`
+- [`get_out_pending`](https://wiki.finkok.com/en/home/outcancel/home/outcancel/metodo_out_pending)
+- [`get_out_related`](https://wiki.finkok.com/en/home/outcancel/metodo_out_related)
+- [`get_out_sat_status`](https://wiki.finkok.com/home/outcancel/metodo_get_out_sat_status)
+- [`out_accept_reject`](https://wiki.finkok.com/home/outcancel/metodo_out_cancel_reject)
+- [`out_cancel`](https://wiki.finkok.com/home/outcancel/metodo_out_cancel)
 
 ### Documentación
 
-Documentación del servicio: <https://wiki.finkok.com/doku.php?id=cancel>
+Documentación del servicio: <https://wiki.finkok.com/en/home/webservices/ws_cancelacion>
 
 ### Respuestas de cancelación por UUID
 
 Estas son las respuestas que puede dar el SAT para cada uno de los UUID incluídos en la solicitud.
-<https://wiki.finkok.com/doku.php?id=tipificacion#validacion_de_la_cancelacion_del_cfdi>
 
-* no_cancelable - El UUID contiene CFDI relacionados
-* 201 - Petición de cancelación realizada exitosamente
-* 202 - Petición de cancelación realizada Previamente
-* 203 - No corresponde el RFC del Emisor y de quien solicita la cancelación
-* 205 - UUID No encontrado
+|          Código | Descripción                                                              |
+|----------------:|--------------------------------------------------------------------------|
+| `no_cancelable` | El UUID contiene CFDI relacionados                                       |
+|           `201` | Petición de cancelación realizada exitosamente                           |
+|           `202` | Petición de cancelación realizada Previamente                            |
+|           `203` | No corresponde el RFC del Emisor y de quien solicita la cancelación      |
+|           `205` | UUID No encontrado                                                       |
+|           `207` | Motivo de cancelacion invalido                                           |
+|           `208` | La Fecha de Solicitud de Cancelación es mayor a la fecha de declaración. |
 
 Si hubiera un problema en la solicitud, por ejemplo, un error de conexión con el SAT, devolverá
 para toda la solicitud y se considera como no presentada:
 
-* 708: No se pudo conectar al SAT (ver *pending buffer*)
-* 711: Error con el certificado al cancelar
+| Código | Descripción                                                                       |
+|-------:|-----------------------------------------------------------------------------------|
+|  `708` | No se pudo conectar al SAT (ver *pending buffer*)                                 |
+|  `711` | Error con el certificado al cancelar                                              |
+|        | Invalid Passphrase                                                                |
+|        | Already en BufferCancellation                                                     |
+|        | Error: Emisor XXX no tiene certificado XXXX activo asignado                       |
+|        | Already Cancelled                                                                 |
+|        | Incorrect padding                                                                 |
+|  `798` | Ya existe una solicitud previa, para volver a mandar la petición esperar 72 horas |
+|  `799` | Excedieron el límite de las 5 peticiones.                                         |
 
 ### Pending buffer
 
@@ -66,7 +87,8 @@ presentar el error `708`.
 Si deseas usar esta característica, al enviar la solicitud de cancelación debes establecer el parámetro
 `store_pending` a `true` disponible en los métodos `cancel_signature` y `cancel`.
 
-Siempre que uses el *Pending buffer* deberás utilizar el servicio `query_pending_cancellation`,
+Siempre que uses el *Pending buffer* deberás utilizar el servicio
+[`query_pending_cancellation`](https://wiki.finkok.com/home/webservices/ws_cancelacion/query_pending_cancellation),
 que precísamente consulta el *pending buffer* para obtener el estado de la cancelación de una
 solicitud que se quedó pendiente de cancelar debido a una falla en el sistema de SAT.
 
@@ -84,8 +106,10 @@ A qué te enfrentas si cancelas múltiples folios en una sola petición:
 
 ### Validaciones de cancelación
 
-Los servicios de cancelación `sign_cancel`, `cancel` y `cancel_signature` tienen una validación previa
-a contactar al SAT para presentar la solicitud de cancelación:
+Los servicios de cancelación [`sign_cancel`](https://wiki.finkok.com/home/webservices/ws_cancelacion/sign_cancel),
+[`cancel`](https://wiki.finkok.com/home/webservices/ws_cancelacion/cancel) y
+[`cancel_signature`](https://wiki.finkok.com/home/webservices/ws_cancelacion/cancel_signature)
+tienen una validación previa a contactar al SAT para presentar la solicitud de cancelación:
 
 > Se verifica el estado de todos los folios enviados, si alguno es no cancelable no presenta la solicitud.
 
@@ -115,7 +139,7 @@ la única forma de poder argumentar contra el SAT es con el acuse.
 Por lo tanto, por seguridad fiscal, sí es muy importante almacenar el acuse, y no es responsabilidad del PAC
 almacenarlos por el contribuyente, es responsabilidad del contribuyente contar con ellos.
 
-### Servicio Finkok Get_Sat_Status
+### Servicio Finkok `Get_Sat_Status`
 
 Este servicio no se encuentra debidamente documentado.
 
@@ -131,12 +155,12 @@ del emisor del comprobante (parte de la expresión impresa en `fe`). Esto indica
 todos los datos o bien el PAC los completa con la información que tiene del CFDI, en ese caso, me queda la
 duda de ¿por qué entonces no completa toda la expresión y requiere únicamente el UUID?.
 
-### Servicio Finkok Cancel get_pending
+### Servicio Finkok `Cancel` `get_pending`
 
 Obtiene un listado de UUID que están pendientes por aprobar o denegar. La lista puede estar vacía.
 
-En la documentación de Finkok <https://wiki.finkok.com/doku.php?id=get_pending> solo está documentado
-el arreglo `uuids`, sin embargo, también existe la variable `error`.
+En la documentación de Finkok [`get_pending`](https://wiki.finkok.com/home/webservices/ws_cancelacion/get_pending)
+solo está documentado el arreglo `uuids`, sin embargo, también existe la variable `error`.
 
 Al revisar las pruebas de integración, es muy difícil crear un caso automatizado, básicamente porque
 toma alrededor de 16 minutos el crear un CFDI y que este aparezca como "Cancelable con autorización".
@@ -169,7 +193,7 @@ Acerca del servicio `Get_Receipt`:
   ¿Se devuelve solo el último acuse con respuesta 202 o el acuse con respuesta 201 donde se canceló por primera vez?
     R: Se devuelve solo el último.
 
-Para los servicios de pasarela, si no se pudo contactar al SAT, se devuelve `708`?
+Para los servicios de pasarela, si no se pudo contactar al SAT, ¿se devuelve `708`?
     R: No, existen varios mensajes de error e incluso excepciones. Finkok está analizando el tema para unificarlas.
 
 ### Servicios que requieren certificado, llave y contraseña compartida
