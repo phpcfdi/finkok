@@ -97,7 +97,6 @@ puedes ejecutar el siguiente comando:
 
 ```shell
 act -P ubuntu-latest=shivammathur/node:latest -W .github/workflows/build.yml
-act -P ubuntu-latest=shivammathur/node:latest -W .github/workflows/functional-tests.yml -s ENV_GPG_SECRET=**********
 ```
 
 

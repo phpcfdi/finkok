@@ -42,7 +42,7 @@ gpg --no-symkey-cache --symmetric --cipher-algo AES256 --output tests/.env-testi
 ```
 
 Para desencriptar el archivo de configuración `tests/.env-testing.enc -> tests/.env` se puede usar el siguiente
-comando. Esta operación es la que se ejecuta en `functional-test.yml` usando el secreto `secrets.ENV_GPG_SECRET`.
+comando. Esta operación es la que se ejecuta en `sonarqube-cloud.yml` usando el secreto `secrets.ENV_GPG_SECRET`.
 
 ```shell
 gpg --quiet --batch --yes --decrypt --output - tests/.env-testing.enc
