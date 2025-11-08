@@ -68,6 +68,6 @@ class StampingResult extends AbstractResult
 
     public function hasAlerts(): bool
     {
-        return ($this->alerts->count() > 0);
+        return $this->alerts->count() > 0;
     }
 }

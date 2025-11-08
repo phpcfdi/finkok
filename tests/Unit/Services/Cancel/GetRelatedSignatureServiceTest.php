@@ -15,7 +15,7 @@ final class GetRelatedSignatureServiceTest extends TestCase
     public function testServiceUsingPreparedResult(): void
     {
         /** @var stdClass $preparedResult */
-        $preparedResult = json_decode(TestCase::fileContentPath('cancel-get-related-signature-response.json'));
+        $preparedResult = json_decode($this->fileContentPath('cancel-get-related-signature-response.json'));
 
         $soapFactory = new FakeSoapFactory();
         $soapFactory->preparedResult = $preparedResult;

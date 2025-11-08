@@ -17,7 +17,7 @@ final class CancelSignatureServiceTest extends TestCase
     public function testServiceUsingPreparedResult(): void
     {
         /** @var stdClass $preparedResult */
-        $preparedResult = json_decode(TestCase::fileContentPath('retentions-cancelsignature-response.json'));
+        $preparedResult = json_decode($this->fileContentPath('retentions-cancelsignature-response.json'));
 
         $soapFactory = new FakeSoapFactory();
         $soapFactory->preparedResult = $preparedResult;

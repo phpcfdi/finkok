@@ -15,7 +15,7 @@ final class ReportTotalServiceTest extends TestCase
     public function testServiceUsingPreparedResult(): void
     {
         /** @var stdClass $preparedResult */
-        $preparedResult = json_decode(TestCase::fileContentPath('utilities-report-total-response.json'));
+        $preparedResult = json_decode($this->fileContentPath('utilities-report-total-response.json'));
 
         $soapFactory = new FakeSoapFactory();
         $soapFactory->preparedResult = $preparedResult;

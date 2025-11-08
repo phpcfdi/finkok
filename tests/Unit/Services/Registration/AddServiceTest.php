@@ -16,7 +16,7 @@ final class AddServiceTest extends TestCase
     public function testServiceUsingPreparedResult(): void
     {
         /** @var stdClass $preparedResult */
-        $preparedResult = json_decode(TestCase::fileContentPath('registration-add-response.json'));
+        $preparedResult = json_decode($this->fileContentPath('registration-add-response.json'));
 
         $soapFactory = new FakeSoapFactory();
         $soapFactory->preparedResult = $preparedResult;

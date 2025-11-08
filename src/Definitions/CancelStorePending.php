@@ -14,6 +14,6 @@ class CancelStorePending extends Enum
 {
     public function asBool(): bool
     {
-        return ('yes' === $this->value());
+        return 'yes' === $this->value();
     }
 }

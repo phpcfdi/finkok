@@ -15,7 +15,7 @@ final class QuickStampServiceTest extends TestCase
     public function testQuickStampSendXmlAndProcessPreparedResult(): void
     {
         /** @var stdClass $preparedResult */
-        $preparedResult = json_decode(TestCase::fileContentPath('quickstamp-response-with-alerts.json'));
+        $preparedResult = json_decode($this->fileContentPath('quickstamp-response-with-alerts.json'));
 
         $soapFactory = new FakeSoapFactory();
         $soapFactory->preparedResult = $preparedResult;

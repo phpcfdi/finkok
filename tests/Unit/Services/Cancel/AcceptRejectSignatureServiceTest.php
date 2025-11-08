@@ -15,7 +15,7 @@ final class AcceptRejectSignatureServiceTest extends TestCase
     public function testServiceUsingPreparedResult(): void
     {
         /** @var stdClass $preparedResult */
-        $preparedResult = json_decode(TestCase::fileContentPath('cancel-accept-reject-signature-response.json'));
+        $preparedResult = json_decode($this->fileContentPath('cancel-accept-reject-signature-response.json'));
         $soapFactory = new FakeSoapFactory();
         $soapFactory->preparedResult = $preparedResult;
         $settings = $this->createSettingsFromEnvironment($soapFactory);

@@ -16,7 +16,7 @@ final class GetReceiptServiceTest extends TestCase
     public function testServiceUsingPreparedResult(): void
     {
         /** @var stdClass $preparedResult */
-        $preparedResult = json_decode(TestCase::fileContentPath('cancel-get-receipt-response.json'));
+        $preparedResult = json_decode($this->fileContentPath('cancel-get-receipt-response.json'));
 
         $soapFactory = new FakeSoapFactory();
         $soapFactory->preparedResult = $preparedResult;

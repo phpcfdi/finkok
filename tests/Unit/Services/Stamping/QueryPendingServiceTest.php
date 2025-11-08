@@ -15,7 +15,7 @@ final class QueryPendingServiceTest extends TestCase
     public function testCall(): void
     {
         /** @var stdClass $preparedResult */
-        $preparedResult = json_decode(TestCase::fileContentPath('querypending-response.json'));
+        $preparedResult = json_decode($this->fileContentPath('querypending-response.json'));
 
         $soapFactory = new FakeSoapFactory();
         $soapFactory->preparedResult = $preparedResult;
