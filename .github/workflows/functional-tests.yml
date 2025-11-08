@@ -8,7 +8,6 @@ on:
 
 # Actions
 # shivammathur/setup-php@v2 https://github.com/marketplace/actions/setup-php-action
-# sudo-bot/action-scrutinizer@latest https://github.com/marketplace/actions/action-scrutinizer
 
 jobs:
   functional-tests:
@@ -19,8 +18,6 @@ jobs:
 
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0 # required for sudo-bot/action-scrutinizer
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
@@ -60,9 +57,3 @@ jobs:
 
       - name: Run integration tests with code coverage
         run: vendor/bin/phpunit --testdox --exclude-group large --coverage-clover=build/coverage-clover.xml
-
-      - name: Upload code coverage to scrutinizer
-        uses: sudo-bot/action-scrutinizer@latest
-        with:
-          cli-args: "--format=php-clover build/coverage-clover.xml"
-        continue-on-error: true

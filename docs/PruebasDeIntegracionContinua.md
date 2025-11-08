@@ -47,8 +47,3 @@ comando. Esta operación es la que se ejecuta en `functional-test.yml` usando el
 ```shell
 gpg --quiet --batch --yes --decrypt --output - tests/.env-testing.enc
 ```
-
-### Cobertura de código
-
-Las pruebas de funcionales son las que establecen la mayor cobertura de código, entonces, en su ejecución
-se genera el archivo de cobertura y se publica en Scrutinizer.
