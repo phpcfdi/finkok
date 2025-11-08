@@ -20,7 +20,7 @@ class GetContractsService
 
     public function obtainContracts(GetContractsCommand $command): GetContractsResult
     {
-        // this empty string are for ommiting sending username and password
+        // this empty string are for omitting sending username and password
         $soapCaller = $this->settings()->createCallerForService(Services::manifest(), '', '');
         $rawResponse = $soapCaller->call('get_contracts_snid', [
             'snid' => $command->snid(),

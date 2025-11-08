@@ -8,11 +8,8 @@ use stdClass;
 
 trait MethodsFilterVariablesTrait
 {
-    /**
-     * @param mixed $variable
-     * @return array<stdClass>
-     */
-    private function filterArrayOfStdClass($variable): array
+    /** @return array<stdClass> */
+    private function filterArrayOfStdClass(mixed $variable): array
     {
         if (! is_array($variable)) {
             return [];
@@ -27,11 +24,8 @@ trait MethodsFilterVariablesTrait
         return $result;
     }
 
-    /**
-     * @param mixed $variable
-     * @return array<string>
-     */
-    private function filterArrayOfStrings($variable): array
+    /** @return array<string> */
+    private function filterArrayOfStrings(mixed $variable): array
     {
         if (! is_array($variable)) {
             return [];
@@ -46,11 +40,7 @@ trait MethodsFilterVariablesTrait
         return $result;
     }
 
-    /**
-     * @param mixed $variable
-     * @return string
-     */
-    private function filterString($variable): string
+    private function filterString(mixed $variable): string
     {
         if (! is_scalar($variable)) {
             return '';

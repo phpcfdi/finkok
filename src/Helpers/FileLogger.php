@@ -6,6 +6,7 @@ namespace PhpCfdi\Finkok\Helpers;
 
 use Psr\Log\AbstractLogger;
 use Psr\Log\LoggerInterface;
+use Stringable;
 
 final class FileLogger extends AbstractLogger implements LoggerInterface
 {
@@ -15,10 +16,9 @@ final class FileLogger extends AbstractLogger implements LoggerInterface
 
     /**
      * @inheritDoc
-     * @param string|\Stringable $message
      * @param mixed[] $context
      */
-    public function log($level, $message, array $context = []): void
+    public function log($level, string|Stringable $message, array $context = []): void
     {
         file_put_contents($this->outputFile, $message . PHP_EOL, FILE_APPEND);
     }

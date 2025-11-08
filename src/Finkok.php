@@ -155,7 +155,7 @@ class Finkok
      * @param object|null $command
      * @return mixed
      */
-    protected function executeService(string $method, object $service, ?object $command)
+    protected function executeService(string $method, object $service, ?object $command): mixed
     {
         $method = static::SERVICES_MAP[$method][2] ?? $method;
         if (! is_callable([$service, $method])) {

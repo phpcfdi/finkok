@@ -14,7 +14,7 @@ use PhpCfdi\Finkok\Services\Cancel\GetSatStatusCommand;
 use RuntimeException;
 
 /**
- * Based on a XML string or a XML Document it can extract the appropiate values to build a GetSatStatusCommand object
+ * Based on an XML string or an XML Document it can extract the appropriate values to build a GetSatStatusCommand object
  * It is using the CFDI QR expressions
  */
 class GetSatStatusExtractor

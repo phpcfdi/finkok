@@ -20,7 +20,7 @@ class SignContractsService
 
     public function sendSignedContracts(SignContractsCommand $command): SignContractsResult
     {
-        // this empty string are for ommiting sending username and password
+        // this empty string are for omitting sending username and password
         $soapCaller = $this->settings()->createCallerForService(Services::manifest(), '', '');
         $rawResponse = $soapCaller->call('sign_contract', [
             'snid' => $command->snid(),

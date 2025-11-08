@@ -31,11 +31,12 @@ abstract class AbstractResult
     }
 
     /**
-     * @param stdClass|array|mixed $haystack
+     * @template T
+     * @param T $haystack
      * @param string ...$location
-     * @return mixed
+     * @return T|null
      */
-    protected function findInDescendent($haystack, string ...$location)
+    protected function findInDescendent(mixed $haystack, string ...$location): mixed
     {
         if ([] === $location) {
             return $haystack;

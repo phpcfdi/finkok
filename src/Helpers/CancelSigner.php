@@ -18,7 +18,7 @@ class CancelSigner
      * CancelSigner constructor
      *
      * @param CancelDocuments $documents
-     * @param DateTimeImmutable|null $dateTime If null or ommited then use current time and time zone
+     * @param DateTimeImmutable|null $dateTime If null or omitted then use current time and time zone
      */
     public function __construct(private CancelDocuments $documents, ?DateTimeImmutable $dateTime = null)
     {

@@ -114,7 +114,7 @@ class QuickFinkok
     }
 
     /**
-     * Este método es el encargado de cancelar uno o varios CFDI emitidos por medio de los web services de Finkok
+     * Este método es el encargado de cancelar uno o varios CFDI emitidos por medio de los webservices de Finkok
      * Durante el proceso no se envía ningún CSD a Finkok y la solicitud firmada es creada usando los datos del CSD
      *
      * @param Credential $credential
@@ -540,7 +540,7 @@ class QuickFinkok
     }
 
     /**
-     * Este método es el encargado de cancelar un CFDI de retenciones emitido por medio de los web services de Finkok
+     * Este método es el encargado de cancelar un CFDI de retenciones emitido por medio de los webservices de Finkok
      * Durante el proceso no se envía ningún CSD a Finkok y la solicitud firmada es creada usando los datos del CSD
      *
      * @param Credential $credential
