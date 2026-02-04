@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PhpCfdi\Finkok\Helpers;
 
+use LogicException;
 use Psr\Log\AbstractLogger;
 use Psr\Log\LoggerInterface;
 use Stringable;
@@ -100,6 +101,9 @@ final class JsonDecoderLogger extends AbstractLogger implements LoggerInterface
 
     private function jsonDecodeWithValidate(string|Stringable $string): string
     {
+        if (! function_exists('json_validate')) {
+            throw new LogicException('The function \json_validate does not exist.');
+        }
         $string = (string) $string;
         if (json_validate($string)) {
             $this->lastMessageWasJsonValid = true;
