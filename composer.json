@@ -38,7 +38,7 @@
         "ext-fileinfo": "*",
         "eclipxe/cfdiutils": "^3.0.1",
         "phpcfdi/rfc": "^1.2",
-        "phpunit/phpunit": "^10.5",
+        "phpunit/phpunit": "^10.5.50",
         "rector/rector": "^2.2",
         "symfony/dotenv": "^6.0 || ^7.0"
     },
