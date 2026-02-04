@@ -32,7 +32,7 @@
         "phpcfdi/credentials": "^1.3.0",
         "phpcfdi/xml-cancelacion": "^2.0.5",
         "psr/log": "^3.0",
-        "robrichards/xmlseclibs": "^3.1.3"
+        "robrichards/xmlseclibs": "^3.1.4"
     },
     "require-dev": {
         "ext-fileinfo": "*",
