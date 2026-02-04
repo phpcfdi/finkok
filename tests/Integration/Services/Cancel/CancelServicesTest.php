@@ -25,7 +25,7 @@ final class CancelServicesTest extends IntegrationTestCase
         // check that it has a correct status
         $beforeCancelStatus = $this->checkCanGetSatStatusOrFail(
             $cfdi->xml(),
-            'Cannot assert cfdi before cancel status is not: No Encontrado'
+            'Cannot assert cfdi before cancel status is not: No Encontrado',
         );
         $this->assertSame('Vigente', $beforeCancelStatus->cfdi());
         $this->assertStringStartsWith('Cancelable ', $beforeCancelStatus->cancellable());
@@ -40,7 +40,7 @@ final class CancelServicesTest extends IntegrationTestCase
         do {
             // build command on every request
             $command = $this->createCancelSignatureCommandFromDocument(
-                CancelDocument::newWithErrorsUnrelated($cfdi->uuid())
+                CancelDocument::newWithErrorsUnrelated($cfdi->uuid()),
             );
             // perform cancel
             $result = $service->cancelSignature($command);
@@ -88,7 +88,7 @@ final class CancelServicesTest extends IntegrationTestCase
         $this->assertSame(
             '201', // 201 - Petición de cancelación realizada exitosamente
             $document->documentStatus(),
-            'SAT did not return 201 EstatusUUID on CancelSignature, is the service down?'
+            'SAT did not return 201 EstatusUUID on CancelSignature, is the service down?',
         );
         // check result properties
         $this->assertNotEmpty($result->voucher(), 'Finkok did not return voucher (Acuse) on CancelSignature');
@@ -97,17 +97,17 @@ final class CancelServicesTest extends IntegrationTestCase
 
         // Consume GetReceiptService and assert that the response is the same (as XML and as string)
         $receipt = (new GetReceiptService($settings))->download(
-            new GetReceiptCommand('EKU9003173C9', $cfdi->uuid(), ReceiptType::cancellation())
+            new GetReceiptCommand('EKU9003173C9', $cfdi->uuid(), ReceiptType::cancellation()),
         );
         $this->assertXmlStringEqualsXmlString(
             $result->voucher(),
             $receipt->receipt(),
-            'El acuse que proviene del método get_receipt no coincide con el acuse de la cancelación'
+            'El acuse que proviene del método get_receipt no coincide con el acuse de la cancelación',
         );
         $this->assertSame(
             $result->voucher(),
             $receipt->receipt(),
-            'El acuse que proviene del método get_receipt no es exactamente el mismo que el acuse de la cancelación'
+            'El acuse que proviene del método get_receipt no es exactamente el mismo que el acuse de la cancelación',
         );
     }
 
@@ -129,7 +129,7 @@ final class CancelServicesTest extends IntegrationTestCase
         // check that it has a correct status
         $beforeCancelStatus = $this->checkCanGetSatStatusOrFail(
             $cfdiXml,
-            'Cannot assert cfdi before cancel status is not: No Encontrado'
+            'Cannot assert cfdi before cancel status is not: No Encontrado',
         );
 
         $this->assertSame('Vigente', $beforeCancelStatus->cfdi());
@@ -139,7 +139,7 @@ final class CancelServicesTest extends IntegrationTestCase
         $service = new CancelSignatureService($settings);
 
         $command = $this->createCancelSignatureCommandFromDocument(
-            CancelDocument::newWithErrorsUnrelated($cfdiUuid)
+            CancelDocument::newWithErrorsUnrelated($cfdiUuid),
         );
 
         // perform cancel
@@ -150,7 +150,7 @@ final class CancelServicesTest extends IntegrationTestCase
         $this->assertSame(
             '201', // 201 - Petición de cancelación realizada exitosamente
             $document->documentStatus(),
-            'SAT did not return 201 EstatusUUID on CancelSignature, is the service down?'
+            'SAT did not return 201 EstatusUUID on CancelSignature, is the service down?',
         );
 
         // check result properties
@@ -160,17 +160,17 @@ final class CancelServicesTest extends IntegrationTestCase
 
         // Consume GetReceiptService and assert that the response is the same (as XML and as string)
         $receipt = (new GetReceiptService($settings))->download(
-            new GetReceiptCommand('EKU9003173C9', $cfdiUuid, ReceiptType::cancellation())
+            new GetReceiptCommand('EKU9003173C9', $cfdiUuid, ReceiptType::cancellation()),
         );
         $this->assertXmlStringEqualsXmlString(
             $result->voucher(),
             $receipt->receipt(),
-            'El acuse que proviene del método get_receipt no coincide con el acuse de la cancelación'
+            'El acuse que proviene del método get_receipt no coincide con el acuse de la cancelación',
         );
         $this->assertSame(
             $result->voucher(),
             $receipt->receipt(),
-            'El acuse que proviene del método get_receipt no es exactamente el mismo que el acuse de la cancelación'
+            'El acuse que proviene del método get_receipt no es exactamente el mismo que el acuse de la cancelación',
         );
     }
 }

@@ -60,9 +60,9 @@ class SoapCaller implements LoggerAwareInterface
                 array_merge(
                     ['method' => $methodName, 'parameters' => $finalParameters],
                     $this->extractSoapClientTrace($soap),
-                    ['exception' => ($exception instanceof JsonSerializable) ? $exception : print_r($exception, true)]
+                    ['exception' => ($exception instanceof JsonSerializable) ? $exception : print_r($exception, true)],
                 ),
-                JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES
+                JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES,
             )));
             throw new RuntimeException(sprintf('Fail soap call to %s', $methodName), previous: $exception);
         }

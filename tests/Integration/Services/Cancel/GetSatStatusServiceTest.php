@@ -24,7 +24,7 @@ final class GetSatStatusServiceTest extends IntegrationTestCase
             'EKU9003173C9',
             'LAN7008173R5',
             '12345678-1234-1234-1234-123456789012',
-            '12345.67'
+            '12345.67',
         );
 
         $result = $service->query($command);

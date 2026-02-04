@@ -36,7 +36,7 @@ final class AssignServiceTest extends RegistrationIntegrationTestCase
             $switchService = new SwitchService($this->staticSettings());
             $this->assertTrue(
                 $switchService->switch(new SwitchCommand($rfc, CustomerType::ondemand()))->success(),
-                'Unable to change the customer type to on-demand'
+                'Unable to change the customer type to on-demand',
             );
             $customer = $this->findCustomerOrFail($rfc);
         }
@@ -53,7 +53,7 @@ final class AssignServiceTest extends RegistrationIntegrationTestCase
             $switchService = new SwitchService($this->staticSettings());
             $this->assertTrue(
                 $switchService->switch(new SwitchCommand($rfc, CustomerType::prepaid()))->success(),
-                'Unable to change the customer type to prepaid'
+                'Unable to change the customer type to prepaid',
             );
             $customer = $this->findCustomerOrFail($rfc);
         }
@@ -63,7 +63,7 @@ final class AssignServiceTest extends RegistrationIntegrationTestCase
         if ($customer->credit() > 0) {
             $this->assertTrue(
                 $service->assign(new AssignCommand($rfc, -1 * $customer->credit()))->success(),
-                'Unable to set current credits to zero'
+                'Unable to set current credits to zero',
             );
             $customer = $this->findCustomerOrFail($rfc);
         }
@@ -102,7 +102,7 @@ final class AssignServiceTest extends RegistrationIntegrationTestCase
         $this->assertSame(3, $assignResult->credit(), 'Credit must contain previous credits');
         $this->assertSame(
             'The number of credits to decrease is greater than the number of current credits.',
-            $assignResult->message()
+            $assignResult->message(),
         );
     }
 

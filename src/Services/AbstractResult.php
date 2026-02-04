@@ -19,7 +19,7 @@ abstract class AbstractResult
         $root = $this->findInDescendent($this->data, ...$meanLocation);
         if (! $root instanceof stdClass) {
             throw new InvalidArgumentException(
-                sprintf('Unable to find mean object at /%s', implode('/', $meanLocation))
+                sprintf('Unable to find mean object at /%s', implode('/', $meanLocation)),
             );
         }
         $this->root = $root;

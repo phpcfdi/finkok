@@ -39,7 +39,7 @@ final class StampedServiceTest extends IntegrationTestCase
         $this->assertSame(
             $previousStamp->uuid(),
             $result->uuid(),
-            'Finkok does not return the same UUID for recently created stamp using stamped'
+            'Finkok does not return the same UUID for recently created stamp using stamped',
         );
     }
 }

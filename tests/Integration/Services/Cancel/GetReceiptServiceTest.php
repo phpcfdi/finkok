@@ -24,7 +24,7 @@ final class GetReceiptServiceTest extends IntegrationTestCase
         $command = new GetReceiptCommand(
             'EKU9003173C9',
             '12345678-1234-1234-1234-123456789012',
-            ReceiptType::cancellation()
+            ReceiptType::cancellation(),
         );
 
         $result = $service->download($command);

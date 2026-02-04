@@ -37,7 +37,7 @@ final class QuickStampServiceTest extends IntegrationTestCase
         $secondResult = $service->quickstamp($this->currentStampingCommand());
         $this->assertNotNull(
             $secondResult->alerts()->findByErrorCode('307'),
-            'Finkok must alert that it was previously stamped'
+            'Finkok must alert that it was previously stamped',
         );
     }
 
@@ -51,7 +51,7 @@ final class QuickStampServiceTest extends IntegrationTestCase
         $secondResult = $service->quickstamp($currentCfdiStampCommand);
         $this->assertNotNull(
             $secondResult->alerts()->findByErrorCode('707'),
-            'Finkok must alert that it contains and existing TFD'
+            'Finkok must alert that it contains and existing TFD',
         );
     }
 

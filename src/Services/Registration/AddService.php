@@ -23,7 +23,7 @@ class AddService
         $soapCaller = $this->settings()->createCallerForService(
             Services::registration(),
             'reseller_username',
-            'reseller_password'
+            'reseller_password',
         );
         $rawResponse = $soapCaller->call('add', array_filter([
             'taxpayer_id' => $command->rfc(),

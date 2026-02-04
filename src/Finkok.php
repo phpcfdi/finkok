@@ -160,7 +160,7 @@ class Finkok
         $method = static::SERVICES_MAP[$method][2] ?? $method;
         if (! is_callable([$service, $method])) {
             throw new BadMethodCallException(
-                sprintf('The service %s does not have a method %s', $service::class, $method)
+                sprintf('The service %s does not have a method %s', $service::class, $method),
             );
         }
         return $service->{$method}($command);

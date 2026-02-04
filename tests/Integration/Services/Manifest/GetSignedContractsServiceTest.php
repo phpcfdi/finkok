@@ -36,7 +36,7 @@ final class GetSignedContractsServiceTest extends IntegrationTestCase
         $command = new GetSignedContractsCommand(
             $this->getenv('FINKOK_SNID'),
             'EKU9003173C9',
-            $format
+            $format,
         );
 
         $service = $this->createService();

@@ -26,7 +26,7 @@ class AcceptRejectSignatureResult extends AbstractResult
             array_merge(
                 $this->filterArrayOfStdClass($aceptacion),
                 $this->filterArrayOfStdClass($rechazo),
-            )
+            ),
         );
         $this->error = $this->get('error');
     }

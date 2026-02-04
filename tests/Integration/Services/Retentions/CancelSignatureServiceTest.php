@@ -28,7 +28,7 @@ final class CancelSignatureServiceTest extends RetentionsTestCase
 
         $result = $this->quickFinkok->retentionCancel(
             $this->createCsdCredential(),
-            CancelDocument::newWithErrorsUnrelated($uuid)
+            CancelDocument::newWithErrorsUnrelated($uuid),
         );
 
         $this->assertSame($expectedStatusCode, $result->statusCode());
@@ -48,7 +48,7 @@ final class CancelSignatureServiceTest extends RetentionsTestCase
         while (true) {
             $result = $this->quickFinkok->retentionCancel(
                 $cancelCredential,
-                CancelDocument::newWithErrorsUnrelated($uuid)
+                CancelDocument::newWithErrorsUnrelated($uuid),
             );
             $document = $result->documents()->first();
 
@@ -78,7 +78,7 @@ final class CancelSignatureServiceTest extends RetentionsTestCase
         $this->assertNotEmpty($result->voucher(), 'Expected to receive an Acuse, but it was empty');
         $this->assertEmpty(
             $result->statusCode(),
-            "CodEstatus (value: {$result->statusCode()}) should have content only when failing"
+            "CodEstatus (value: {$result->statusCode()}) should have content only when failing",
         );
         $this->assertSame($uuid, $document->uuid());
         $this->assertSame('1201', $document->documentStatus());

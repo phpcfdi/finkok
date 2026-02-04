@@ -75,7 +75,7 @@ class FinkokSettings
         $wsdlLocation = $this->environment()->endpoint($service);
         $credentials = array_merge(
             ('' !== $usernameKey) ? [$usernameKey => $this->username()] : [],
-            ('' !== $passwordKey) ? [$passwordKey => $this->password()] : []
+            ('' !== $passwordKey) ? [$passwordKey => $this->password()] : [],
         );
         return $this->soapFactory()->createSoapCaller($wsdlLocation, $credentials);
     }

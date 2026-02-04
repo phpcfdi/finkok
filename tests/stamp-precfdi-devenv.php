@@ -39,7 +39,7 @@ exit(call_user_func(new class ($argv[0] ?? '') {
             $settings = new FinkokSettings(
                 TestCase::getenv('FINKOK_USERNAME') ?: 'username-non-set',
                 TestCase::getenv('FINKOK_PASSWORD') ?: 'password-non-set',
-                FinkokEnvironment::makeDevelopment()
+                FinkokEnvironment::makeDevelopment(),
             );
             if ($debug) {
                 $settings->soapFactory()->setLogger(new JsonDecoderLogger(new FileLogger()));
@@ -61,7 +61,7 @@ exit(call_user_func(new class ($argv[0] ?? '') {
             file_put_contents(
                 'php://stderr',
                 sprintf("%s: %s\n", $exception::class, $exception->getMessage()),
-                FILE_APPEND
+                FILE_APPEND,
             );
             return (int) $exception->getCode() ?: 1;
         }

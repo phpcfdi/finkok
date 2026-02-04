@@ -36,13 +36,13 @@ final class StampServiceTest extends IntegrationTestCase
         $secondResult = $this->createService()->stamp($this->currentStampingCommand());
         $this->assertNotNull(
             $secondResult->alerts()->findByErrorCode('307'),
-            'Finkok must alert that it was previously stamped'
+            'Finkok must alert that it was previously stamped',
         );
 
         $this->assertSame(
             $firstResult->uuid(),
             $secondResult->uuid(),
-            'Finkok does not return the same UUID for duplicated stamp call'
+            'Finkok does not return the same UUID for duplicated stamp call',
         );
     }
 
@@ -56,7 +56,7 @@ final class StampServiceTest extends IntegrationTestCase
         $secondResult = $service->stamp($currentCfdiStampCommand);
         $this->assertNotNull(
             $secondResult->alerts()->findByErrorCode('707'),
-            'Finkok must alert that it contains and existing TFD'
+            'Finkok must alert that it contains and existing TFD',
         );
     }
 
@@ -82,7 +82,7 @@ final class StampServiceTest extends IntegrationTestCase
     {
         $description = sprintf(
             'Mousepad con leyenda «%s es un texto XML válido»',
-            htmlentities($descriptionPart, ENT_XML1)
+            htmlentities($descriptionPart, ENT_XML1),
         );
         $expectedXmlEncodedText = htmlentities($description, ENT_XML1);
 

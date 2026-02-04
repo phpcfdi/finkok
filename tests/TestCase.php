@@ -19,7 +19,7 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
         $settings = new FinkokSettings(
             $this->getenv('FINKOK_USERNAME') ?: 'username-non-set',
             $this->getenv('FINKOK_PASSWORD') ?: 'password-non-set',
-            FinkokEnvironment::makeDevelopment()
+            FinkokEnvironment::makeDevelopment(),
         );
         if (null !== $soapFactory) {
             $settings->changeSoapFactory($soapFactory);
@@ -31,7 +31,7 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
                 __DIR__,
                 (new DateTimeImmutable())->format('YmdHis.u'),
                 $this->name(),
-                uniqid()
+                uniqid(),
             );
             $logger = new JsonDecoderLogger(new FileLogger($loggerOutputFile));
             $settings->soapFactory()->setLogger($logger);

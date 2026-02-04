@@ -41,7 +41,7 @@ final class RetentionsUsingExistentRetentionTest extends RetentionsTestCase
         $this->quickFinkok = new QuickFinkok($this->createSettingsFromEnvironment());
         $this->assertNotEmpty(
             $this->currentRetentionsStampResult()->uuid(),
-            'To run this test there must be an already stamped retention precfdi'
+            'To run this test there must be an already stamped retention precfdi',
         );
     }
 
@@ -68,12 +68,12 @@ final class RetentionsUsingExistentRetentionTest extends RetentionsTestCase
         $this->assertXmlStringEqualsXmlString(
             $currentResult->xml(),
             $stampedResult->xml(),
-            'Created and downloaded RET must be XML equal'
+            'Created and downloaded RET must be XML equal',
         );
         $this->assertSame(
             $currentResult->xml(),
             $stampedResult->xml(),
-            'Created and downloaded RET must be identical'
+            'Created and downloaded RET must be identical',
         );
     }
 
@@ -86,12 +86,12 @@ final class RetentionsUsingExistentRetentionTest extends RetentionsTestCase
         $this->assertXmlStringEqualsXmlString(
             $currentResult->xml(),
             $downloadResult->xml(),
-            'Created and downloaded RET must be XML equal'
+            'Created and downloaded RET must be XML equal',
         );
         $this->assertSame(
             $currentResult->xml(),
             $downloadResult->xml(),
-            'Created and downloaded RET must be identical'
+            'Created and downloaded RET must be identical',
         );
     }
 }

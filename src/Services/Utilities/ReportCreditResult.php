@@ -20,7 +20,7 @@ class ReportCreditResult extends AbstractResult
         parent::__construct($data, 'report_creditResult');
 
         $items = $this->filterArrayOfStdClass(
-            $this->findInDescendent($data, 'report_creditResult', 'result', 'ReportTotalCredit')
+            $this->findInDescendent($data, 'report_creditResult', 'result', 'ReportTotalCredit'),
         );
         foreach ($items as $item) {
             $this->items[] = [

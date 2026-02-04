@@ -27,14 +27,14 @@ final class SwitchServiceTest extends RegistrationIntegrationTestCase
         $this->assertEquals(
             $changeTo,
             $this->findCustomerOrFail($rfc)->customerType(),
-            'Expected to change user type to a different one'
+            'Expected to change user type to a different one',
         );
 
         $service->switch(new SwitchCommand($rfc, $currentType));
         $this->assertEquals(
             $currentType,
             $this->findCustomerOrFail($rfc)->customerType(),
-            'Expected to change customer type to original'
+            'Expected to change customer type to original',
         );
     }
 

@@ -47,7 +47,7 @@ final class FinkokTest extends TestCase
         $finkok->expects($this->once())->method('executeService')->with(
             $this->equalTo('stamp'),
             $this->isInstanceOf(StampService::class),
-            $this->isInstanceOf(StampingCommand::class)
+            $this->isInstanceOf(StampingCommand::class),
         )->willReturn($result);
 
         $this->assertSame($result, $finkok->stamp($command));
@@ -74,7 +74,7 @@ final class FinkokTest extends TestCase
         $this->expectExceptionMessage(
             'Call PhpCfdi\Finkok\Finkok::getContracts'
             . ' expect PhpCfdi\Finkok\Services\Manifest\GetContractsCommand'
-            . ' but received ' . $command::class
+            . ' but received ' . $command::class,
         );
         $finkok->{'getContracts'}($command);  /** @phpstan-ignore-line argument.type */
     }
@@ -154,7 +154,7 @@ final class FinkokTest extends TestCase
             $service = $exposer->exposeCreateService($methodName);
             $this->assertTrue(
                 is_callable([$service, $finalMethodName]),
-                "The finalMethodName $methodName was not found"
+                "The finalMethodName $methodName was not found",
             );
         }
     }

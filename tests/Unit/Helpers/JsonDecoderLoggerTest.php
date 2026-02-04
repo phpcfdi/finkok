@@ -97,9 +97,9 @@ final class JsonDecoderLoggerTest extends TestCase
                 function ($message) use ($matcher, $expectedParameters): bool {
                     $this->assertSame($expectedParameters[$matcher->numberOfInvocations() - 1], $message);
                     return true;
-                }
+                },
             ),
-            []
+            [],
         );
 
         $decoder = new JsonDecoderLogger($logger);
