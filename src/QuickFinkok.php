@@ -471,7 +471,7 @@ class QuickFinkok
         if (! $documents->success()) {
             return Manifest\SignContractsResult::createFromData(
                 false,
-                sprintf('Unable to get contracts: %s', $documents->error() ?: '(no error)')
+                sprintf('Unable to get contracts: %s', $documents->error() ?: '(no error)'),
             );
         }
         $privacy = (new Helpers\DocumentSigner($rfc, $signedOn, $documents->privacy()))->signUsingCredential($fiel);

@@ -45,7 +45,7 @@ final class QuickFinkokTest extends TestCase
         $this->assertSame(
             array_merge($lastCall->latestCallParameters, $expectedParameters),
             $lastCall->latestCallParameters,
-            'Expected parameters does not match'
+            'Expected parameters does not match',
         );
     }
 
@@ -231,7 +231,7 @@ final class QuickFinkokTest extends TestCase
         $result = $finkok->answerAcceptRejectCancellation(
             $this->createCsdCredential(),
             'x-uuid',
-            CancelAnswer::reject()
+            CancelAnswer::reject(),
         );
 
         $this->performTestOnLatestCall('accept_reject_signature');
@@ -465,14 +465,14 @@ final class QuickFinkokTest extends TestCase
                 $this->identicalTo($fiel->rfc()),
                 $this->identicalTo($fiel->legalName()),
                 $this->identicalTo('x-address'),
-                $this->identicalTo('x-email')
+                $this->identicalTo('x-email'),
             );
         $finkok->expects($this->once())
             ->method('customerSendContracts')->willReturn($signContractsResult)
             ->with(
                 $this->identicalTo('x-snid'),
                 $this->stringContains($getContractsResult->privacy()),
-                $this->stringContains($getContractsResult->contract())
+                $this->stringContains($getContractsResult->contract()),
             );
 
         $signedOn = new DateTimeImmutable('2019-01-13 14:15:16');

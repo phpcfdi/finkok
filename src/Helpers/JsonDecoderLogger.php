@@ -81,23 +81,32 @@ final class JsonDecoderLogger extends AbstractLogger implements LoggerInterface
     private function jsonDecode(string|Stringable $string): string
     {
         $this->lastMessageWasJsonValid = false;
-        $string = strval($string);
 
         // json_validate and json_decode
-        if ($this->useJsonValidateIfAvailable && function_exists('\json_validate')) {
-            if (\json_validate($string)) {
-                $this->lastMessageWasJsonValid = true;
-                return $this->varDump(json_decode($string));
+        if ($this->useJsonValidateIfAvailable) {
+            $string = $this->jsonDecodeWithValidate($string);
+            if ($this->lastMessageWasJsonValid()) {
+                return $string;
             }
-
-            return $string;
         }
 
         // json_decode only
+        $string = (string) $string;
         $decoded = json_decode($string);
         if (JSON_ERROR_NONE === json_last_error()) {
             $this->lastMessageWasJsonValid = true;
             return $this->varDump($decoded);
+        }
+
+        return $string;
+    }
+
+    private function jsonDecodeWithValidate(string|Stringable $string): string
+    {
+        $string = (string) $string;
+        if (function_exists('json_validate') && json_validate($string)) {
+            $this->lastMessageWasJsonValid = true;
+            return $this->varDump(json_decode($string));
         }
 
         return $string;

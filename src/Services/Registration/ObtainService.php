@@ -23,7 +23,7 @@ class ObtainService
         $soapCaller = $this->settings()->createCallerForService(
             Services::registration(),
             'reseller_username',
-            'reseller_password'
+            'reseller_password',
         );
         $rawResponse = $soapCaller->call('get', [
             'taxpayer_id' => $command->rfc(),

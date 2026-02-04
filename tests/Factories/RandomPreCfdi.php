@@ -20,7 +20,7 @@ final class RandomPreCfdi
         return new PreCfdiCreatorHelper(
             TestCase::filePath('certs/EKU9003173C9.cer'),
             TestCase::filePath('certs/EKU9003173C9.key.pem'),
-            trim(TestCase::fileContentPath('certs/EKU9003173C9.password.bin'))
+            trim(TestCase::fileContentPath('certs/EKU9003173C9.password.bin')),
         );
     }
 

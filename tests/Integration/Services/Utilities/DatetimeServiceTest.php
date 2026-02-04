@@ -24,7 +24,7 @@ final class DatetimeServiceTest extends IntegrationTestCase
         $this->assertGreaterThanOrEqual(
             3600,
             $tsCancun - $tsTijuana + 1,
-            'Cancún and Tijuana must always have a different time at least for 1 hour'
+            'Cancún and Tijuana must always have a different time at least for 1 hour',
         );
     }
 
@@ -45,7 +45,7 @@ final class DatetimeServiceTest extends IntegrationTestCase
         $currentTime = time();
         $this->assertThat($converted, $this->logicalAnd(
             $this->greaterThanOrEqual($currentTime - $margin),
-            $this->lessThanOrEqual($currentTime + $margin)
+            $this->lessThanOrEqual($currentTime + $margin),
         ), sprintf('Finkok date %s is not %s +/- %d second', date('c', $converted), date('c', $currentTime), $margin));
     }
 
@@ -54,7 +54,7 @@ final class DatetimeServiceTest extends IntegrationTestCase
         $settings = new FinkokSettings(
             'foo-bar-baz',
             'foo-bar-baz',
-            FinkokEnvironment::makeDevelopment()
+            FinkokEnvironment::makeDevelopment(),
         );
         $service = new DatetimeService($settings);
         $result = $service->datetime(new DatetimeCommand(''));

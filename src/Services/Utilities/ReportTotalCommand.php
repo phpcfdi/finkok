@@ -56,7 +56,7 @@ class ReportTotalCommand
 
         if ($this->startPeriod > $this->endPeriod) {
             throw new LogicException(
-                sprintf('Start period %s cannot be greater than end period %s', $this->startPeriod, $this->endPeriod)
+                sprintf('Start period %s cannot be greater than end period %s', $this->startPeriod, $this->endPeriod),
             );
         }
 

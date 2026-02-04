@@ -38,7 +38,7 @@ class ObtainCustomersService
         $soapCaller = $this->settings()->createCallerForService(
             Services::registration(),
             'username',
-            'password'
+            'password',
         );
         $rawResponse = $soapCaller->call('customers', [
             'page' => $command->page(),

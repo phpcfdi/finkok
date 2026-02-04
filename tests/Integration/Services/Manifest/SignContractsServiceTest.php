@@ -28,7 +28,7 @@ final class SignContractsServiceTest extends IntegrationTestCase
             'Empresa Conocida SA de CV',
             'Cuauhtémoc #123, Colonia Centro, Villahermosa, Tabasco. CP 86000',
             'legal@empresa-conocida.mx',
-            $this->getenv('FINKOK_SNID')
+            $this->getenv('FINKOK_SNID'),
         );
 
         $srvGetContracts = new GetContractsService($settings);
@@ -44,7 +44,7 @@ final class SignContractsServiceTest extends IntegrationTestCase
         $cmdSignContracts = new SignContractsCommand(
             $this->getenv('FINKOK_SNID'),
             $privacyDocument->sign($certificateFile, $privateKeyFile, $passPhrase),
-            $contractDocument->sign($certificateFile, $privateKeyFile, $passPhrase)
+            $contractDocument->sign($certificateFile, $privateKeyFile, $passPhrase),
         );
 
         $srvSignContracts = new SignContractsService($settings);

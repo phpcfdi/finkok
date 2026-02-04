@@ -22,7 +22,7 @@ final class CancelSignatureServiceTest extends IntegrationTestCase
         $expectedStatusCode = sprintf('UUID: %s No Encontrado', $uuid);
 
         $command = $this->createCancelSignatureCommandFromDocument(
-            CancelDocument::newWithErrorsUnrelated($uuid)
+            CancelDocument::newWithErrorsUnrelated($uuid),
         );
         $service = $this->createService();
         $result = $service->cancelSignature($command);

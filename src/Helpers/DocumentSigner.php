@@ -69,7 +69,7 @@ class DocumentSigner
             $document,
             XMLSecurityDSig::SHA1,
             ['http://www.w3.org/2000/09/xmldsig#enveloped-signature'],
-            ['force_uri' => true]
+            ['force_uri' => true],
         );
 
         $objKey = new XMLSecurityKey(XMLSecurityKey::RSA_SHA1, ['type' => 'private']);

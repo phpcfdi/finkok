@@ -6,9 +6,26 @@ Nos apegamos a [SEMVER](SEMVER.md), revisa la información para entender mejor e
 
 Estos cambios se aplican y se publican, pero aún no son parte de una versión liberada.
 
+## Versión 0.6.1 2026-02-04
+
+- Se comprueba la compatibilidad con PHP 8.5.
+- Se actualizan dependencias para evitar alertas de seguridad (CVE).
+- Se agrega una validación para prevenir el uso de `json_validate` en versiones de PHP donde no se soporta.
+
+Se hacen varios cambios menores:
+
+- Actualización del estándar de código.
+- Actualización del año de licencia a 2026.
+
+Se hacen varios cambios al entorno de desarrollo:
+
+- Se agrega PHP 8.5 a la matriz de pruebas.
+- Se actualizan las herramientas de desarrollo.
+
 ## Versión 0.6.0 2025-11-08
 
 Esta versión tiene cambios importantes dado que:
+
 - Elimina la compatibilidad con PHP 7.3, PHP 7.4 y PHP 8.0.
 - Agrega la compatibilidad con PHP 8.4.
 

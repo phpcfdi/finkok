@@ -22,7 +22,7 @@ final class RandomPreCfdiRetention
             'EKU9003173C9',
             'ESCUELA KEMPER URGATE',
             '52000',
-            '601'
+            '601',
         );
         $helper->setCveReten('14');
         $helper->setInvoiceDate(new DateTimeImmutable());
@@ -57,7 +57,7 @@ final class RandomPreCfdiRetention
                 'MontISRAcredNal' => '0',
                 'MontDivAcumNal' => '0',
                 'MontDivAcumExt' => '0',
-            ])
+            ]),
         );
 
         $preCfdi = $helper->signPreCfdi($creator);
@@ -70,8 +70,8 @@ final class RandomPreCfdiRetention
                 PHP_EOL,
                 implode(PHP_EOL, array_map(fn (Assert $assert): string => rtrim(
                     sprintf('%s - %s: %s', $assert->getCode(), $assert->getTitle(), $assert->getExplanation()),
-                    ' :'
-                ), $assets->errors()))
+                    ' :',
+                ), $assets->errors())),
             ));
         }
 

@@ -23,7 +23,7 @@ final class GetContractsServiceTest extends IntegrationTestCase
             'Empresa Conocida SA de CV',
             'Cuauhtémoc #123, Colonia Centro, Villahermosa, Tabasco. CP 86000',
             'legal@empresa-conocida.mx',
-            $this->getenv('FINKOK_SNID')
+            $this->getenv('FINKOK_SNID'),
         );
 
         $service = $this->createService();

@@ -53,7 +53,7 @@ class AcceptRejectUuidList extends AbstractCollection
         return new AcceptRejectUuidItem(
             $this->filterString($source->uuid ?? ''),
             new AcceptRejectUuidStatus($this->filterString($source->status ?? '0')),
-            $answer
+            $answer,
         );
     }
 }

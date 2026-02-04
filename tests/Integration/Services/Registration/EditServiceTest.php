@@ -29,7 +29,7 @@ final class EditServiceTest extends RegistrationIntegrationTestCase
         $this->assertSame('Account was Suspended successfully', $editToSuspended->message());
         $this->assertTrue(
             $this->findCustomerOrFail($rfc)->status()->isSuspended(),
-            "Customer $rfc was not changed to Suspended"
+            "Customer $rfc was not changed to Suspended",
         );
 
         $editToActive = $service->edit(new EditCommand($rfc, CustomerStatus::active()));
@@ -37,7 +37,7 @@ final class EditServiceTest extends RegistrationIntegrationTestCase
         $this->assertSame('Account was Activated successfully', $editToActive->message());
         $this->assertTrue(
             $this->findCustomerOrFail($rfc)->status()->isActive(),
-            "Customer $rfc was not changed to Active"
+            "Customer $rfc was not changed to Active",
         );
     }
 
@@ -55,7 +55,7 @@ final class EditServiceTest extends RegistrationIntegrationTestCase
         $this->assertSame('Account was Activated successfully', $editToActive->message());
         $this->assertTrue(
             $this->findCustomerOrFail($rfc)->status()->isActive(),
-            "Customer $rfc was not changed to Active"
+            "Customer $rfc was not changed to Active",
         );
     }
 

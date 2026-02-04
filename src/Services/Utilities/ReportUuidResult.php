@@ -20,7 +20,7 @@ class ReportUuidResult extends AbstractResult
         parent::__construct($data, 'report_uuidResult');
 
         $items = $this->filterArrayOfStdClass(
-            $this->findInDescendent($data, 'report_uuidResult', 'invoices', 'ReportUUID')
+            $this->findInDescendent($data, 'report_uuidResult', 'invoices', 'ReportUUID'),
         );
         foreach ($items as $item) {
             $this->items[] = [

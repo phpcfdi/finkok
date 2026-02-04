@@ -20,7 +20,7 @@ class RelatedItems extends AbstractCollection
         return new RelatedItem(
             $this->filterString($content->{'uuid'} ?? ''),
             $this->filterString($content->{'emisor'} ?? ''),
-            $this->filterString($content->{'receptor'} ?? '')
+            $this->filterString($content->{'receptor'} ?? ''),
         );
     }
 }
